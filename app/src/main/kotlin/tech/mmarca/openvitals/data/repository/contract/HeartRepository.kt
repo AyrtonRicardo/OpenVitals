@@ -1,7 +1,9 @@
 package tech.mmarca.openvitals.data.repository.contract
 
+import java.time.Duration
 import java.time.Instant
 import java.time.LocalDate
+import tech.mmarca.healthcalculations.insights.observedMaxHeartRateLookbackDays
 import tech.mmarca.healthcalculations.model.DailyHrv
 import tech.mmarca.healthcalculations.model.DailyRestingHR
 import tech.mmarca.healthcalculations.model.HeartRateSample
@@ -49,3 +51,10 @@ interface HeartRepository {
 
     suspend fun loadDailyHRV(start: LocalDate, end: LocalDate): List<DailyHrv>
 }
+
+/**
+ * The observed maximum every estimate uses: the highest bpm in the
+ * [observedMaxHeartRateLookbackDays] before [end].
+ */
+suspend fun HeartRepository.loadObservedMaxHeartRate(end: Instant): Long? =
+    loadMaxHeartRate(end.minus(Duration.ofDays(observedMaxHeartRateLookbackDays)), end)
