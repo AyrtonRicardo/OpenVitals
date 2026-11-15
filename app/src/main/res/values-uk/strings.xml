@@ -2069,7 +2069,7 @@
     <string name="medical_report_none_in_range">%1$s: у цьому проміжку нічого немає</string>
     <string name="medical_report_failed">Не вдалося прочитати: %1$s.</string>
     <string name="medical_report_disclaimer">Медичні записи показано такими, якими їх отримано. OpenVitals не інтерпретує їх.</string>
-    <string name="medical_report_option_body">Алергії, захворювання та ліки за записом, а також вакцини та результати аналізів у проміжку. Використовує медичний доступ, який ви вже надали.</string>
+    <string name="medical_report_option_body">Алергії, захворювання та ліки як записано, а також вакцини та результати аналізів у проміжку. Використовує медичний доступ, який ви вже надали.</string>
     <string name="medical_documents_title">Збережені документи</string>
     <string name="medical_documents_keep">Зберігати копію цього документа на телефоні</string>
     <string name="medical_documents_keep_sizes">Цей файл: %1$s · Збережені документи: %2$s</string>
@@ -2221,7 +2221,7 @@
     <string name="settings_activity_week_monday_to_sunday">Календар</string>
     <string name="settings_activity_week_last_7_days">Плаваюче</string>
     <string name="settings_favorite_activity_title">Улюблена активність</string>
-    <string name="settings_favorite_activity_body">Типово використовувати останню записану активність або вибрати один тип, який завжди буде вибрано заздалегідь.</string>
+    <string name="settings_favorite_activity_body">Типово використовувати останню записану активність або вибрати один тип, який завжди попередньо вибирається.</string>
     <string name="settings_favorite_activity_latest">За останньою</string>
     <string name="settings_activity_recording_title">Запис активності</string>
     <string name="settings_activity_recording_body">Налаштуйте живий запис GPS, не змінюючи процес збереження деталей активності.</string>
@@ -2244,7 +2244,7 @@
     <string name="settings_activity_recording_voice_distance_title">Оголошувати за дистанцією</string>
     <string name="settings_activity_recording_voice_idle_title">Оголошення про паузу</string>
     <string name="settings_activity_recording_voice_idle_body">Сповіщати, коли починається авто-пауза і коли запис відновлюється.</string>
-    <string name="settings_activity_recording_voice_lap_title">Оголошення про круги</string>
+    <string name="settings_activity_recording_voice_lap_title">Оголошення про кола</string>
     <string name="settings_activity_recording_voice_lap_body">Промовляти підсумок прогресу, коли ви позначаєте коло.</string>
     <string name="settings_activity_recording_seconds">%1$d с</string>
     <string name="settings_activity_recording_half_second">0.5 с</string>
@@ -2642,9 +2642,9 @@
     <string name="settings_offline_maps_empty">Офлайн-карти ще не імпортовано.</string>
     <string name="settings_offline_maps_format_pmtiles">PMTiles</string>
     <string name="settings_offline_maps_format_mapsforge">Mapsforge</string>
-    <string name="settings_offline_maps_render_format_title">Формат рендерингу</string>
+    <string name="settings_offline_maps_render_format_title">Формат відмальовування</string>
     <string name="settings_offline_maps_render_format_option">%1$s (%2$d)</string>
-    <string name="settings_offline_maps_render_format_body">OpenVitals рендерить кожен імпортований пакет у вибраному форматі разом.</string>
+    <string name="settings_offline_maps_render_format_body">OpenVitals відмальовує кожен імпортований пакет у вибраному форматі разом.</string>
     <string name="settings_offline_maps_pack_detail">%1$s • %2$s • %3$s</string>
     <string name="settings_offline_maps_import_action">Імпортувати офлайн-карту</string>
     <string name="settings_offline_maps_importing">Імпорт…</string>
@@ -3233,7 +3233,7 @@
     <string name="device_sync_rewrite_title">Перезаписати наявні записи</string>
     <string name="device_sync_rewrite_body">Записи, які цей телефон уже має, записуються знову від імені OpenVitals. Використовуйте, коли Health Connect показує записи, але не включає їх у підсумки.</string>
     <string name="device_sync_progress_heading">Синхронізація</string>
-    <string name="device_sync_phase_handshake">Рукостискання й перевірка дублікатів</string>
+    <string name="device_sync_phase_handshake">Встановлення звʼязку й перевірка дублікатів</string>
     <string name="device_sync_phase_confirming">Очікування, поки інший телефон підтвердить код</string>
     <string name="device_sync_phase_waiting_for_peer">Очікування, поки інший телефон почне синхронізацію</string>
     <string name="device_sync_phase_exchanging">Обмін записами</string>
