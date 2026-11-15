@@ -405,6 +405,8 @@ internal data class ConvertedAppleRecord(
     val record: Record,
     val sourceTimeRange: AppleImportTimeRange,
     val unit: String?,
+    /** The id an earlier release wrote this record under, when it differs. */
+    val legacyClientRecordId: String? = null,
 )
 
 internal data class AppleImportTimeRange(

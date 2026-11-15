@@ -48,7 +48,11 @@ Apple GPX route timestamps are not trusted for Health Connect writes because the
 
 ## Duplicate And Overlap Handling
 
-The importer skips exact duplicates inside the same export and checks existing imported Health Connect records by deterministic `clientRecordId` before writing selected records.
+Every record gets a deterministic `clientRecordId`. The importer skips a record whose id it has already seen in the export or finds in Health Connect.
+
+For a single reading, the id comes from what was measured: the type, source, start and end time, unit and value. It leaves out what Apple stamps on each save (`creationDate`, `sourceVersion`, device and metadata). A reading that a vendor app re-synced into Apple Health many times therefore imports once. So does a blood pressure reading listed both as a correlation and as separate systolic and diastolic samples. Water keeps the stamps, because two glasses logged for the same time are two glasses. Sleep sessions, food entries and workouts still build their id from every attribute.
+
+Releases up to 2.16.0 built every id from the stamps too. The duplicate check also looks for that older id, so re-importing an export imported before writes nothing again. Copies an earlier import already wrote stay in Health Connect.
 
 For additive metrics where double-counting is common, such as steps, active calories, and distance, overlapping records from multiple Apple Health sources are merged conservatively. Lower-priority samples that are already mostly covered by another source are skipped with an `overlap_cross_source` diagnostic. Workout distance and active calorie totals are not written when overlapping raw records already cover the same workout interval.
 

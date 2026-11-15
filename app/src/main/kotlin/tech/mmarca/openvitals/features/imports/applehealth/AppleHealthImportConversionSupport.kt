@@ -63,8 +63,15 @@ internal fun List<SleepStageCandidate>.splitSleepSessions(): List<List<SleepStag
     return sessions
 }
 
-internal fun appleMetadata(record: AppleRecord, targetType: String, sourceFingerprint: String): Metadata =
-    appleMetadata(targetType, record.stableClientRecordId(targetType.toStableIdSegment(), sourceFingerprint))
+internal fun appleMetadata(record: AppleRecord, targetType: String): Metadata =
+    appleMetadata(targetType, record.stableClientRecordId(targetType.toStableIdSegment()))
+
+/**
+ * The id earlier releases gave this record, from [stableParts]. Health Connect holds records under
+ * it, so a re-import still finds them; null when it is the current id.
+ */
+internal fun AppleRecord.legacyClientRecordId(targetType: String): String? =
+    if (type in AppleLoggedPortionTypes) null else stableClientRecordId(targetType.toStableIdSegment(), stableParts())
 
 internal fun appleMetadata(targetType: String, fingerprint: String): Metadata =
     Metadata.manualEntry(
@@ -90,12 +97,41 @@ internal fun buildStableClientRecordId(prefix: String, parts: Any): String {
 
 private const val HexDigits = "0123456789abcdef"
 
-internal fun AppleRecord.stableClientRecordId(prefix: String, extra: Any = stableParts()): String =
+internal fun AppleRecord.stableClientRecordId(prefix: String, extra: Any = measurementParts()): String =
     buildStableClientRecordId(prefix, extra)
 
 internal val AppleRecord.sourceFingerprint: String
     get() = stableParts()
 
+/**
+ * What makes two samples the same reading: type, source, time, unit and value. Not the stamps
+ * Apple adds on every save (creationDate, sourceVersion, device, metadata), so a reading a vendor
+ * app re-synced into Apple Health imports once. A logged portion keeps them: two glasses of water
+ * logged for the same time are two glasses.
+ */
+internal fun AppleRecord.measurementParts(): String {
+    if (type in AppleLoggedPortionTypes) return stableParts()
+    return listOf(
+        type,
+        sourceName.orEmpty(),
+        startDate?.instant?.toString().orEmpty(),
+        endDate?.instant?.toString().orEmpty(),
+        unit.orEmpty(),
+        rawValue.orEmpty(),
+        metadata.filterKeys { it in AppleMetadataKeysWritten }.toSortedMap().entries.joinToString(";") { "${it.key}=${it.value}" },
+    ).joinToString("|")
+}
+
+/** Portions a person logs at a time they pick, where two the same are two portions. */
+private val AppleLoggedPortionTypes = setOf(AppleDietaryWater)
+
+/** Apple metadata a conversion writes into the Health Connect record, so it tells two readings apart. */
+private val AppleMetadataKeysWritten = setOf(
+    "HKSexualActivityProtectionUsed",
+    "HKMetadataKeySexualActivityProtectionUsed",
+)
+
+/** Everything Apple wrote, save stamps included: the identity earlier releases used, kept for legacy ids. */
 internal fun AppleRecord.stableParts(): String =
     listOf(
         type,
