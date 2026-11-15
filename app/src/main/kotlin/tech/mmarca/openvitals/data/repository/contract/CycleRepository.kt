@@ -1,6 +1,7 @@
 package tech.mmarca.openvitals.data.repository.contract
 
 import java.time.LocalDate
+import tech.mmarca.healthcalculations.cycle.CycleInputs
 import tech.mmarca.healthcalculations.cycle.CycleStatistics
 import tech.mmarca.healthcalculations.model.CycleData
 import tech.mmarca.healthcalculations.model.CycleEntry
@@ -43,6 +44,16 @@ interface CycleRepository {
      * exclusions, contexts and age band applied. Null without the read permission.
      */
     suspend fun loadCycleStatistics(today: LocalDate = LocalDate.now()): CycleStatistics?
+
+    /**
+     * What [loadCycleStatistics] computes from, read up to [end]: bleeding, exclusions and the
+     * marker observations. Null without the read permission.
+     *
+     * Without [historyFrom] the observations are the ones the statistics of [end] need. With it
+     * they cover every day from [historyFrom] on, so `statisticsAsOf` gives each of those days
+     * what it would have shown then.
+     */
+    suspend fun loadCycleInputs(end: LocalDate = LocalDate.now(), historyFrom: LocalDate? = null): CycleInputs?
 
     /** Everything recorded for one day, for the day log. */
     suspend fun loadDayLog(date: LocalDate): CycleDayLog

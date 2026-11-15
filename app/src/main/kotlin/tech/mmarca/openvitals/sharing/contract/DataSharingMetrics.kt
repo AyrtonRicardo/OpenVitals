@@ -127,20 +127,10 @@ private fun MutableList<DataSharingMetric>.sleep() {
         "deep_sleep",
         "rem_sleep",
     )
-    metrics(SLEEP, DataSharingUnits.SCORE, setOf(DAILY), "sleep_score", "sleep_pressure")
+    metrics(SLEEP, DataSharingUnits.SCORE, setOf(DAILY), "sleep_score")
     metrics(SLEEP, DataSharingUnits.PERCENT, setOf(DAILY), "sleep_efficiency")
-    // sleep_midpoint: minutes after the local midnight before the night.
-    metrics(
-        SLEEP,
-        DataSharingUnits.MINUTES,
-        setOf(DAILY),
-        "waso",
-        "sleep_midpoint",
-        "sleep_awake_time",
-        "sleep_need",
-        "sleep_need_usual",
-    )
-    metrics(SLEEP, DataSharingUnits.COUNT, setOf(DAILY), "sleep_awakenings")
+    // sleep_midpoint: the middle of the time in bed, as minutes after local midnight (0-1439).
+    metrics(SLEEP, DataSharingUnits.MINUTES, setOf(DAILY), "waso", "sleep_midpoint")
     metrics(SLEEP, DataSharingUnits.TEXT, setOf(SAMPLES), "sleep_stage")
 }
 
@@ -149,7 +139,6 @@ private fun MutableList<DataSharingMetric>.heart() {
     metrics(HEART, DataSharingUnits.BPM, setOf(SAMPLES), "heart_rate")
     metrics(HEART, DataSharingUnits.BPM, DailyAndSamples, "resting_heart_rate")
     metrics(HEART, DataSharingUnits.MILLISECONDS, DailyAndSamples, "hrv_rmssd")
-    metrics(HEART, DataSharingUnits.TEXT, setOf(DAILY), "hrv_status")
 }
 
 private fun MutableList<DataSharingMetric>.vitals() {
@@ -197,9 +186,12 @@ private fun MutableList<DataSharingMetric>.nutrition() {
     metrics(NUTRITION, DataSharingUnits.MILLIGRAMS, setOf(SAMPLES), "caffeine_active")
 }
 
+/**
+ * Readiness, stress, HRV status, cardio load and intensity minutes are not here: working them
+ * out takes too many Health Connect reads for a query. They can be added without a new API
+ * version once the app keeps a daily record of them.
+ */
 private fun MutableList<DataSharingMetric>.recovery() {
-    metrics(RECOVERY, DataSharingUnits.SCORE, setOf(DAILY), "readiness", "stress")
-    metrics(RECOVERY, DataSharingUnits.TEXT, setOf(DAILY), "readiness_state", "stress_level")
     metrics(
         RECOVERY,
         DataSharingUnits.SCORE,
@@ -208,21 +200,9 @@ private fun MutableList<DataSharingMetric>.recovery() {
         "body_energy_end",
         "body_energy_charged",
         "body_energy_drained",
-        "cardio_load",
-        "cardio_load_week",
     )
-    metrics(RECOVERY, DataSharingUnits.MINUTES, setOf(DAILY), "intensity_minutes", "intensity_minutes_week")
     metrics(RECOVERY, DataSharingUnits.MINUTES, setOf(DAILY, SESSIONS), "mindfulness_minutes")
     metrics(RECOVERY, DataSharingUnits.SCORE, setOf(SAMPLES), "body_energy")
-    metrics(
-        RECOVERY,
-        DataSharingUnits.SCORE,
-        setOf(DAILY),
-        "training_readiness",
-        "training_load_acute",
-        "training_load_chronic",
-    )
-    metrics(RECOVERY, DataSharingUnits.MINUTES, setOf(DAILY), "recovery_time", "moderate_minutes", "vigorous_minutes")
 }
 
 private fun MutableList<DataSharingMetric>.cycle() {
@@ -238,7 +218,7 @@ private fun MutableList<DataSharingMetric>.cycle() {
     )
     metrics(CYCLE, DataSharingUnits.COUNT, DailyAndSamples, "intermenstrual_bleeding")
     metrics(CYCLE, DataSharingUnits.CELSIUS, DailyAndSamples, "basal_body_temperature")
-    // Worked out by OpenVitals. next_period_* are ISO dates; thermal_shift is the date the rise was confirmed.
+    // Worked out by OpenVitals. next_period_* bound the predicted window; thermal_shift is the first day of a confirmed rise.
     metrics(CYCLE, DataSharingUnits.COUNT, setOf(DAILY), "cycle_day")
     metrics(
         CYCLE,

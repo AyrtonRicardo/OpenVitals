@@ -7,7 +7,7 @@ import org.junit.Test
 import tech.mmarca.openvitals.healthconnect.HealthConnectRateLimitException
 import tech.mmarca.openvitals.sharing.contract.DataSharingStatus
 
-class RunHealthConnectReadsTest {
+class RunSourceReadsTest {
     private val day = LocalDate.of(2026, 10, 1)
     private var ran = mutableListOf<String>()
 
@@ -45,11 +45,11 @@ class RunHealthConnectReadsTest {
 
     @Test
     fun `a metric whose own permission is missing is dropped from a shared read`() = runTest {
-        val shared = HealthConnectRead(setOf("steps", "floors"), emptySet()) {
+        val shared = SourceRead(setOf("steps", "floors"), emptySet()) {
             listOf(DailyRow(day, "steps", 1.0), DailyRow(day, "floors", 2.0))
         }
 
-        val result = runHealthConnectReads(
+        val result = runSourceReads(
             reads = listOf(shared),
             wanted = emptySet(),
             granted = setOf("perm.steps"),
@@ -85,25 +85,25 @@ class RunHealthConnectReadsTest {
 
     @Test
     fun `reads without metrics always run`() = runTest {
-        val sessions = HealthConnectRead<String>(emptySet(), emptySet()) { listOf("session") }
+        val sessions = SourceRead<String>(emptySet(), emptySet()) { listOf("session") }
 
-        val result = runHealthConnectReads(listOf(sessions), wanted = setOf("anything"), granted = emptySet(), onFailure = {})
+        val result = runSourceReads(listOf(sessions), wanted = setOf("anything"), granted = emptySet(), onFailure = {})
 
         assertThat(result.rows).containsExactly("session")
     }
 
     private suspend fun run(
-        reads: List<HealthConnectRead<DailyRow>>,
+        reads: List<SourceRead<DailyRow>>,
         wanted: Set<String>,
         granted: Set<String> = setOf("perm.steps"),
-    ) = runHealthConnectReads(reads, wanted, granted, metricOf = { it.metric }, onFailure = {})
+    ) = runSourceReads(reads, wanted, granted, metricOf = { it.metric }, onFailure = {})
 
     private fun read(name: String, metric: String, requires: String? = null) =
-        HealthConnectRead(setOf(metric), setOfNotNull(requires)) {
+        SourceRead(setOf(metric), setOfNotNull(requires)) {
             ran += name
             listOf(DailyRow(day, metric, 1.0))
         }
 
     private fun failing(error: Throwable) =
-        HealthConnectRead<DailyRow>(setOf("broken"), emptySet()) { throw error }
+        SourceRead<DailyRow>(setOf("broken"), emptySet()) { throw error }
 }

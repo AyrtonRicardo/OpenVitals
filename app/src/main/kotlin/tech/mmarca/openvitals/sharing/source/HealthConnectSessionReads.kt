@@ -24,7 +24,7 @@ internal class HealthConnectSessionReads @Inject constructor(
     private val sleepRepository: SleepRepository,
     private val mindfulnessRepository: MindfulnessRepository,
 ) {
-    fun sessions(group: DataSharingGroup, start: LocalDate, end: LocalDate): List<HealthConnectRead<SessionRow>> {
+    fun sessions(group: DataSharingGroup, start: LocalDate, end: LocalDate): List<SourceRead<SessionRow>> {
         val zone = ZoneId.systemDefault()
         val startsInRange = { session: SessionRow ->
             val day = session.start.atZone(zone).toLocalDate()
@@ -74,7 +74,7 @@ internal class HealthConnectSessionReads @Inject constructor(
         }
     }
 
-    fun summary(group: DataSharingGroup, id: String): List<HealthConnectRead<SummaryRow>> = when (group) {
+    fun summary(group: DataSharingGroup, id: String): List<SourceRead<SummaryRow>> = when (group) {
         DataSharingGroup.WORKOUTS -> listOf(
             read(ExerciseSessionRecord::class) {
                 activityRepository.loadWorkout(id)?.let(::workoutSummary)
@@ -102,17 +102,17 @@ internal class HealthConnectSessionReads @Inject constructor(
     }
 
     /** Health Connect asks the user before it shows a route to an app; a refusal throws, so the answer says partial. */
-    fun route(id: String): HealthConnectRead<RouteRow> = HealthConnectRead(
+    fun route(id: String): SourceRead<RouteRow> = SourceRead(
         metrics = emptySet(),
         requires = setOf(readPermission(ExerciseSessionRecord::class), HealthPermission.PERMISSION_READ_EXERCISE_ROUTES),
     ) {
-        val route = activityRepository.loadWorkout(id)?.route ?: return@HealthConnectRead emptyList()
+        val route = activityRepository.loadWorkout(id)?.route ?: return@SourceRead emptyList()
         check(route.status != ExerciseRouteStatus.CONSENT_REQUIRED) { "The route needs the user's consent." }
         route.points.map { RouteRow(it.time, it.latitude, it.longitude, it.altitudeMeters) }
     }
 
     private fun <T> read(type: KClass<out Record>, block: suspend () -> List<T>) =
-        HealthConnectRead(emptySet(), setOf(readPermission(type)), block)
+        SourceRead(emptySet(), setOf(readPermission(type)), block)
 
     private companion object {
         const val MillisPerMinute = 60_000.0

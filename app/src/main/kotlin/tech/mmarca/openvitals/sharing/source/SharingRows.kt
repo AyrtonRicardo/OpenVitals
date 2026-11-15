@@ -44,6 +44,17 @@ data class SummaryRow(
     val text: String? = null,
 )
 
+/** One split; [paceSecondsPerKm] is null when it has no distance. */
+data class SplitRow(
+    val index: Int,
+    val distanceMeters: Double,
+    val durationSeconds: Double,
+    val paceSecondsPerKm: Double?,
+    val elevationGainMeters: Double?,
+    val heartRateAvg: Double?,
+    val source: String,
+)
+
 data class RouteRow(
     val time: Instant,
     val latitude: Double,
@@ -118,6 +129,22 @@ object SharingTables {
         columns = DataSharingColumns.SessionSummary.ALL,
         rows = result.rows.map { row ->
             arrayOf(row.metric, row.value, row.text, DataSharingMetrics.unitOf(group, row.metric))
+        },
+        status = result.status,
+    )
+
+    fun splits(result: SourceResult<SplitRow>): DataSharingAnswer = DataSharingAnswer(
+        columns = DataSharingColumns.Splits.ALL,
+        rows = result.rows.sortedBy { it.index }.map { row ->
+            arrayOf(
+                row.index,
+                row.distanceMeters,
+                row.durationSeconds,
+                row.paceSecondsPerKm,
+                row.elevationGainMeters,
+                row.heartRateAvg,
+                row.source,
+            )
         },
         status = result.status,
     )

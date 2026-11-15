@@ -1,6 +1,5 @@
 package tech.mmarca.openvitals.sharing.source
 
-import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.BasalMetabolicRateRecord
 import androidx.health.connect.client.records.BloodGlucoseRecord
 import androidx.health.connect.client.records.BloodPressureRecord
@@ -55,18 +54,6 @@ import tech.mmarca.openvitals.sharing.contract.DataSharingGroup
 import tech.mmarca.openvitals.sharing.contract.DataSharingOrigin
 
 /**
- * One read that serves [metrics]. It runs only when OpenVitals holds every
- * Health Connect permission in [requires]; a metric's own type is checked too.
- */
-internal class HealthConnectRead<T>(
-    val metrics: Set<String>,
-    val requires: Set<String>,
-    val read: suspend () -> List<T>,
-)
-
-internal fun readPermission(type: KClass<out Record>): String = HealthPermission.getReadPermission(type)
-
-/**
  * The daily Health Connect values of each group, through the same repository
  * reads the PDF report uses, so the Room caches apply. A day belongs to the
  * phone's current time zone.
@@ -83,7 +70,7 @@ internal class HealthConnectDailyReads @Inject constructor(
     private val cycleRepository: CycleRepository,
     private val sleepWindowPreferences: SleepWindowPreferences,
 ) {
-    fun reads(group: DataSharingGroup, start: LocalDate, end: LocalDate): List<HealthConnectRead<DailyRow>> {
+    fun reads(group: DataSharingGroup, start: LocalDate, end: LocalDate): List<SourceRead<DailyRow>> {
         val zone = ZoneId.systemDefault()
         val inRange = { date: LocalDate -> !date.isBefore(start) && !date.isAfter(end) }
         return when (group) {
@@ -115,12 +102,12 @@ internal class HealthConnectDailyReads @Inject constructor(
                 },
             )
             DataSharingGroup.CYCLE -> listOf(
-                HealthConnectRead(CycleDailyKeys, emptySet()) {
+                SourceRead(CycleDailyKeys, emptySet()) {
                     cycleDailyRows(cycleRepository.loadCycleData(start, end), zone).filter { inRange(it.date) }
                 },
             )
             DataSharingGroup.SEXUAL_ACTIVITY -> listOf(
-                HealthConnectRead(setOf("sexual_activity"), emptySet()) {
+                SourceRead(setOf("sexual_activity"), emptySet()) {
                     cycleRepository.loadCycleData(start, end).sexualActivity
                         .groupBy { it.time.atZone(zone).toLocalDate() }
                         .filterKeys(inRange)
@@ -132,7 +119,7 @@ internal class HealthConnectDailyReads @Inject constructor(
     }
 
     private fun activity(start: LocalDate, end: LocalDate) = listOf(
-        HealthConnectRead(
+        SourceRead(
             setOf("steps", "distance", "active_calories", "floors", "elevation_gained", "wheelchair_pushes"),
             setOf(readPermission(StepsRecord::class)),
         ) {
@@ -197,7 +184,7 @@ internal class HealthConnectDailyReads @Inject constructor(
         },
     )
 
-    private fun vitals(start: LocalDate, end: LocalDate): List<HealthConnectRead<DailyRow>> {
+    private fun vitals(start: LocalDate, end: LocalDate): List<SourceRead<DailyRow>> {
         fun cached(metric: String, type: KClass<out Record>, vitals: VitalsPeriodMetric) = read(setOf(metric), type) {
             vitalsRepository.loadDailyVitals(vitals, start, end).map { DailyRow(it.date, metric, it.value) }
         }
@@ -224,7 +211,7 @@ internal class HealthConnectDailyReads @Inject constructor(
         end: LocalDate,
         zone: ZoneId,
         inRange: (LocalDate) -> Boolean,
-    ): List<HealthConnectRead<DailyRow>> {
+    ): List<SourceRead<DailyRow>> {
         fun mean(metric: String, type: KClass<out Record>, entries: suspend () -> List<Pair<Instant, Double>>) =
             read(setOf(metric), type) {
                 entries()
@@ -265,7 +252,7 @@ internal class HealthConnectDailyReads @Inject constructor(
     )
 
     private fun read(metrics: Set<String>, type: KClass<out Record>, block: suspend () -> List<DailyRow>) =
-        HealthConnectRead(metrics, setOf(readPermission(type)), block)
+        SourceRead(metrics, setOf(readPermission(type)), block)
 
     private fun positive(date: LocalDate, metric: String, value: Double?): DailyRow? =
         value?.takeIf { it > 0.0 }?.let { DailyRow(date, metric, it) }
