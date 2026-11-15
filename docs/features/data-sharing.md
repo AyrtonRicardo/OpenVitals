@@ -1,6 +1,6 @@
 # Share With Other Apps
 
-> **Status:** In progress. Debug and ci builds only: `BuildConfig.DATA_SHARING` hides the settings screen elsewhere, and the manifest placeholder `dataSharingEnabled` leaves the provider disabled.
+> **Status:** In every build. Off until the user turns it on.
 > **Audience:** Users and contributors.
 > **Implementation:** `sharing`, `sharing/contract`, `features/settings`.
 > **Navigation:** `Screen.SettingsDataSharing`; settings section `DATA_SHARING`.
@@ -42,6 +42,7 @@ Medical records are not shared.
   - **daily** values through the same repository reads as the PDF report, so the Room caches apply. A day is a day in the phone's time zone; a night belongs to the day it ends on.
   - **samples** straight from the records, up to 48 hours per query, mapped in `healthconnect/SharedSamplesHealthReader`. They are screen reads: paced, counted and behind the one rate-limit backoff, so a refusal makes the answer `rate_limited` at once.
   - **sessions** for workouts (recorded and planned), sleep and mindfulness, each session's summary, and a workout's route.
+- A recorded workout as a file: `workouts/sessions/<session_id>/fit`, the FIT file "Save as FIT" writes (`features/activity/ActivityWorkoutFitFile`). It is opened, not queried. `?route=true` adds the GPS track and needs the routes group too. A file cannot say what is missing from it, so anything short of the whole file is refused: the `FileNotFoundException`'s message starts with the status and a colon (`sharing_off: `, `background_read_missing: `, `rate_limited: `, `partial: `, or `not_found: ` when no recorded workout has the id) and names no workout.
 - OpenVitals' own data, with origin `openvitals`:
   - **stored in the app:** Body Energy as last computed (days and 5-minute buckets), the cycle journal and pill intakes. These need no Health Connect access, so they arrive even when Health Connect cannot be read.
   - **worked out on request**, with the same functions the screens use (they live in the `health-calculations` library): the sleep score, efficiency, WASO and midpoint; BMI, FFMI and the BMR estimate as of each day; the maximum heart rate the load estimates use; the caffeine curve; the cycle day, phase, predicted window, averages and thermal shift as they stood on each day; a workout's moving time, maxima, recovery drop and splits.

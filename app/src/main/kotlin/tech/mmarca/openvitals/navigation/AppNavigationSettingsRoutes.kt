@@ -131,10 +131,8 @@ internal fun NavGraphBuilder.settingsRoutes(
     composable(Screen.SettingsOpenWatch.route) {
         OpenWatchSettingsScreen(viewModel = hiltViewModel())
     }
-    if (BuildConfig.DATA_SHARING) {
-        composable(Screen.SettingsDataSharing.route) {
-            DataSharingSettingsScreen(viewModel = hiltViewModel())
-        }
+    composable(Screen.SettingsDataSharing.route) {
+        DataSharingSettingsScreen(viewModel = hiltViewModel())
     }
 
     composable(Screen.SettingsHealthConnect.route) {

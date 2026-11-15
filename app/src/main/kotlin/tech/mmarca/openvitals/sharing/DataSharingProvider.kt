@@ -8,10 +8,13 @@ import android.database.Cursor
 import android.database.MatrixCursor
 import android.net.Uri
 import android.os.Bundle
+import android.os.ParcelFileDescriptor
 import dagger.hilt.EntryPoint
 import dagger.hilt.InstallIn
 import dagger.hilt.android.EntryPointAccessors
 import dagger.hilt.components.SingletonComponent
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
 import java.util.concurrent.atomic.AtomicInteger
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.withTimeoutOrNull
@@ -24,7 +27,7 @@ import tech.mmarca.openvitals.sharing.contract.DataSharingStatus
 /**
  * The read-only data sharing API. Android checks each group's path-permission
  * first; [query] checks again, because Android lets through a path that no
- * path-permission names. Everything but [query] refuses.
+ * path-permission names. [openFile] serves a workout's FIT file. Everything else refuses.
  */
 class DataSharingProvider : ContentProvider() {
 
@@ -65,7 +68,38 @@ class DataSharingProvider : ContentProvider() {
         return answer.project(projection).toCursor()
     }
 
-    override fun getType(uri: Uri): String? = null
+    /**
+     * A recorded workout's FIT file. Read-only. The caller needs the workouts group, and the
+     * routes group as well to get the route. A refusal is a [FileNotFoundException] whose message
+     * starts with the status and a colon, such as `sharing_off: `; it names no workout.
+     */
+    override fun openFile(uri: Uri, mode: String): ParcelFileDescriptor {
+        if (mode != "r") readOnly()
+        val context = requireNotNull(context)
+        val request = DataSharingRequestParser.parseFile(uri.pathSegments, uri::getQueryParameter)
+        request.groups.forEach { group -> enforceGranted(context, group) }
+        if (!OpenVitalsApp.awaitStarted(StartupTimeoutMillis)) refuse(DataSharingStatus.PARTIAL)
+
+        val entryPoint = EntryPointAccessors.fromApplication(context.applicationContext, DataSharingEntryPoint::class.java)
+        callingPackage?.let { caller -> request.groups.forEach { entryPoint.dataSharingStore().recordAccess(caller, it) } }
+
+        val answer = blocking<WorkoutFitAnswer>(
+            busy = { WorkoutFitAnswer.Refused(DataSharingStatus.RATE_LIMITED) },
+            timedOut = { WorkoutFitAnswer.Refused(DataSharingStatus.PARTIAL) },
+        ) { entryPoint.dataSharingQueries().workoutFit(request) }
+        return when (answer) {
+            is WorkoutFitAnswer.File -> openPipeHelper(uri, DataSharingContract.FIT_MIME_TYPE, null, answer.bytes) { output, _, _, _, bytes ->
+                // The reader may close early; that is its choice, not a failure here.
+                runCatching { FileOutputStream(output.fileDescriptor).use { it.write(bytes) } }
+            }
+            is WorkoutFitAnswer.Refused -> refuse(answer.status)
+        }
+    }
+
+    override fun getType(uri: Uri): String? =
+        runCatching { DataSharingRequestParser.parseFile(uri.pathSegments, uri::getQueryParameter) }
+            .map { DataSharingContract.FIT_MIME_TYPE }
+            .getOrNull()
 
     override fun insert(uri: Uri, values: ContentValues?): Uri? = readOnly()
 
@@ -105,6 +139,9 @@ class DataSharingProvider : ContentProvider() {
         }
     }
 
+    private fun refuse(status: DataSharingStatus): Nothing =
+        throw FileNotFoundException("${status.value}: ${RefusalText[status] ?: "the file could not be written"}")
+
     private fun readOnly(): Nothing = throw UnsupportedOperationException("The OpenVitals data API is read-only.")
 
     private fun DataSharingAnswer.toCursor(): Cursor {
@@ -125,6 +162,17 @@ class DataSharingProvider : ContentProvider() {
         /** A year of daily values takes a few seconds; a stuck read must not hold a binder thread for long. */
         const val QueryTimeoutMillis = 20_000L
         const val StartupTimeoutMillis = 5_000L
+
+        /** What follows the status in a refused file's message. Words only: no id, no value. */
+        val RefusalText = mapOf(
+            DataSharingStatus.SHARING_OFF to "sharing is off in OpenVitals",
+            DataSharingStatus.BACKGROUND_READ_MISSING to "OpenVitals may not read Health Connect in the background",
+            DataSharingStatus.HEALTH_CONNECT_PAUSED to "Health Connect access is paused in OpenVitals",
+            DataSharingStatus.HEALTH_CONNECT_UNAVAILABLE to "Health Connect is not available",
+            DataSharingStatus.RATE_LIMITED to "Health Connect asked OpenVitals to slow down",
+            DataSharingStatus.NOT_FOUND to "no recorded workout has this id",
+            DataSharingStatus.PARTIAL to "a read failed, so the file would be incomplete",
+        )
     }
 }
 

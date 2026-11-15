@@ -82,7 +82,6 @@ internal fun LazyListScope.settingsScreenContent(
 private fun LazyListScope.settingsRootCards(actions: SettingsScreenActions, openWatchSummary: OpenWatchLinkSummary?) {
     SettingsSection.entries
         .filter { BuildConfig.OPENVITALS_DIAGNOSTICS || it != SettingsSection.DEBUG_DIAGNOSTICS }
-        .filter { BuildConfig.DATA_SHARING || it != SettingsSection.DATA_SHARING }
         .forEach { settingsSection ->
             item {
                 SettingsCategoryCard(

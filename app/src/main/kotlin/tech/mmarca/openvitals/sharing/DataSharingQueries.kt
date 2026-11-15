@@ -1,16 +1,22 @@
 package tech.mmarca.openvitals.sharing
 
+import android.util.Log
 import javax.inject.Inject
 import javax.inject.Singleton
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
+import tech.mmarca.openvitals.features.activity.ActivityWorkoutFitFile
 import tech.mmarca.openvitals.healthconnect.HealthConnectRateLimitBackoff
+import tech.mmarca.openvitals.healthconnect.HealthConnectRateLimitException
+import tech.mmarca.openvitals.healthconnect.withStrictHealthConnectReads
 import tech.mmarca.openvitals.healthconnect.HealthConnectSyncGate
 import tech.mmarca.openvitals.sharing.contract.DataSharingGroup
 import tech.mmarca.openvitals.sharing.contract.DataSharingRequest
 import tech.mmarca.openvitals.sharing.contract.DataSharingStatus
+import tech.mmarca.openvitals.sharing.contract.WorkoutFitRequest
 import tech.mmarca.openvitals.sharing.source.HealthConnectSharingSource
 import tech.mmarca.openvitals.sharing.source.OpenVitalsSharingSource
 import tech.mmarca.openvitals.sharing.source.SharingTables
@@ -26,6 +32,7 @@ class DataSharingQueries @Inject internal constructor(
     private val syncGate: HealthConnectSyncGate,
     private val healthConnect: HealthConnectSharingSource,
     private val openVitals: OpenVitalsSharingSource,
+    private val workoutFitFile: ActivityWorkoutFitFile,
 ) {
     /** One query reads at a time: Health Connect's rate limit is shared with the app's own screens. */
     private val mutex = Mutex()
@@ -41,6 +48,32 @@ class DataSharingQueries @Inject internal constructor(
             mutex.withLock { dataAnswer(request) }
         } else {
             DataSharingAnswers.empty(request, DataSharingStatus.SHARING_OFF)
+        }
+    }
+
+    /**
+     * A recorded workout's FIT file, the one "Save as FIT" writes. A file has no status to say
+     * what is missing from it, so anything short of a whole file is a refusal with the reason:
+     * sharing off, a closed Health Connect gate, a failed read, or no such workout.
+     */
+    suspend fun workoutFit(
+        request: WorkoutFitRequest,
+        onFailure: (Throwable) -> Unit = { Log.w(TAG, "A workout's FIT file could not be written", it) },
+    ): WorkoutFitAnswer {
+        if (!store.sharingEnabled) return WorkoutFitAnswer.Refused(DataSharingStatus.SHARING_OFF)
+        return mutex.withLock {
+            val gate = healthConnectGate()
+            if (gate != DataSharingStatus.OK) return@withLock WorkoutFitAnswer.Refused(gate)
+            try {
+                val bytes = withStrictHealthConnectReads { workoutFitFile.bytes(request.sessionId, request.withRoute) }
+                if (bytes == null) WorkoutFitAnswer.Refused(DataSharingStatus.NOT_FOUND) else WorkoutFitAnswer.File(bytes)
+            } catch (error: CancellationException) {
+                throw error
+            } catch (error: Exception) {
+                onFailure(error)
+                val rateLimited = error is HealthConnectRateLimitException || HealthConnectRateLimitBackoff.isRateLimitFailure(error)
+                WorkoutFitAnswer.Refused(if (rateLimited) DataSharingStatus.RATE_LIMITED else DataSharingStatus.PARTIAL)
+            }
         }
     }
 
@@ -104,6 +137,15 @@ class DataSharingQueries @Inject internal constructor(
         else -> DataSharingStatus.OK
     }
 }
+
+/** A workout's FIT file, or why there is none. */
+sealed interface WorkoutFitAnswer {
+    class File(val bytes: ByteArray) : WorkoutFitAnswer
+
+    data class Refused(val status: DataSharingStatus) : WorkoutFitAnswer
+}
+
+private const val TAG = "DataSharing"
 
 /** Both parts' rows. A closed gate explains the answer; otherwise the worse read status does. */
 internal fun <T> merge(gate: DataSharingStatus, healthConnect: SourceResult<T>?, openVitals: SourceResult<T>?): SourceResult<T> {

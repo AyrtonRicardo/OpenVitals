@@ -119,21 +119,6 @@ class LocalAppManifestPolicyTest {
         assertTrue(provider.contains("""android:grantUriPermissions="false""""))
     }
 
-    @Test
-    fun `the data sharing API is switched on by the build, not left on`() {
-        // Until it launches, only debug and ci builds set the placeholder to true.
-        val manifest = File("src/main/AndroidManifest.xml").readText()
-        val switch = "android:enabled=\"\${dataSharingEnabled}\""
-
-        assertTrue(manifestTags(manifest, "provider").single { it.contains(".sharing.DataSharingProvider") }.contains(switch))
-        assertTrue(manifestTags(manifest, "activity-alias").single { it.contains(".ManageDataSharingActivity") }.contains(switch))
-        val build = File("build.gradle.kts").readText()
-        assertTrue(
-            "The default must be off.",
-            build.substringBefore("buildTypes {").contains("""manifestPlaceholders["dataSharingEnabled"] = "false""""),
-        )
-    }
-
     private fun manifestTags(manifest: String, tagName: String): List<String> =
         Regex("""<$tagName\b[^>]*>""").findAll(manifest).map { it.value }.toList()
 

@@ -18,9 +18,18 @@ object DataSharingContract {
     const val PATH_METRICS = "metrics"
     const val PATH_SPLITS = "splits"
 
+    /** `workouts/sessions/{id}/fit`: a file to open, not a table to query. */
+    const val PATH_FIT = "fit"
+
     const val PARAM_START = "start"
     const val PARAM_END = "end"
     const val PARAM_METRIC = "metric"
+
+    /** `true` adds the GPS track to a workout's FIT file. It needs the routes group as well. */
+    const val PARAM_ROUTE = "route"
+
+    /** What `getType` answers for a workout's FIT file. */
+    const val FIT_MIME_TYPE = "application/vnd.ant.fit"
 
     /** Daily and session ranges, both days counted. */
     const val MAX_RANGE_DAYS = 366L
@@ -84,6 +93,9 @@ enum class DataSharingStatus(val value: String) {
     HEALTH_CONNECT_UNAVAILABLE("health_connect_unavailable"),
     RATE_LIMITED("rate_limited"),
     SHARING_OFF("sharing_off"),
+
+    /** Only for a file: no recorded workout has this id. */
+    NOT_FOUND("not_found"),
 }
 
 /** Column names, one object per table. */

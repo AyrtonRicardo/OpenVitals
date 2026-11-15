@@ -107,10 +107,6 @@ android {
         versionCode = versionCodeOverride.orElse(baseVersionCode).get()
         versionName = versionNameOverride.orElse(baseVersionName).get()
         buildConfigField("boolean", "OPENVITALS_DIAGNOSTICS", "false")
-        // The data sharing API is in debug and ci builds until it launches: elsewhere its
-        // provider and its settings alias are disabled, and its settings screen is hidden.
-        buildConfigField("boolean", "DATA_SHARING", "false")
-        manifestPlaceholders["dataSharingEnabled"] = "false"
         if (apkAbiFilters.isNotEmpty()) {
             ndk {
                 abiFilters.addAll(apkAbiFilters)
@@ -134,8 +130,6 @@ android {
             applicationIdSuffix = ".debug"
             versionNameSuffix = "-debug"
             buildConfigField("boolean", "OPENVITALS_DIAGNOSTICS", "true")
-            buildConfigField("boolean", "DATA_SHARING", "true")
-            manifestPlaceholders["dataSharingEnabled"] = "true"
             if (signDebugWithReleaseKey && hasReleaseSigning) {
                 signingConfig = signingConfigs.getByName("release")
             }

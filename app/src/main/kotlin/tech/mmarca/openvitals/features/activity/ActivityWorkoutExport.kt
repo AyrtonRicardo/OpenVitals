@@ -90,7 +90,7 @@ internal suspend fun Context.shareActivityWorkout(
         )
     }
 
-private fun writeActivityWorkoutExport(
+internal fun writeActivityWorkoutExport(
     workout: ExerciseData,
     series: ActivityWorkoutSeries,
     format: ActivityWorkoutExportFormat,
