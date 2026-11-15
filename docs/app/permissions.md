@@ -157,6 +157,23 @@ Nearby-device Bluetooth permissions never add internet access. Phone-to-phone sy
 
 OpenVitals treats the foreground slot as effectively single. Activity recording, an Apple Health import, and a phone-to-phone sync contend for it, so the app does not run them at the same time. No service starts without a tap.
 
+## Data Sharing Permissions
+
+OpenVitals defines these permissions; it does not ask for them. Another app asks for one to read that group through the sharing provider, and Android shows the user its Allow dialog. Their names carry the application id, so builds install side by side.
+
+- `<applicationId>.permission.READ_ACTIVITY`
+- `<applicationId>.permission.READ_WORKOUTS`
+- `<applicationId>.permission.READ_ROUTES`
+- `<applicationId>.permission.READ_SLEEP`
+- `<applicationId>.permission.READ_HEART`
+- `<applicationId>.permission.READ_VITALS`
+- `<applicationId>.permission.READ_BODY`
+- `<applicationId>.permission.READ_NUTRITION`
+- `<applicationId>.permission.READ_RECOVERY`
+- `<applicationId>.permission.READ_CYCLE`
+- `<applicationId>.permission.READ_SEXUAL_ACTIVITY`
+- `<applicationId>.permission.WRITE_DATA`: signature-level, so no other app can hold it. It guards the provider's writes, which are refused anyway.
+
 ## Removed Network Permissions
 
 The manifest explicitly removes inherited network permissions from dependencies:

@@ -56,6 +56,15 @@ sealed interface DataSharingRequest {
 }
 
 /**
+ * A recorded workout as a FIT file. Not a [DataSharingRequest]: it is opened, not queried, and
+ * answers with bytes. It needs the workouts group, and the routes group too when [withRoute].
+ */
+data class WorkoutFitRequest(val sessionId: String, val withRoute: Boolean) {
+    val groups: Set<DataSharingGroup>
+        get() = if (withRoute) setOf(DataSharingGroup.WORKOUTS, DataSharingGroup.ROUTES) else setOf(DataSharingGroup.WORKOUTS)
+}
+
+/**
  * Turns URI path segments and query parameters into a [DataSharingRequest].
  * Anything else throws [IllegalArgumentException], which reaches the client.
  */
@@ -92,6 +101,21 @@ object DataSharingRequestParser {
         }
     }
 
+    /** The file paths. Today there is one: `workouts/sessions/<session_id>/fit?route=true|false`. */
+    fun parseFile(segments: List<String>, parameter: (String) -> String?): WorkoutFitRequest {
+        val isFit = segments.size == 4 &&
+            segments[0] == DataSharingGroup.WORKOUTS.path &&
+            segments[1] == DataSharingTable.SESSIONS.path &&
+            segments[3] == DataSharingContract.PATH_FIT
+        if (!isFit) fail("Not a file. The only file is /workouts/sessions/<session_id>/fit.")
+        val withRoute = when (parameter(DataSharingContract.PARAM_ROUTE)) {
+            null, "false" -> false
+            "true" -> true
+            else -> fail("route is true or false.")
+        }
+        return WorkoutFitRequest(sessionId(segments[2]), withRoute)
+    }
+
     private fun sessionRequest(
         group: DataSharingGroup,
         segments: List<String>,
@@ -104,6 +128,8 @@ object DataSharingRequestParser {
         segments.size == 3 -> DataSharingRequest.Session(group, sessionId(segments[2]))
         segments.size == 4 && group == DataSharingGroup.WORKOUTS && segments[3] == DataSharingContract.PATH_SPLITS ->
             DataSharingRequest.Splits(sessionId(segments[2]))
+        segments.size == 4 && group == DataSharingGroup.WORKOUTS && segments[3] == DataSharingContract.PATH_FIT ->
+            fail("A workout's FIT file is a file: open it, do not query it.")
         else -> fail("Unknown path: /${segments.joinToString("/")}")
     }
 

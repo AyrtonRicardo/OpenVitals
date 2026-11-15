@@ -53,7 +53,6 @@ enum class SettingsSection(
         summaryRes = R.string.settings_device_sync_group_body,
     ),
 
-    // Debug builds only until it launches: BuildConfig.DATA_SHARING.
     DATA_SHARING(
         titleRes = R.string.settings_data_sharing_group_title,
         summaryRes = R.string.settings_data_sharing_group_body,

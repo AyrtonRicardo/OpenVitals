@@ -21,6 +21,8 @@ Connected features should live in a separate app and repository.
 
 Possible connected features include accounts, sharing, and social workflows. Those features should not be mixed into the local app's Health Connect-only runtime.
 
+[OpenBridge](https://github.com/Hale-MTU/OpenBridge) is that separate app. It has the internet permission the local app does not. The local app hands it data only through the on-device sharing provider, which the user switches on and allows group by group ([Share with other apps](../features/data-sharing.md)).
+
 ## Why Separate Them?
 
 The split keeps the local app easier to reason about:

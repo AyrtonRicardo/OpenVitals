@@ -1,6 +1,6 @@
 # OpenVitals Privacy Policy
 
-Last updated: November 9, 2026
+Last updated: November 15, 2026
 
 OpenVitals is a local-first Android app for viewing health and fitness data from Health Connect.
 
@@ -17,10 +17,10 @@ OpenVitals is designed to keep health data on your device.
 - The app has no internet permission. Android itself stops it from using the network.
 - No ads are shown.
 - No analytics SDKs are included.
-- No health data is sold or shared with third parties.
+- No health data is sold. OpenVitals itself sends none to anyone. Another app on your phone can read it only if you switch sharing on and allow that app (see "Sharing With Other Apps").
 - OpenVitals reads Health Connect data only after you grant the relevant Android permissions.
 - OpenVitals writes to Health Connect only through something you start or switch on: saving an entry, recording an activity, running an import, adding a medical record, syncing from another phone, or the distance backfill setting.
-- Data leaves the phone only over Bluetooth, to a second phone you paired yourself, or in a file you choose to export or share.
+- Data leaves OpenVitals only over Bluetooth, to a second phone you paired yourself, in a file you choose to export or share, or to another app on your phone that you allowed to read it.
 - On the phone, OpenVitals shares your body profile with OpenWatch and receives your watch's state and heart rate from it, if you have OpenWatch (see "OpenWatch On The Same Phone").
 
 ## Data OpenVitals Accesses
@@ -112,7 +112,18 @@ Exports (routes, workouts, reports, CSV files) and import reports are created on
 
 ## Data Sharing
 
-OpenVitals does not sell, rent, transfer, or share your health data with third parties.
+OpenVitals does not sell or rent your health data, and it sends none to any third party itself: it has no internet access to send it with.
+
+## Sharing With Other Apps
+
+OpenVitals can let another app on your phone read your data. This is off until you turn on Settings, Share with other apps.
+
+- **You choose the app and the data.** The data is split into 11 groups: activity, workouts, workout routes, sleep, heart, vitals, body, nutrition, recovery, cycle and sexual activity. An app must ask Android for each group, and Android shows you its own Allow or Deny dialog for each one. You can change each answer later in Android's settings for that app.
+- **What an allowed app can read** is the data of the groups you allowed: the Health Connect records OpenVitals may read, the values OpenVitals works out from them (such as the sleep score), and what OpenVitals stores itself for that group (such as Body Energy, and the cycle journal without its notes). An app allowed to read workouts can also get a workout as a FIT file, with its route only if you allowed workout routes too. Medical records are never shared.
+- **Reading only.** Another app cannot change or delete anything in OpenVitals.
+- **OpenVitals keeps a list** of the apps that asked and when each last asked, on your phone, so the settings screen can show it. You can remove an app from the list.
+- **What the other app does with the data is up to that app.** OpenVitals stays offline, but an app you allow can send what it reads elsewhere. Its own privacy policy applies. OpenBridge, Hale's own app for this, sends nothing until you connect a service and tell it to send.
+- **To stop**, turn the switch off, or deny the group in Android's settings for that app. Both take effect at once.
 
 OpenVitals does not include advertising SDKs or analytics SDKs.
 
@@ -142,7 +153,7 @@ You can delete all local OpenVitals data by clearing the app's storage in Androi
 
 ## Security
 
-OpenVitals relies on Android and Health Connect permission controls to protect access to health data. Its local data sits in app-private storage, which other apps cannot read. You can also require your device unlock to open the app.
+OpenVitals relies on Android and Health Connect permission controls to protect access to health data. Its local data sits in app-private storage, which other apps cannot read. An app you allowed under "Sharing With Other Apps" is given the data it asks for by OpenVitals; it gets no access to that storage. You can also require your device unlock to open the app.
 
 Because OpenVitals works locally and does not upload health data, there is no OpenVitals cloud account or cloud health-data store.
 

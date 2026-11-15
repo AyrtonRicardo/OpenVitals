@@ -114,6 +114,34 @@ class DataSharingRequestParserTest {
         assertFails("sleep/daily", "start" to "2026-09-01", "end" to "2026-09-01", "metric" to "Sleep_Score")
     }
 
+    @Test
+    fun `a workout's FIT file is a file path, with the route only when asked`() {
+        assertThat(parseFile("workouts/sessions/abc/fit")).isEqualTo(WorkoutFitRequest("abc", withRoute = false))
+        assertThat(parseFile("workouts/sessions/abc/fit", "route" to "false").withRoute).isFalse()
+        assertThat(parseFile("workouts/sessions/abc/fit", "route" to "true")).isEqualTo(WorkoutFitRequest("abc", withRoute = true))
+    }
+
+    @Test
+    fun `the route makes the file need the routes group too`() {
+        assertThat(WorkoutFitRequest("abc", withRoute = false).groups).containsExactly(DataSharingGroup.WORKOUTS)
+        assertThat(WorkoutFitRequest("abc", withRoute = true).groups)
+            .containsExactly(DataSharingGroup.WORKOUTS, DataSharingGroup.ROUTES)
+    }
+
+    @Test
+    fun `nothing else is a file, and the file is not a table`() {
+        listOf("workouts/sessions/abc", "workouts/sessions/abc/splits", "sleep/sessions/abc/fit", "routes/abc", "groups").forEach {
+            assertThrows(IllegalArgumentException::class.java) { parseFile(it) }
+        }
+        assertThrows(IllegalArgumentException::class.java) { parseFile("workouts/sessions/abc/fit", "route" to "yes") }
+        assertFails("workouts/sessions/abc/fit")
+    }
+
+    private fun parseFile(path: String, vararg parameters: Pair<String, String>): WorkoutFitRequest {
+        val map = parameters.toMap()
+        return DataSharingRequestParser.parseFile(path.split('/').filter { it.isNotEmpty() }) { map[it] }
+    }
+
     private fun parse(path: String, vararg parameters: Pair<String, String>): DataSharingRequest {
         val map = parameters.toMap()
         return DataSharingRequestParser.parse(path.split('/').filter { it.isNotEmpty() }) { map[it] }

@@ -26,6 +26,7 @@ Every device feature is built around keeping that true:
 
 - Phone-to-phone sync uses Bluetooth Classic (RFCOMM), not Wi-Fi. A Wi-Fi or TCP transfer would require `INTERNET`; Bluetooth keeps it a direct link between the two phones.
 - Offline maps are imported as local map packs; nothing is downloaded.
+- Another app gets data only through the on-device sharing provider, never over a socket. See [Sharing With Other Apps](#sharing-with-other-apps).
 - Diagnostics and import reports are generated on device and shared only if the user chooses to. They hold structure, not data: counts, record types, reasons and masked error text. See [Text that leaves the app is structure, not data](../engineering/architecture.md#5-text-that-leaves-the-app-is-structure-not-data).
 
 ## Paired Devices
@@ -64,6 +65,18 @@ Health Connect stores medical records as FHIR resources, on Android 14 and newer
 Cycle tracking uses Health Connect records and is shown only after cycle permissions are granted explicitly. The day log's subjective fields (pain, mood, energy, symptoms, notes, pregnancy-test results, temperature disturbances, cervical sensation), the cycles excluded from estimates, and the declared contexts and age band have no Health Connect record type and live in the app's Room database (`cycle_journal_entries`, `cycle_exclusions`) and its own preferences file. They are handled like the rest of the app's local data: they move between two phones with the cycle category of phone-to-phone sync, and they are deleted from Settings → Cycle or with the app's data.
 
 Workout route previews require manual Health Connect approval in some cases. GPS recording requires location permission because OpenVitals needs location points to build the route. Imported PMTiles or Mapsforge map packs stay local on the device.
+
+## Sharing With Other Apps
+
+Another app on the phone can read OpenVitals data through a read-only content provider ([Share with other apps](../features/data-sharing.md)). Three things must all be true:
+
+- the user turned on Settings, Share with other apps (off by default);
+- the app asked Android for a data group, and the user allowed it in Android's own dialog. There are 11 groups, one `dangerous` permission each;
+- for Health Connect data, OpenVitals itself may read that data, in the background too.
+
+What the other app does with the data is outside OpenVitals: an allowed app that has internet access can send it elsewhere. The switch says so. [OpenBridge](https://github.com/Hale-MTU/OpenBridge) is Hale's app for that, and the reason OpenVitals needs no socket. Medical records and the cycle journal's notes are never shared. Writes are refused.
+
+The access log (which app asked, for which groups, when) stays in a SharedPreferences file on the phone and is not part of device transfer.
 
 ## Permission Details
 

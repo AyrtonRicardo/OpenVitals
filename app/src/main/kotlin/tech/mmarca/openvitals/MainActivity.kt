@@ -198,7 +198,7 @@ private fun Intent.isHealthConnectOnboardingIntent(): Boolean {
 /** Another app asks to open the sharing settings, for example because sharing is off. */
 internal fun Intent.dataSharingRoute(): String? =
     Screen.SettingsDataSharing.route.takeIf {
-        BuildConfig.DATA_SHARING && action == DataSharingContract.ACTION_MANAGE_DATA_SHARING
+        action == DataSharingContract.ACTION_MANAGE_DATA_SHARING
     }
 
 internal fun Intent.openVitalsRoute(): String? =

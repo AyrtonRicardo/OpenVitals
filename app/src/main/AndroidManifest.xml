@@ -623,7 +623,6 @@
         <provider
             android:name=".sharing.DataSharingProvider"
             android:authorities="${applicationId}.data"
-            android:enabled="${dataSharingEnabled}"
             android:exported="true"
             android:grantUriPermissions="false"
             android:writePermission="${applicationId}.permission.WRITE_DATA">
@@ -676,7 +675,6 @@
         <!-- Lets another app open the sharing settings, for example when /groups says sharing is off. -->
         <activity-alias
             android:name=".ManageDataSharingActivity"
-            android:enabled="${dataSharingEnabled}"
             android:exported="true"
             android:targetActivity=".MainActivity">
             <intent-filter>
