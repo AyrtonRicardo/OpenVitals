@@ -28,7 +28,7 @@ internal fun AppleHealthImportConverter.convertBloodPressureCorrelations(
                 unit = systolic.unit ?: diastolic.unit,
                 systolic = systolic.numericValue,
                 diastolic = diastolic.numericValue,
-                stableParts = listOf("bp_correlation", correlation.stableParts(), systolic.stableParts(), diastolic.stableParts()),
+                legacyParts = listOf("bp_correlation", correlation.stableParts(), systolic.stableParts(), diastolic.stableParts()),
             )
         }
 
@@ -61,7 +61,7 @@ internal fun AppleHealthImportConverter.convertStandaloneBloodPressure(records: 
             unit = systolic.unit ?: diastolic.unit,
             systolic = systolic.numericValue,
             diastolic = diastolic.numericValue,
-            stableParts = listOf("bp_pair", systolic.stableParts(), diastolic.stableParts()),
+            legacyParts = listOf("bp_pair", systolic.stableParts(), diastolic.stableParts()),
         )
     }
 }
@@ -74,7 +74,7 @@ private fun AppleHealthImportConverter.buildBloodPressureRecord(
     unit: String?,
     systolic: Double?,
     diastolic: Double?,
-    stableParts: List<String>,
+    legacyParts: List<String>,
 ): ConvertedAppleRecord? {
     val time = start ?: return invalid(
         appleType = appleType,
@@ -88,7 +88,12 @@ private fun AppleHealthImportConverter.buildBloodPressureRecord(
         appleType = appleType,
         detail = "Diastolic value is missing or outside supported range.",
     )
-    val fingerprint = buildStableClientRecordId("blood_pressure", stableParts + sourceName.orEmpty())
+    // One reading, whether it came as a correlation, a standalone pair, or a vendor's re-sync of either.
+    val end = sourceEnd?.instant ?: time.instant
+    val fingerprint = buildStableClientRecordId(
+        "blood_pressure",
+        listOf("reading", sourceName.orEmpty(), time.instant, end, unit.orEmpty(), sys, dia),
+    )
     markConverted(appleType)
     return ConvertedAppleRecord(
         appleType = appleType,
@@ -102,7 +107,8 @@ private fun AppleHealthImportConverter.buildBloodPressureRecord(
             systolic = Pressure.millimetersOfMercury(sys),
             diastolic = Pressure.millimetersOfMercury(dia),
         ),
-        sourceTimeRange = AppleImportTimeRange(time.instant, sourceEnd?.instant ?: time.instant),
+        sourceTimeRange = AppleImportTimeRange(time.instant, end),
         unit = unit,
+        legacyClientRecordId = buildStableClientRecordId("blood_pressure", legacyParts + sourceName.orEmpty()),
     )
 }
