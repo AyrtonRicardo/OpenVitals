@@ -3,7 +3,7 @@ package tech.mmarca.openvitals.features.nutrition
 import java.time.LocalDate
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.domain.preferences.NutritionAverageBasis
 
 /** The divisor behind "calories per day" (#259): which daily figure is right depends on whether blank days count. */

@@ -1,12 +1,12 @@
 package tech.mmarca.openvitals.features.hydration
 
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.displayPeriodFor
-import tech.mmarca.openvitals.domain.insights.BaselineValue
-import tech.mmarca.openvitals.domain.insights.CrossMetricValue
-import tech.mmarca.openvitals.domain.insights.crossMetricInsight
-import tech.mmarca.openvitals.domain.insights.periodComparison
+import tech.mmarca.healthcalculations.insights.BaselineValue
+import tech.mmarca.healthcalculations.insights.CrossMetricValue
+import tech.mmarca.healthcalculations.insights.crossMetricInsight
+import tech.mmarca.healthcalculations.insights.periodComparison
 import tech.mmarca.openvitals.domain.model.DailyHydration
 import tech.mmarca.openvitals.domain.model.WeightEntry
 import java.time.LocalDate

@@ -26,8 +26,8 @@ import org.junit.Rule
 import org.junit.Test
 import org.maplibre.android.maps.MapView as MapLibreMapView
 import org.mapsforge.map.android.view.MapView as MapsforgeMapView
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.testing.string
 import tech.mmarca.openvitals.ui.theme.OpenVitalsTheme
 

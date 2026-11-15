@@ -1,9 +1,9 @@
 package tech.mmarca.openvitals.openwatch
 
+import tech.mmarca.healthcalculations.preferences.BiologicalSex
+import tech.mmarca.healthcalculations.preferences.BodyProfile
 import tech.mmarca.openlink.OpenLinkProfile
 import tech.mmarca.openlink.OpenLinkSex
-import tech.mmarca.openvitals.domain.preferences.BiologicalSex
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
 
 internal fun BodyProfile.toLink(updatedAtMillis: Long): OpenLinkProfile = OpenLinkProfile(
     birthYear = birthYear,

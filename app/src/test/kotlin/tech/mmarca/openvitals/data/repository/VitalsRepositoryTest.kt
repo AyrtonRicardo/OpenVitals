@@ -39,15 +39,15 @@ import tech.mmarca.openvitals.data.local.vitalscache.VitalsSyncCursorEntity
 import tech.mmarca.openvitals.data.sync.VitalsCacheKeys
 import tech.mmarca.openvitals.data.sync.HistoryLookbackDays
 import tech.mmarca.openvitals.data.sync.VitalsHistorySyncService
-import tech.mmarca.openvitals.domain.model.DailyBloodPressurePoint
-import tech.mmarca.openvitals.domain.model.DailyVitalPoint
+import tech.mmarca.healthcalculations.model.DailyBloodPressurePoint
+import tech.mmarca.healthcalculations.model.DailyVitalPoint
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
-import tech.mmarca.openvitals.domain.model.SkinTemperatureDeltaSample
-import tech.mmarca.openvitals.domain.model.SkinTemperatureEntry
-import tech.mmarca.openvitals.domain.model.SpO2Entry
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementEntry
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementWriteRequest
+import tech.mmarca.healthcalculations.model.SkinTemperatureDeltaSample
+import tech.mmarca.healthcalculations.model.SkinTemperatureEntry
+import tech.mmarca.healthcalculations.model.SpO2Entry
+import tech.mmarca.healthcalculations.model.VitalsMeasurementEntry
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.model.VitalsMeasurementWriteRequest
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
 
 class VitalsRepositoryTest {
@@ -498,7 +498,7 @@ class VitalsRepositoryTest {
                 time = oldDay.atTime(8, 0).atZone(ZoneId.systemDefault()).toInstant(),
                 value = 18.0,
                 source = "tech.mmarca.openvitals",
-                isOpenVitalsEntry = true,
+                isOwnEntry = true,
             )
         coEvery { hc.readDailyRespiratoryRate(any(), any()) } coAnswers {
             // The old day is empty once the reading moved off it; the new day has two.

@@ -1,15 +1,15 @@
 package tech.mmarca.openvitals.features.vitals
 
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
-import tech.mmarca.openvitals.domain.model.BloodPressureEntry
-import tech.mmarca.openvitals.domain.model.DailyHrv
-import tech.mmarca.openvitals.domain.model.DailyRestingHR
-import tech.mmarca.openvitals.domain.model.HeartRateSummary
-import tech.mmarca.openvitals.core.stats.averageOrNull
-import tech.mmarca.openvitals.core.stats.averageOrZero
-import tech.mmarca.openvitals.core.stats.timeBucketedAverageOrNull
-import tech.mmarca.openvitals.domain.model.RespiratoryRateEntry
+import tech.mmarca.healthcalculations.model.BloodPressureEntry
+import tech.mmarca.healthcalculations.model.DailyHrv
+import tech.mmarca.healthcalculations.model.DailyRestingHR
+import tech.mmarca.healthcalculations.model.HeartRateSummary
+import tech.mmarca.healthcalculations.stats.averageOrNull
+import tech.mmarca.healthcalculations.stats.averageOrZero
+import tech.mmarca.healthcalculations.stats.timeBucketedAverageOrNull
+import tech.mmarca.healthcalculations.model.RespiratoryRateEntry
 import tech.mmarca.openvitals.ui.components.MetricLinePoint
 import tech.mmarca.openvitals.ui.components.MetricLineSeries
 import tech.mmarca.openvitals.ui.components.dailyAverageLinePoints

@@ -77,7 +77,6 @@ class FileSizeRatchetTest {
             "features/devicesync/store/SyncRecordCodec.kt" to 1150,
             "data/repository/dashboard/DashboardDataLoader.kt" to 1050,
             "navigation/AppNavigation.kt" to 1050,
-            "domain/insights/BodyEnergyTimeline.kt" to 1050,
             "ui/charts/MetricLineChart.kt" to 950,
             "features/reports/pdf/ReportPdfWriter.kt" to 1000,
             "features/manualentry/activity/recording/ActivityRecordingDashboard.kt" to 1000,

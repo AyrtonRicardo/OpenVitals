@@ -4,8 +4,8 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import tech.mmarca.healthcalculations.model.ExerciseData
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.model.ExerciseData
 import tech.mmarca.openvitals.ui.components.OpenVitalsTextButton
 
 /** Asked before a workout is deleted, on the dashboard and in the activity list. There is no undo. */

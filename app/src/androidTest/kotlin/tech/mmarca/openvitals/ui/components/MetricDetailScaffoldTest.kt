@@ -14,7 +14,7 @@ import androidx.compose.ui.test.swipeRight
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.ui.theme.OpenVitalsTheme
 import java.time.LocalDate

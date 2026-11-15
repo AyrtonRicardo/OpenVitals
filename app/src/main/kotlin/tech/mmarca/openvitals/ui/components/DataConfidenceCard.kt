@@ -23,12 +23,12 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import tech.mmarca.healthcalculations.insights.DataConfidence
+import tech.mmarca.healthcalculations.insights.DataConfidenceLevel
+import tech.mmarca.healthcalculations.insights.DataConfidenceWarning
+import tech.mmarca.healthcalculations.insights.DataSourceConsistency
+import tech.mmarca.healthcalculations.insights.DataValueKind
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.DataConfidence
-import tech.mmarca.openvitals.domain.insights.DataConfidenceLevel
-import tech.mmarca.openvitals.domain.insights.DataConfidenceWarning
-import tech.mmarca.openvitals.domain.insights.DataSourceConsistency
-import tech.mmarca.openvitals.domain.insights.DataValueKind
 
 @Composable
 fun DataConfidenceCard(

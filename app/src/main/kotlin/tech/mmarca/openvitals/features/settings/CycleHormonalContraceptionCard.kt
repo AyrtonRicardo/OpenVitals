@@ -24,9 +24,9 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import java.time.LocalDate
+import tech.mmarca.healthcalculations.cycle.HormonalContraception
+import tech.mmarca.healthcalculations.cycle.HormonalContraceptionKind
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.cycle.HormonalContraception
-import tech.mmarca.openvitals.domain.cycle.HormonalContraceptionKind
 import tech.mmarca.openvitals.features.manualentry.ManualEntryPickerButton
 import tech.mmarca.openvitals.features.manualentry.localizedDateText
 import tech.mmarca.openvitals.ui.components.HealthDatePickerDialog

@@ -14,7 +14,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.domain.preferences.ActivityRecordingPreferences
 
 /**

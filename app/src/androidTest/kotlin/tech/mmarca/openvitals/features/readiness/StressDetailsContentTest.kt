@@ -9,8 +9,8 @@ import androidx.compose.ui.test.performScrollToNode
 import java.time.LocalDate
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.insights.PhysiologicalStressEstimate
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.PhysiologicalStressEstimate
 import tech.mmarca.openvitals.testing.readinessInsight
 import tech.mmarca.openvitals.testing.string
 import tech.mmarca.openvitals.ui.theme.OpenVitalsTheme

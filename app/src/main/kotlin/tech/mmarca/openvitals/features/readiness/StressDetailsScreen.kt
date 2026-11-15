@@ -40,9 +40,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import java.time.LocalDate
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.resolve
-import tech.mmarca.openvitals.domain.insights.PhysiologicalStressConfidence
-import tech.mmarca.openvitals.domain.insights.PhysiologicalStressEstimate
-import tech.mmarca.openvitals.domain.insights.PhysiologicalStressLevel
+import tech.mmarca.healthcalculations.insights.PhysiologicalStressConfidence
+import tech.mmarca.healthcalculations.insights.PhysiologicalStressEstimate
+import tech.mmarca.healthcalculations.insights.PhysiologicalStressLevel
 import tech.mmarca.openvitals.healthconnect.HealthConnectFeature
 import tech.mmarca.openvitals.ui.components.DayNavigator
 import tech.mmarca.openvitals.ui.components.DataSourceEducationItem

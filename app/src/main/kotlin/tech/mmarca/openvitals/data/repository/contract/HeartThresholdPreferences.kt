@@ -1,7 +1,7 @@
 package tech.mmarca.openvitals.data.repository.contract
 
 import kotlinx.coroutines.flow.Flow
-import tech.mmarca.openvitals.domain.preferences.BloodPressureGuideline
+import tech.mmarca.healthcalculations.preferences.BloodPressureGuideline
 
 /** What counts as a high or low reading. The Heart screen flags readings against these. */
 interface HeartThresholdPreferences {

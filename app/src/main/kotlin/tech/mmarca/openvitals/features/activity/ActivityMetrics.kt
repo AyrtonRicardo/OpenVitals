@@ -1,9 +1,9 @@
 package tech.mmarca.openvitals.features.activity
 
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.movingDurationMs
 import tech.mmarca.openvitals.core.presentation.DisplayValue
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.movingDurationMs
 
 internal fun ExerciseData.averageSpeed(unitFormatter: UnitFormatter): DisplayValue? {
     val distanceMeters = totalDistanceMeters?.takeIf { it > 0.0 } ?: return null

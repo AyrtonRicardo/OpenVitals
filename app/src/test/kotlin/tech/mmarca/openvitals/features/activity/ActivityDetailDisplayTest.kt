@@ -6,13 +6,13 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import tech.mmarca.openvitals.domain.insights.ActivitySplit
-import tech.mmarca.openvitals.domain.insights.ActivitySplits
-import tech.mmarca.openvitals.domain.insights.SplitSource
-import tech.mmarca.openvitals.domain.model.ExerciseRouteData
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
-import tech.mmarca.openvitals.domain.model.ExerciseRouteStatus
-import tech.mmarca.openvitals.domain.model.SpeedSample
+import tech.mmarca.healthcalculations.insights.ActivitySplit
+import tech.mmarca.healthcalculations.insights.ActivitySplits
+import tech.mmarca.healthcalculations.insights.SplitSource
+import tech.mmarca.healthcalculations.model.ExerciseRouteData
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseRouteStatus
+import tech.mmarca.healthcalculations.model.SpeedSample
 
 /**
  * The detail-card derivations as pure functions: the pace scale, the height profile,

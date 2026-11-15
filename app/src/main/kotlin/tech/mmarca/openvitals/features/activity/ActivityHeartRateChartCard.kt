@@ -26,8 +26,8 @@ import tech.mmarca.openvitals.core.presentation.UnitFormatter
 import androidx.health.connect.client.records.ExerciseSegment
 import tech.mmarca.openvitals.domain.model.BleHeartRateSample
 import tech.mmarca.openvitals.domain.model.BleRecordingSampleBuffer
-import tech.mmarca.openvitals.domain.model.ExerciseSegmentData
-import tech.mmarca.openvitals.domain.model.HeartRateSample
+import tech.mmarca.healthcalculations.model.ExerciseSegmentData
+import tech.mmarca.healthcalculations.model.HeartRateSample
 import tech.mmarca.openvitals.ui.components.ChartXAxisWithYAxis
 import tech.mmarca.openvitals.ui.components.ChartZoom
 import tech.mmarca.openvitals.ui.components.MetricLinePlot

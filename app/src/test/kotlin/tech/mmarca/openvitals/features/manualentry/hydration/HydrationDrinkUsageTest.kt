@@ -28,7 +28,7 @@ class HydrationDrinkUsageTest {
         endTime = time,
         liters = 0.25,
         source = "openvitals",
-        isOpenVitalsEntry = true,
+        isOwnEntry = true,
         clientRecordId = "openvitals_hydration_${time.toEpochMilli()}_drink_${drinkId}_$uuid",
     )
 
@@ -50,7 +50,7 @@ class HydrationDrinkUsageTest {
         sugarGrams = null,
         source = "openvitals",
         clientRecordId = clientRecordId,
-        isOpenVitalsEntry = isOpenVitals,
+        isOwnEntry = isOpenVitals,
     )
 
     @Test

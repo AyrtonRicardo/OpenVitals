@@ -6,8 +6,8 @@ import java.time.ZoneId
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
-import tech.mmarca.openvitals.domain.model.SleepData
-import tech.mmarca.openvitals.domain.model.SleepStage
+import tech.mmarca.healthcalculations.model.SleepData
+import tech.mmarca.healthcalculations.model.SleepStage
 
 class SleepReportTest {
 

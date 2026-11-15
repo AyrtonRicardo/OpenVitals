@@ -2,7 +2,7 @@
 
 > **Status:** Current implemented behavior.
 > **Audience:** Users and contributors.
-> **Implementation:** `features/bodyenergy`, `features/readiness`, `domain/insights/BodyEnergyTimeline.kt`, `domain/insights/BodyEnergyCalibrationFit.kt`.
+> **Implementation:** `features/bodyenergy`, `features/readiness`, `insights/BodyEnergyTimeline.kt` and `preferences/BodyEnergyCalibration.kt` in health-calculations.
 > **Navigation:** `Screen.BodyEnergyDetails`, widget `BODY_ENERGY`, settings section `RECOVERY`.
 > **Related:** [Feature map](feature-map.md), [Daily readiness](daily-readiness.md), [Sleep score and recovery](sleep-score-and-recovery.md), [Home screen widgets](home-widgets.md).
 
@@ -107,7 +107,7 @@ The worst two meet at the floor, which is the bound doing its job.
 
 Changing any of this changes every stored day, so
 `BodyEnergyTimelineAlgorithmVersion` is bumped and the cached timelines
-recompute. See `domain/insights/BodyEnergyTimeline.kt`.
+recompute. See `insights/BodyEnergyTimeline.kt` in health-calculations.
 
 ## Signals
 

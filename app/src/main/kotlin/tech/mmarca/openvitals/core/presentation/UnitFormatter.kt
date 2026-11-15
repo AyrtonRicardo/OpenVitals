@@ -1,6 +1,6 @@
 package tech.mmarca.openvitals.core.presentation
 
-import tech.mmarca.openvitals.domain.model.GlucoseMgPerDlPerMmolPerL
+import tech.mmarca.healthcalculations.model.GlucoseMgPerDlPerMmolPerL
 import tech.mmarca.openvitals.domain.preferences.UnitQuantity
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import java.text.NumberFormat

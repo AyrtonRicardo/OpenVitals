@@ -3,9 +3,9 @@ package tech.mmarca.openvitals.domain.report
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 import kotlin.math.sqrt
-import tech.mmarca.openvitals.domain.cycle.CycleSymptom
-import tech.mmarca.openvitals.domain.cycle.RecordedCycle
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.cycle.CycleSymptom
+import tech.mmarca.healthcalculations.cycle.RecordedCycle
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
 import tech.mmarca.openvitals.domain.model.ReportCycleDetail
 import tech.mmarca.openvitals.domain.model.ReportCycleNote
 import tech.mmarca.openvitals.domain.model.ReportCycleRow
@@ -42,7 +42,7 @@ fun cycleDetail(
     end: LocalDate,
 ): ReportCycleDetail? {
     val inRange = cycles
-        .filter { !it.startDate.isAfter(end) && (it.endDate == null || !it.endDate.isBefore(start)) }
+        .filter { !it.startDate.isAfter(end) && it.endDate?.isBefore(start) != true }
         .sortedBy { it.startDate }
     val entries = journal.filter { !it.date.isBefore(start) && !it.date.isAfter(end) }.sortedBy { it.date }
     if (inRange.isEmpty() && entries.isEmpty()) return null

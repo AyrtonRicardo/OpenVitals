@@ -2,12 +2,12 @@ package tech.mmarca.openvitals.features.nutrition
 
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.displayPeriodFor
-import tech.mmarca.openvitals.domain.insights.BaselineValue
-import tech.mmarca.openvitals.domain.insights.DailyGoalValue
-import tech.mmarca.openvitals.domain.insights.dailyGoalProgress
-import tech.mmarca.openvitals.domain.insights.macroSplitInterpretation
-import tech.mmarca.openvitals.domain.insights.periodComparison
-import tech.mmarca.openvitals.domain.insights.personalBaselineInsight
+import tech.mmarca.healthcalculations.insights.BaselineValue
+import tech.mmarca.healthcalculations.insights.DailyGoalValue
+import tech.mmarca.healthcalculations.insights.dailyGoalProgress
+import tech.mmarca.healthcalculations.insights.macroSplitInterpretation
+import tech.mmarca.healthcalculations.insights.periodComparison
+import tech.mmarca.healthcalculations.insights.personalBaselineInsight
 import tech.mmarca.openvitals.domain.model.DailyMacros
 import tech.mmarca.openvitals.domain.model.NutritionEntry
 import tech.mmarca.openvitals.domain.model.NutritionNutrient
@@ -87,7 +87,7 @@ internal val primaryNutritionOverviewNutrients: List<NutritionNutrient>
 private fun buildMetricDisplay(
     metric: NutritionMetric,
     dailyGoal: Double,
-    period: tech.mmarca.openvitals.core.period.DatePeriod,
+    period: tech.mmarca.healthcalculations.model.DatePeriod,
     dailyMacros: List<DailyMacros>,
     previousDailyMacros: List<DailyMacros>,
     baselineDailyMacros: List<DailyMacros>,
@@ -142,7 +142,7 @@ private fun List<DailyMacros>.totals(): NutritionPeriodTotals =
 
 /** The series with its daily average for [period]. Whether to show it is the screen's call. */
 private fun NutritionNutrientSeries.averagedOver(
-    period: tech.mmarca.openvitals.core.period.DatePeriod,
+    period: tech.mmarca.healthcalculations.model.DatePeriod,
     basis: NutritionAverageBasis,
     today: LocalDate,
 ): NutritionNutrientSeries =

@@ -1,6 +1,7 @@
 package tech.mmarca.openvitals.domain.model
 
 import kotlin.math.roundToLong
+import tech.mmarca.healthcalculations.model.HeartRateSample
 
 /** Upper bound for day-view heart rate charts and in-memory use. */
 const val MaxHeartRateChartSamples = 2_500

@@ -4,21 +4,21 @@ import androidx.health.connect.client.records.ExerciseRouteResult
 import androidx.health.connect.client.records.ExerciseSessionRecord
 import androidx.health.connect.client.records.MindfulnessSessionRecord
 import androidx.health.connect.client.records.SleepSessionRecord
-import tech.mmarca.openvitals.domain.model.CaloriesBurnedSource
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.ExerciseDeviceData
-import tech.mmarca.openvitals.domain.model.ExerciseLapData
-import tech.mmarca.openvitals.domain.model.ExerciseRouteData
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
-import tech.mmarca.openvitals.domain.model.ExerciseRouteStatus
-import tech.mmarca.openvitals.domain.model.ExerciseSegmentData
+import tech.mmarca.healthcalculations.model.CaloriesBurnedSource
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseDeviceData
+import tech.mmarca.healthcalculations.model.ExerciseLapData
+import tech.mmarca.healthcalculations.model.ExerciseRouteData
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseRouteStatus
+import tech.mmarca.healthcalculations.model.ExerciseSegmentData
+import tech.mmarca.healthcalculations.model.SleepData
+import tech.mmarca.healthcalculations.model.SleepDeviceData
+import tech.mmarca.healthcalculations.model.SleepStage
+import tech.mmarca.healthcalculations.model.resolveSleepStages
+import tech.mmarca.healthcalculations.model.sleepDurationMsFromStages
+import tech.mmarca.healthcalculations.model.withRouteBackfilledMetrics
 import tech.mmarca.openvitals.domain.model.MindfulnessSession
-import tech.mmarca.openvitals.domain.model.SleepData
-import tech.mmarca.openvitals.domain.model.SleepDeviceData
-import tech.mmarca.openvitals.domain.model.SleepStage
-import tech.mmarca.openvitals.domain.model.resolveSleepStages
-import tech.mmarca.openvitals.domain.model.sleepDurationMsFromStages
-import tech.mmarca.openvitals.domain.model.withRouteBackfilledMetrics
 
 internal fun ExerciseSessionRecord.toExerciseData(
     steps: Long? = null,
@@ -94,7 +94,7 @@ internal fun ExerciseSessionRecord.toExerciseData(
         )
     },
     route = exerciseRouteResult.toExerciseRouteData(),
-    isOpenVitalsEntry = appPackageName?.let { isOpenVitalsRecord(metadata.dataOrigin.packageName, it) } ?: false,
+    isOwnEntry = appPackageName?.let { isOpenVitalsRecord(metadata.dataOrigin.packageName, it) } ?: false,
 ).let { exercise ->
     if (backfillRouteMetrics) exercise.withRouteBackfilledMetrics() else exercise
 }
@@ -166,5 +166,5 @@ internal fun MindfulnessSessionRecord.toMindfulnessSession(appPackageName: Strin
     endTime = endTime,
     durationMs = endTime.toEpochMilli() - startTime.toEpochMilli(),
     source = SyncedSourceOverlay.displaySource(metadata),
-    isOpenVitalsEntry = appPackageName?.let { isOpenVitalsRecord(metadata.dataOrigin.packageName, it) } ?: false,
+    isOwnEntry = appPackageName?.let { isOpenVitalsRecord(metadata.dataOrigin.packageName, it) } ?: false,
 )

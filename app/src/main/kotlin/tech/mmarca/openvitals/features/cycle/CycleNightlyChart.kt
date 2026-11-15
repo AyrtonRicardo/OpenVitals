@@ -17,9 +17,9 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import java.util.Locale
+import tech.mmarca.healthcalculations.cycle.NightlySeries
+import tech.mmarca.healthcalculations.cycle.NightlySignal
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.cycle.NightlySeries
-import tech.mmarca.openvitals.domain.cycle.NightlySignal
 import tech.mmarca.openvitals.ui.components.chartSemantics
 import tech.mmarca.openvitals.ui.theme.HeartColor
 import tech.mmarca.openvitals.ui.theme.HydrationColor

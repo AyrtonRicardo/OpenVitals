@@ -16,12 +16,12 @@ import java.time.ZoneId
 import java.time.format.DateTimeParseException
 import java.util.Locale
 import kotlin.reflect.KClass
-import tech.mmarca.openvitals.domain.cycle.CycleSymptom
-import tech.mmarca.openvitals.domain.model.CervicalSensation
-import tech.mmarca.openvitals.domain.model.CervixFirmness
-import tech.mmarca.openvitals.domain.model.CervixOpening
-import tech.mmarca.openvitals.domain.model.CervixPosition
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.cycle.CycleSymptom
+import tech.mmarca.healthcalculations.model.CervicalSensation
+import tech.mmarca.healthcalculations.model.CervixFirmness
+import tech.mmarca.healthcalculations.model.CervixOpening
+import tech.mmarca.healthcalculations.model.CervixPosition
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
 
 /**
  * The drip cycle tracker's CSV export, recognised by its header and read

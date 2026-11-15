@@ -20,12 +20,12 @@ import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
+import tech.mmarca.healthcalculations.insights.SplitSource
+import tech.mmarca.healthcalculations.model.ActivityCadenceKind
+import tech.mmarca.healthcalculations.model.ActivityCadenceSample
+import tech.mmarca.healthcalculations.model.SpeedSample
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.insights.SplitSource
-import tech.mmarca.openvitals.domain.model.ActivityCadenceKind
-import tech.mmarca.openvitals.domain.model.ActivityCadenceSample
-import tech.mmarca.openvitals.domain.model.SpeedSample
 import tech.mmarca.openvitals.ui.components.ChartXAxisWithYAxis
 import tech.mmarca.openvitals.ui.components.ChartZoom
 import tech.mmarca.openvitals.ui.components.MetricLinePlot

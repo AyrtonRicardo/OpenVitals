@@ -248,7 +248,7 @@ class BodyMeasurementEntryViewModelTest {
                 time = Instant.parse("2026-05-19T07:30:00Z"),
                 value = 81.0,
                 source = "OpenVitals",
-                isOpenVitalsEntry = true,
+                isOwnEntry = true,
             ),
         )
         val vm = viewModel(repo, type = BodyMeasurementType.WEIGHT, editId = "weight-id")
@@ -285,7 +285,7 @@ class BodyMeasurementEntryViewModelTest {
                 time = Instant.parse("2026-05-19T07:30:00Z"),
                 value = 44.0,
                 source = "OpenVitals",
-                isOpenVitalsEntry = true,
+                isOwnEntry = true,
             ),
         )
         val vm = viewModel(repo, type = BodyMeasurementType.BODY_WATER_MASS, editId = "water-id")
@@ -306,7 +306,7 @@ class BodyMeasurementEntryViewModelTest {
                 time = Instant.parse("2026-05-19T07:30:00Z"),
                 value = 60.0,
                 source = "Scale app",
-                isOpenVitalsEntry = false,
+                isOwnEntry = false,
             ),
         )
         val vm = viewModel(repo, type = BodyMeasurementType.LEAN_MASS, editId = "lean-id")

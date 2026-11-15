@@ -202,7 +202,7 @@ class HydrationViewModelTest {
             liters = 0.5,
             source = "tech.mmarca.openvitals.debug",
             id = "hydration-id",
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         val repo = emptyRepo()
         coEvery { repo.loadDailyHydration(any(), any()) } returns listOf(DailyHydration(today, 0.5))
@@ -246,7 +246,7 @@ class HydrationViewModelTest {
             liters = 0.5,
             source = "tech.mmarca.openvitals.debug",
             id = "hydration-id",
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         val caffeineEntry = NutritionEntry(
             time = start.plusSeconds(60),
@@ -262,7 +262,7 @@ class HydrationViewModelTest {
             nutrientValues = mapOf(NutritionNutrient.CAFFEINE to 0.095),
             id = "nutrition-id",
             clientRecordId = "openvitals_nutrition_1000_uuid",
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         val carbsEntry = caffeineEntry.copy(
             name = "OpenVitals carbs",
@@ -290,7 +290,7 @@ class HydrationViewModelTest {
             source = "other.source",
             id = "external-caffeine",
             clientRecordId = null,
-            isOpenVitalsEntry = false,
+            isOwnEntry = false,
         )
         val externalFoodEntry = caffeineEntry.copy(
             time = start.plusSeconds(240),
@@ -299,7 +299,7 @@ class HydrationViewModelTest {
             nutrientValues = mapOf(NutritionNutrient.SUGAR to 8.0),
             id = "external-food",
             clientRecordId = null,
-            isOpenVitalsEntry = false,
+            isOwnEntry = false,
         )
         // A logged food: OpenVitals wrote it, and it even carries caffeine, but it is not a drink.
         val loggedFoodEntry = caffeineEntry.copy(
@@ -351,7 +351,7 @@ class HydrationViewModelTest {
         assertEquals("Coffee", entries[1].displayName)
         assertEquals("Espresso", entries[2].displayName)
         assertEquals("Red Bull", entries[3].displayName)
-        assertEquals(false, entries[3].isOpenVitalsEntry)
+        assertEquals(false, entries[3].isOwnEntry)
         assertEquals(0.0, entries[1].liters, 0.01)
     }
 
@@ -372,7 +372,7 @@ class HydrationViewModelTest {
             nutrientValues = mapOf(NutritionNutrient.ENERGY to 450.0, NutritionNutrient.PROTEIN to 35.0),
             id = "apple-meal",
             clientRecordId = "apple_health_nutrition_0123456789abcdef0123456789abcdef",
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         val syncedMeal = appleMeal.copy(
             time = start.plusSeconds(60),
@@ -403,7 +403,7 @@ class HydrationViewModelTest {
             liters = 0.5,
             source = "tech.mmarca.openvitals.debug",
             id = "hydration-id",
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         var hydration = listOf(DailyHydration(today, 0.5))
         var entries = listOf(entry)
@@ -441,7 +441,7 @@ class HydrationViewModelTest {
             nutrientValues = mapOf(NutritionNutrient.CAFFEINE to 0.095),
             id = "nutrition-id",
             clientRecordId = "openvitals_nutrition_1000_uuid",
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         var nutritionEntries = listOf(nutritionEntry)
         val repo = emptyRepo()
@@ -469,7 +469,7 @@ class HydrationViewModelTest {
             liters = 0.5,
             source = "com.example.hydrotracker",
             id = "external-hydration-id",
-            isOpenVitalsEntry = false,
+            isOwnEntry = false,
         )
         val entries = listOf(entry)
         val repo = emptyRepo()

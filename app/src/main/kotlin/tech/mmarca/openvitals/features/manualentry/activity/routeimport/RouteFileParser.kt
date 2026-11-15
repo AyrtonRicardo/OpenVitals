@@ -9,8 +9,8 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.domain.model.BleRecordingSampleBuffer
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
 
 data class RouteFileImport(
     val fileName: String?,

@@ -123,7 +123,7 @@ import tech.mmarca.openvitals.domain.model.ActivityRecordingMarker
 import tech.mmarca.openvitals.domain.model.BleSensorCapability
 import tech.mmarca.openvitals.domain.model.CoMapsNavigationState
 import tech.mmarca.openvitals.domain.model.CoMapsRoutePolyline
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.features.activity.maps.OfflineRouteMapOrPreview
 import tech.mmarca.openvitals.domain.preferences.ActivityRecordingDashboardField
 import tech.mmarca.openvitals.domain.preferences.ActivityRecordingDashboardItemSize
@@ -141,6 +141,10 @@ import tech.mmarca.openvitals.ui.components.OpenVitalsButton
 import tech.mmarca.openvitals.ui.components.OpenVitalsIconButton
 import tech.mmarca.openvitals.ui.components.OpenVitalsOutlinedButton
 import tech.mmarca.openvitals.ui.components.OpenVitalsSurface
+import tech.mmarca.healthcalculations.insights.activityRecordingDistanceSplits
+import tech.mmarca.healthcalculations.insights.activityRecordingIntervalSplits
+import tech.mmarca.healthcalculations.insights.activityRecordingLapSplits
+import tech.mmarca.healthcalculations.insights.activityRecordingTimeSplits
 
 @Composable
 internal fun GpsRecordingTabs(

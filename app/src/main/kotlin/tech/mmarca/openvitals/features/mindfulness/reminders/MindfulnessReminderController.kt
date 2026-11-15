@@ -18,7 +18,7 @@ import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import tech.mmarca.openvitals.domain.insights.MetricDailyGoalKey
+import tech.mmarca.healthcalculations.insights.MetricDailyGoalKey
 import tech.mmarca.openvitals.core.performance.DispatcherProvider
 import tech.mmarca.openvitals.domain.model.MindfulnessReminderConfig
 import tech.mmarca.openvitals.data.repository.contract.MindfulnessRepository

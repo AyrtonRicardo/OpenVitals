@@ -1,6 +1,6 @@
 package tech.mmarca.openvitals.features.sleep
 
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
+import tech.mmarca.healthcalculations.preferences.SleepWindow
 import java.time.Instant
 import java.time.LocalTime
 import java.time.ZoneId

@@ -15,11 +15,11 @@ import org.junit.Rule
 import org.junit.Test
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
-import tech.mmarca.openvitals.domain.insights.ActivitySplits
-import tech.mmarca.openvitals.domain.insights.HeartRateRecoveryMark
-import tech.mmarca.openvitals.domain.insights.HeartRateRecoveryQuality
-import tech.mmarca.openvitals.domain.insights.HeartRateRecoveryReading
-import tech.mmarca.openvitals.domain.model.ExerciseData
+import tech.mmarca.healthcalculations.insights.ActivitySplits
+import tech.mmarca.healthcalculations.insights.HeartRateRecoveryMark
+import tech.mmarca.healthcalculations.insights.HeartRateRecoveryQuality
+import tech.mmarca.healthcalculations.insights.HeartRateRecoveryReading
+import tech.mmarca.healthcalculations.model.ExerciseData
 import tech.mmarca.openvitals.testing.string
 import tech.mmarca.openvitals.testing.testUnitFormatter
 import tech.mmarca.openvitals.ui.theme.OpenVitalsTheme

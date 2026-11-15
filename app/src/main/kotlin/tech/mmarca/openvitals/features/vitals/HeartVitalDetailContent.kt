@@ -11,13 +11,13 @@ import androidx.compose.material.icons.outlined.Speed
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.MetricDetailSectionContext
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.core.stats.averageOrZero
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.stats.averageOrZero
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
 import tech.mmarca.openvitals.features.heart.BodyTemperatureContextCardContent
 import tech.mmarca.openvitals.features.heart.BodyTemperatureStatisticsContent
 import tech.mmarca.openvitals.features.heart.BloodGlucoseStatisticsContent
@@ -93,7 +93,7 @@ internal fun LazyListScope.spO2Content(
                         time = { it.time },
                         dateTimeFormatterProvider = dateTimeFormatterProvider,
                         titleDate = selectedDate,
-                        editable = { it.isOpenVitalsEntry && it.id.isNotBlank() },
+                        editable = { it.isOwnEntry && it.id.isNotBlank() },
                         onEdit = { onEditVitalsMeasurement(VitalsMeasurementType.SPO2, it.id) },
                         onDelete = { onDeleteVitalsMeasurement(VitalsMeasurementType.SPO2, it.id) },
                     )
@@ -128,7 +128,7 @@ internal fun LazyListScope.spO2Content(
                     source = { it.source },
                     time = { it.time },
                     dateTimeFormatterProvider = dateTimeFormatterProvider,
-                    editable = { it.isOpenVitalsEntry && it.id.isNotBlank() },
+                    editable = { it.isOwnEntry && it.id.isNotBlank() },
                     onEdit = { onEditVitalsMeasurement(VitalsMeasurementType.SPO2, it.id) },
                     onDelete = { onDeleteVitalsMeasurement(VitalsMeasurementType.SPO2, it.id) },
                 )
@@ -221,7 +221,7 @@ internal fun LazyListScope.vo2MaxContent(
                     source = { it.source },
                     time = { it.time },
                     dateTimeFormatterProvider = dateTimeFormatterProvider,
-                    editable = { it.isOpenVitalsEntry && it.id.isNotBlank() },
+                    editable = { it.isOwnEntry && it.id.isNotBlank() },
                     onEdit = { onEditVitalsMeasurement(VitalsMeasurementType.VO2_MAX, it.id) },
                     onDelete = { onDeleteVitalsMeasurement(VitalsMeasurementType.VO2_MAX, it.id) },
                 )
@@ -294,7 +294,7 @@ internal fun LazyListScope.respiratoryRateContent(
                         time = { it.time },
                         dateTimeFormatterProvider = dateTimeFormatterProvider,
                         titleDate = selectedDate,
-                        editable = { it.isOpenVitalsEntry && it.id.isNotBlank() },
+                        editable = { it.isOwnEntry && it.id.isNotBlank() },
                         onEdit = { onEditVitalsMeasurement(VitalsMeasurementType.RESPIRATORY_RATE, it.id) },
                         onDelete = { onDeleteVitalsMeasurement(VitalsMeasurementType.RESPIRATORY_RATE, it.id) },
                     )
@@ -336,7 +336,7 @@ internal fun LazyListScope.respiratoryRateContent(
                             time = { it.time },
                             dateTimeFormatterProvider = dateTimeFormatterProvider,
                             modifier = metricModifier(),
-                            editable = { it.isOpenVitalsEntry && it.id.isNotBlank() },
+                            editable = { it.isOwnEntry && it.id.isNotBlank() },
                             onEdit = { onEditVitalsMeasurement(VitalsMeasurementType.RESPIRATORY_RATE, it.id) },
                             onDelete = { onDeleteVitalsMeasurement(VitalsMeasurementType.RESPIRATORY_RATE, it.id) },
                         )
@@ -360,7 +360,7 @@ internal fun LazyListScope.respiratoryRateContent(
                         source = { it.source },
                         time = { it.time },
                         dateTimeFormatterProvider = dateTimeFormatterProvider,
-                        editable = { it.isOpenVitalsEntry && it.id.isNotBlank() },
+                        editable = { it.isOwnEntry && it.id.isNotBlank() },
                         onEdit = { onEditVitalsMeasurement(VitalsMeasurementType.RESPIRATORY_RATE, it.id) },
                         onDelete = { onDeleteVitalsMeasurement(VitalsMeasurementType.RESPIRATORY_RATE, it.id) },
                     )
@@ -443,7 +443,7 @@ internal fun LazyListScope.bodyTemperatureContent(
                         time = { it.time },
                         dateTimeFormatterProvider = dateTimeFormatterProvider,
                         modifier = metricModifier(),
-                        editable = { it.isOpenVitalsEntry && it.id.isNotBlank() },
+                        editable = { it.isOwnEntry && it.id.isNotBlank() },
                         onEdit = { onEditVitalsMeasurement(VitalsMeasurementType.BODY_TEMPERATURE, it.id) },
                         onDelete = { onDeleteVitalsMeasurement(VitalsMeasurementType.BODY_TEMPERATURE, it.id) },
                     )
@@ -453,7 +453,7 @@ internal fun LazyListScope.bodyTemperatureContent(
                         source = { it.source },
                         time = { it.time },
                         dateTimeFormatterProvider = dateTimeFormatterProvider,
-                        editable = { it.isOpenVitalsEntry && it.id.isNotBlank() },
+                        editable = { it.isOwnEntry && it.id.isNotBlank() },
                         onEdit = { onEditVitalsMeasurement(VitalsMeasurementType.BODY_TEMPERATURE, it.id) },
                         onDelete = { onDeleteVitalsMeasurement(VitalsMeasurementType.BODY_TEMPERATURE, it.id) },
                     )
@@ -521,7 +521,7 @@ internal fun LazyListScope.bloodGlucoseContent(
                         time = { it.time },
                         dateTimeFormatterProvider = dateTimeFormatterProvider,
                         titleDate = selectedDate,
-                        editable = { it.isOpenVitalsEntry && it.id.isNotBlank() },
+                        editable = { it.isOwnEntry && it.id.isNotBlank() },
                         onEdit = { onEditVitalsMeasurement(VitalsMeasurementType.BLOOD_GLUCOSE, it.id) },
                         onDelete = { onDeleteVitalsMeasurement(VitalsMeasurementType.BLOOD_GLUCOSE, it.id) },
                     )
@@ -553,7 +553,7 @@ internal fun LazyListScope.bloodGlucoseContent(
                     source = { it.source },
                     time = { it.time },
                     dateTimeFormatterProvider = dateTimeFormatterProvider,
-                    editable = { it.isOpenVitalsEntry && it.id.isNotBlank() },
+                    editable = { it.isOwnEntry && it.id.isNotBlank() },
                     onEdit = { onEditVitalsMeasurement(VitalsMeasurementType.BLOOD_GLUCOSE, it.id) },
                     onDelete = { onDeleteVitalsMeasurement(VitalsMeasurementType.BLOOD_GLUCOSE, it.id) },
                 )

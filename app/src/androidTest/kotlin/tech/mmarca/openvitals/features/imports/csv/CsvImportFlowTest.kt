@@ -27,6 +27,8 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.cycle.CycleExclusionReason
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.performance.AppForegroundGate
 import tech.mmarca.openvitals.core.performance.DefaultDispatcherProvider
@@ -36,8 +38,6 @@ import tech.mmarca.openvitals.data.repository.CsvImportPreferencesRepository
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
 import tech.mmarca.openvitals.data.repository.contract.CycleJournalRepository
 import tech.mmarca.openvitals.data.repository.contract.HealthRepository
-import tech.mmarca.openvitals.domain.cycle.CycleExclusionReason
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
 import tech.mmarca.openvitals.healthconnect.HealthConnectSyncGate
 import tech.mmarca.openvitals.healthconnect.MindfulnessIntegrationGate

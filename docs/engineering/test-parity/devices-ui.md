@@ -263,7 +263,7 @@ Kotlin counterpart: none
 | settings screen survives 2.0 text scale | PORTED | TextScalingSweepTest: `settingsScreenSurvivesTheLargestFontScale` | Compose instrumentation; runs on a device, not in CI |
 
 ## test/integration/activity_pipeline_test.dart
-Kotlin counterpart: /home/manu/Documentos/repos/openvitals-android/app/src/test/kotlin/tech/mmarca/openvitals/healthconnect/FixtureReaderTest.kt (plus SwallowingRecordTest.kt, domain/insights/ActivitySplitsTest.kt, domain/model/ExerciseTypeTraitsTest.kt)
+Kotlin counterpart: /home/manu/Documentos/repos/openvitals-android/app/src/test/kotlin/tech/mmarca/openvitals/healthconnect/FixtureReaderTest.kt (plus SwallowingRecordTest.kt, health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/ActivitySplitsTest.kt, health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/model/ExerciseTypeTraitsTest.kt)
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | a workout gets the heart rate that lived inside a 17-hour record | PORTED | FixtureReaderTest: `but the real reader finds it anyway` (+ `Health Connect hides that workout's heart rate from a windowed read`, SwallowingRecordTest: `a workout buried inside a 17 hour record still has a heart rate`) | Same byte-identical golden.json; Kotlin additionally bounds every returned sample to the workout window |

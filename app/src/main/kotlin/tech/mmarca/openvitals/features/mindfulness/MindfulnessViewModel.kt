@@ -5,7 +5,7 @@ import tech.mmarca.openvitals.navigation.selectedDayOrNull
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import tech.mmarca.openvitals.domain.insights.MetricDailyGoalKey
+import tech.mmarca.healthcalculations.insights.MetricDailyGoalKey
 import tech.mmarca.openvitals.core.presentation.ScreenError
 import tech.mmarca.openvitals.core.presentation.toScreenError
 import tech.mmarca.openvitals.core.performance.DefaultDispatcherProvider
@@ -19,9 +19,9 @@ import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.period.WeekPeriodMode
 import tech.mmarca.openvitals.domain.model.MindfulnessSession
 import tech.mmarca.openvitals.data.repository.contract.MindfulnessRepository
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
+import tech.mmarca.healthcalculations.preferences.SleepWindow
 import tech.mmarca.openvitals.domain.model.MindfulnessReminderConfig
-import tech.mmarca.openvitals.domain.model.SleepData
+import tech.mmarca.healthcalculations.model.SleepData
 import tech.mmarca.openvitals.data.repository.contract.DailyGoalPreferences
 import tech.mmarca.openvitals.data.repository.contract.PeriodPreferences
 import tech.mmarca.openvitals.data.repository.contract.SleepWindowPreferences
@@ -170,7 +170,7 @@ class MindfulnessViewModel @Inject constructor(
     fun deleteMindfulnessSessionEntry(entryId: String) {
         if (entryId.isBlank()) return
         val entry = _uiState.value.sessions.firstOrNull { it.id == entryId } ?: return
-        if (!entry.isOpenVitalsEntry) return
+        if (!entry.isOwnEntry) return
         viewModelScope.launch {
             val previous = _uiState.value
             _uiState.value = previous.withDeletedSession(entryId)

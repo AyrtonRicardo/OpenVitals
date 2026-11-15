@@ -49,12 +49,12 @@ import tech.mmarca.openvitals.data.repository.contract.HeartRepository
 import tech.mmarca.openvitals.data.repository.contract.RecordingPreferences
 import tech.mmarca.openvitals.data.repository.contract.UnitPreferences
 import tech.mmarca.openvitals.data.repository.contract.BodyProfilePreferences
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
-import tech.mmarca.openvitals.domain.model.ActivityRecordingLap
+import tech.mmarca.healthcalculations.preferences.BodyProfile
+import tech.mmarca.healthcalculations.model.ActivityRecordingLap
 import tech.mmarca.openvitals.domain.model.ActivityRecordingMarker
 import tech.mmarca.openvitals.domain.model.CoMapsNavigationState
 import tech.mmarca.openvitals.domain.model.CoMapsRoutePolyline
-import tech.mmarca.openvitals.domain.model.ExerciseLapData
+import tech.mmarca.healthcalculations.model.ExerciseLapData
 import tech.mmarca.openvitals.domain.model.PlannedExerciseData
 import tech.mmarca.openvitals.domain.preferences.ActivityRecordingDashboardLayout
 import tech.mmarca.openvitals.navigation.ACTIVITY_ENTRY_ID_ARG
@@ -1236,7 +1236,7 @@ class ActivityEntryViewModel(
             runCatching {
                 repository.loadWorkoutForEdit(recordId)
             }.onSuccess { workout ->
-                if (workout == null || !workout.isOpenVitalsEntry) {
+                if (workout == null || !workout.isOwnEntry) {
                     _uiState.value = _uiState.value.copy(
                         entryError = ActivityEntryError.WRITE_FAILED,
                         detailError = ScreenError.Text(R.string.screen_error_entry_not_editable),

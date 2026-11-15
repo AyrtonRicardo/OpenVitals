@@ -13,35 +13,35 @@ import tech.mmarca.openvitals.core.performance.DispatcherProvider
 import tech.mmarca.openvitals.core.performance.LoadCoordinator
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.PeriodRangePreferenceKey
-import tech.mmarca.openvitals.domain.model.DailyHrv
-import tech.mmarca.openvitals.domain.model.DailyBloodPressurePoint
-import tech.mmarca.openvitals.domain.model.DailyVitalPoint
-import tech.mmarca.openvitals.domain.model.DailyRestingHR
-import tech.mmarca.openvitals.domain.model.HeartRateSample
-import tech.mmarca.openvitals.domain.model.HeartRateThresholds
-import tech.mmarca.openvitals.domain.model.HeartRateSummary
-import tech.mmarca.openvitals.domain.model.HrvSample
+import tech.mmarca.healthcalculations.model.DailyHrv
+import tech.mmarca.healthcalculations.model.DailyBloodPressurePoint
+import tech.mmarca.healthcalculations.model.DailyVitalPoint
+import tech.mmarca.healthcalculations.model.DailyRestingHR
+import tech.mmarca.healthcalculations.model.HeartRateSample
+import tech.mmarca.healthcalculations.model.HeartRateThresholds
+import tech.mmarca.healthcalculations.model.HeartRateSummary
+import tech.mmarca.healthcalculations.model.HrvSample
 import tech.mmarca.openvitals.domain.model.RefreshMode
-import tech.mmarca.openvitals.domain.model.RestingHeartRateSample
-import tech.mmarca.openvitals.domain.model.BloodGlucoseEntry
-import tech.mmarca.openvitals.domain.model.BloodPressureEntry
-import tech.mmarca.openvitals.domain.model.BodyTempEntry
-import tech.mmarca.openvitals.domain.model.RespiratoryRateEntry
-import tech.mmarca.openvitals.domain.model.SkinTemperatureEntry
-import tech.mmarca.openvitals.domain.model.SpO2Entry
+import tech.mmarca.healthcalculations.model.RestingHeartRateSample
+import tech.mmarca.healthcalculations.model.BloodGlucoseEntry
+import tech.mmarca.healthcalculations.model.BloodPressureEntry
+import tech.mmarca.healthcalculations.model.BodyTempEntry
+import tech.mmarca.healthcalculations.model.RespiratoryRateEntry
+import tech.mmarca.healthcalculations.model.SkinTemperatureEntry
+import tech.mmarca.healthcalculations.model.SpO2Entry
 import tech.mmarca.openvitals.core.period.PeriodSelection
 import tech.mmarca.openvitals.core.period.PeriodSelectionDriver
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.period.WeekPeriodMode
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
-import tech.mmarca.openvitals.domain.model.Vo2MaxEntry
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.model.Vo2MaxEntry
 import tech.mmarca.openvitals.data.repository.HeartPeriodMetric
 import tech.mmarca.openvitals.data.repository.contract.HeartThresholdPreferences
 import tech.mmarca.openvitals.data.repository.contract.PeriodPreferences
 import tech.mmarca.openvitals.data.repository.VitalsPeriodMetric
 import tech.mmarca.openvitals.data.repository.contract.VitalsRepository
 import tech.mmarca.openvitals.data.sync.VitalsHistorySyncService
-import tech.mmarca.openvitals.domain.preferences.BloodPressureGuideline
+import tech.mmarca.healthcalculations.preferences.BloodPressureGuideline
 import tech.mmarca.openvitals.domain.usecase.HeartPeriodLoadRequest
 import tech.mmarca.openvitals.domain.usecase.LoadHeartPeriodUseCase
 import tech.mmarca.openvitals.navigation.METRIC_ID_ARG
@@ -255,25 +255,25 @@ class HeartViewModel @Inject constructor(
         val entryIsOpenVitals = when (type) {
             VitalsMeasurementType.BLOOD_PRESSURE -> _uiState.value.bloodPressure
                 .firstOrNull { it.id == entryId }
-                ?.isOpenVitalsEntry
+                ?.isOwnEntry
             VitalsMeasurementType.SPO2 -> _uiState.value.spO2
                 .firstOrNull { it.id == entryId }
-                ?.isOpenVitalsEntry
+                ?.isOwnEntry
             VitalsMeasurementType.RESPIRATORY_RATE -> _uiState.value.respiratoryRate
                 .firstOrNull { it.id == entryId }
-                ?.isOpenVitalsEntry
+                ?.isOwnEntry
             VitalsMeasurementType.BODY_TEMPERATURE -> _uiState.value.bodyTemperature
                 .firstOrNull { it.id == entryId }
-                ?.isOpenVitalsEntry
+                ?.isOwnEntry
             VitalsMeasurementType.HRV -> _uiState.value.dayHrvSamples
                 .firstOrNull { it.id == entryId }
-                ?.isOpenVitalsEntry
+                ?.isOwnEntry
             VitalsMeasurementType.BLOOD_GLUCOSE -> _uiState.value.bloodGlucose
                 .firstOrNull { it.id == entryId }
-                ?.isOpenVitalsEntry
+                ?.isOwnEntry
             VitalsMeasurementType.VO2_MAX -> _uiState.value.vo2Max
                 .firstOrNull { it.id == entryId }
-                ?.isOpenVitalsEntry
+                ?.isOwnEntry
         } ?: return
         if (!entryIsOpenVitals) return
 

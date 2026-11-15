@@ -3,8 +3,8 @@ package tech.mmarca.openvitals.healthconnect
 import androidx.health.connect.client.HealthConnectClient
 import androidx.health.connect.client.records.BasalMetabolicRateRecord
 import androidx.health.connect.client.time.TimeRangeFilter
-import tech.mmarca.openvitals.domain.model.CaloriesBurnedSource
-import tech.mmarca.openvitals.domain.model.CaloriesBurnedValue
+import tech.mmarca.healthcalculations.model.CaloriesBurnedSource
+import tech.mmarca.healthcalculations.model.CaloriesBurnedValue
 import java.time.Duration
 import java.time.Instant
 

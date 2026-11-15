@@ -2,8 +2,8 @@ package tech.mmarca.openvitals.data.repository.contract
 
 import java.time.LocalDate
 import kotlinx.coroutines.flow.Flow
-import tech.mmarca.openvitals.domain.cycle.CycleExclusionReason
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.cycle.CycleExclusionReason
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
 
 /**
  * The cycle journal: the day observations Health Connect has no record type

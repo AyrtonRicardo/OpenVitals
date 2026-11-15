@@ -9,7 +9,7 @@ import androidx.compose.ui.unit.dp
 import java.time.Instant
 import org.junit.Rule
 import org.junit.Test
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.ui.theme.OpenVitalsTheme
 
 /**

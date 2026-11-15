@@ -5,9 +5,9 @@ import androidx.health.connect.client.records.MenstruationFlowRecord
 import androidx.health.connect.client.records.OvulationTestRecord
 import androidx.health.connect.client.records.SexualActivityRecord
 import java.time.Instant
-import tech.mmarca.openvitals.domain.model.CycleEntryKind
-import tech.mmarca.openvitals.domain.model.CycleEntryWriteRequest
-import tech.mmarca.openvitals.domain.model.CycleRecordValues
+import tech.mmarca.healthcalculations.model.CycleEntryKind
+import tech.mmarca.healthcalculations.model.CycleEntryWriteRequest
+import tech.mmarca.healthcalculations.model.CycleRecordValues
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertThrows
 import org.junit.Test

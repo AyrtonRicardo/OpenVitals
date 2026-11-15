@@ -19,13 +19,13 @@ import org.junit.Assert.assertNull
 import org.junit.Rule
 import org.junit.Test
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
 import tech.mmarca.openvitals.data.repository.contract.CaffeineRepository
-import tech.mmarca.openvitals.domain.model.CaffeineEntry
-import tech.mmarca.openvitals.domain.model.CaffeinePeriodData
+import tech.mmarca.healthcalculations.model.CaffeineEntry
+import tech.mmarca.healthcalculations.model.CaffeinePeriodData
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.navigation.CAFFEINE_ENTRY_ID_ARG
 import tech.mmarca.openvitals.navigation.SELECTED_DAY_ARG

@@ -25,17 +25,17 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.BaselineValue
-import tech.mmarca.openvitals.domain.insights.BmiCategory
-import tech.mmarca.openvitals.domain.insights.DataValueKind
-import tech.mmarca.openvitals.domain.insights.FfmiCategory
-import tech.mmarca.openvitals.domain.insights.PeriodComparison
-import tech.mmarca.openvitals.domain.insights.bmiInterpretation
-import tech.mmarca.openvitals.domain.insights.dataConfidence
-import tech.mmarca.openvitals.domain.insights.ffmiInterpretation
-import tech.mmarca.openvitals.domain.insights.periodComparison
-import tech.mmarca.openvitals.domain.insights.personalBaselineInsight
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.insights.BaselineValue
+import tech.mmarca.healthcalculations.insights.BmiCategory
+import tech.mmarca.healthcalculations.insights.DataValueKind
+import tech.mmarca.healthcalculations.insights.FfmiCategory
+import tech.mmarca.healthcalculations.insights.PeriodComparison
+import tech.mmarca.healthcalculations.insights.bmiInterpretation
+import tech.mmarca.healthcalculations.insights.dataConfidence
+import tech.mmarca.healthcalculations.insights.ffmiInterpretation
+import tech.mmarca.healthcalculations.insights.periodComparison
+import tech.mmarca.healthcalculations.insights.personalBaselineInsight
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.DisplayValue
@@ -500,7 +500,7 @@ internal fun LazyListScope.bmiEntries(
         accentColor = WeightColor,
         dateTimeFormatterProvider = dateTimeFormatterProvider,
         titleDate = titleDate,
-        editable = { it.isOpenVitalsEntry && it.id.isNotBlank() },
+        editable = { it.isOwnEntry && it.id.isNotBlank() },
         onEdit = { onEditBodyMeasurement(BodyMeasurementType.WEIGHT, it.id) },
         onDelete = { onDeleteBodyMeasurement(BodyMeasurementType.WEIGHT, it.id) },
     )
@@ -702,31 +702,31 @@ internal fun bodyReadingItems(
         }
         state.weightEntries.forEach {
             val value = "$weightLabel · ${unitFormatter.weight(it.weightKg).text}"
-            reading(BodyMeasurementType.WEIGHT, it.id, it.isOpenVitalsEntry, value, it.source, it.time, WeightColor)
+            reading(BodyMeasurementType.WEIGHT, it.id, it.isOwnEntry, value, it.source, it.time, WeightColor)
         }
         state.heightEntries.forEach {
             val value = "$heightLabel · ${unitFormatter.height(it.heightCm).text}"
-            reading(BodyMeasurementType.HEIGHT, it.id, it.isOpenVitalsEntry, value, it.source, it.time, WeightColor)
+            reading(BodyMeasurementType.HEIGHT, it.id, it.isOwnEntry, value, it.source, it.time, WeightColor)
         }
         state.bodyFatEntries.forEach {
             val value = "$bodyFatLabel · ${unitFormatter.percent(it.percent).text}"
-            reading(BodyMeasurementType.BODY_FAT, it.id, it.isOpenVitalsEntry, value, it.source, it.time, BodyFatColor)
+            reading(BodyMeasurementType.BODY_FAT, it.id, it.isOwnEntry, value, it.source, it.time, BodyFatColor)
         }
         state.leanMassEntries.forEach {
             val value = "$leanMassLabel · ${unitFormatter.bodyMass(it.massKg).text}"
-            reading(BodyMeasurementType.LEAN_MASS, it.id, it.isOpenVitalsEntry, value, it.source, it.time, WeightColor)
+            reading(BodyMeasurementType.LEAN_MASS, it.id, it.isOwnEntry, value, it.source, it.time, WeightColor)
         }
         state.bmrEntries.forEach {
             val value = "$bmrLabel · ${unitFormatter.energy(it.kcalPerDay).text}"
-            reading(BodyMeasurementType.BMR, it.id, it.isOpenVitalsEntry, value, it.source, it.time, CaloriesColor)
+            reading(BodyMeasurementType.BMR, it.id, it.isOwnEntry, value, it.source, it.time, CaloriesColor)
         }
         state.boneMassEntries.forEach {
             val value = "$boneMassLabel · ${unitFormatter.bodyMass(it.massKg, decimals = 2).text}"
-            reading(BodyMeasurementType.BONE_MASS, it.id, it.isOpenVitalsEntry, value, it.source, it.time, WeightColor)
+            reading(BodyMeasurementType.BONE_MASS, it.id, it.isOwnEntry, value, it.source, it.time, WeightColor)
         }
         state.bodyWaterMassEntries.forEach {
             val value = "$bodyWaterMassLabel · ${unitFormatter.bodyMass(it.massKg, decimals = 2).text}"
-            reading(BodyMeasurementType.BODY_WATER_MASS, it.id, it.isOpenVitalsEntry, value, it.source, it.time, WeightColor)
+            reading(BodyMeasurementType.BODY_WATER_MASS, it.id, it.isOwnEntry, value, it.source, it.time, WeightColor)
         }
     }
 
@@ -791,7 +791,7 @@ internal fun WeightEntry.editAction(
     type: BodyMeasurementType,
     onEditBodyMeasurement: (BodyMeasurementType, String) -> Unit,
 ): (() -> Unit)? =
-    if (isOpenVitalsEntry && id.isNotBlank()) {
+    if (isOwnEntry && id.isNotBlank()) {
         { onEditBodyMeasurement(type, id) }
     } else {
         null
@@ -801,7 +801,7 @@ internal fun WeightEntry.deleteAction(
     type: BodyMeasurementType,
     onDeleteBodyMeasurement: (BodyMeasurementType, String) -> Unit,
 ): (() -> Unit)? =
-    if (isOpenVitalsEntry && id.isNotBlank()) {
+    if (isOwnEntry && id.isNotBlank()) {
         { onDeleteBodyMeasurement(type, id) }
     } else {
         null

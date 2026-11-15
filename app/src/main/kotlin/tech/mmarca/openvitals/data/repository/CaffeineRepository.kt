@@ -4,12 +4,12 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.CaffeineEntry
+import tech.mmarca.healthcalculations.model.CaffeinePeriodData
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.data.repository.contract.CaffeineRepository
 import tech.mmarca.openvitals.data.repository.contract.NutritionRepository
-import tech.mmarca.openvitals.domain.model.CaffeineEntry
-import tech.mmarca.openvitals.domain.model.CaffeinePeriodData
 import tech.mmarca.openvitals.domain.model.NutritionEntry
 import tech.mmarca.openvitals.domain.model.NutritionNutrient
 import tech.mmarca.openvitals.domain.model.valueFor
@@ -65,6 +65,6 @@ internal fun NutritionEntry.toCaffeineEntry(): CaffeineEntry? {
         source = source,
         mealType = mealType,
         clientRecordId = clientRecordId,
-        isOpenVitalsEntry = isOpenVitalsEntry,
+        isOwnEntry = isOwnEntry,
     )
 }

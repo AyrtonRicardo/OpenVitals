@@ -2,8 +2,8 @@ package tech.mmarca.openvitals.features.cycle
 
 import com.google.common.truth.Truth.assertWithMessage
 import org.junit.Test
-import tech.mmarca.openvitals.domain.cycle.CycleFacts
-import tech.mmarca.openvitals.domain.cycle.PhaseTips
+import tech.mmarca.healthcalculations.cycle.CycleFacts
+import tech.mmarca.healthcalculations.cycle.PhaseTips
 
 /** Every tip and fact id in the catalog maps to a string; an unmapped id would draw an empty card. */
 class CycleCopyTest {

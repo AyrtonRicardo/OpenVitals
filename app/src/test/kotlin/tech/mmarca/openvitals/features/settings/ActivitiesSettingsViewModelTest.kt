@@ -26,13 +26,13 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.preferences.StrideLength
 import tech.mmarca.openvitals.core.geo.HgtResolution
 import tech.mmarca.openvitals.core.geo.HgtTileKey
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
 import tech.mmarca.openvitals.data.repository.contract.SessionDistancePreferences
 import tech.mmarca.openvitals.data.sync.StepDistanceBackfillService
 import tech.mmarca.openvitals.domain.preferences.ActivityRecordingPreferences
-import tech.mmarca.openvitals.domain.preferences.StrideLength
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.features.activity.elevation.ElevationTile
 import tech.mmarca.openvitals.features.activity.elevation.ElevationTileLibraryState

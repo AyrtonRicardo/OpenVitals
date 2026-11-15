@@ -9,14 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import java.time.Instant
+import tech.mmarca.healthcalculations.insights.BaselineValue
+import tech.mmarca.healthcalculations.insights.periodComparison
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.DisplayValue
 import tech.mmarca.openvitals.core.presentation.MetricDetailSectionContext
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.insights.BaselineValue
-import tech.mmarca.openvitals.domain.insights.periodComparison
 import tech.mmarca.openvitals.domain.model.BodyMeasurementType
 import tech.mmarca.openvitals.ui.components.ChartDaySelection
 import tech.mmarca.openvitals.ui.theme.CaloriesColor
@@ -107,10 +107,10 @@ internal data class BodyCompositionReading(
     val time: Instant,
     val value: Double,
     val source: String,
-    val isOpenVitalsEntry: Boolean,
+    val isOwnEntry: Boolean,
 ) {
     val editable: Boolean
-        get() = isOpenVitalsEntry && id.isNotBlank()
+        get() = isOwnEntry && id.isNotBlank()
 }
 
 private class BodyCompositionMetricSpec(
@@ -140,7 +140,7 @@ private fun bodyCompositionMetricSpec(
             latest = summary.latestLeanMassKg,
             previousLatest = summary.previousLatestLeanMassKg,
             readings = state.leanMassEntries.map {
-                BodyCompositionReading(it.id, it.time, it.massKg, it.source, it.isOpenVitalsEntry)
+                BodyCompositionReading(it.id, it.time, it.massKg, it.source, it.isOwnEntry)
             },
             baselineValues = state.baselineLeanMassEntries.map { it.leanMassBaselineValue() },
             format = { unitFormatter.bodyMass(it) },
@@ -153,7 +153,7 @@ private fun bodyCompositionMetricSpec(
             latest = summary.latestBmrKcal,
             previousLatest = summary.previousLatestBmrKcal,
             readings = state.bmrEntries.map {
-                BodyCompositionReading(it.id, it.time, it.kcalPerDay, it.source, it.isOpenVitalsEntry)
+                BodyCompositionReading(it.id, it.time, it.kcalPerDay, it.source, it.isOwnEntry)
             },
             baselineValues = state.baselineBmrEntries.map { it.bmrBaselineValue() },
             format = { unitFormatter.energy(it) },
@@ -166,7 +166,7 @@ private fun bodyCompositionMetricSpec(
             latest = summary.latestBoneMassKg,
             previousLatest = summary.previousLatestBoneMassKg,
             readings = state.boneMassEntries.map {
-                BodyCompositionReading(it.id, it.time, it.massKg, it.source, it.isOpenVitalsEntry)
+                BodyCompositionReading(it.id, it.time, it.massKg, it.source, it.isOwnEntry)
             },
             baselineValues = state.baselineBoneMassEntries.map { it.boneMassBaselineValue() },
             format = { unitFormatter.bodyMass(it, decimals = 2) },
@@ -179,7 +179,7 @@ private fun bodyCompositionMetricSpec(
             latest = summary.latestBodyWaterMassKg,
             previousLatest = summary.previousLatestBodyWaterMassKg,
             readings = state.bodyWaterMassEntries.map {
-                BodyCompositionReading(it.id, it.time, it.massKg, it.source, it.isOpenVitalsEntry)
+                BodyCompositionReading(it.id, it.time, it.massKg, it.source, it.isOwnEntry)
             },
             baselineValues = state.baselineBodyWaterMassEntries.map { it.bodyWaterMassBaselineValue() },
             format = { unitFormatter.bodyMass(it, decimals = 2) },

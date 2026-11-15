@@ -1,12 +1,12 @@
 package tech.mmarca.openvitals.features.sleep
 
 import androidx.compose.runtime.Immutable
-import tech.mmarca.openvitals.core.period.DatePeriod
-import tech.mmarca.openvitals.domain.insights.CrossMetricValue
-import tech.mmarca.openvitals.domain.insights.SleepScoreConfidence
-import tech.mmarca.openvitals.domain.insights.SleepScoreEstimate
-import tech.mmarca.openvitals.domain.model.SleepData
-import tech.mmarca.openvitals.domain.model.SleepStage
+import tech.mmarca.healthcalculations.model.DatePeriod
+import tech.mmarca.healthcalculations.insights.CrossMetricValue
+import tech.mmarca.healthcalculations.insights.SleepScoreConfidence
+import tech.mmarca.healthcalculations.insights.SleepScoreEstimate
+import tech.mmarca.healthcalculations.model.SleepData
+import tech.mmarca.healthcalculations.model.SleepStage
 import java.time.Instant
 import java.time.LocalDate
 

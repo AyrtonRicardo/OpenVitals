@@ -4,6 +4,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Test
 import java.time.LocalDate
+import tech.mmarca.healthcalculations.model.DatePeriod
 
 /**
  * Flipping [WeekPeriodMode] must reload the unchanged anchor: the same anchor derives a

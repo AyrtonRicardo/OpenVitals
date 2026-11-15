@@ -8,12 +8,12 @@ import io.mockk.mockkStatic
 import io.mockk.unmockkStatic
 import java.time.LocalDate
 import java.util.Locale
+import tech.mmarca.healthcalculations.insights.BodyEnergyBucketState
+import tech.mmarca.healthcalculations.insights.BodyEnergyConfidence
+import tech.mmarca.healthcalculations.insights.BodyEnergyPrimaryInfluence
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimeline
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimelinePoint
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.insights.BodyEnergyBucketState
-import tech.mmarca.openvitals.domain.insights.BodyEnergyConfidence
-import tech.mmarca.openvitals.domain.insights.BodyEnergyPrimaryInfluence
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimeline
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimelinePoint
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 
 /**

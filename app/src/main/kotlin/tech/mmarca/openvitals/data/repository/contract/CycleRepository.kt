@@ -1,14 +1,14 @@
 package tech.mmarca.openvitals.data.repository.contract
 
 import java.time.LocalDate
+import tech.mmarca.healthcalculations.cycle.CycleStatistics
+import tech.mmarca.healthcalculations.model.CycleData
+import tech.mmarca.healthcalculations.model.CycleEntry
+import tech.mmarca.healthcalculations.model.CycleEntryKind
+import tech.mmarca.healthcalculations.model.CycleEntryWriteRequest
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
-import tech.mmarca.openvitals.domain.cycle.CycleStatistics
-import tech.mmarca.openvitals.domain.model.CycleData
 import tech.mmarca.openvitals.domain.model.CycleDayLog
 import tech.mmarca.openvitals.domain.model.CycleDayLogWrite
-import tech.mmarca.openvitals.domain.model.CycleEntry
-import tech.mmarca.openvitals.domain.model.CycleEntryKind
-import tech.mmarca.openvitals.domain.model.CycleEntryWriteRequest
 import tech.mmarca.openvitals.domain.query.CyclePeriodData
 
 interface CycleRepository {

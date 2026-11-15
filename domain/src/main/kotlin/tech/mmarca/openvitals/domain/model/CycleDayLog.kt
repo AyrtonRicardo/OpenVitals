@@ -2,6 +2,14 @@ package tech.mmarca.openvitals.domain.model
 
 import java.time.LocalDate
 import java.time.LocalTime
+import tech.mmarca.healthcalculations.model.BasalBodyTemperatureEntry
+import tech.mmarca.healthcalculations.model.CervicalMucusEntry
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.model.CycleRecordValues
+import tech.mmarca.healthcalculations.model.IntermenstrualBleedingEntry
+import tech.mmarca.healthcalculations.model.MenstruationFlowEntry
+import tech.mmarca.healthcalculations.model.OvulationTestEntry
+import tech.mmarca.healthcalculations.model.SexualActivityEntry
 
 /** What the user records about bleeding on one day. Absent means not recorded. */
 sealed interface DayBleedingChoice {

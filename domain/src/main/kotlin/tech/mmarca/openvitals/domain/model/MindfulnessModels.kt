@@ -11,7 +11,7 @@ data class MindfulnessSession(
     val endTime: Instant,
     val durationMs: Long,
     val source: String,
-    val isOpenVitalsEntry: Boolean = false,
+    val isOwnEntry: Boolean = false,
     val notes: String? = null,
 ) {
     val durationMinutes: Long get() = durationMs / 60_000

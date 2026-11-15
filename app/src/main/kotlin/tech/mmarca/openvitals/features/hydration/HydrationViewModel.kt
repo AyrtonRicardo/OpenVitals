@@ -201,7 +201,7 @@ class HydrationViewModel @Inject constructor(
     fun deleteHydrationEntry(entryId: String) {
         if (entryId.isBlank()) return
         val entry = _uiState.value.hydrationEntries.firstOrNull { it.id == entryId } ?: return
-        if (!entry.isOpenVitalsEntry) return
+        if (!entry.isOwnEntry) return
         viewModelScope.launch {
             val previous = _uiState.value
             _uiState.value = previous.withDeletedHydrationEntry(entryId)
@@ -357,7 +357,7 @@ private fun List<NutritionEntry>.toHydrationNutritionOnlyEntries(
             source = entry.source,
             id = entry.id,
             clientRecordId = entry.clientRecordId,
-            isOpenVitalsEntry = entry.isOpenVitalsEntry,
+            isOwnEntry = entry.isOwnEntry,
             recordType = HydrationEntryRecordType.NUTRITION_ONLY,
             displayName = entry.name?.takeIf { it.isNotBlank() },
             nutrientValues = entry.nutrientValues,
@@ -388,6 +388,6 @@ private fun NutritionEntry.isStandaloneHydrationNutrition(
         clientRecordId?.startsWith(OpenVitalsStandaloneNutritionPrefix) == true -> true
         clientRecordId?.startsWith(OpenVitalsPairedHydrationNutritionPrefix) == true -> false
         else -> hydrationEntries.none { hydrationEntry ->
-            hydrationEntry.startTime == time && hydrationEntry.isOpenVitalsEntry
+            hydrationEntry.startTime == time && hydrationEntry.isOwnEntry
         }
     }

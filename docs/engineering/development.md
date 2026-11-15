@@ -278,11 +278,18 @@ gone; the next release's upload also supersedes it.
 ### The OpenLink submodule
 
 The app builds the OpenLink client from the git submodule at `openlink/`
-(`includeBuild("openlink")` in `settings.gradle.kts`). Clone with
+(`includeBuild("openlink")` in `settings.gradle.kts`), and the health calculations from the
+one at `health-calculations/` (`includeBuild("health-calculations")`; see the architecture
+document's [health-calculations](architecture.md#health-calculations) section). Clone with
 `git clone --recurse-submodules`, or run `git submodule update --init` in an existing
 checkout. Every workflow checkout passes `submodules: true`. F-Droid builds from the tag
 with its own recipe in fdroiddata: that recipe needs `submodules: true` on the build entry
 from the first release that carries OpenLink, or the build fails at configuration.
+
+A change to a calculation is a commit in health-calculations, then a submodule move here
+(`git -C health-calculations fetch && git -C health-calculations checkout <commit>`, then
+commit the new pointer). Move OpenWatch's submodule to the same commit, so both apps give
+the same number.
 
 ## Release Checklist
 

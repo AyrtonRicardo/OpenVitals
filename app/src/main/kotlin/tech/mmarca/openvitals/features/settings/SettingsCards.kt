@@ -102,9 +102,9 @@ import tech.mmarca.openvitals.domain.preferences.ActivityRecordingPreferences
 import tech.mmarca.openvitals.domain.preferences.ActivityWeekMode
 import tech.mmarca.openvitals.domain.preferences.AppLanguage
 import tech.mmarca.openvitals.domain.preferences.AppThemeMode
-import tech.mmarca.openvitals.domain.preferences.BloodPressureGuideline
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
-import tech.mmarca.openvitals.domain.preferences.CaffeinePreferences
+import tech.mmarca.healthcalculations.preferences.BloodPressureGuideline
+import tech.mmarca.healthcalculations.preferences.BodyProfile
+import tech.mmarca.healthcalculations.preferences.CaffeinePreferences
 import tech.mmarca.openvitals.domain.preferences.ChartAggregationMode
 import tech.mmarca.openvitals.domain.preferences.HomeWidgetRefreshInterval
 import tech.mmarca.openvitals.core.presentation.UnitFormatter

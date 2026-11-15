@@ -9,18 +9,19 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import tech.mmarca.healthcalculations.insights.BodyEnergyInputSummary
+import tech.mmarca.healthcalculations.insights.BodyEnergySeedSource
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimeline
+import tech.mmarca.healthcalculations.insights.CardioLoadConfidence
+import tech.mmarca.healthcalculations.insights.DailyReadinessGoalInputs
+import tech.mmarca.healthcalculations.insights.calculateDailyReadiness
+import tech.mmarca.healthcalculations.model.DashboardWeeklyCardioLoad
+import tech.mmarca.healthcalculations.model.DashboardWeeklyCardioLoadTargetSource
+import tech.mmarca.healthcalculations.model.SleepData
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.BodyEnergyInputSummary
-import tech.mmarca.openvitals.domain.insights.BodyEnergySeedSource
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimeline
-import tech.mmarca.openvitals.domain.insights.CardioLoadConfidence
-import tech.mmarca.openvitals.domain.insights.DailyReadinessGoalInputs
-import tech.mmarca.openvitals.domain.insights.calculateDailyReadiness
 import tech.mmarca.openvitals.domain.model.DashboardData
 import tech.mmarca.openvitals.domain.model.DashboardMetric
-import tech.mmarca.openvitals.domain.model.DashboardWeeklyCardioLoad
-import tech.mmarca.openvitals.domain.model.DashboardWeeklyCardioLoadTargetSource
-import tech.mmarca.openvitals.domain.model.SleepData
+import tech.mmarca.openvitals.domain.model.toDaySignals
 import tech.mmarca.openvitals.navigation.Screen
 
 /** The three shared status widgets. There is no screen behind a widget, so the snapshot is the feature. */
@@ -43,7 +44,7 @@ class HomeStatusWidgetSnapshotTest {
     @Test
     fun `daily readiness reports the score, status and recommendation`() {
         val data = dataWithReadiness()
-        val insight = calculateDailyReadiness(data)
+        val insight = calculateDailyReadiness(data.toDaySignals())
 
         val snapshot = buildDailyReadinessSnapshot(context, insight, date)
 
@@ -64,7 +65,7 @@ class HomeStatusWidgetSnapshotTest {
     @Test
     fun `daily readiness falls back to dashes when no signal is loaded`() {
         // Nothing loaded: availableSignals == 0, so ReadinessState.UNKNOWN.
-        val insight = calculateDailyReadiness(DashboardData(date = date))
+        val insight = calculateDailyReadiness(DashboardData(date = date).toDaySignals())
 
         val snapshot = buildDailyReadinessSnapshot(context, insight, date)
 
@@ -97,12 +98,12 @@ class HomeStatusWidgetSnapshotTest {
         // A 4 L goal leaves 0.2 L far behind; a 0.25 L goal does not.
         val behind = buildDailyReadinessSnapshot(
             context,
-            calculateDailyReadiness(data, DailyReadinessGoalInputs(hydrationLitersGoal = 4.0)),
+            calculateDailyReadiness(data.toDaySignals(), DailyReadinessGoalInputs(hydrationLitersGoal = 4.0)),
             date,
         )
         val met = buildDailyReadinessSnapshot(
             context,
-            calculateDailyReadiness(data, DailyReadinessGoalInputs(hydrationLitersGoal = 0.25)),
+            calculateDailyReadiness(data.toDaySignals(), DailyReadinessGoalInputs(hydrationLitersGoal = 0.25)),
             date,
         )
 
@@ -282,7 +283,7 @@ class HomeStatusWidgetSnapshotTest {
             context = context,
             data = data,
             unitFormatter = unitFormatter(),
-            readinessInsight = calculateDailyReadiness(data),
+            readinessInsight = calculateDailyReadiness(data.toDaySignals()),
             bodyEnergyTimeline = bodyEnergyTimeline(currentScore = 64),
         )
 
@@ -333,7 +334,7 @@ class HomeStatusWidgetSnapshotTest {
             context = context,
             data = DashboardData(date = date),
             unitFormatter = unitFormatter(),
-            readinessInsight = calculateDailyReadiness(DashboardData(date = date)),
+            readinessInsight = calculateDailyReadiness(DashboardData(date = date).toDaySignals()),
             bodyEnergyTimeline = null,
         )
 

@@ -151,9 +151,9 @@ class BodyDisplayDerivationsTest {
         val state = stateOf(
             BodyPeriodData(
                 weightEntries = listOf(
-                    weight(monday, 72.0, id = "w1", isOpenVitalsEntry = true),
+                    weight(monday, 72.0, id = "w1", isOwnEntry = true),
                     // An OpenVitals entry with no id is not editable.
-                    weight(at(mondayDate, 9), 71.5, isOpenVitalsEntry = true),
+                    weight(at(mondayDate, 9), 71.5, isOwnEntry = true),
                     // Another app's entry never is.
                     weight(tuesday, 70.0, id = "w2"),
                 ),
@@ -206,13 +206,13 @@ class BodyDisplayDerivationsTest {
         time: Instant,
         kg: Double,
         id: String = "",
-        isOpenVitalsEntry: Boolean = false,
+        isOwnEntry: Boolean = false,
     ) = WeightEntry(
         time = time,
         weightKg = kg,
         source = "test",
         id = id,
-        isOpenVitalsEntry = isOpenVitalsEntry,
+        isOwnEntry = isOwnEntry,
     )
 
     /** Mirrors what [BodyViewModel] publishes for a loaded period. */

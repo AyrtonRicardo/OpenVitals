@@ -381,14 +381,14 @@ private fun MindfulnessSessionRowContent(
 }
 
 internal fun MindfulnessSession.editAction(onEditMindfulnessSession: (String) -> Unit): (() -> Unit)? =
-    if (isOpenVitalsEntry && id.isNotBlank()) {
+    if (isOwnEntry && id.isNotBlank()) {
         { onEditMindfulnessSession(id) }
     } else {
         null
     }
 
 internal fun MindfulnessSession.deleteAction(onDeleteMindfulnessSession: (String) -> Unit): (() -> Unit)? =
-    if (isOpenVitalsEntry && id.isNotBlank()) {
+    if (isOwnEntry && id.isNotBlank()) {
         { onDeleteMindfulnessSession(id) }
     } else {
         null

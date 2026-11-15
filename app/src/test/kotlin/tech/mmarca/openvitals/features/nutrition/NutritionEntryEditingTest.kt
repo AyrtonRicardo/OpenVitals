@@ -51,6 +51,6 @@ class NutritionEntryEditingTest {
         source = "test",
         id = id,
         clientRecordId = clientRecordId,
-        isOpenVitalsEntry = isOpenVitals,
+        isOwnEntry = isOpenVitals,
     )
 }

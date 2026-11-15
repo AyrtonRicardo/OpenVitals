@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import tech.mmarca.healthcalculations.preferences.StrideLength
 import tech.mmarca.openvitals.core.geo.HgtTileKey
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
 import tech.mmarca.openvitals.data.repository.contract.CoMapsNavigationRepository
@@ -19,7 +20,6 @@ import tech.mmarca.openvitals.data.repository.contract.SessionDistancePreference
 import tech.mmarca.openvitals.data.sync.StepDistanceBackfillService
 import tech.mmarca.openvitals.domain.preferences.ActivityRecordingPreferences
 import tech.mmarca.openvitals.domain.preferences.ActivitySplitDistance
-import tech.mmarca.openvitals.domain.preferences.StrideLength
 import tech.mmarca.openvitals.domain.preferences.UnitQuantity
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.features.activity.elevation.ElevationTile

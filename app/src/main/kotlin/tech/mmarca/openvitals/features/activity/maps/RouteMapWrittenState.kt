@@ -1,6 +1,6 @@
 package tech.mmarca.openvitals.features.activity.maps
 
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 
 /** The parts of a live route map that a render pass has to rewrite. */
 internal data class RouteMapChanges(

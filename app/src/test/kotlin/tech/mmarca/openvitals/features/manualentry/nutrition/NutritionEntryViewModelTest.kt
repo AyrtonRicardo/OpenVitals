@@ -347,7 +347,7 @@ class NutritionEntryViewModelTest {
         nutrientValues = values,
         id = "record-1",
         clientRecordId = "openvitals_manual_nutrition_1_u",
-        isOpenVitalsEntry = true,
+        isOwnEntry = true,
     )
 
     private fun viewModel(

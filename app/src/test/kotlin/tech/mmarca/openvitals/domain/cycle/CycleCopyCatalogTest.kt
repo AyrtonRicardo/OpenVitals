@@ -3,6 +3,10 @@ package tech.mmarca.openvitals.domain.cycle
 import com.google.common.truth.Truth.assertWithMessage
 import java.io.File
 import org.junit.Test
+import tech.mmarca.healthcalculations.cycle.CycleFacts
+import tech.mmarca.healthcalculations.cycle.CycleSymptom
+import tech.mmarca.healthcalculations.cycle.NightlyVitalsEvidence
+import tech.mmarca.healthcalculations.cycle.PhaseTips
 
 /**
  * Every tip, fact and symptom id has its copy. A card whose id has no string

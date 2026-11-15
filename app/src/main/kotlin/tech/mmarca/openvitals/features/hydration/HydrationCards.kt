@@ -43,13 +43,13 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.insights.DataValueKind
-import tech.mmarca.openvitals.domain.insights.dataConfidence
-import tech.mmarca.openvitals.domain.insights.personalBaselineInsight
+import tech.mmarca.healthcalculations.insights.DataValueKind
+import tech.mmarca.healthcalculations.insights.dataConfidence
+import tech.mmarca.healthcalculations.insights.personalBaselineInsight
 import tech.mmarca.openvitals.domain.model.HydrationReminderConfig
 import tech.mmarca.openvitals.ui.components.DataConfidenceCard
 import tech.mmarca.openvitals.ui.components.InsightStat

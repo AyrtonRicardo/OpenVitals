@@ -153,14 +153,14 @@ class BodyViewModel @Inject constructor(
         if (entryId.isBlank()) return
         val state = _uiState.value
         val entryIsOpenVitals = when (type) {
-            BodyMeasurementType.WEIGHT -> state.weightEntries.firstOrNull { it.id == entryId }?.isOpenVitalsEntry
-            BodyMeasurementType.HEIGHT -> state.heightEntries.firstOrNull { it.id == entryId }?.isOpenVitalsEntry
-            BodyMeasurementType.BODY_FAT -> state.bodyFatEntries.firstOrNull { it.id == entryId }?.isOpenVitalsEntry
-            BodyMeasurementType.LEAN_MASS -> state.leanMassEntries.firstOrNull { it.id == entryId }?.isOpenVitalsEntry
+            BodyMeasurementType.WEIGHT -> state.weightEntries.firstOrNull { it.id == entryId }?.isOwnEntry
+            BodyMeasurementType.HEIGHT -> state.heightEntries.firstOrNull { it.id == entryId }?.isOwnEntry
+            BodyMeasurementType.BODY_FAT -> state.bodyFatEntries.firstOrNull { it.id == entryId }?.isOwnEntry
+            BodyMeasurementType.LEAN_MASS -> state.leanMassEntries.firstOrNull { it.id == entryId }?.isOwnEntry
             BodyMeasurementType.BODY_WATER_MASS ->
-                state.bodyWaterMassEntries.firstOrNull { it.id == entryId }?.isOpenVitalsEntry
-            BodyMeasurementType.BONE_MASS -> state.boneMassEntries.firstOrNull { it.id == entryId }?.isOpenVitalsEntry
-            BodyMeasurementType.BMR -> state.bmrEntries.firstOrNull { it.id == entryId }?.isOpenVitalsEntry
+                state.bodyWaterMassEntries.firstOrNull { it.id == entryId }?.isOwnEntry
+            BodyMeasurementType.BONE_MASS -> state.boneMassEntries.firstOrNull { it.id == entryId }?.isOwnEntry
+            BodyMeasurementType.BMR -> state.bmrEntries.firstOrNull { it.id == entryId }?.isOwnEntry
         } ?: return
         if (!entryIsOpenVitals) return
 

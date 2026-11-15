@@ -18,20 +18,20 @@ import androidx.compose.ui.res.stringResource
 import java.time.LocalDate
 import java.time.ZoneId
 import kotlin.math.roundToInt
+import tech.mmarca.healthcalculations.insights.DataValueKind
+import tech.mmarca.healthcalculations.insights.PeriodComparison
+import tech.mmarca.healthcalculations.insights.dataConfidence
+import tech.mmarca.healthcalculations.model.CaffeineEntryInsight
+import tech.mmarca.healthcalculations.model.CaffeineInsights
+import tech.mmarca.healthcalculations.model.CaffeinePoint
+import tech.mmarca.healthcalculations.model.DatePeriod
+import tech.mmarca.healthcalculations.preferences.CaffeinePreferences
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.DisplayValue
 import tech.mmarca.openvitals.core.presentation.MetricDetailSectionContext
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.insights.DataValueKind
-import tech.mmarca.openvitals.domain.insights.PeriodComparison
-import tech.mmarca.openvitals.domain.insights.dataConfidence
-import tech.mmarca.openvitals.domain.model.CaffeineEntryInsight
-import tech.mmarca.openvitals.domain.model.CaffeineInsights
-import tech.mmarca.openvitals.domain.model.CaffeinePoint
-import tech.mmarca.openvitals.domain.preferences.CaffeinePreferences
 import tech.mmarca.openvitals.domain.preferences.MetricDetailSectionId
 import tech.mmarca.openvitals.ui.components.ChartDaySelection
 import tech.mmarca.openvitals.ui.components.ChartSkeleton
@@ -291,7 +291,7 @@ private fun CaffeineEntriesContent(
             // The drink screen loads the drink's own day.
             onClick = { onOpenDrink(entry.id, entry.startTime.atZone(zone).toLocalDate()) },
             // Only a record this app wrote, with an id, can be deleted here.
-            onDelete = if (entry.isOpenVitalsEntry && entry.id.isNotBlank()) {
+            onDelete = if (entry.isOwnEntry && entry.id.isNotBlank()) {
                 { onDeleteEntry(entry.id) }
             } else {
                 null

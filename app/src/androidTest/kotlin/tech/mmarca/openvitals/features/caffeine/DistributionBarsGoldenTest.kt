@@ -7,10 +7,10 @@ import androidx.compose.ui.test.junit4.v2.createComposeRule
 import androidx.compose.ui.unit.dp
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.CaffeineDistributionSlice
+import tech.mmarca.healthcalculations.model.CaffeineTimeBucket
+import tech.mmarca.healthcalculations.model.CaffeineTimeOfDayBucket
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.CaffeineDistributionSlice
-import tech.mmarca.openvitals.domain.model.CaffeineTimeBucket
-import tech.mmarca.openvitals.domain.model.CaffeineTimeOfDayBucket
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.testing.OpenVitalsVisualTestSurface
 import tech.mmarca.openvitals.testing.assertVisualRootMatchesGolden

@@ -9,10 +9,10 @@ import java.time.Instant
 import kotlin.math.roundToLong
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.insights.ActivitySplit
+import tech.mmarca.healthcalculations.insights.ActivitySplits
+import tech.mmarca.healthcalculations.insights.SplitSource
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.insights.ActivitySplit
-import tech.mmarca.openvitals.domain.insights.ActivitySplits
-import tech.mmarca.openvitals.domain.insights.SplitSource
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.testing.OpenVitalsVisualTestSurface
 import tech.mmarca.openvitals.testing.assertVisualRootMatchesGolden

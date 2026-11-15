@@ -13,7 +13,7 @@ import tech.mmarca.openvitals.core.presentation.toScreenError
 import tech.mmarca.openvitals.core.performance.DefaultDispatcherProvider
 import tech.mmarca.openvitals.core.performance.DispatcherProvider
 import tech.mmarca.openvitals.core.performance.LoadCoordinator
-import tech.mmarca.openvitals.domain.model.DailySteps
+import tech.mmarca.healthcalculations.model.DailySteps
 import tech.mmarca.openvitals.data.repository.contract.ActivityRepository
 
 private val LegacyActivityStartDate: LocalDate = LocalDate.of(2009, 1, 1)

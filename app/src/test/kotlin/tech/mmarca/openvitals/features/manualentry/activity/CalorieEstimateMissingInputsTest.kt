@@ -4,7 +4,7 @@ import androidx.health.connect.client.records.ExerciseSessionRecord
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import tech.mmarca.openvitals.domain.insights.BmrInput
+import tech.mmarca.healthcalculations.insights.BmrInput
 
 class CalorieEstimateMissingInputsTest {
 

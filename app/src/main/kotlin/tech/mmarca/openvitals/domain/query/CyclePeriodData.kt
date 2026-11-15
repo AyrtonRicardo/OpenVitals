@@ -1,10 +1,10 @@
 package tech.mmarca.openvitals.domain.query
 
-import tech.mmarca.openvitals.domain.cycle.CycleStatistics
-import tech.mmarca.openvitals.domain.model.BasalBodyTemperatureEntry
-import tech.mmarca.openvitals.domain.model.CycleData
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
-import tech.mmarca.openvitals.domain.model.SkinTemperatureEntry
+import tech.mmarca.healthcalculations.cycle.CycleStatistics
+import tech.mmarca.healthcalculations.model.BasalBodyTemperatureEntry
+import tech.mmarca.healthcalculations.model.CycleData
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.model.SkinTemperatureEntry
 
 data class CyclePeriodData(
     val data: CycleData,

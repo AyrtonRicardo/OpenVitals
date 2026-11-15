@@ -1,12 +1,12 @@
 package tech.mmarca.openvitals.features.mindfulness
 
 import androidx.compose.runtime.Immutable
-import tech.mmarca.openvitals.core.period.DatePeriod
-import tech.mmarca.openvitals.domain.insights.BaselineValue
-import tech.mmarca.openvitals.domain.insights.CrossMetricInsight
-import tech.mmarca.openvitals.domain.insights.DailyGoalProgress
-import tech.mmarca.openvitals.domain.insights.PeriodComparison
-import tech.mmarca.openvitals.domain.insights.PersonalBaselineInsight
+import tech.mmarca.healthcalculations.model.DatePeriod
+import tech.mmarca.healthcalculations.insights.BaselineValue
+import tech.mmarca.healthcalculations.insights.CrossMetricInsight
+import tech.mmarca.healthcalculations.insights.DailyGoalProgress
+import tech.mmarca.healthcalculations.insights.PeriodComparison
+import tech.mmarca.healthcalculations.insights.PersonalBaselineInsight
 import java.time.LocalDate
 
 @Immutable

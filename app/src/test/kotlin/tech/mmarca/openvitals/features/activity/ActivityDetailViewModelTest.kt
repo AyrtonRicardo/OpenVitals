@@ -8,13 +8,13 @@ import tech.mmarca.openvitals.core.presentation.ScreenError
 import tech.mmarca.openvitals.data.repository.ActivityMarkerRepository
 import tech.mmarca.openvitals.data.repository.contract.ActivityRepository
 import tech.mmarca.openvitals.data.repository.contract.HeartRepository
-import tech.mmarca.openvitals.domain.insights.SplitSource
-import tech.mmarca.openvitals.domain.model.ActivityCadenceKind
-import tech.mmarca.openvitals.domain.model.ActivityCadenceSample
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.ExerciseSegmentData
-import tech.mmarca.openvitals.domain.model.HeartRateSample
-import tech.mmarca.openvitals.domain.model.SpeedSample
+import tech.mmarca.healthcalculations.insights.SplitSource
+import tech.mmarca.healthcalculations.model.ActivityCadenceKind
+import tech.mmarca.healthcalculations.model.ActivityCadenceSample
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseSegmentData
+import tech.mmarca.healthcalculations.model.HeartRateSample
+import tech.mmarca.healthcalculations.model.SpeedSample
 import tech.mmarca.openvitals.util.MainDispatcherRule
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -120,7 +120,7 @@ class ActivityDetailViewModelTest {
     }
 
     @Test fun `deleteActivity deletes OpenVitals activity and reports completion`() = runTest {
-        val workout = workout(id = "activity-1", isOpenVitalsEntry = true)
+        val workout = workout(id = "activity-1", isOwnEntry = true)
         val repo = mockk<ActivityRepository>()
         coEvery { repo.loadWorkout("activity-1") } returns workout
         coEvery { repo.deleteActivityEntry("activity-1") } returns Unit
@@ -137,7 +137,7 @@ class ActivityDetailViewModelTest {
     }
 
     @Test fun `keeps the screen and records the error when the delete fails`() = runTest {
-        val workout = workout(id = "activity-1", isOpenVitalsEntry = true)
+        val workout = workout(id = "activity-1", isOwnEntry = true)
         val repo = mockk<ActivityRepository>()
         coEvery { repo.loadWorkout("activity-1") } returns workout
         coEvery { repo.deleteActivityEntry("activity-1") } throws
@@ -156,7 +156,7 @@ class ActivityDetailViewModelTest {
     }
 
     @Test fun `deleteActivity ignores workout not created by OpenVitals`() = runTest {
-        val workout = workout(id = "activity-1", isOpenVitalsEntry = false)
+        val workout = workout(id = "activity-1", isOwnEntry = false)
         val repo = mockk<ActivityRepository>(relaxed = true)
         coEvery { repo.loadWorkout("activity-1") } returns workout
         stubMetricSamples(repo)
@@ -351,7 +351,7 @@ class ActivityDetailViewModelTest {
 
     private fun workout(
         id: String,
-        isOpenVitalsEntry: Boolean = false,
+        isOwnEntry: Boolean = false,
         totalDistanceMeters: Double? = null,
         segments: List<ExerciseSegmentData> = emptyList(),
     ) = ExerciseData(
@@ -362,7 +362,7 @@ class ActivityDetailViewModelTest {
         endTime = Instant.EPOCH.plusSeconds(3_600),
         durationMs = 3_600_000,
         source = "test",
-        isOpenVitalsEntry = isOpenVitalsEntry,
+        isOwnEntry = isOwnEntry,
         totalDistanceMeters = totalDistanceMeters,
         segments = segments,
     )

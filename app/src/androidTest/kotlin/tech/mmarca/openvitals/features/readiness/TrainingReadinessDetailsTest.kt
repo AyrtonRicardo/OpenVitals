@@ -10,9 +10,9 @@ import java.time.LocalDate
 import org.junit.Rule
 import org.junit.Test
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.DailyReadinessInsight
-import tech.mmarca.openvitals.domain.insights.ReadinessFactorKind
-import tech.mmarca.openvitals.domain.insights.ReadinessState
+import tech.mmarca.healthcalculations.insights.DailyReadinessInsight
+import tech.mmarca.healthcalculations.insights.ReadinessFactorKind
+import tech.mmarca.healthcalculations.insights.ReadinessState
 import tech.mmarca.openvitals.testing.readinessFactor
 import tech.mmarca.openvitals.testing.readinessInsight
 import tech.mmarca.openvitals.testing.string

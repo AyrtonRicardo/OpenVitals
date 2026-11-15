@@ -4,10 +4,10 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.domain.model.BmrEntry
 import tech.mmarca.openvitals.domain.model.DailyNutrition
-import tech.mmarca.openvitals.domain.model.DailySteps
+import tech.mmarca.healthcalculations.model.DailySteps
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId

@@ -13,12 +13,12 @@ import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import tech.mmarca.openvitals.domain.cycle.CycleSymptom
-import tech.mmarca.openvitals.domain.model.CervicalSensation
-import tech.mmarca.openvitals.domain.model.CervixFirmness
-import tech.mmarca.openvitals.domain.model.CervixOpening
-import tech.mmarca.openvitals.domain.model.CervixPosition
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.cycle.CycleSymptom
+import tech.mmarca.healthcalculations.model.CervicalSensation
+import tech.mmarca.healthcalculations.model.CervixFirmness
+import tech.mmarca.healthcalculations.model.CervixOpening
+import tech.mmarca.healthcalculations.model.CervixPosition
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
 
 /** The header drip writes, verbatim from an export. */
 private const val DripHeader =

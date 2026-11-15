@@ -13,11 +13,11 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import java.time.LocalDate
+import tech.mmarca.healthcalculations.cycle.LongitudinalCycleItem
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
 import tech.mmarca.openvitals.core.presentation.rememberMetricDetailSectionOrdering
-import tech.mmarca.openvitals.domain.cycle.LongitudinalCycleItem
 import tech.mmarca.openvitals.healthconnect.HealthConnectFeature
 import tech.mmarca.openvitals.ui.components.MetricAction
 import tech.mmarca.openvitals.ui.components.MetricDetailScaffold

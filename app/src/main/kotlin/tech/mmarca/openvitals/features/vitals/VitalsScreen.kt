@@ -1,9 +1,9 @@
 package tech.mmarca.openvitals.features.vitals
 
 import androidx.compose.runtime.Composable
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
 import tech.mmarca.openvitals.features.heart.HeartMetric
 import tech.mmarca.openvitals.features.heart.HeartMetricScreen
 import tech.mmarca.openvitals.features.heart.HeartViewModel

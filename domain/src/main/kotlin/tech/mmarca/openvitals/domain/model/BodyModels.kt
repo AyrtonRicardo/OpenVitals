@@ -46,7 +46,7 @@ data class WeightEntry(
     val weightKg: Double,
     val source: String,
     val id: String = "",
-    val isOpenVitalsEntry: Boolean = false,
+    val isOwnEntry: Boolean = false,
 )
 
 data class HeightEntry(
@@ -54,7 +54,7 @@ data class HeightEntry(
     val heightCm: Double,
     val source: String,
     val id: String = "",
-    val isOpenVitalsEntry: Boolean = false,
+    val isOwnEntry: Boolean = false,
 )
 
 data class BodyFatEntry(
@@ -62,7 +62,7 @@ data class BodyFatEntry(
     val percent: Double,
     val source: String,
     val id: String = "",
-    val isOpenVitalsEntry: Boolean = false,
+    val isOwnEntry: Boolean = false,
 )
 
 data class LeanBodyMassEntry(
@@ -70,7 +70,7 @@ data class LeanBodyMassEntry(
     val massKg: Double,
     val source: String,
     val id: String = "",
-    val isOpenVitalsEntry: Boolean = false,
+    val isOwnEntry: Boolean = false,
 )
 
 data class BmrEntry(
@@ -78,7 +78,7 @@ data class BmrEntry(
     val kcalPerDay: Double,
     val source: String,
     val id: String = "",
-    val isOpenVitalsEntry: Boolean = false,
+    val isOwnEntry: Boolean = false,
 )
 
 data class BoneMassEntry(
@@ -86,7 +86,7 @@ data class BoneMassEntry(
     val massKg: Double,
     val source: String,
     val id: String = "",
-    val isOpenVitalsEntry: Boolean = false,
+    val isOwnEntry: Boolean = false,
 )
 
 data class BodyWaterMassEntry(
@@ -94,7 +94,7 @@ data class BodyWaterMassEntry(
     val massKg: Double,
     val source: String,
     val id: String = "",
-    val isOpenVitalsEntry: Boolean = false,
+    val isOwnEntry: Boolean = false,
 )
 
 data class BodyMeasurementEntry(
@@ -103,5 +103,5 @@ data class BodyMeasurementEntry(
     val time: Instant,
     val value: Double,
     val source: String,
-    val isOpenVitalsEntry: Boolean,
+    val isOwnEntry: Boolean,
 )

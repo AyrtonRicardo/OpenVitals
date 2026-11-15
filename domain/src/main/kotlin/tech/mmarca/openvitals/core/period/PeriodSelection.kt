@@ -1,6 +1,7 @@
 package tech.mmarca.openvitals.core.period
 
 import java.time.LocalDate
+import tech.mmarca.healthcalculations.model.DatePeriod
 
 data class PeriodSelection(
     val selectedRange: TimeRange,

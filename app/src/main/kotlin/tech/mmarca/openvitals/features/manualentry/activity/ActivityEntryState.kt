@@ -1,7 +1,7 @@
 package tech.mmarca.openvitals.features.manualentry.activity
 
 import tech.mmarca.openvitals.domain.model.ActivityFormMetric
-import tech.mmarca.openvitals.domain.insights.BmrInput
+import tech.mmarca.healthcalculations.insights.BmrInput
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.material.icons.outlined.SentimentVeryDissatisfied
 import androidx.compose.material.icons.outlined.SentimentDissatisfied
@@ -23,13 +23,13 @@ import androidx.compose.runtime.Immutable
 import java.time.Instant
 import tech.mmarca.openvitals.core.presentation.ScreenError
 import tech.mmarca.openvitals.core.presentation.toScreenError
-import tech.mmarca.openvitals.domain.model.ActivityPauseInterval
+import tech.mmarca.healthcalculations.model.ActivityPauseInterval
 import tech.mmarca.openvitals.domain.model.ActivityRecordingMarker
 import tech.mmarca.openvitals.domain.model.BleRecordingSampleBuffer
 import tech.mmarca.openvitals.domain.model.CoMapsNavigationSnapshot
-import tech.mmarca.openvitals.domain.model.ExerciseLapData
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
-import tech.mmarca.openvitals.domain.model.HeartRateSample
+import tech.mmarca.healthcalculations.model.ExerciseLapData
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.HeartRateSample
 import tech.mmarca.openvitals.domain.model.PlannedExerciseData
 import tech.mmarca.openvitals.R
 

@@ -12,9 +12,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import tech.mmarca.healthcalculations.model.HeartRateThresholds
+import tech.mmarca.healthcalculations.preferences.BodyEnergyCalibration
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.model.HeartRateThresholds
-import tech.mmarca.openvitals.domain.preferences.BodyEnergyCalibration
 import tech.mmarca.openvitals.features.bodyenergy.BodyEnergyCalibrationCard
 import tech.mmarca.openvitals.ui.components.SectionHeader
 import tech.mmarca.openvitals.ui.theme.LayoutMetrics

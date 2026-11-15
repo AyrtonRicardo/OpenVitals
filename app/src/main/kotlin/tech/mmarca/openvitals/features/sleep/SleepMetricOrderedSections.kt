@@ -16,24 +16,24 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.MetricDetailSectionContext
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.insights.DailyGoalValue
-import tech.mmarca.openvitals.domain.insights.MetricDailyGoalKey
-import tech.mmarca.openvitals.domain.insights.crossMetricInsight
-import tech.mmarca.openvitals.domain.insights.dailyGoalProgress
-import tech.mmarca.openvitals.domain.insights.dataConfidence
-import tech.mmarca.openvitals.domain.insights.periodComparison
-import tech.mmarca.openvitals.domain.insights.personalBaselineInsight
-import tech.mmarca.openvitals.domain.insights.sleepTargetInterpretation
-import tech.mmarca.openvitals.domain.insights.BaselineValue
-import tech.mmarca.openvitals.domain.insights.CrossMetricValue
-import tech.mmarca.openvitals.domain.insights.DataValueKind
+import tech.mmarca.healthcalculations.insights.DailyGoalValue
+import tech.mmarca.healthcalculations.insights.MetricDailyGoalKey
+import tech.mmarca.healthcalculations.insights.crossMetricInsight
+import tech.mmarca.healthcalculations.insights.dailyGoalProgress
+import tech.mmarca.healthcalculations.insights.dataConfidence
+import tech.mmarca.healthcalculations.insights.periodComparison
+import tech.mmarca.healthcalculations.insights.personalBaselineInsight
+import tech.mmarca.healthcalculations.insights.sleepTargetInterpretation
+import tech.mmarca.healthcalculations.insights.BaselineValue
+import tech.mmarca.healthcalculations.insights.CrossMetricValue
+import tech.mmarca.healthcalculations.insights.DataValueKind
 import tech.mmarca.openvitals.domain.model.RecordingMethod
-import tech.mmarca.openvitals.domain.model.SleepData
+import tech.mmarca.healthcalculations.model.SleepData
 import tech.mmarca.openvitals.domain.preferences.MetricDetailSectionId
 import tech.mmarca.openvitals.ui.components.ChartDaySelection
 import tech.mmarca.openvitals.ui.components.CrossMetricInsightCard
@@ -382,7 +382,7 @@ private fun SleepStatisticsSectionContent(
     display: SleepDisplayState,
     period: DatePeriod,
     unitFormatter: UnitFormatter,
-    goalProgress: tech.mmarca.openvitals.domain.insights.DailyGoalProgress,
+    goalProgress: tech.mmarca.healthcalculations.insights.DailyGoalProgress,
 ) {
     val isDay = period.start == period.end
     Column(modifier = Modifier.fillMaxWidth()) {
@@ -499,19 +499,19 @@ private fun SleepTargetContextSectionContent(
     MetricInterpretationCard(
         title = stringResource(R.string.interpretation_sleep_title),
         status = when (interpretation.status) {
-            tech.mmarca.openvitals.domain.insights.SleepTargetStatus.BELOW_TARGET ->
+            tech.mmarca.healthcalculations.insights.SleepTargetStatus.BELOW_TARGET ->
                 stringResource(R.string.interpretation_sleep_below)
-            tech.mmarca.openvitals.domain.insights.SleepTargetStatus.NEAR_TARGET ->
+            tech.mmarca.healthcalculations.insights.SleepTargetStatus.NEAR_TARGET ->
                 stringResource(R.string.interpretation_sleep_near)
-            tech.mmarca.openvitals.domain.insights.SleepTargetStatus.MET_TARGET ->
+            tech.mmarca.healthcalculations.insights.SleepTargetStatus.MET_TARGET ->
                 stringResource(R.string.interpretation_sleep_met)
         },
         body = when (interpretation.status) {
-            tech.mmarca.openvitals.domain.insights.SleepTargetStatus.BELOW_TARGET ->
+            tech.mmarca.healthcalculations.insights.SleepTargetStatus.BELOW_TARGET ->
                 stringResource(R.string.interpretation_sleep_below_body, gapDisplay)
-            tech.mmarca.openvitals.domain.insights.SleepTargetStatus.NEAR_TARGET ->
+            tech.mmarca.healthcalculations.insights.SleepTargetStatus.NEAR_TARGET ->
                 stringResource(R.string.interpretation_sleep_near_body, averageDisplay, targetDisplay)
-            tech.mmarca.openvitals.domain.insights.SleepTargetStatus.MET_TARGET ->
+            tech.mmarca.healthcalculations.insights.SleepTargetStatus.MET_TARGET ->
                 stringResource(R.string.interpretation_sleep_met_body, averageDisplay, targetDisplay)
         },
         source = stringResource(R.string.interpretation_sleep_source),

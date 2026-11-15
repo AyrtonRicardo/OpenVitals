@@ -18,15 +18,15 @@ import tech.mmarca.openvitals.core.period.PeriodSelection
 import tech.mmarca.openvitals.core.period.PeriodSelectionDriver
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.period.WeekPeriodMode
-import tech.mmarca.openvitals.domain.cycle.CycleExclusionReason
-import tech.mmarca.openvitals.domain.cycle.CycleStatistics
-import tech.mmarca.openvitals.domain.cycle.NightlyVitals
+import tech.mmarca.healthcalculations.cycle.CycleExclusionReason
+import tech.mmarca.healthcalculations.cycle.CycleStatistics
+import tech.mmarca.healthcalculations.cycle.NightlyVitals
 import tech.mmarca.openvitals.domain.usecase.LoadCycleNightlyVitalsUseCase
-import tech.mmarca.openvitals.domain.model.CycleData
-import tech.mmarca.openvitals.domain.model.CycleEntryKind
-import tech.mmarca.openvitals.domain.model.CycleEntryWriteRequest
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
-import tech.mmarca.openvitals.domain.model.CycleRecordValues
+import tech.mmarca.healthcalculations.model.CycleData
+import tech.mmarca.healthcalculations.model.CycleEntryKind
+import tech.mmarca.healthcalculations.model.CycleEntryWriteRequest
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.model.CycleRecordValues
 import tech.mmarca.openvitals.data.repository.contract.BodyProfilePreferences
 import tech.mmarca.openvitals.data.repository.contract.CycleJournalRepository
 import tech.mmarca.openvitals.data.repository.contract.CyclePreferences
@@ -353,12 +353,12 @@ class CycleViewModel @Inject constructor(
 
 private fun CycleData.without(kind: CycleEntryKind, entryId: String): CycleData? {
     val hasEntry = when (kind) {
-        CycleEntryKind.MENSTRUATION_FLOW -> menstruationFlows.any { it.id == entryId && it.isOpenVitalsEntry }
-        CycleEntryKind.SPOTTING -> intermenstrualBleeding.any { it.id == entryId && it.isOpenVitalsEntry }
-        CycleEntryKind.SEXUAL_ACTIVITY -> sexualActivity.any { it.id == entryId && it.isOpenVitalsEntry }
-        CycleEntryKind.OVULATION_TEST -> ovulationTests.any { it.id == entryId && it.isOpenVitalsEntry }
-        CycleEntryKind.CERVICAL_MUCUS -> cervicalMucus.any { it.id == entryId && it.isOpenVitalsEntry }
-        CycleEntryKind.BASAL_BODY_TEMPERATURE -> basalBodyTemperature.any { it.id == entryId && it.isOpenVitalsEntry }
+        CycleEntryKind.MENSTRUATION_FLOW -> menstruationFlows.any { it.id == entryId && it.isOwnEntry }
+        CycleEntryKind.SPOTTING -> intermenstrualBleeding.any { it.id == entryId && it.isOwnEntry }
+        CycleEntryKind.SEXUAL_ACTIVITY -> sexualActivity.any { it.id == entryId && it.isOwnEntry }
+        CycleEntryKind.OVULATION_TEST -> ovulationTests.any { it.id == entryId && it.isOwnEntry }
+        CycleEntryKind.CERVICAL_MUCUS -> cervicalMucus.any { it.id == entryId && it.isOwnEntry }
+        CycleEntryKind.BASAL_BODY_TEMPERATURE -> basalBodyTemperature.any { it.id == entryId && it.isOwnEntry }
     }
     if (!hasEntry) return null
     return when (kind) {

@@ -4,9 +4,9 @@ import tech.mmarca.openvitals.navigation.METRIC_ID_ARG
 import tech.mmarca.openvitals.data.repository.contract.FakePreferences
 import androidx.lifecycle.SavedStateHandle
 import tech.mmarca.openvitals.core.presentation.ScreenError
-import tech.mmarca.openvitals.domain.model.ActivityProgressPoint
+import tech.mmarca.healthcalculations.model.ActivityProgressPoint
 import tech.mmarca.openvitals.domain.model.DailyNutrition
-import tech.mmarca.openvitals.domain.model.DailySteps
+import tech.mmarca.healthcalculations.model.DailySteps
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.domain.query.ActivityPeriodData

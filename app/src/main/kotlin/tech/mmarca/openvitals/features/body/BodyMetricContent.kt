@@ -21,18 +21,18 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.DisplayValue
 import tech.mmarca.openvitals.core.presentation.MetricDetailSectionContext
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
 import tech.mmarca.openvitals.core.presentation.rememberMetricDetailSectionOrdering
-import tech.mmarca.openvitals.domain.insights.BaselineValue
-import tech.mmarca.openvitals.domain.insights.DataValueKind
-import tech.mmarca.openvitals.domain.insights.PeriodComparison
-import tech.mmarca.openvitals.domain.insights.dataConfidence
-import tech.mmarca.openvitals.domain.insights.periodComparison
+import tech.mmarca.healthcalculations.insights.BaselineValue
+import tech.mmarca.healthcalculations.insights.DataValueKind
+import tech.mmarca.healthcalculations.insights.PeriodComparison
+import tech.mmarca.healthcalculations.insights.dataConfidence
+import tech.mmarca.healthcalculations.insights.periodComparison
 import tech.mmarca.openvitals.domain.model.BodyMeasurementType
 import tech.mmarca.openvitals.healthconnect.HealthConnectFeature
 import tech.mmarca.openvitals.ui.components.ChartDaySelection
@@ -511,12 +511,12 @@ internal fun LazyListScope.bodyFatContent(
                                 time = entry.time,
                                 accentColor = BodyFatColor,
                                 dateTimeFormatterProvider = dateTimeFormatterProvider,
-                                onEdit = if (entry.isOpenVitalsEntry && entry.id.isNotBlank()) {
+                                onEdit = if (entry.isOwnEntry && entry.id.isNotBlank()) {
                                     { onEditBodyMeasurement(BodyMeasurementType.BODY_FAT, entry.id) }
                                 } else {
                                     null
                                 },
-                                onDelete = if (entry.isOpenVitalsEntry && entry.id.isNotBlank()) {
+                                onDelete = if (entry.isOwnEntry && entry.id.isNotBlank()) {
                                     { onDeleteBodyMeasurement(BodyMeasurementType.BODY_FAT, entry.id) }
                                 } else {
                                     null
@@ -570,12 +570,12 @@ internal fun LazyListScope.bodyFatContent(
                             time = entry.time,
                             accentColor = BodyFatColor,
                             dateTimeFormatterProvider = dateTimeFormatterProvider,
-                            onEdit = if (entry.isOpenVitalsEntry && entry.id.isNotBlank()) {
+                            onEdit = if (entry.isOwnEntry && entry.id.isNotBlank()) {
                                 { onEditBodyMeasurement(BodyMeasurementType.BODY_FAT, entry.id) }
                             } else {
                                 null
                             },
-                            onDelete = if (entry.isOpenVitalsEntry && entry.id.isNotBlank()) {
+                            onDelete = if (entry.isOwnEntry && entry.id.isNotBlank()) {
                                 { onDeleteBodyMeasurement(BodyMeasurementType.BODY_FAT, entry.id) }
                             } else {
                                 null
@@ -798,12 +798,12 @@ when (metric) {
                             time = entry.time,
                             accentColor = WeightColor,
                             dateTimeFormatterProvider = dateTimeFormatterProvider,
-                            onEdit = if (entry.isOpenVitalsEntry && entry.id.isNotBlank()) {
+                            onEdit = if (entry.isOwnEntry && entry.id.isNotBlank()) {
                                 { onEditBodyMeasurement(BodyMeasurementType.HEIGHT, entry.id) }
                             } else {
                                 null
                             },
-                            onDelete = if (entry.isOpenVitalsEntry && entry.id.isNotBlank()) {
+                            onDelete = if (entry.isOwnEntry && entry.id.isNotBlank()) {
                                 { onDeleteBodyMeasurement(BodyMeasurementType.HEIGHT, entry.id) }
                             } else {
                                 null
@@ -824,12 +824,12 @@ when (metric) {
                         time = entry.time,
                         accentColor = WeightColor,
                         dateTimeFormatterProvider = dateTimeFormatterProvider,
-                        onEdit = if (entry.isOpenVitalsEntry && entry.id.isNotBlank()) {
+                        onEdit = if (entry.isOwnEntry && entry.id.isNotBlank()) {
                             { onEditBodyMeasurement(BodyMeasurementType.HEIGHT, entry.id) }
                         } else {
                             null
                         },
-                        onDelete = if (entry.isOpenVitalsEntry && entry.id.isNotBlank()) {
+                        onDelete = if (entry.isOwnEntry && entry.id.isNotBlank()) {
                             { onDeleteBodyMeasurement(BodyMeasurementType.HEIGHT, entry.id) }
                         } else {
                             null
@@ -910,12 +910,12 @@ when (metric) {
                                 time = entry.time,
                                 accentColor = WeightColor,
                                 dateTimeFormatterProvider = dateTimeFormatterProvider,
-                                onEdit = if (entry.isOpenVitalsEntry && entry.id.isNotBlank()) {
+                                onEdit = if (entry.isOwnEntry && entry.id.isNotBlank()) {
                                     { onEditBodyMeasurement(BodyMeasurementType.WEIGHT, entry.id) }
                                 } else {
                                     null
                                 },
-                                onDelete = if (entry.isOpenVitalsEntry && entry.id.isNotBlank()) {
+                                onDelete = if (entry.isOwnEntry && entry.id.isNotBlank()) {
                                     { onDeleteBodyMeasurement(BodyMeasurementType.WEIGHT, entry.id) }
                                 } else {
                                     null
@@ -940,12 +940,12 @@ when (metric) {
                             time = entry.time,
                             accentColor = WeightColor,
                             dateTimeFormatterProvider = dateTimeFormatterProvider,
-                            onEdit = if (entry.isOpenVitalsEntry && entry.id.isNotBlank()) {
+                            onEdit = if (entry.isOwnEntry && entry.id.isNotBlank()) {
                                 { onEditBodyMeasurement(BodyMeasurementType.WEIGHT, entry.id) }
                             } else {
                                 null
                             },
-                            onDelete = if (entry.isOpenVitalsEntry && entry.id.isNotBlank()) {
+                            onDelete = if (entry.isOwnEntry && entry.id.isNotBlank()) {
                                 { onDeleteBodyMeasurement(BodyMeasurementType.WEIGHT, entry.id) }
                             } else {
                                 null

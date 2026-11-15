@@ -2,7 +2,7 @@
 
 > **Status:** Current implemented behavior; caffeine sleep integration remains a proposal.
 > **Audience:** Users and contributors.
-> **Implementation:** `features/recovery`, `features/sleep`, `domain/insights/SleepScore.kt`.
+> **Implementation:** `features/recovery`, `features/sleep`, `insights/SleepScore.kt` in health-calculations.
 > **Navigation:** opened from the sleep detail experience; widget `SLEEP`.
 > **Related:** [Feature map](feature-map.md), [Sleep tracking](sleep-tracking.md), [Caffeine sleep proposal](../proposals/caffeine-aware-sleep-insights.md).
 

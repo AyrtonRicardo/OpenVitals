@@ -3,7 +3,7 @@ package tech.mmarca.openvitals.features.settings
 import java.time.LocalTime
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import tech.mmarca.openvitals.domain.preferences.CaffeinePreferences
+import tech.mmarca.healthcalculations.preferences.CaffeinePreferences
 
 /** What an out-of-range half-life is normalized to on save, and the bedtime the card seeds from. */
 class CaffeinePreferencesCardTest {

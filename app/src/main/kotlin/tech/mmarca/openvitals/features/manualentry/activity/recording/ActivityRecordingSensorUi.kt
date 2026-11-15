@@ -232,7 +232,7 @@ internal fun ActivityRecordedSensorSummary(
     unitFormatter: UnitFormatter,
     sessionStart: java.time.Instant? = null,
     sessionEnd: java.time.Instant? = null,
-    savedHeartRateSamples: List<tech.mmarca.openvitals.domain.model.HeartRateSample> = emptyList(),
+    savedHeartRateSamples: List<tech.mmarca.healthcalculations.model.HeartRateSample> = emptyList(),
     modifier: Modifier = Modifier,
 ) {
     val heartRateSamples = samples.toHeartRateSamples().ifEmpty { savedHeartRateSamples }

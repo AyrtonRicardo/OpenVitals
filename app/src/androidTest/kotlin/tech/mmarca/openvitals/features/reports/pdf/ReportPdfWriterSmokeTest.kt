@@ -9,7 +9,7 @@ import org.junit.Test
 import tech.mmarca.openvitals.domain.model.GlucoseRecordValues
 import tech.mmarca.openvitals.domain.model.ReportBloodPressureDetail
 import tech.mmarca.openvitals.domain.model.ReportBpReading
-import tech.mmarca.openvitals.domain.model.BpMealContext
+import tech.mmarca.healthcalculations.model.BpMealContext
 import tech.mmarca.openvitals.domain.model.ReportBpSlotAverage
 import tech.mmarca.openvitals.domain.model.ReportGlucoseContextAverage
 import tech.mmarca.openvitals.domain.model.ReportGlucoseDetail

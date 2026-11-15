@@ -13,7 +13,7 @@ import android.text.TextPaint
 import android.text.TextUtils
 import androidx.compose.ui.graphics.asAndroidPath
 import java.io.OutputStream
-import tech.mmarca.openvitals.domain.model.BpMealContext
+import tech.mmarca.healthcalculations.model.BpMealContext
 import tech.mmarca.openvitals.domain.model.ReportBloodPressureDetail
 import tech.mmarca.openvitals.domain.model.ReportCycleDetail
 import tech.mmarca.openvitals.domain.model.ReportGlucoseDetail

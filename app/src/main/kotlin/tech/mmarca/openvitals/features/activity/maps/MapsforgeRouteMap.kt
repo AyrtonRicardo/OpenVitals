@@ -57,7 +57,7 @@ import org.mapsforge.map.reader.MapFile
 import org.mapsforge.map.rendertheme.internal.MapsforgeThemes
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.domain.model.CoMapsRoutePolyline
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.features.activity.RoutePreview
 import tech.mmarca.openvitals.ui.theme.Spacing
 

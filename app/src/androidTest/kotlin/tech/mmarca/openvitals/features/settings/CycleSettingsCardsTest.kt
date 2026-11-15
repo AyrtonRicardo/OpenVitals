@@ -13,10 +13,10 @@ import androidx.compose.ui.test.performScrollTo
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.cycle.AgeBand
+import tech.mmarca.healthcalculations.cycle.CycleTrackingProfile
+import tech.mmarca.healthcalculations.cycle.TrackingContext
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.cycle.AgeBand
-import tech.mmarca.openvitals.domain.cycle.CycleTrackingProfile
-import tech.mmarca.openvitals.domain.cycle.TrackingContext
 import tech.mmarca.openvitals.testing.string
 import tech.mmarca.openvitals.ui.theme.OpenVitalsTheme
 

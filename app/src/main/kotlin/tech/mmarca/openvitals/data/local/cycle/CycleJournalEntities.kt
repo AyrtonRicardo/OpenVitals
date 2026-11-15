@@ -5,15 +5,15 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.time.Instant
 import java.time.LocalDate
-import tech.mmarca.openvitals.domain.cycle.CycleExclusionReason
-import tech.mmarca.openvitals.domain.cycle.CycleSymptom
-import tech.mmarca.openvitals.domain.model.BbtDisturbance
-import tech.mmarca.openvitals.domain.model.CervicalSensation
-import tech.mmarca.openvitals.domain.model.CervixFirmness
-import tech.mmarca.openvitals.domain.model.CervixOpening
-import tech.mmarca.openvitals.domain.model.CervixPosition
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
-import tech.mmarca.openvitals.domain.model.HcgTestResult
+import tech.mmarca.healthcalculations.cycle.CycleExclusionReason
+import tech.mmarca.healthcalculations.cycle.CycleSymptom
+import tech.mmarca.healthcalculations.model.BbtDisturbance
+import tech.mmarca.healthcalculations.model.CervicalSensation
+import tech.mmarca.healthcalculations.model.CervixFirmness
+import tech.mmarca.healthcalculations.model.CervixOpening
+import tech.mmarca.healthcalculations.model.CervixPosition
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.model.HcgTestResult
 
 /**
  * The subjective half of a day's cycle observations. Health Connect has no

@@ -6,8 +6,8 @@ import androidx.health.connect.client.records.SleepSessionRecord
 import java.time.Duration
 import java.time.Instant
 import kotlin.math.roundToLong
-import tech.mmarca.openvitals.domain.model.SleepStage
-import tech.mmarca.openvitals.domain.model.sleepDurationMsFromStages
+import tech.mmarca.healthcalculations.model.SleepStage
+import tech.mmarca.healthcalculations.model.sleepDurationMsFromStages
 
 /**
  * Sleep in the CSV importer. Like blood pressure, a sleep column is not a

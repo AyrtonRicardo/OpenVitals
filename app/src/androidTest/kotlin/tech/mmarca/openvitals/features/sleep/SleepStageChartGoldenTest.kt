@@ -9,8 +9,8 @@ import java.time.Instant
 import java.time.format.DateTimeFormatter
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.SleepStage
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.SleepStage
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.testing.OpenVitalsVisualTestSurface
 import tech.mmarca.openvitals.testing.assertVisualRootMatchesGolden

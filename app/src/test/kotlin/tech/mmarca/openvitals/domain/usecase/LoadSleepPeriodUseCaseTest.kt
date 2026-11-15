@@ -12,9 +12,9 @@ import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.period.WeekPeriodMode
 import tech.mmarca.openvitals.data.repository.contract.HeartRepository
 import tech.mmarca.openvitals.data.repository.contract.SleepRepository
-import tech.mmarca.openvitals.domain.insights.SleepScoreLookbackDays
-import tech.mmarca.openvitals.domain.model.DailyHrv
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
+import tech.mmarca.healthcalculations.insights.SleepScoreLookbackDays
+import tech.mmarca.healthcalculations.model.DailyHrv
+import tech.mmarca.healthcalculations.preferences.SleepWindow
 import tech.mmarca.openvitals.domain.query.SleepPeriodData
 import java.time.LocalDate
 

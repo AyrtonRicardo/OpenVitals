@@ -18,7 +18,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Rule
 import org.junit.Test
-import tech.mmarca.openvitals.domain.insights.MetricDailyGoalKey
+import tech.mmarca.healthcalculations.insights.MetricDailyGoalKey
 import tech.mmarca.openvitals.domain.model.MindfulnessReminderConfig
 import tech.mmarca.openvitals.domain.model.MindfulnessSession
 import tech.mmarca.openvitals.data.repository.contract.MindfulnessRepository

@@ -1,7 +1,7 @@
 package tech.mmarca.openvitals.features.body
 
 import androidx.compose.runtime.Immutable
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import java.time.LocalDate
 
 @Immutable

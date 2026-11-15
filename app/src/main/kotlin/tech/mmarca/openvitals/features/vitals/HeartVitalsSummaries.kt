@@ -5,12 +5,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Air
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.core.stats.averageOrZero
-import tech.mmarca.openvitals.core.stats.timeBucketedAverageOrNull
-import tech.mmarca.openvitals.domain.model.RespiratoryRateEntry
+import tech.mmarca.healthcalculations.stats.averageOrZero
+import tech.mmarca.healthcalculations.stats.timeBucketedAverageOrNull
+import tech.mmarca.healthcalculations.model.RespiratoryRateEntry
 import tech.mmarca.openvitals.ui.components.PeriodBarAggregation
 import tech.mmarca.openvitals.ui.components.PeriodChartBucket
 import tech.mmarca.openvitals.ui.components.PeriodChartValue

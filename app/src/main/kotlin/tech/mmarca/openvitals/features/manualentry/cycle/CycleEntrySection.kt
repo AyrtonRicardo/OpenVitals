@@ -10,8 +10,8 @@ import androidx.compose.material.icons.outlined.Opacity
 import androidx.compose.material.icons.outlined.Science
 import androidx.compose.material.icons.outlined.WaterDrop
 import androidx.compose.ui.graphics.vector.ImageVector
+import tech.mmarca.healthcalculations.model.CycleEntryKind
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.model.CycleEntryKind
 
 /** One thing to log. The chooser offers each; the day log then shows only the chosen one. */
 enum class CycleEntrySection(

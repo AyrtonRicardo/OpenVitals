@@ -23,8 +23,8 @@ import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import tech.mmarca.healthcalculations.model.CycleRecordValues
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.model.CycleRecordValues
 import tech.mmarca.openvitals.ui.theme.Spacing
 
 private val DropHeavy: Dp = 22.dp

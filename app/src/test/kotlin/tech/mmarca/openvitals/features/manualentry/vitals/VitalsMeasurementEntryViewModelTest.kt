@@ -28,14 +28,14 @@ import org.junit.Test
 import tech.mmarca.openvitals.core.presentation.ScreenError
 import androidx.lifecycle.SavedStateHandle
 import java.time.Instant
-import tech.mmarca.openvitals.domain.model.GlucoseContext
+import tech.mmarca.healthcalculations.model.GlucoseContext
 import tech.mmarca.openvitals.domain.model.GlucoseRecordValues
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementEntry
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
-import tech.mmarca.openvitals.domain.model.Vo2MaxRecordValues
+import tech.mmarca.healthcalculations.model.VitalsMeasurementEntry
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.model.Vo2MaxRecordValues
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.navigation.VITALS_ENTRY_ID_ARG
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementWriteRequest
+import tech.mmarca.healthcalculations.model.VitalsMeasurementWriteRequest
 import tech.mmarca.openvitals.data.repository.contract.VitalsRepository
 import tech.mmarca.openvitals.util.MainDispatcherRule
 
@@ -149,13 +149,13 @@ class VitalsMeasurementEntryViewModelTest {
         vm.setType(VitalsMeasurementType.BLOOD_PRESSURE)
         advanceUntilIdle()
 
-        vm.selectBpMealContext(tech.mmarca.openvitals.domain.model.BpMealContext.BEFORE_BREAKFAST)
+        vm.selectBpMealContext(tech.mmarca.healthcalculations.model.BpMealContext.BEFORE_BREAKFAST)
         vm.addEntry(121.0, 78.0)
         advanceUntilIdle()
 
         coVerify {
             repo.writeVitalsMeasurementEntry(match<VitalsMeasurementWriteRequest> { request ->
-                request.bpMealContext == tech.mmarca.openvitals.domain.model.BpMealContext.BEFORE_BREAKFAST
+                request.bpMealContext == tech.mmarca.healthcalculations.model.BpMealContext.BEFORE_BREAKFAST
             })
         }
     }
@@ -166,9 +166,9 @@ class VitalsMeasurementEntryViewModelTest {
         vm.setType(VitalsMeasurementType.BLOOD_PRESSURE)
         advanceUntilIdle()
 
-        vm.selectBpBodyPosition(tech.mmarca.openvitals.domain.model.BpRecordValues.BODY_POSITION_SITTING_DOWN)
+        vm.selectBpBodyPosition(tech.mmarca.healthcalculations.model.BpRecordValues.BODY_POSITION_SITTING_DOWN)
         vm.selectBpMeasurementLocation(
-            tech.mmarca.openvitals.domain.model.BpRecordValues.MEASUREMENT_LOCATION_LEFT_UPPER_ARM,
+            tech.mmarca.healthcalculations.model.BpRecordValues.MEASUREMENT_LOCATION_LEFT_UPPER_ARM,
         )
         vm.addEntry(121.0, 78.0)
         advanceUntilIdle()
@@ -176,9 +176,9 @@ class VitalsMeasurementEntryViewModelTest {
         coVerify {
             repo.writeVitalsMeasurementEntry(match<VitalsMeasurementWriteRequest> { request ->
                 request.bpBodyPosition ==
-                    tech.mmarca.openvitals.domain.model.BpRecordValues.BODY_POSITION_SITTING_DOWN &&
+                    tech.mmarca.healthcalculations.model.BpRecordValues.BODY_POSITION_SITTING_DOWN &&
                     request.bpMeasurementLocation ==
-                    tech.mmarca.openvitals.domain.model.BpRecordValues.MEASUREMENT_LOCATION_LEFT_UPPER_ARM
+                    tech.mmarca.healthcalculations.model.BpRecordValues.MEASUREMENT_LOCATION_LEFT_UPPER_ARM
             })
         }
     }
@@ -397,7 +397,7 @@ class VitalsMeasurementEntryViewModelTest {
                 time = Instant.parse("2026-05-19T07:30:00Z"),
                 value = 5.5,
                 source = "OpenVitals",
-                isOpenVitalsEntry = true,
+                isOwnEntry = true,
                 glucose = context,
             )
         val vm = VitalsMeasurementEntryViewModel(repo, SavedStateHandle(mapOf(VITALS_ENTRY_ID_ARG to "glucose-id")))

@@ -1,7 +1,7 @@
 package tech.mmarca.openvitals.data.repository.contract
 
 import kotlinx.coroutines.flow.Flow
-import tech.mmarca.openvitals.domain.preferences.CaffeinePreferences
+import tech.mmarca.healthcalculations.preferences.CaffeinePreferences
 
 /** The caffeine clearance model: half-life, the sleep threshold and the factors behind them. */
 interface CaffeineModelPreferences {

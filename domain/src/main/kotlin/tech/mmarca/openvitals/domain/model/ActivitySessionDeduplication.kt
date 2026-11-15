@@ -3,6 +3,8 @@ package tech.mmarca.openvitals.domain.model
 import java.time.Instant
 import kotlin.math.max
 import kotlin.math.min
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseRouteStatus
 
 private const val DuplicateOverlapRatio = 0.85
 private const val DuplicateBoundaryToleranceMs = 15 * 60 * 1000L
@@ -55,7 +57,7 @@ private fun richerExerciseSession(first: ExerciseData, second: ExerciseData): Ex
         .let { comparator -> if (comparator.compare(first, second) >= 0) first else second }
 
 private fun ExerciseData.richnessScore(): Int =
-    (if (isOpenVitalsEntry) 1_000 else 0) +
+    (if (isOwnEntry) 1_000 else 0) +
         (if (route.status == ExerciseRouteStatus.DATA) 200 else 0) +
         route.points.size.coerceAtMost(500) +
         listOfNotNull(

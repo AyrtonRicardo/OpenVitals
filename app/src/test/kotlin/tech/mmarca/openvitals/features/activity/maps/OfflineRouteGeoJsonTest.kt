@@ -5,9 +5,9 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import org.maplibre.geojson.LineString
-import tech.mmarca.openvitals.core.geo.haversineMeters
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
-import tech.mmarca.openvitals.features.manualentry.activity.recording.activityRecordingRouteDistanceMeters
+import tech.mmarca.healthcalculations.geo.haversineMeters
+import tech.mmarca.healthcalculations.insights.activityRecordingRouteDistanceMeters
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.features.manualentry.activity.routeimport.routeDistanceMeters
 
 class OfflineRouteGeoJsonTest {

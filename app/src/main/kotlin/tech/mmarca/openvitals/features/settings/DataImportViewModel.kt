@@ -14,7 +14,7 @@ import tech.mmarca.openvitals.data.repository.contract.MedicalRecordsRepository
 import tech.mmarca.openvitals.data.repository.contract.RecordingPreferences
 import tech.mmarca.openvitals.data.repository.contract.UnitPreferences
 import tech.mmarca.openvitals.data.repository.contract.BodyProfilePreferences
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
+import tech.mmarca.healthcalculations.preferences.BodyProfile
 import tech.mmarca.openvitals.features.manualentry.activity.CalorieEstimateContext
 import tech.mmarca.openvitals.features.manualentry.activity.ActivityEntryType
 import tech.mmarca.openvitals.features.manualentry.activity.ActivityEntryUnits

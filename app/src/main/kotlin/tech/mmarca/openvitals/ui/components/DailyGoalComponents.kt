@@ -28,9 +28,9 @@ import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.DailyGoalBalance
-import tech.mmarca.openvitals.domain.insights.DailyGoalDirection
-import tech.mmarca.openvitals.domain.insights.DailyGoalProgress
+import tech.mmarca.healthcalculations.insights.DailyGoalBalance
+import tech.mmarca.healthcalculations.insights.DailyGoalDirection
+import tech.mmarca.healthcalculations.insights.DailyGoalProgress
 import tech.mmarca.openvitals.core.presentation.DisplayValue
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
 import kotlin.math.abs

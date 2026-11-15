@@ -34,7 +34,7 @@ import java.time.LocalDateTime
 import java.util.Locale
 import kotlin.math.roundToLong
 import tech.mmarca.openvitals.domain.model.ActivityWriteRequest
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
 import tech.mmarca.openvitals.domain.model.NutritionNutrient
 
 /** One CSV row to the Health Connect records it represents. Pure: no I/O, no clock. */

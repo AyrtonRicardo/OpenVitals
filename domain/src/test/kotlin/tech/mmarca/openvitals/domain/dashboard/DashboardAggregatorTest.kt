@@ -3,14 +3,14 @@ package tech.mmarca.openvitals.domain.dashboard
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
-import tech.mmarca.openvitals.domain.insights.CardioLoadConfidence
-import tech.mmarca.openvitals.domain.insights.CardioLoadEstimate
-import tech.mmarca.openvitals.domain.insights.CardioLoadMethod
-import tech.mmarca.openvitals.domain.model.CaloriesBurnedSource
+import tech.mmarca.healthcalculations.insights.CardioLoadConfidence
+import tech.mmarca.healthcalculations.insights.CardioLoadEstimate
+import tech.mmarca.healthcalculations.insights.CardioLoadMethod
+import tech.mmarca.healthcalculations.model.CaloriesBurnedSource
 import tech.mmarca.openvitals.domain.model.DashboardData
 import tech.mmarca.openvitals.domain.model.DashboardMetric
 import tech.mmarca.openvitals.domain.dashboard.DashboardAggregator.medianLongOrNull
-import tech.mmarca.openvitals.domain.model.DashboardWeeklyCardioLoadTargetSource
+import tech.mmarca.healthcalculations.model.DashboardWeeklyCardioLoadTargetSource
 import java.time.LocalDate
 
 class DashboardAggregatorTest {

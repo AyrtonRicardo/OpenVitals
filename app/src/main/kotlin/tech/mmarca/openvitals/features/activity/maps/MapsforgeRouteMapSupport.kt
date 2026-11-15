@@ -6,7 +6,7 @@ import org.mapsforge.core.model.BoundingBox
 import org.mapsforge.core.model.Dimension
 import org.mapsforge.core.util.LatLongUtils
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 
 /** The pure and process-wide parts of the Mapsforge map, testable without a `MapView`. */
 

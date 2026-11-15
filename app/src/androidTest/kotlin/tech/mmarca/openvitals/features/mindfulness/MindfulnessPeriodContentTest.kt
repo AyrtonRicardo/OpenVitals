@@ -16,8 +16,8 @@ import java.time.ZoneId
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.period.WeekPeriodMode
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
@@ -187,7 +187,7 @@ class MindfulnessPeriodContentTest {
             endTime = start.plusMinutes(15).toInstant(),
             durationMs = 15L * 60_000L,
             source = "tech.mmarca.openvitals",
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
     }
 

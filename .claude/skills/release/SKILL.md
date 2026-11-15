@@ -29,7 +29,11 @@ commit with the release notes, and pushes in one motion.
 - Scope the release: `git log --oneline vLAST..HEAD` is the list of what the notes must cover.
   Read the commit bodies, not only the subjects; the user-facing behaviour is
   usually described there. Translation merges from Codeberg Translate are in
-  scope too (which locales moved, whether a new one started).
+  scope too (which locales moved, whether a new one started). A change in the
+  `openlink/` or `health-calculations/` submodule ships with the app: read
+  `git diff vLAST..HEAD -- openlink health-calculations` and that repository's
+  log between the two commits. A moved `health-calculations/` changes the numbers
+  the app shows, and OpenWatch's release carries the same move.
 - Translations: every shipping locale should be at 100%. Count the keys each
   `values-*/strings.xml` is missing against `values/strings.xml` (translatable
   ones only) before writing the notes; `verifyTranslations` only enforces 70%.

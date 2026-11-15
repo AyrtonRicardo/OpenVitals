@@ -4,6 +4,15 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 import kotlin.math.roundToInt
+import tech.mmarca.healthcalculations.model.BloodGlucoseEntry
+import tech.mmarca.healthcalculations.model.BloodPressureEntry
+import tech.mmarca.healthcalculations.model.BodyTempEntry
+import tech.mmarca.healthcalculations.model.DailyBloodPressurePoint
+import tech.mmarca.healthcalculations.model.DailyVitalPoint
+import tech.mmarca.healthcalculations.model.RespiratoryRateEntry
+import tech.mmarca.healthcalculations.model.SkinTemperatureEntry
+import tech.mmarca.healthcalculations.model.SpO2Entry
+import tech.mmarca.healthcalculations.model.Vo2MaxEntry
 
 /**
  * Non-day ranges load one point per day; the charts draw entry lists, so

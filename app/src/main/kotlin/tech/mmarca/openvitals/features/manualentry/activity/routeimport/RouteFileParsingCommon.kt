@@ -17,9 +17,9 @@ import java.time.Instant
 import javax.xml.parsers.DocumentBuilderFactory
 import org.w3c.dom.Document
 import org.w3c.dom.Element
-import tech.mmarca.openvitals.core.geo.haversineMeters
-import tech.mmarca.openvitals.domain.insights.RouteElevation
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.geo.haversineMeters
+import tech.mmarca.healthcalculations.insights.RouteElevation
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 
 internal data class RouteFileMetadata(
     val name: String?,

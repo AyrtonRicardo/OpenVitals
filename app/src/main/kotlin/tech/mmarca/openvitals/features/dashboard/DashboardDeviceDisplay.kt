@@ -1,8 +1,8 @@
 package tech.mmarca.openvitals.features.dashboard
 
 import java.time.Instant
+import tech.mmarca.healthcalculations.insights.MetricDailyGoalKey
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
-import tech.mmarca.openvitals.domain.insights.MetricDailyGoalKey
 import tech.mmarca.openvitals.domain.model.BleConnectionStatus
 import tech.mmarca.openvitals.domain.model.BleDeviceConnectionStatus
 import tech.mmarca.openvitals.domain.model.BleSensorDevice

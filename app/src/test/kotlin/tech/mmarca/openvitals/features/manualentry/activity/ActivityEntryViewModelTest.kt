@@ -1,11 +1,11 @@
 package tech.mmarca.openvitals.features.manualentry.activity
 
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
+import tech.mmarca.healthcalculations.preferences.BodyProfile
 import tech.mmarca.openvitals.data.repository.contract.BodyProfilePreferences
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
 import tech.mmarca.openvitals.data.repository.contract.FakePreferences
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.BmrInput
+import tech.mmarca.healthcalculations.insights.BmrInput
 import tech.mmarca.openvitals.domain.model.ActivityFormMetric
 import tech.mmarca.openvitals.features.manualentry.*
 import tech.mmarca.openvitals.features.manualentry.activity.*
@@ -52,15 +52,15 @@ import tech.mmarca.openvitals.core.performance.DefaultDispatcherProvider
 import tech.mmarca.openvitals.core.presentation.ScreenError
 import tech.mmarca.openvitals.features.activity.elevation.ElevationTileRepository
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
-import tech.mmarca.openvitals.domain.model.ActivityPauseInterval
+import tech.mmarca.healthcalculations.model.ActivityPauseInterval
 import tech.mmarca.openvitals.domain.model.ActivityWriteRequest
 import tech.mmarca.openvitals.domain.model.BleRecordingSampleBuffer
 import tech.mmarca.openvitals.domain.model.CoMapsNavigationState
 import tech.mmarca.openvitals.domain.model.CoMapsRoutePolyline
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.ExerciseLapData
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
-import tech.mmarca.openvitals.domain.model.ExerciseSegmentData
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseLapData
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseSegmentData
 import tech.mmarca.openvitals.domain.model.PlannedExerciseBlockData
 import tech.mmarca.openvitals.domain.model.PlannedExerciseCompletion
 import tech.mmarca.openvitals.domain.model.PlannedExerciseData
@@ -668,7 +668,7 @@ class ActivityEntryViewModelTest {
                     repetitions = 8,
                 )
             ),
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         val repo = activityRepo(canWrite = true, plannedWorkouts = listOf(plannedPullUpPlan()), workout = workout)
         coEvery { repo.updateActivityEntry(any(), any()) } returns Unit
@@ -1580,7 +1580,7 @@ class ActivityEntryViewModelTest {
             title = "Morning run",
             notes = "Easy effort",
             totalDistanceMeters = 10_500.0,
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         val repo = activityRepo(canWrite = true, workout = workout)
         val vm = ActivityEntryViewModel(
@@ -1657,7 +1657,7 @@ class ActivityEntryViewModelTest {
             durationMs = 45 * 60 * 1000,
             source = "tech.mmarca.openvitals",
             title = "Yoga",
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         val repo = activityRepo(canWrite = true, workout = workout)
         coEvery { repo.updateActivityEntry(any(), any()) } returns Unit
@@ -1696,7 +1696,7 @@ class ActivityEntryViewModelTest {
             source = "tech.mmarca.openvitals",
             title = "Morning run",
             totalDistanceMeters = 10_500.0,
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         val repo = activityRepo(canWrite = true, workout = workout)
         coEvery { repo.updateActivityEntry(any(), any()) } returns Unit
@@ -1745,7 +1745,7 @@ class ActivityEntryViewModelTest {
             source = "tech.mmarca.openvitals",
             title = "Morning run",
             totalDistanceMeters = 10_500.0,
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         val repo = activityRepo(canWrite = true, workout = workout)
         val units = ActivityEntryUnits.uniform(UnitSystem.METRIC)
@@ -1787,7 +1787,7 @@ class ActivityEntryViewModelTest {
                     repetitions = 0,
                 ),
             ),
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         val repo = activityRepo(canWrite = true, workout = workout)
         coEvery { repo.updateActivityEntry(any(), any()) } returns Unit

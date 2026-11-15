@@ -3,8 +3,8 @@ package tech.mmarca.openvitals.features.vitals
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
-import tech.mmarca.openvitals.domain.model.DailyHrv
-import tech.mmarca.openvitals.domain.model.DailyRestingHR
+import tech.mmarca.healthcalculations.model.DailyHrv
+import tech.mmarca.healthcalculations.model.DailyRestingHR
 import java.time.LocalDate
 
 class HeartVitalsRangeSummaryTest {

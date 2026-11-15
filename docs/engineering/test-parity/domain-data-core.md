@@ -3,7 +3,7 @@
 The Body Energy watch-fit and the Garmin wellness table left this repository for OpenWatch; their sections left this file with them, and the summary counts predate that.
 
 ## test/domain/insights/activity_splits_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/ActivitySplitsTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/ActivitySplitsTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | an activity that does not travel has no splits > a strength session with GPS drift is not cut into "laps" | PORTED | ActivitySplitsTest.kt: `a strength session with GPS drift is not cut into laps` | — |
@@ -61,7 +61,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/B
 | an observation moves the gain that scales the drain it blames > quiet rest moves the sleep gain, which scales the rest charge | PORTED | BodyEnergyCalibrationFitTest.kt: `quiet rest moves the sleep gain, which scales the rest charge` | — |
 
 ## test/domain/insights/body_energy_timeline_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/BodyEnergyTimelineTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/BodyEnergyTimelineTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | manual zones classify sustained exercise as high confidence drain | PORTED | BodyEnergyTimelineTest.kt: `manual zones classify sustained exercise as high confidence drain` | — |
@@ -100,7 +100,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/B
 | the age-derived max heart rate uses Tanaka, like the rest of the app | PORTED | BodyEnergyTimelineTest.kt: `the age-derived max heart rate uses Tanaka, like the rest of the app` | — |
 
 ## test/domain/insights/caffeine_drink_profile_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/CaffeineDrinkProfileTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/CaffeineDrinkProfileTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | the peak is LESS than the dose, and comes after the drink | PORTED | CaffeineDrinkProfileTest.kt: `peak is below the dose and is the highest point of the curve` | Kotlin additionally pins the peak to the curve maximum |
@@ -113,20 +113,20 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/C
 | the drink profile agrees with the calculator it is built on | PORTED | CaffeineDrinkProfileTest.kt: `the profile agrees with the model the day curve is built from` | — |
 
 ## test/domain/insights/caffeine_insight_calculator_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/CaffeineInsightCalculatorTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/CaffeineInsightCalculatorTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | contribution is zero before intake and positive after absorption | PORTED | CaffeineInsightCalculatorTest.kt: `contribution is zero before intake and positive after absorption` | — |
 | active caffeine decays over time | PORTED | CaffeineInsightCalculatorTest.kt: `active caffeine decays over time` | — |
-| build returns bedtime safety source and time bucket insights | DIVERGED | CaffeineInsightCalculatorTest.kt: `build returns bedtime safety source and time bucket insights` | Kotlin omits the `dailyStats.size == 3` assertion |
+| build returns bedtime safety source and time bucket insights | DIVERGED | CaffeineHealthDrinkCatalogTest.kt: `build returns bedtime safety source and time bucket insights` | Kotlin omits the `dailyStats.size == 3` assertion |
 | a midnight bedtime minutes away projects tonight, not last night | DIVERGED | CaffeineInsightCalculatorTest.kt: `a bedtime before noon belongs to the night that ENDS the day` | Same anchoring rule pinned via dailyStats only; live `insights.bedtimeMg`/`currentMg` projection never asserted |
 | the morning after, a midnight bedtime projects the coming night | DIVERGED | CaffeineInsightCalculatorTest.kt: `a bedtime before noon belongs to the night that ENDS the day` | Same anchoring rule pinned via dailyStats only; forward-looking `bedtimeMg` near-zero check unported |
 | a day's safe-for-sleep stat uses the midnight that ENDS the day | DIVERGED | CaffeineInsightCalculatorTest.kt: `a bedtime before noon belongs to the night that ENDS the day` + `an evening bedtime stays on its own date` | Kotlin pins the anchor arithmetic exactly but does not assert `safeForSleep == false` for a lived unsafe night |
 | an un-lived night is neither safe nor unsafe until it happens | PORTED | CaffeineInsightCalculatorTest.kt: `nights that have not been lived yet are not counted` + `an unlived night neither breaks nor extends the safe sleep streak` | Coverage split across two Kotlin tests |
-| caffeine health catalog matches health connect names without local entries | PORTED | CaffeineInsightCalculatorTest.kt: `caffeine health catalog matches health connect names without local entries` | — |
+| caffeine health catalog matches health connect names without local entries | PORTED | CaffeineHealthDrinkCatalogTest.kt: `caffeine health catalog matches health connect names without local entries` | — |
 
 ## test/domain/insights/cross_metric_insights_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/CrossMetricInsightsTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/CrossMetricInsightsTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | calculatesPositiveCorrelationForPairedDays | PORTED | CrossMetricInsightsTest.kt: `calculatesPositiveCorrelationForPairedDays` | — |
@@ -135,7 +135,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/C
 | returnsNullWhenThereAreNotEnoughPairs | PORTED | CrossMetricInsightsTest.kt: `returnsNullWhenThereAreNotEnoughPairs` | — |
 
 ## test/domain/insights/daily_goals_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/DailyGoalsTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/DailyGoalsTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | at least goals count tracked days and streaks | PORTED | DailyGoalsTest.kt: `at least goals count tracked days and streaks` | |
@@ -145,7 +145,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/D
 | values on the same day are summed before goal evaluation | PORTED | DailyGoalsTest.kt: `values on the same day are summed before goal evaluation` | — |
 
 ## test/domain/insights/daily_readiness_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/DailyReadinessTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/DailyReadinessTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | readyWhenSleepAndRecoverySignalsAreStrong | PORTED | DailyReadinessTest.kt: `readyWhenSleepAndRecoverySignalsAreStrong` | — |
@@ -164,7 +164,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/D
 | lowConfidenceWhenBaselinesAreMissing | PORTED | DailyReadinessTest.kt: `lowConfidenceWhenBaselinesAreMissing` | — |
 
 ## test/domain/insights/data_confidence_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/DataConfidenceTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/DataConfidenceTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | confidence calculates coverage inside the selected period | PORTED | DataConfidenceTest.kt: `confidence calculates coverage inside the selected period` | — |
@@ -174,7 +174,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/D
 | manual entries are reported | PORTED | DataConfidenceTest.kt: `manual entries are reported` | — |
 
 ## test/domain/insights/heart_rate_recovery_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/HeartRateRecoveryTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/HeartRateRecoveryTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | calculateHeartRateRecovery > the offsets are 30s..5min, no 10s mark | PORTED | HeartRateRecoveryTest.kt: `the offsets are 30s to 5min, no 10s mark` | — |
@@ -206,7 +206,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/H
 | heartRateRecoveryWindowFor > a rest ending just shy of the session end still qualifies | PORTED | HeartRateRecoveryTest.kt: `a rest ending just shy of the session end still qualifies` | — |
 
 ## test/domain/insights/intensity_minutes_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/IntensityMinutesTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/IntensityMinutesTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | heartRateReserveCountsModerateMinutes | PORTED | IntensityMinutesTest.kt: `heartRateReserveCountsModerateMinutes` | — |
@@ -216,7 +216,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/I
 | noInputsReturnNoData | PORTED | IntensityMinutesTest.kt: `noInputsReturnNoData` | — |
 
 ## test/domain/insights/metric_interpretations_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/MetricInterpretationsTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/MetricInterpretationsTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | classifiesBloodPressureUsingHighestApplicableCategory | PORTED | MetricInterpretationsTest.kt: `classifiesBloodPressureUsingHighestApplicableCategory` | — |
@@ -231,7 +231,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/M
 | returnsNullForInvalidInputs | PORTED | MetricInterpretationsTest.kt: `returnsNullForInvalidInputs` | — |
 
 ## test/domain/insights/period_comparison_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/PeriodComparisonTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/PeriodComparisonTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | comparison reports upward percent change | PORTED | PeriodComparisonTest.kt: `comparison reports upward percent change` | — |
@@ -239,7 +239,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/P
 | comparison omits percent when previous value is zero | PORTED | PeriodComparisonTest.kt: `comparison omits percent when previous value is zero` | — |
 
 ## test/domain/insights/personal_baseline_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/PersonalBaselineTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/PersonalBaselineTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | calculatesTrailingWindowAverages | PORTED | PersonalBaselineTest.kt: `calculatesTrailingWindowAverages` | — |
@@ -250,7 +250,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/P
 | — | KOTLIN-ONLY | PersonalBaselineTest.kt: `dropsZeroAndNegativeDaysByDefault`, `keepsZeroAndNegativeDaysForASignedMetric` | `includeNonPositive`: a signed metric (skin temperature variation) keeps its negative days |
 
 ## test/domain/insights/route_elevation_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/RouteElevationTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/RouteElevationTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | elevationGainFromAltitudes > a flat route reports essentially no climb | PORTED | RouteElevationTest.kt: `a flat route reports essentially no climb` | Same seeded Box-Muller fixture reproduced in Kotlin |
@@ -263,13 +263,13 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/R
 | elevationGainFromAltitudes > null and non-finite altitudes are skipped, not treated as zero | PORTED | RouteElevationTest.kt: `null and non-finite altitudes are skipped not treated as zero` | — |
 
 ## test/domain/insights/sleep_score_date_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/SleepScoreDateTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/SleepScoreDateTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | date score uses previous daily sleep summaries as regularity baseline | PORTED | SleepScoreDateTest.kt: `date score uses previous daily sleep summaries as regularity baseline` | — |
 
 ## test/domain/insights/stress_tracking_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/StressTrackingTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/StressTrackingTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | lowHrvAndElevatedRestingHeartRateProduceHighStress | PORTED | StressTrackingTest.kt: `lowHrvAndElevatedRestingHeartRateProduceHighStress` | — |
@@ -288,7 +288,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/dashboard/
 | median long returns middle value | PORTED | DashboardAggregatorTest.kt: `median long returns middle value` | — |
 
 ## test/domain/model/activity_backfill_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/model/ActivityBackfillTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/model/ActivityBackfillTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | route backfill fills missing distance and elevation | PORTED | ActivityBackfillTest.kt: `route backfill fills missing distance and elevation` | was blocked: the backfill summed per-segment ascents instead of calling `RouteElevation.routeElevationGain` like recording and route import already did. Fixed; Flutter's fixture and its exact 70.0 expectation now pass unchanged, plus a new noise-floor rejection case |
@@ -319,7 +319,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/model/BleR
 | isEmpty when no samples | PORTED | BleRecordingSampleBufferTest.kt: `isEmpty_whenNoSamples` | — |
 
 ## test/domain/model/health_data_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/model/HealthDataTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/model/HealthDataTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | durationMinutes truncates sub-minute remainder | PORTED | HealthDataTest.kt: `durationMinutes truncates sub-minute remainder` | — |
@@ -332,18 +332,18 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/model/Heal
 | DailySteps stores all optional fields when provided | PORTED | HealthDataTest.kt: `DailySteps optional fields default to null and a provided zero stays zero` | — |
 | ActivityProgressPoint defaults detailed optional fields to null | PORTED | HealthDataTest.kt: `ActivityProgressPoint defaults detailed optional fields to null` | — |
 | ActivityProgressPoint stores detailed optional fields | PORTED | HealthDataTest.kt: `ActivityProgressPoint defaults detailed optional fields to null` | — |
-| DashboardData defaults weight to null | PORTED | HealthDataTest.kt: `DashboardData optional readings default to null` | — |
-| DashboardData stores latest weight with time when provided | PORTED | HealthDataTest.kt: `DashboardData optional readings default to null` | — |
-| DashboardData stores latest height with time when provided | PORTED | HealthDataTest.kt: `DashboardData optional readings default to null` | — |
-| DashboardData defaults floorsClimbed to null | PORTED | HealthDataTest.kt: `DashboardData optional readings default to null` | — |
-| DashboardData stores floorsClimbed when provided | PORTED | HealthDataTest.kt: `DashboardData optional readings default to null` | — |
-| DashboardData defaults elevationGainedMeters to null | PORTED | HealthDataTest.kt: `DashboardData optional readings default to null` | — |
-| DashboardData stores elevationGainedMeters when provided | PORTED | HealthDataTest.kt: `DashboardData optional readings default to null` | — |
+| DashboardData defaults weight to null | PORTED | DashboardDataTest.kt: `DashboardData optional readings default to null` | — |
+| DashboardData stores latest weight with time when provided | PORTED | DashboardDataTest.kt: `DashboardData optional readings default to null` | — |
+| DashboardData stores latest height with time when provided | PORTED | DashboardDataTest.kt: `DashboardData optional readings default to null` | — |
+| DashboardData defaults floorsClimbed to null | PORTED | DashboardDataTest.kt: `DashboardData optional readings default to null` | — |
+| DashboardData stores floorsClimbed when provided | PORTED | DashboardDataTest.kt: `DashboardData optional readings default to null` | — |
+| DashboardData defaults elevationGainedMeters to null | PORTED | DashboardDataTest.kt: `DashboardData optional readings default to null` | — |
+| DashboardData stores elevationGainedMeters when provided | PORTED | DashboardDataTest.kt: `DashboardData optional readings default to null` | — |
 | DailySteps floorsClimbed zero is non-null — permission granted no data | PORTED | HealthDataTest.kt: `DailySteps optional fields default to null and a provided zero stays zero` | — |
 | DailySteps elevationGainedMeters zero is non-null — permission granted no data | PORTED | HealthDataTest.kt: `DailySteps optional fields default to null and a provided zero stays zero` | — |
 
 ## test/domain/model/heart_rate_aggregated_samples_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/model/HeartRateAggregatedSamplesTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/model/HeartRateAggregatedSamplesTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | shouldUseAggregatedHeartRateSamples is true for day ranges | PORTED | HeartRateAggregatedSamplesTest.kt: `shouldUseAggregatedHeartRateSamples is true for day ranges` | — |
@@ -374,7 +374,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/features/imports/
 | buildStableClientRecordId > it delegates to the shared builder under the apple_health namespace | N/A-FRAMEWORK | — | guards a Dart-side refactor (extraction into a shared builder); Kotlin deliberately keeps per-importer builders, so there is no delegation to assert |
 
 ## test/domain/model/sleep_day_attribution_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/model/SleepDayAttributionTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/model/SleepDayAttributionTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | a cross-midnight night is filed under the wake-up date | PORTED | SleepDayAttributionTest.kt: `a cross-midnight night is filed under the wake-up date` | — |
@@ -383,7 +383,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/model/Slee
 | custom window hours move the night boundary | PORTED | SleepDayAttributionTest.kt: `custom window hours move the night boundary` | — |
 
 ## test/domain/model/sleep_night_split_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/model/SleepNightSplitTest.kt (+ features/sleep/SleepDailySummaryTest.kt for the presentation-level summary)
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/model/SleepNightSplitTest.kt (+ features/sleep/SleepDailySummaryTest.kt for the presentation-level summary)
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | splitNightAndNaps > keeps a night broken by a short early-morning wake together | PORTED | SleepNightSplitTest.kt: `splitNightAndNaps keeps a night broken by a short early-morning wake together` | — |
@@ -400,7 +400,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/model/Slee
 | sleepSessionsUnionMs > empty input is zero | PORTED | SleepNightSplitTest.kt: `sleepSessionsUnionMs counts overlapping intervals shared time once` | — |
 
 ## test/domain/model/sleep_session_merging_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/model/SleepSessionMergingTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/model/SleepSessionMergingTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | mergeSleepSessions merges same-source sessions separated by a short gap | PORTED | SleepSessionMergingTest.kt: `mergeSleepSessions merges same-source sessions separated by a short gap` | — |
@@ -417,7 +417,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/model/Slee
 | mergedSleepSessionComponentIds returns encoded raw ids | PORTED | SleepSessionMergingTest.kt: `mergedSleepSessionComponentIds returns encoded raw ids` | — |
 
 ## test/domain/model/sleep_split_night_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/model/SleepSplitNightTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/model/SleepSplitNightTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | combineNightStages fills the wake gap with Awake | PORTED | SleepSplitNightTest.kt: `combineNightStages fills the wake gap with Awake` | — |
@@ -425,7 +425,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/model/Slee
 | the split night is reliable once its gap is filled | PORTED | SleepSplitNightTest.kt: `the split night is reliable once its gap is filled` | — |
 
 ## test/domain/model/sleep_stage_coverage_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/model/SleepStageCoverageTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/model/SleepStageCoverageTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | a fully-staged night is reliable | PORTED | SleepStageCoverageTest.kt: `a fully-staged night is reliable` | — |
@@ -435,7 +435,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/model/Slee
 | a zero-length session never divides by zero | PORTED | SleepStageCoverageTest.kt: `a zero-length session never divides by zero` | — |
 
 ## test/domain/preferences/body_energy_calibration_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/preferences/BodyEnergyCalibrationTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/preferences/BodyEnergyCalibrationTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | manual zones round trip through preference string | PORTED | BodyEnergyCalibrationTest.kt: `manual zones round trip through preference string` | — |
@@ -445,7 +445,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/preference
 | normalization preserves setupCompleted flag | PORTED | BodyEnergyCalibrationTest.kt: `normalization preserves setupCompleted flag` | — |
 
 ## test/domain/preferences/body_profile_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/preferences/BodyProfileTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/preferences/BodyProfileTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | normalization keeps optional values in safe ranges | PORTED | BodyProfileTest.kt: `normalization keeps optional values in safe ranges` | Kotlin is a superset (also clamps max/resting HR) |
@@ -586,7 +586,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/data/repository/P
 | activity recording preferences — the null sentinels > the booleans and the timeout round-trip | PORTED | PreferencesRepositoryCodecTest.kt: `the booleans and the timeout round-trip` | — |
 
 ## test/data/prefs/preferences_repository_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/data/repository/PreferencesRepositoryTest.kt (over a FakeSharedPreferences; + domain/preferences/BodyProfileTest.kt and BodyEnergyCalibrationTest.kt at model level)
+Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/data/repository/PreferencesRepositoryTest.kt (over a FakeSharedPreferences; + health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/preferences/BodyProfileTest.kt and BodyEnergyCalibrationTest.kt at model level)
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | scalar keys > onboardingDone defaults false and round-trips | PORTED | PreferencesRepositoryTest.kt: `onboardingDone defaults false and round-trips` | — |
@@ -787,7 +787,7 @@ Kotlin counterpart: none (the Kotlin port dropped the Dart Result/AppFailure wra
 Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/data/repository/SleepRepositoryTest.kt (partial; merged-id reconstruction moved to healthconnect/SleepHealthReader.kt:135)
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
-| SleepRepositoryImpl.loadSleepSession > reconstructs a merged night from its component records | DIVERGED | domain/model/SleepSessionMergingTest.kt: `mergedSleepSessionComponentIds returns encoded raw ids` | Component-id codec and merge are tested at domain level only; the SleepHealthReader.readSleepSession reconstruction path itself is untested |
+| SleepRepositoryImpl.loadSleepSession > reconstructs a merged night from its component records | DIVERGED | health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/model/SleepSessionMergingTest.kt: `mergedSleepSessionComponentIds returns encoded raw ids` | Component-id codec and merge are tested at domain level only; the SleepHealthReader.readSleepSession reconstruction path itself is untested |
 | SleepRepositoryImpl.loadSleepSession > reads a plain record id straight through | PORTED | SleepRepositoryTest.kt: `loadSleepSession reads a plain record id straight through` | — |
 | SleepRepositoryImpl.loadSleepSession > is not-found when every component record has since vanished | PORTED | SleepRepositoryTest.kt: `loadSleepSession is not-found when every component record has since vanished` | drives the real SleepHealthReader reconstruction over an empty fake client |
 
@@ -821,7 +821,7 @@ Kotlin counterpart: none
 | the default sink lets a repository write with no container at all | N/A-FRAMEWORK | — | Background-isolate/no-container shape is Flutter-specific |
 
 ## test/data/source/health/health_connect_native_data_source_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/healthconnect/ (HealthConnectReadMappingTest.kt, HealthConnectAggregateReadTest.kt, HealthConnectPermissionServiceTest.kt, ActivityHealthReaderTest.kt, FixtureReaderTest.kt, SwallowingRecordTest.kt, HealthConnectAvailabilityServiceTest.kt) + domain/model/ActivityBackfillTest.kt
+Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/healthconnect/ (HealthConnectReadMappingTest.kt, HealthConnectAggregateReadTest.kt, HealthConnectPermissionServiceTest.kt, ActivityHealthReaderTest.kt, FixtureReaderTest.kt, SwallowingRecordTest.kt, HealthConnectAvailabilityServiceTest.kt) + health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/model/ActivityBackfillTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | availability > maps SDK status ints and caches the result | DIVERGED | HealthConnectAvailabilityServiceTest.kt | status mapping covered via install-state scenarios; caching of the result not asserted |
@@ -1391,7 +1391,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/ui/charts/Buckete
 | skips samples before day start and non-finite values | PORTED | BucketedSeriesTest.kt: `skips samples before day start and non-finite values` | — |
 
 ## test/core/stats/stats_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/core/stats/StatsTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/stats/StatsTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | average — null means "no samples" > averages the values | PORTED | StatsTest.kt: `averageOrNull averages a populated list` | — |

@@ -13,7 +13,7 @@ import tech.mmarca.openvitals.domain.model.BoneMassEntry
 import tech.mmarca.openvitals.domain.model.HeightEntry
 import tech.mmarca.openvitals.domain.model.LeanBodyMassEntry
 import tech.mmarca.openvitals.domain.model.WeightEntry
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
+import tech.mmarca.healthcalculations.preferences.BodyProfile
 import tech.mmarca.openvitals.domain.query.BodyPeriodData
 
 interface BodyRepository {

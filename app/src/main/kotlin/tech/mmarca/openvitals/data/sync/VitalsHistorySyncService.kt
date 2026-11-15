@@ -80,7 +80,7 @@ class VitalsHistorySyncService @Inject constructor(
     private fun singleValueSpec(
         key: String,
         recordType: KClass<out Record>,
-        read: suspend (java.time.Instant, java.time.Instant) -> List<tech.mmarca.openvitals.domain.model.DailyVitalPoint>,
+        read: suspend (java.time.Instant, java.time.Instant) -> List<tech.mmarca.healthcalculations.model.DailyVitalPoint>,
     ): MetricSpec = MetricSpec(key, recordType, readPermission(recordType)) { start, end ->
         read(start.dayStart(), end.dayEndExclusive()).map { point ->
             VitalsDailyAggregateEntity(

@@ -2,7 +2,7 @@
 
 > **Status:** Current implemented behavior.
 > **Audience:** Users and contributors.
-> **Implementation:** `domain/insights/HeartRateRecovery.kt`, `features/recovery`, `features/activity`, `features/manualentry/activity/recording`.
+> **Implementation:** `insights/HeartRateRecovery.kt` in health-calculations, `features/recovery`, `features/activity`, `features/manualentry/activity/recording`.
 > **Navigation:** `heart/recovery`, a card on an activity's detail screen, and a surface on the heart screen.
 > **Related:** [Feature map](feature-map.md), [Heart and vitals](heart-and-vitals.md), [Activity recording](activity-recording.md).
 

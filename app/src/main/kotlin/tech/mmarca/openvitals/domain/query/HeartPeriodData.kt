@@ -1,11 +1,11 @@
 package tech.mmarca.openvitals.domain.query
 
-import tech.mmarca.openvitals.domain.model.DailyHrv
-import tech.mmarca.openvitals.domain.model.DailyRestingHR
-import tech.mmarca.openvitals.domain.model.HeartRateSample
-import tech.mmarca.openvitals.domain.model.HeartRateSummary
-import tech.mmarca.openvitals.domain.model.HrvSample
-import tech.mmarca.openvitals.domain.model.RestingHeartRateSample
+import tech.mmarca.healthcalculations.model.DailyHrv
+import tech.mmarca.healthcalculations.model.DailyRestingHR
+import tech.mmarca.healthcalculations.model.HeartRateSample
+import tech.mmarca.healthcalculations.model.HeartRateSummary
+import tech.mmarca.healthcalculations.model.HrvSample
+import tech.mmarca.healthcalculations.model.RestingHeartRateSample
 
 data class HeartPeriodData(
     val daySamples: List<HeartRateSample> = emptyList(),

@@ -22,7 +22,7 @@ import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.data.repository.BodyEnergyChainSettlingDays
 import tech.mmarca.openvitals.data.repository.BodyEnergyTimelineStore
@@ -31,7 +31,7 @@ import tech.mmarca.openvitals.data.repository.bodyEnergyPermissionSignature
 import tech.mmarca.openvitals.data.repository.contract.BodyEnergyRepository
 import tech.mmarca.openvitals.data.repository.contract.BodyEnergyTimelineQuery
 import tech.mmarca.openvitals.data.repository.contract.HealthRepository
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimelineAlgorithmVersion
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimelineAlgorithmVersion
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
 import tech.mmarca.openvitals.domain.model.RefreshMode
 import tech.mmarca.openvitals.healthconnect.HealthConnectRateLimitBackoff

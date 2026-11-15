@@ -3,6 +3,7 @@ package tech.mmarca.openvitals.core.period
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.util.Locale
+import tech.mmarca.healthcalculations.model.DatePeriod
 
 private val dateFormatter = DateTimeFormatter.ofPattern("EEE d MMM")
 private val monthFormatter = DateTimeFormatter.ofPattern("LLLL yyyy")

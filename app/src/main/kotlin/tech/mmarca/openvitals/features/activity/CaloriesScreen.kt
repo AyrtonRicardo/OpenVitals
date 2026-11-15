@@ -28,7 +28,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.period.displayPeriodFor
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
@@ -36,7 +36,7 @@ import tech.mmarca.openvitals.core.presentation.MetricDetailSectionContext
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
 import tech.mmarca.openvitals.core.presentation.rememberMetricDetailSectionOrdering
 import tech.mmarca.openvitals.domain.model.BmrEntry
-import tech.mmarca.openvitals.domain.model.CaloriesBurnedSource
+import tech.mmarca.healthcalculations.model.CaloriesBurnedSource
 import tech.mmarca.openvitals.domain.preferences.MetricDetailSectionId
 import tech.mmarca.openvitals.ui.components.AutoResizeText
 import tech.mmarca.openvitals.ui.components.ChartSkeleton

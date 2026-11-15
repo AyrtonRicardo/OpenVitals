@@ -421,7 +421,7 @@ class HydrationEntryViewModel @Inject constructor(
             runCatching {
                 repository.loadHydrationEntry(recordId)
             }.onSuccess { entry ->
-                if (entry == null || !entry.isOpenVitalsEntry) {
+                if (entry == null || !entry.isOwnEntry) {
                     _uiState.value = _uiState.value.copy(
                         entryError = HydrationEntryError.WRITE_FAILED,
                         writeError = ScreenError.Text(R.string.screen_error_entry_not_editable),

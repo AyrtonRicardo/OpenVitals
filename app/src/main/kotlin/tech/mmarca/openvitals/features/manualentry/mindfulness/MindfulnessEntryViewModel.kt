@@ -495,7 +495,7 @@ class MindfulnessEntryViewModel @Inject constructor(
             runCatching {
                 repository.loadMindfulnessSession(recordId)
             }.onSuccess { session ->
-                if (session == null || !session.isOpenVitalsEntry) {
+                if (session == null || !session.isOwnEntry) {
                     _uiState.value = _uiState.value.copy(
                         entryError = MindfulnessEntryError.WRITE_FAILED,
                         writeError = ScreenError.Text(R.string.screen_error_entry_not_editable),

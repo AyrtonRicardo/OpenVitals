@@ -1,9 +1,9 @@
 package tech.mmarca.openvitals.domain.model
 
 import java.time.LocalDate
-import tech.mmarca.openvitals.domain.cycle.CurrentCyclePhase
-import tech.mmarca.openvitals.domain.cycle.CycleEstimateResult
-import tech.mmarca.openvitals.domain.cycle.CycleStatistics
+import tech.mmarca.healthcalculations.cycle.CurrentCyclePhase
+import tech.mmarca.healthcalculations.cycle.CycleEstimateResult
+import tech.mmarca.healthcalculations.cycle.CycleStatistics
 
 /** What the dashboard tile and the metric widget show of the cycle: the recorded day, the phase, the estimate. */
 data class DashboardCycleSummary(

@@ -7,10 +7,10 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.SleepData
+import tech.mmarca.healthcalculations.model.SleepStage
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.domain.model.RecordingMethod
-import tech.mmarca.openvitals.domain.model.SleepData
-import tech.mmarca.openvitals.domain.model.SleepStage
 
 /** The sleep derivations: stage shares, newest-first entry lists, manual-entry count, schedule-chart rule, period totals. */
 class SleepMetricSectionsTest {

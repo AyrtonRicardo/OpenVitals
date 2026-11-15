@@ -31,7 +31,7 @@ import org.junit.Test
 import tech.mmarca.openvitals.data.local.vitalscache.VitalsDailyAggregateEntity
 import tech.mmarca.openvitals.data.local.vitalscache.VitalsDailyCacheDao
 import tech.mmarca.openvitals.data.local.vitalscache.VitalsSyncCursorEntity
-import tech.mmarca.openvitals.domain.model.DailyVitalPoint
+import tech.mmarca.healthcalculations.model.DailyVitalPoint
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
 import tech.mmarca.openvitals.healthconnect.HealthConnectChanges
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager

@@ -1,20 +1,20 @@
 package tech.mmarca.openvitals.testing
 
-import tech.mmarca.openvitals.domain.insights.DailyReadinessFactor
-import tech.mmarca.openvitals.domain.insights.DailyReadinessInsight
-import tech.mmarca.openvitals.domain.insights.HrvStatus
-import tech.mmarca.openvitals.domain.insights.HrvStatusInsight
-import tech.mmarca.openvitals.domain.insights.IntensityMinutesConfidence
-import tech.mmarca.openvitals.domain.insights.IntensityMinutesReadinessInsight
-import tech.mmarca.openvitals.domain.insights.IntensityMinutesStatus
-import tech.mmarca.openvitals.domain.insights.PhysiologicalStressConfidence
-import tech.mmarca.openvitals.domain.insights.PhysiologicalStressEstimate
-import tech.mmarca.openvitals.domain.insights.PhysiologicalStressLevel
-import tech.mmarca.openvitals.domain.insights.ReadinessConfidence
-import tech.mmarca.openvitals.domain.insights.ReadinessFactorImpact
-import tech.mmarca.openvitals.domain.insights.ReadinessFactorKind
-import tech.mmarca.openvitals.domain.insights.ReadinessRecommendationType
-import tech.mmarca.openvitals.domain.insights.ReadinessState
+import tech.mmarca.healthcalculations.insights.DailyReadinessFactor
+import tech.mmarca.healthcalculations.insights.DailyReadinessInsight
+import tech.mmarca.healthcalculations.insights.HrvStatus
+import tech.mmarca.healthcalculations.insights.HrvStatusInsight
+import tech.mmarca.healthcalculations.insights.IntensityMinutesConfidence
+import tech.mmarca.healthcalculations.insights.IntensityMinutesReadinessInsight
+import tech.mmarca.healthcalculations.insights.IntensityMinutesStatus
+import tech.mmarca.healthcalculations.insights.PhysiologicalStressConfidence
+import tech.mmarca.healthcalculations.insights.PhysiologicalStressEstimate
+import tech.mmarca.healthcalculations.insights.PhysiologicalStressLevel
+import tech.mmarca.healthcalculations.insights.ReadinessConfidence
+import tech.mmarca.healthcalculations.insights.ReadinessFactorImpact
+import tech.mmarca.healthcalculations.insights.ReadinessFactorKind
+import tech.mmarca.healthcalculations.insights.ReadinessRecommendationType
+import tech.mmarca.healthcalculations.insights.ReadinessState
 
 /**
  * A whole, plausible readiness insight, so a test can name the one field it cares about.

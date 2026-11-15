@@ -64,7 +64,7 @@ internal class HydrationHealthReader(
                     source = SyncedSourceOverlay.displaySource(record.metadata),
                     id = record.metadata.id,
                     clientRecordId = record.metadata.clientRecordId,
-                    isOpenVitalsEntry = isOpenVitalsRecord(record.metadata.dataOrigin.packageName, appPackageName),
+                    isOwnEntry = isOpenVitalsRecord(record.metadata.dataOrigin.packageName, appPackageName),
                 )
             }
         }
@@ -191,7 +191,7 @@ internal class HydrationHealthReader(
             source = SyncedSourceOverlay.displaySource(metadata),
             id = metadata.id,
             clientRecordId = metadata.clientRecordId,
-            isOpenVitalsEntry = isOpenVitalsRecord(metadata.dataOrigin.packageName, appPackageName),
+            isOwnEntry = isOpenVitalsRecord(metadata.dataOrigin.packageName, appPackageName),
         )
 }
 

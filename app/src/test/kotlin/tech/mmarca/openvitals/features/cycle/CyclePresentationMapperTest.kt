@@ -9,18 +9,18 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import tech.mmarca.healthcalculations.cycle.CycleTrackingProfile
+import tech.mmarca.healthcalculations.cycle.HormonalContraception
+import tech.mmarca.healthcalculations.cycle.HormonalContraceptionKind
+import tech.mmarca.healthcalculations.model.BasalBodyTemperatureEntry
+import tech.mmarca.healthcalculations.model.CycleData
+import tech.mmarca.healthcalculations.model.MenstruationFlowEntry
+import tech.mmarca.healthcalculations.model.MenstruationPeriodEntry
+import tech.mmarca.healthcalculations.model.OvulationTestEntry
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.period.WeekPeriodMode
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.cycle.CycleTrackingProfile
-import tech.mmarca.openvitals.domain.cycle.HormonalContraception
-import tech.mmarca.openvitals.domain.cycle.HormonalContraceptionKind
-import tech.mmarca.openvitals.domain.model.BasalBodyTemperatureEntry
-import tech.mmarca.openvitals.domain.model.CycleData
-import tech.mmarca.openvitals.domain.model.MenstruationFlowEntry
-import tech.mmarca.openvitals.domain.model.MenstruationPeriodEntry
-import tech.mmarca.openvitals.domain.model.OvulationTestEntry
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 
 class CyclePresentationMapperTest {

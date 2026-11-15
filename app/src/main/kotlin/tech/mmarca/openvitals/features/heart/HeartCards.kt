@@ -22,11 +22,11 @@ import androidx.compose.ui.unit.dp
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.core.stats.timeBucketedAverageOrNull
-import tech.mmarca.openvitals.domain.model.HeartRateSample
-import tech.mmarca.openvitals.domain.model.HeartRateSummary
-import tech.mmarca.openvitals.domain.model.HrvSample
-import tech.mmarca.openvitals.domain.model.RestingHeartRateSample
+import tech.mmarca.healthcalculations.stats.timeBucketedAverageOrNull
+import tech.mmarca.healthcalculations.model.HeartRateSample
+import tech.mmarca.healthcalculations.model.HeartRateSummary
+import tech.mmarca.healthcalculations.model.HrvSample
+import tech.mmarca.healthcalculations.model.RestingHeartRateSample
 import tech.mmarca.openvitals.ui.components.DayTimelineLinePlot
 import tech.mmarca.openvitals.ui.theme.HeartColor
 import java.time.LocalDate

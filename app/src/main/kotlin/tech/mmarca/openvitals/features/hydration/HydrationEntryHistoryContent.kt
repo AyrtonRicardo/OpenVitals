@@ -71,14 +71,14 @@ internal fun HydrationEntriesContent(
             dateTimeFormatterProvider = dateTimeFormatterProvider,
             onEdit = if (
                 entry.recordType == HydrationEntryRecordType.HYDRATION &&
-                entry.isOpenVitalsEntry &&
+                entry.isOwnEntry &&
                 entry.id.isNotBlank()
             ) {
                 { onEditHydrationEntry(entry.id) }
             } else {
                 null
             },
-            onDelete = if (entry.isOpenVitalsEntry && entry.id.isNotBlank()) {
+            onDelete = if (entry.isOwnEntry && entry.id.isNotBlank()) {
                 { onDeleteHydrationEntry(entry.id) }
             } else {
                 null

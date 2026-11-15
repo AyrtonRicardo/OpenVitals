@@ -3,12 +3,12 @@ package tech.mmarca.openvitals.features.cycle
 import androidx.compose.runtime.Immutable
 import java.time.LocalDate
 import java.time.ZoneId
-import tech.mmarca.openvitals.domain.cycle.CycleStatistics
-import tech.mmarca.openvitals.domain.cycle.SkinTemperatureNight
-import tech.mmarca.openvitals.domain.cycle.SkinTemperatureNights
-import tech.mmarca.openvitals.domain.cycle.SkinTemperatureShiftCalculator
-import tech.mmarca.openvitals.domain.cycle.SkinTemperatureShiftResult
-import tech.mmarca.openvitals.domain.model.SkinTemperatureEntry
+import tech.mmarca.healthcalculations.cycle.CycleStatistics
+import tech.mmarca.healthcalculations.cycle.SkinTemperatureNight
+import tech.mmarca.healthcalculations.cycle.SkinTemperatureNights
+import tech.mmarca.healthcalculations.cycle.SkinTemperatureShiftCalculator
+import tech.mmarca.healthcalculations.cycle.SkinTemperatureShiftResult
+import tech.mmarca.healthcalculations.model.SkinTemperatureEntry
 
 /**
  * The current cycle's night skin temperature and the retrospective verdict on it.
