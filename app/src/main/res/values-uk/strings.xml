@@ -515,7 +515,7 @@
     <string name="body_composition_entry_permission_needed">Щоб зберегти ці значення, OpenVitals потрібен дозвіл на запис у Health Connect для кожного з них. Застосунок не зберігає ці дані; записи зберігаються у Health Connect.</string>
     <string name="body_composition_entry_save">Зберегти вимірювання</string>
     <string name="body_composition_entry_invalid_values">Перевірте виділені значення.</string>
-    <string name="body_composition_entry_water_needs_weight">Введіть вагу, щоб зберегти воду в тілі у відсотках.</string>
+    <string name="body_composition_entry_water_needs_weight">Введіть вагу, щоб зберегти воду у тілі у відсотках.</string>
     <string name="nutrition_entry_subtitle">Записи зберігаються безпосередньо у Health Connect. Заповнюйте лише ті кількості, які маєте.</string>
     <string name="nutrition_entry_permission_needed">Щоб додавати записи харчування, OpenVitals потрібен дозвіл на запис у Health Connect. Застосунок не зберігає ці дані; записи зберігаються у Health Connect.</string>
     <string name="nutrition_entry_add">Записати запис харчування</string>
@@ -605,8 +605,8 @@
     <string name="metric_lean_mass">Безжирова маса</string>
     <string name="metric_bmr">Базовий метаболізм</string>
     <string name="metric_bone_mass">Кісткова маса</string>
-    <string name="metric_body_water_mass">Маса води в тілі</string>
-    <string name="metric_body_water">Вода в тілі</string>
+    <string name="metric_body_water_mass">Маса води у тілі</string>
+    <string name="metric_body_water">Вода у тілі</string>
     <string name="metric_latest">Останнє</string>
     <string name="metric_change">Зміна</string>
     <string name="metric_protein">Білок</string>
@@ -1478,13 +1478,13 @@
     <string name="onboarding_category_heart_recovery">Серце і показники</string>
     <string name="onboarding_category_heart_recovery_desc">Health Connect запитає:\n* Пульс\n* Пульс спокою\n* Варіабельність пульсу</string>
     <string name="onboarding_category_body">Тіло</string>
-    <string name="onboarding_category_body_desc">Health Connect запитає:\n* Вагу\n* Зріст\n* Жир у тілі\n* Безжирову масу\n* Базовий рівень метаболізму\n* Кісткову масу\n* Масу води в тілі</string>
+    <string name="onboarding_category_body_desc">Health Connect запитає:\n* Вагу\n* Зріст\n* Жир у тілі\n* Безжирову масу\n* Базовий рівень метаболізму\n* Кісткову масу\n* Масу води у тілі</string>
     <string name="onboarding_category_activity_extras">Додатково про активність</string>
     <string name="onboarding_category_activity_extras_desc">Health Connect запитає:\n* Загальні спалені калорії\n* Активні спалені калорії\n* Пройдені поверхи\n* Набір висоти\n* Поштовхи крісла\n* Швидкість\n* Потужність\n* Каденція кроків\n* Каденція педалювання\n* Заплановані вправи, коли підтримуються</string>
     <string name="onboarding_category_nutrition_hydration">Харчування і напої</string>
     <string name="onboarding_category_nutrition_hydration_desc">Health Connect запитає:\n* Напої\n* Харчування</string>
     <string name="onboarding_category_manual_entry_write">Доступ на ручне введення</string>
-    <string name="onboarding_category_manual_entry_write_desc">Health Connect запитає доступ на запис до:\n* Вправ\n* Дистанції\n* Набору висоти\n* Активних спалених калорій\n* Загальних спалених калорій\n* Маршруту вправ\n* Напоїв\n* Ваги\n* Зросту\n* Жиру в тілі\n* Кровʼяного тиску\n* Сатурації киснем\n* Частоти дихання\n* Температури тіла\n* Варіабельності пульсу\n* Усвідомленості, коли підтримується</string>
+    <string name="onboarding_category_manual_entry_write_desc">Health Connect запитає доступ на запис до:\n* Вправ\n* Дистанції\n* Набору висоти\n* Активних спалених калорій\n* Загальних спалених калорій\n* Маршруту вправ\n* Напоїв\n* Ваги\n* Зросту\n* Жиру у тілі\n* Кровʼяного тиску\n* Сатурації киснем\n* Частоти дихання\n* Температури тіла\n* Варіабельності пульсу\n* Усвідомленості, коли підтримується</string>
     <string name="onboarding_category_mindfulness">Усвідомленість</string>
     <string name="onboarding_category_mindfulness_desc">Health Connect запитає:\n* Сесії усвідомленості</string>
     <string name="onboarding_category_mindfulness_unavailable">Сесії усвідомленості потребують новішої версії Health Connect.</string>
@@ -1500,7 +1500,7 @@
     <string name="onboarding_hc_category_activity">Активність</string>
     <string name="onboarding_hc_category_activity_desc">Читати й зберігати:\n• Кроки й дистанцію\n• Тренування\n• Спалені калорії\n• Пройдені поверхи й набір висоти\n• Поштовхи крісла\n• Швидкість, потужність і каденція\n• VO2 max</string>
     <string name="onboarding_hc_category_body">Вимірювання тіла</string>
-    <string name="onboarding_hc_category_body_desc">Читати й зберігати:\n• Вагу\n• Зріст\n• Жир у тілі\n• Безжирову масу\n• Кісткову масу\n• Масу води в тілі\n• Базовий рівень метаболізму</string>
+    <string name="onboarding_hc_category_body_desc">Читати й зберігати:\n• Вагу\n• Зріст\n• Жир у тілі\n• Безжирову масу\n• Кісткову масу\n• Масу води у тілі\n• Базовий рівень метаболізму</string>
     <string name="onboarding_hc_category_nutrition">Харчування</string>
     <string name="onboarding_hc_category_nutrition_desc">Читати й зберігати записи їжі та напоїв, включно з напоями.</string>
     <string name="onboarding_hc_category_sleep">Сон</string>
@@ -2127,7 +2127,7 @@
     <string name="medical_import_scan_hint">Наведіть камеру на QR-код SMART Health Card.</string>
     <string name="medical_import_scan_partial">Прочитано частину %1$d з %2$d. Тепер відскануйте наступний QR-код.</string>
     <string name="medical_import_scan_not_card">Цей QR-код не є SMART Health Card.</string>
-    <string name="medical_import_error_camera_denied">OpenVitals потрібна камера для сканування QR-коду. Можна дозволити її в налаштуваннях телефона або вибрати замість цього фото коду.</string>
+    <string name="medical_import_error_camera_denied">OpenVitals потрібна камера для сканування QR-коду. Можна дозволити її у налаштуваннях телефона або вибрати замість цього фото коду.</string>
     <string name="medical_record_converted">Перетворено OpenVitals зі старішої версії FHIR (DSTU2).</string>
     <string name="medical_import_card_title">SMART Health Card</string>
     <string name="medical_import_card_unverified">OpenVitals не може перевірити підпис цієї картки, оскільки це потребує інтернету. Її записи позначено як неперевірені.</string>
@@ -2288,7 +2288,7 @@
     <string name="caffeine_pref_milligrams_suffix">мг</string>
     <string name="caffeine_pref_effective_half_life">Ефективний період напіввиведення %1$d хв</string>
     <string name="settings_metabolism_title">Метаболізм</string>
-    <string name="settings_metabolism_body">Як ваше тіло виводить кофеїн. Це факти про вас, тому вони зберігаються тут, а не в налаштуваннях кофеїну.</string>
+    <string name="settings_metabolism_body">Як ваше тіло виводить кофеїн. Це факти про вас, тому вони зберігаються тут, а не у налаштуваннях кофеїну.</string>
     <string name="settings_metabolism_sleep_sensitivity">Чутливість до кофеїну</string>
     <string name="settings_metabolism_alcohol">Вживання алкоголю</string>
     <string name="settings_metabolism_habituation">Звикання до кофеїну</string>
@@ -2360,7 +2360,7 @@
     <string name="settings_apple_health_import_progress">%1$s. Скановано %2$d обʼєктів, імпортовано %3$d записів.</string>
     <string name="settings_apple_health_import_progress_with_percent">%1$d%%. %2$s. Вибрано %3$d/%4$d записів, імпортовано %5$d.</string>
     <string name="settings_apple_health_import_progress_with_scan_percent">%1$d%%. %2$s. Скановано %3$d/%4$d обʼєктів. Вибрано %5$d/%6$d записів, імпортовано %7$d.</string>
-    <string name="settings_apple_health_import_background">Імпорт продовжується у фоні, поки ви не в застосунку.</string>
+    <string name="settings_apple_health_import_background">Імпорт продовжується у фоні, поки ви не у застосунку.</string>
     <string name="settings_apple_health_import_notification_channel">Імпорти Apple Health</string>
     <string name="settings_apple_health_import_notification_title">Імпорт експорту Apple Health</string>
     <string name="settings_apple_health_import_notification_text">%1$s. Скановано %2$d, імпортовано %3$d.</string>
@@ -2389,7 +2389,7 @@
     <string name="settings_apple_health_import_category_sleep">Сон</string>
     <string name="settings_apple_health_import_category_sleep_desc">Сесії сну та його стадії.</string>
     <string name="settings_apple_health_import_category_body">Вимірювання тіла</string>
-    <string name="settings_apple_health_import_category_body_desc">Вага, зріст, жир у тілі, безжирова маса, БМ, кісткова маса та вода в тілі.</string>
+    <string name="settings_apple_health_import_category_body_desc">Вага, зріст, жир у тілі, безжирова маса, БМ, кісткова маса та вода у тілі.</string>
     <string name="settings_apple_health_import_category_vitals">Показники</string>
     <string name="settings_apple_health_import_category_vitals_desc">Кровʼяний тиск, сатурація киснем, частота дихання, температура тіла, глюкоза крові та VO2 max.</string>
     <string name="settings_apple_health_import_category_nutrition">Харчування</string>
@@ -2461,7 +2461,7 @@
     <string name="settings_csv_import_metric_body_fat">Жир у тілі</string>
     <string name="settings_csv_import_metric_lean_body_mass">Безжирова маса (мʼязова маса)</string>
     <string name="settings_csv_import_metric_bone_mass">Кісткова маса</string>
-    <string name="settings_csv_import_metric_body_water_mass">Вода в тілі</string>
+    <string name="settings_csv_import_metric_body_water_mass">Вода у тілі</string>
     <string name="settings_csv_import_metric_height">Зріст</string>
     <string name="settings_csv_import_metric_basal_metabolic_rate">Базовий рівень метаболізму</string>
     <string name="settings_csv_import_metric_heart_rate">Пульс</string>
@@ -2653,7 +2653,7 @@
     <string name="settings_offline_maps_import_progress_complete">Завершено</string>
     <string name="settings_offline_maps_import_progress">%1$s</string>
     <string name="settings_offline_maps_import_progress_with_percent">%1$s • %2$d%%</string>
-    <string name="settings_offline_maps_import_background">Імпорт продовжується у фоні, поки ви не в застосунку.</string>
+    <string name="settings_offline_maps_import_background">Імпорт продовжується у фоні, поки ви не у застосунку.</string>
     <string name="settings_offline_maps_import_result">Імпортовано %1$s (%2$s).</string>
     <string name="settings_offline_maps_import_error">Не вдалося імпортувати карту: %1$s</string>
     <string name="settings_offline_maps_import_notification_channel">Імпорти офлайн-карт</string>
