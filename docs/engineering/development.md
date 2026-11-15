@@ -291,6 +291,13 @@ A change to a calculation is a commit in health-calculations, then a submodule m
 commit the new pointer). Move OpenWatch's submodule to the same commit, so both apps give
 the same number.
 
+The pointer must name a commit on the library's default branch: merge the library's pull
+request first, then move the pointer. A pointer at a commit that only a pull request branch
+holds builds until that branch is deleted, and then no fresh clone can check the submodule
+out. `scripts/ci-submodule-pointers.sh` checks every submodule and is a job of the gate
+(`submodule-pointers` in `verify.yml`), so a pull request that points at an unmerged library
+branch stays red until the library is merged.
+
 ## Release Checklist
 
 For a versioned prerelease:
