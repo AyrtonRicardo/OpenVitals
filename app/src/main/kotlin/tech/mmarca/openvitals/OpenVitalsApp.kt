@@ -15,6 +15,8 @@ import tech.mmarca.openvitals.core.performance.AppForegroundGate
 import tech.mmarca.openvitals.data.migration.FlutterDataMigrator
 import tech.mmarca.openvitals.data.migration.FlutterMigrationEntryPoint
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 import kotlin.concurrent.thread
 
@@ -53,9 +55,20 @@ class OpenVitalsApp : Application() {
                 mainHandler.post { ProcessLifecycleOwner.get().lifecycle.addObserver(observer) }
             }
         }
+        started.countDown()
     }
 
     private val mainHandler by lazy { Handler(Looper.getMainLooper()) }
+
+    companion object {
+        private val started = CountDownLatch(1)
+
+        /**
+         * Waits for [onCreate] to finish. A content provider call can arrive on a
+         * binder thread before that, while the Flutter migration still runs.
+         */
+        fun awaitStarted(timeoutMillis: Long): Boolean = started.await(timeoutMillis, TimeUnit.MILLISECONDS)
+    }
 
     override fun onConfigurationChanged(newConfig: Configuration) {
         super.onConfigurationChanged(newConfig)

@@ -74,6 +74,7 @@ internal fun LazyListScope.settingsScreenContent(
         SettingsSection.DATA_IMPORT,
         SettingsSection.DEVICE_SYNC,
         SettingsSection.OPENWATCH,
+        SettingsSection.DATA_SHARING,
         -> Unit
     }
 }
@@ -81,6 +82,7 @@ internal fun LazyListScope.settingsScreenContent(
 private fun LazyListScope.settingsRootCards(actions: SettingsScreenActions, openWatchSummary: OpenWatchLinkSummary?) {
     SettingsSection.entries
         .filter { BuildConfig.OPENVITALS_DIAGNOSTICS || it != SettingsSection.DEBUG_DIAGNOSTICS }
+        .filter { BuildConfig.DATA_SHARING || it != SettingsSection.DATA_SHARING }
         .forEach { settingsSection ->
             item {
                 SettingsCategoryCard(

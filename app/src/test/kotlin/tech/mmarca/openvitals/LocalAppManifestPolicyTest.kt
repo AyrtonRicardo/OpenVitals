@@ -1,9 +1,11 @@
 package tech.mmarca.openvitals
 
 import java.io.File
+import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import tech.mmarca.openvitals.sharing.contract.DataSharingGroup
 
 class LocalAppManifestPolicyTest {
 
@@ -72,6 +74,64 @@ class LocalAppManifestPolicyTest {
                 transfer.contains("""<exclude domain="file" path="$directory" />"""),
             )
         }
+    }
+
+    @Test
+    fun `every data sharing group has a dangerous permission and a path-permission`() {
+        val manifest = File("src/main/AndroidManifest.xml").readText()
+        val permissions = manifestTags(manifest, "permission")
+        val pathPermissions = manifestTags(manifest, "path-permission")
+
+        DataSharingGroup.entries.forEach { group ->
+            val name = "\${applicationId}.permission.READ_${group.name}"
+            assertTrue(
+                "$name must be declared with protectionLevel dangerous.",
+                permissions.any { it.names(name) && it.contains("""android:protectionLevel="dangerous"""") },
+            )
+            assertTrue(
+                "/${group.path} must need $name.",
+                pathPermissions.any {
+                    it.contains("""android:pathPrefix="/${group.path}"""") &&
+                        it.contains("""android:readPermission="$name"""")
+                },
+            )
+        }
+        assertEquals(
+            "Each group needs exactly one path-permission.",
+            DataSharingGroup.entries.size,
+            pathPermissions.size,
+        )
+    }
+
+    @Test
+    fun `the data sharing provider refuses other apps' writes`() {
+        val manifest = File("src/main/AndroidManifest.xml").readText()
+        val provider = manifestTags(manifest, "provider").single { it.contains(".sharing.DataSharingProvider") }
+        val writePermission = "\${applicationId}.permission.WRITE_DATA"
+
+        assertTrue(provider.contains("""android:writePermission="$writePermission""""))
+        assertTrue(
+            "$writePermission must be signature-level.",
+            manifestTags(manifest, "permission").any {
+                it.names(writePermission) && it.contains("""android:protectionLevel="signature"""")
+            },
+        )
+        assertTrue(provider.contains("""android:grantUriPermissions="false""""))
+    }
+
+    @Test
+    fun `the data sharing API is switched on by the build, not left on`() {
+        // Until it launches, only debug and ci builds set the placeholder to true.
+        val manifest = File("src/main/AndroidManifest.xml").readText()
+        val switch = "android:enabled=\"\${dataSharingEnabled}\""
+
+        assertTrue(manifestTags(manifest, "provider").single { it.contains(".sharing.DataSharingProvider") }.contains(switch))
+        assertTrue(manifestTags(manifest, "activity-alias").single { it.contains(".ManageDataSharingActivity") }.contains(switch))
+        val build = File("build.gradle.kts").readText()
+        assertTrue(
+            "The default must be off.",
+            build.substringBefore("buildTypes {").contains("""manifestPlaceholders["dataSharingEnabled"] = "false""""),
+        )
     }
 
     private fun manifestTags(manifest: String, tagName: String): List<String> =
