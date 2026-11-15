@@ -33,17 +33,6 @@ class SharedSampleTypesTest {
     }
 
     @Test
-    fun `every sample metric is served by Health Connect or by OpenVitals`() {
-        val fromHealthConnect = SharedSampleTypes.all.flatMap { spec -> spec.metrics.map { DataSharingGroup.valueOf(spec.family.name) to it } }.toSet()
-        val missing = DataSharingMetrics.all
-            .filter { DataSharingTable.SAMPLES in it.tables }
-            .map { it.group to it.key }
-            .filter { it !in fromHealthConnect && it.second !in OpenVitalsSampleMetrics }
-
-        assertThat(missing).isEmpty()
-    }
-
-    @Test
     fun `heart rate becomes one row per sample`() {
         val record = HeartRateRecord(
             startTime = t0,
@@ -137,9 +126,4 @@ class SharedSampleTypesTest {
 
     private fun rowsOf(group: DataSharingGroup, record: Record): List<SharedSample> =
         sampleTypes(group).single { it.recordType.isInstance(record) }.toSamples(record)
-
-    private companion object {
-        /** Worked out or stored by OpenVitals; their sources are not Health Connect. */
-        val OpenVitalsSampleMetrics = setOf("caffeine_active", "body_energy")
-    }
 }

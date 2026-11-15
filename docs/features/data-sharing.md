@@ -24,11 +24,11 @@ The screen also lists every app that has asked: what it may read now, when it la
 | Workouts | workouts, workout plans, speed, power, cadence, splits, the heart-rate recovery test |
 | Workout routes | GPS routes. A group of its own, because a route shows where the user has been. |
 | Sleep | sessions and stages, sleep score, efficiency |
-| Heart | heart rate, resting heart rate, HRV, maximum heart rate, HRV status |
+| Heart | heart rate, resting heart rate, HRV, maximum heart rate |
 | Vitals | blood pressure, SpO2, breathing rate, temperatures, VO2 max, blood glucose |
 | Body | weight, height, body composition, BMR, BMI, FFMI |
 | Nutrition | food and nutrients, hydration, caffeine |
-| Recovery | readiness, stress, Body Energy, cardio load, intensity minutes, mindfulness |
+| Recovery | Body Energy, mindfulness |
 | Cycle | periods, fertility signs, predictions, the cycle journal, pill intakes. Journal notes are never shared. |
 | Sexual activity | sexual activity records. A group of its own, because it is the most private. |
 
@@ -42,9 +42,22 @@ Medical records are not shared.
   - **daily** values through the same repository reads as the PDF report, so the Room caches apply. A day is a day in the phone's time zone; a night belongs to the day it ends on.
   - **samples** straight from the records, up to 48 hours per query, mapped in `healthconnect/SharedSamplesHealthReader`. They are screen reads: paced, counted and behind the one rate-limit backoff, so a refusal makes the answer `rate_limited` at once.
   - **sessions** for workouts (recorded and planned), sleep and mindfulness, each session's summary, and a workout's route.
-- Values OpenVitals works out itself (scores, splits, the cycle journal) come next.
+- OpenVitals' own data, with origin `openvitals`:
+  - **stored in the app:** Body Energy as last computed (days and 5-minute buckets), the cycle journal and pill intakes. These need no Health Connect access, so they arrive even when Health Connect cannot be read.
+  - **worked out on request**, with the same functions the screens use (they live in the `health-calculations` library): the sleep score, efficiency, WASO and midpoint; BMI, FFMI and the BMR estimate as of each day; the maximum heart rate the load estimates use; the caffeine curve; the cycle day, phase, predicted window, averages and thermal shift as they stood on each day; a workout's moving time, maxima, recovery drop and splits.
+- Not served: readiness, stress, HRV status, cardio load and intensity minutes. They cost too many Health Connect reads to compute on request. They are not in the catalog, and can join it without a new API version once the app keeps a daily record of them.
 
-Health Connect data needs four things, or the answer says why it is empty: sharing on, Health Connect available and not paused, and the background-read grant. Without the history grant, Health Connect serves the last 30 days and the cursor says where the data starts. A read OpenVitals has no permission for, or one that fails, makes the answer `partial`; the other rows are still right.
+Health Connect data needs four things, or the answer says why it is missing: sharing on, Health Connect available and not paused, and the background-read grant. OpenVitals' stored data still arrives. Without the history grant, Health Connect serves the last 30 days and the cursor says where the data starts. A read OpenVitals has no permission for, or one that fails, makes the answer `partial`; the other rows are still right.
+
+How a day's value is chosen:
+
+| Value | Rule |
+|---|---|
+| Maximum heart rate | one row, for the last day of the range: the observed maximum looks a year back |
+| Body measurements for BMI and FFMI | the last one on or before the day |
+| Cycle values | only what was recorded by that day |
+| Period flow | the day's heaviest |
+| Mucus and ovulation tests | the day's last reading |
 
 A query runs on one of the provider's binder threads and has 20 seconds; a slower one answers `partial` with no rows. At most four queries wait at once, over every calling app; one more answers `rate_limited`.
 

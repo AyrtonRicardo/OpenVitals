@@ -149,14 +149,16 @@ object DataSharingColumns {
         val ALL = arrayOf(METRIC, VALUE, TEXT_VALUE, UNIT)
     }
 
+    /** `source` is `device_laps`, `route`, `speed_samples` or `estimated`, most trustworthy first. */
     object Splits {
         const val INDEX = "index"
         const val DISTANCE_M = "distance_m"
         const val DURATION_S = "duration_s"
         const val PACE_S_PER_KM = "pace_s_per_km"
         const val ELEVATION_GAIN_M = "elevation_gain_m"
+        const val HEART_RATE_AVG = "heart_rate_avg"
         const val SOURCE = "source"
-        val ALL = arrayOf(INDEX, DISTANCE_M, DURATION_S, PACE_S_PER_KM, ELEVATION_GAIN_M, SOURCE)
+        val ALL = arrayOf(INDEX, DISTANCE_M, DURATION_S, PACE_S_PER_KM, ELEVATION_GAIN_M, HEART_RATE_AVG, SOURCE)
     }
 
     object Route {
