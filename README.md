@@ -32,11 +32,11 @@ No OpenVitals account is required, and the app has no `INTERNET` permission. Ope
 - Log by hand: drinks and hydration, food and nutrition, activities of every Health Connect exercise type, mindfulness, cycle records, a body analysis scale's whole weigh-in (weight, body fat, lean mass, body water, bone mass and BMR) in one form, height, blood pressure with the pulse the monitor shows, SpO2, respiratory rate, body temperature, HRV, blood glucose, VO2 max, and every kind of medical record Health Connect holds. Records with a matching Health Connect type are written there; some cycle-journal data stays local because Health Connect has no record type for it.
 - Record activities with GPS, offline maps and Bluetooth sensors. Routes and workouts can also be imported, and guided workout plans can be run from the phone.
 - Read recovery views derived on the phone: Daily Readiness, Body Energy and Training Readiness, together with HRV status, physiological stress, adaptive goals and explanation screens based on the data available.
-- Bring in Apple Health exports, CSV files of measurements, blood pressure readings, meals or the app's own workout exports, a cycle history exported by drip, route and workout files, and medical records as FHIR files, alone or in a zip, the older DSTU2 format included.
+- Bring in Apple Health exports, CSV files of measurements, blood pressure readings, a sleep app's nights, meals or the app's own workout exports, a cycle history exported by drip, route and workout files, and medical records as FHIR files, alone or in a zip, the older DSTU2 format included.
 - Generate PDF health reports fully on-device, with charts, statistics and sections for supported health data.
 - Track your cycle with a local day journal, estimates that count from a recorded LH test, temperature rise or mucus peak, reminders, pill tracking, a declared hormonal method, backup and a home-screen widget alongside the records kept in Health Connect. The night skin temperature and the overnight pulse, HRV and breathing a watch or ring records are drawn by cycle day, with the studies behind them, as information only.
 - Put widgets on the home screen for readiness, Body Energy, vitals, selected metrics and quick beverage logging.
-- Choose metric or imperial units, and pick the app language from fourteen translations or follow the system.
+- Choose metric or imperial units, and pick the app language from fifteen languages, Ukrainian the newest, or follow the system.
 
 For the detailed feature inventory, see the [feature guide](https://docs.hale.ngo/openvitals/app/features/).
 
@@ -55,7 +55,7 @@ For the detailed feature inventory, see the [feature guide](https://docs.hale.ng
 
 ## Devices and integrations
 
-Watch and scale support (Garmin and Wear OS watches, the Xiaomi S400 scale) lives in the separate [OpenWatch](https://github.com/Hale-MTU/OpenWatch) app, which writes what those devices record to Health Connect for OpenVitals to read.
+Watch and scale support (Garmin and Wear OS watches, the Xiaomi S400 scale) lives in the separate [OpenWatch](https://github.com/Hale-MTU/OpenWatch) app, which writes what those devices record to Health Connect for OpenVitals to read. With both installed, the two apps talk on the phone over [OpenLink](https://github.com/Hale-MTU/OpenLink): they keep one body profile, the dashboard shows your watch with its battery, last sync and a sync button, and an activity recording can use the watch's heart rate. Settings, OpenWatch says where the connection stands.
 
 ### Bluetooth sensors
 
