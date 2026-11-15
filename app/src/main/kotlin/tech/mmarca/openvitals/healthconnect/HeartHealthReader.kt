@@ -6,20 +6,20 @@ import androidx.health.connect.client.records.RestingHeartRateRecord
 import androidx.health.connect.client.request.AggregateGroupByDurationRequest
 import androidx.health.connect.client.request.AggregateRequest
 import androidx.health.connect.client.time.TimeRangeFilter
-import tech.mmarca.openvitals.core.stats.timeBucketedAverageOrNull
-import tech.mmarca.openvitals.domain.model.DailyHrv
-import tech.mmarca.openvitals.domain.model.DailyRestingHR
-import tech.mmarca.openvitals.domain.model.HeartRateDayAggregate
-import tech.mmarca.openvitals.domain.model.HeartRateInsightBucketDuration
-import tech.mmarca.openvitals.domain.model.HeartRateSample
-import tech.mmarca.openvitals.domain.model.HeartRateSummary
-import tech.mmarca.openvitals.domain.model.MaxHeartRateInsightAggregateBuckets
-import tech.mmarca.openvitals.domain.model.HrvSample
-import tech.mmarca.openvitals.domain.model.RestingHeartRateSample
-import tech.mmarca.openvitals.domain.model.dayAverageBpm
-import tech.mmarca.openvitals.domain.model.exceedsRawHeartRateReadRange
-import tech.mmarca.openvitals.domain.model.heartRateSampleFromAggregateBucket
-import tech.mmarca.openvitals.domain.model.shouldUseAggregatedHeartRateSamples
+import tech.mmarca.healthcalculations.stats.timeBucketedAverageOrNull
+import tech.mmarca.healthcalculations.model.DailyHrv
+import tech.mmarca.healthcalculations.model.DailyRestingHR
+import tech.mmarca.healthcalculations.model.HeartRateDayAggregate
+import tech.mmarca.healthcalculations.model.HeartRateInsightBucketDuration
+import tech.mmarca.healthcalculations.model.HeartRateSample
+import tech.mmarca.healthcalculations.model.HeartRateSummary
+import tech.mmarca.healthcalculations.model.MaxHeartRateInsightAggregateBuckets
+import tech.mmarca.healthcalculations.model.HrvSample
+import tech.mmarca.healthcalculations.model.RestingHeartRateSample
+import tech.mmarca.healthcalculations.model.dayAverageBpm
+import tech.mmarca.healthcalculations.model.exceedsRawHeartRateReadRange
+import tech.mmarca.healthcalculations.model.heartRateSampleFromAggregateBucket
+import tech.mmarca.healthcalculations.model.shouldUseAggregatedHeartRateSamples
 import java.time.Duration
 import java.time.Instant
 import java.time.LocalDate
@@ -302,7 +302,7 @@ internal class HeartHealthReader(
                     rmssdMs = record.heartRateVariabilityMillis,
                     source = SyncedSourceOverlay.displaySource(record.metadata),
                     id = record.metadata.id,
-                    isOpenVitalsEntry = isOpenVitalsRecord(
+                    isOwnEntry = isOpenVitalsRecord(
                         record.metadata.dataOrigin.packageName,
                         appPackageName,
                     ),

@@ -204,7 +204,7 @@ class BodyMeasurementEntryViewModel @Inject constructor(
             runCatching {
                 repository.loadBodyMeasurementEntry(type, recordId)
             }.onSuccess { entry ->
-                if (entry == null || !entry.isOpenVitalsEntry) {
+                if (entry == null || !entry.isOwnEntry) {
                     _uiState.value = _uiState.value.copy(
                         entryError = BodyMeasurementEntryError.WRITE_FAILED,
                         writeError = ScreenError.Text(R.string.screen_error_entry_not_editable),

@@ -33,15 +33,15 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.BaselineValue
-import tech.mmarca.openvitals.domain.insights.DataValueKind
-import tech.mmarca.openvitals.domain.insights.DailyGoalProgress
-import tech.mmarca.openvitals.domain.insights.DailyGoalValue
-import tech.mmarca.openvitals.domain.insights.dailyGoalProgress
-import tech.mmarca.openvitals.domain.insights.dataConfidence
-import tech.mmarca.openvitals.domain.insights.periodComparison
-import tech.mmarca.openvitals.domain.insights.personalBaselineInsight
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.insights.BaselineValue
+import tech.mmarca.healthcalculations.insights.DataValueKind
+import tech.mmarca.healthcalculations.insights.DailyGoalProgress
+import tech.mmarca.healthcalculations.insights.DailyGoalValue
+import tech.mmarca.healthcalculations.insights.dailyGoalProgress
+import tech.mmarca.healthcalculations.insights.dataConfidence
+import tech.mmarca.healthcalculations.insights.periodComparison
+import tech.mmarca.healthcalculations.insights.personalBaselineInsight
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.DisplayValue
@@ -119,7 +119,7 @@ internal fun LazyListScope.activityGoal(
     unitFormatter: UnitFormatter,
     icon: ImageVector,
     accentColor: Color,
-    direction: tech.mmarca.openvitals.domain.insights.DailyGoalDirection,
+    direction: tech.mmarca.healthcalculations.insights.DailyGoalDirection,
     goalFormatter: @Composable (Double) -> DisplayValue,
     onDecreaseGoal: () -> Unit,
     onIncreaseGoal: () -> Unit,
@@ -207,7 +207,7 @@ internal fun LazyListScope.activityStatistics(
     average: @Composable () -> DisplayValue,
     best: @Composable () -> DisplayValue,
     activeDays: Int,
-    comparison: tech.mmarca.openvitals.domain.insights.PeriodComparison,
+    comparison: tech.mmarca.healthcalculations.insights.PeriodComparison,
     selectedRange: TimeRange,
     comparisonValueFormatter: @Composable (Double) -> DisplayValue,
     baselineCurrentValue: Double,
@@ -246,7 +246,7 @@ internal fun ActivityPeriodStatisticsGrid(
     average: @Composable () -> DisplayValue,
     best: @Composable () -> DisplayValue,
     activeDays: Int,
-    comparison: tech.mmarca.openvitals.domain.insights.PeriodComparison,
+    comparison: tech.mmarca.healthcalculations.insights.PeriodComparison,
     selectedRange: TimeRange,
     comparisonValueFormatter: @Composable (Double) -> DisplayValue,
     baselineCurrentValue: Double,

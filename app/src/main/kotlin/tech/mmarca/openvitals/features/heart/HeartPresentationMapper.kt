@@ -3,8 +3,8 @@ package tech.mmarca.openvitals.features.heart
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.period.displayPeriodFor
-import tech.mmarca.openvitals.domain.insights.BaselineValue
-import tech.mmarca.openvitals.domain.insights.periodComparison
+import tech.mmarca.healthcalculations.insights.BaselineValue
+import tech.mmarca.healthcalculations.insights.periodComparison
 import tech.mmarca.openvitals.domain.usecase.HeartPeriodLoadResult
 import tech.mmarca.openvitals.domain.usecase.vitalsSummary
 import tech.mmarca.openvitals.features.vitals.heartRateRangeSummary

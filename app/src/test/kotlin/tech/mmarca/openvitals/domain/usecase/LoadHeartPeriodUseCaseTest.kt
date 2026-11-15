@@ -16,7 +16,7 @@ import tech.mmarca.openvitals.data.repository.contract.HeartRepository
 import tech.mmarca.openvitals.data.repository.VitalsPeriodMetric
 import tech.mmarca.openvitals.data.repository.contract.VitalsRepository
 import tech.mmarca.openvitals.domain.model.RefreshMode
-import tech.mmarca.openvitals.domain.model.SpO2Entry
+import tech.mmarca.healthcalculations.model.SpO2Entry
 import tech.mmarca.openvitals.domain.query.HeartPeriodData
 import tech.mmarca.openvitals.domain.query.VitalsPeriodData
 import java.time.Instant

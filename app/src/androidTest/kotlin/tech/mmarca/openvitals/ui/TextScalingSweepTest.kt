@@ -17,17 +17,17 @@ import java.time.LocalTime
 import java.time.ZoneId
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.BloodPressureEntry
+import tech.mmarca.healthcalculations.model.DatePeriod
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.SpO2Entry
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.MetricDetailSectionContext
-import tech.mmarca.openvitals.domain.model.BloodPressureEntry
 import tech.mmarca.openvitals.domain.model.DailyHydration
-import tech.mmarca.openvitals.domain.model.ExerciseData
 import tech.mmarca.openvitals.domain.model.HydrationEntry
 import tech.mmarca.openvitals.domain.model.MindfulnessSession
-import tech.mmarca.openvitals.domain.model.SpO2Entry
 import tech.mmarca.openvitals.domain.model.WeightEntry
 import tech.mmarca.openvitals.domain.preferences.DefaultMetricDetailSectionOrder
 import tech.mmarca.openvitals.features.activity.ActivitiesUiState
@@ -430,7 +430,7 @@ class TextScalingSweepTest {
         time = instantAt(ANCHOR.minusDays(daysAgo.toLong()), 7),
         weightKg = 72.5 + daysAgo * 0.3,
         source = "tech.mmarca.openvitals",
-        isOpenVitalsEntry = true,
+        isOwnEntry = true,
     )
 
     private fun mindfulnessSession() = MindfulnessSession(
@@ -440,7 +440,7 @@ class TextScalingSweepTest {
         endTime = instantAt(ANCHOR, 7).plusSeconds(15 * 60),
         durationMs = 15L * 60_000L,
         source = "tech.mmarca.openvitals",
-        isOpenVitalsEntry = true,
+        isOwnEntry = true,
     )
 
     private fun bloodPressure() = BloodPressureEntry(

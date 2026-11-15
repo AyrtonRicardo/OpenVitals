@@ -13,9 +13,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.pluralStringResource
 import androidx.compose.ui.res.stringResource
+import tech.mmarca.healthcalculations.cycle.CyclePhase
+import tech.mmarca.healthcalculations.cycle.SymptomPattern
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.cycle.CyclePhase
-import tech.mmarca.openvitals.domain.cycle.SymptomPattern
 import tech.mmarca.openvitals.ui.components.OpenVitalsCard
 import tech.mmarca.openvitals.ui.theme.LayoutMetrics
 import tech.mmarca.openvitals.ui.theme.Spacing

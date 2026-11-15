@@ -17,6 +17,11 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import tech.mmarca.healthcalculations.insights.HeartRateRecoveryReading
+import tech.mmarca.healthcalculations.insights.calculateHeartRateRecovery
+import tech.mmarca.healthcalculations.insights.heartRateRecoveryWindowFor
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.preferences.BodyProfile
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.performance.DefaultDispatcherProvider
 import tech.mmarca.openvitals.core.performance.DispatcherProvider
@@ -33,11 +38,6 @@ import tech.mmarca.openvitals.data.repository.contract.ActivityRepository
 import tech.mmarca.openvitals.data.repository.contract.BodyProfilePreferences
 import tech.mmarca.openvitals.data.repository.contract.HeartRepository
 import tech.mmarca.openvitals.data.repository.contract.PeriodPreferences
-import tech.mmarca.openvitals.domain.insights.HeartRateRecoveryReading
-import tech.mmarca.openvitals.domain.insights.calculateHeartRateRecovery
-import tech.mmarca.openvitals.domain.insights.heartRateRecoveryWindowFor
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
 
 /** Shorter sessions cannot have a recovery worth measuring, and each costs a read. */
 private val minimumHeartRateRecoverySessionDuration: Duration = Duration.ofMinutes(5)

@@ -5,8 +5,9 @@ import androidx.core.content.edit
 import java.nio.charset.StandardCharsets
 import java.time.Instant
 import java.util.Base64
-import tech.mmarca.openvitals.domain.model.ActivityPauseInterval
-import tech.mmarca.openvitals.domain.model.ActivityRecordingLap
+import tech.mmarca.healthcalculations.model.ActivityPauseInterval
+import tech.mmarca.healthcalculations.model.ActivityRecordingLap
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.domain.model.ActivityRecordingMarker
 import tech.mmarca.openvitals.domain.model.ActivityRecordingMarkerType
 import tech.mmarca.openvitals.domain.model.BleCyclingCadenceSample
@@ -15,7 +16,6 @@ import tech.mmarca.openvitals.domain.model.BlePowerSample
 import tech.mmarca.openvitals.domain.model.BleRecordingSampleBuffer
 import tech.mmarca.openvitals.domain.model.BleSpeedSample
 import tech.mmarca.openvitals.domain.model.BleStepsCadenceSample
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.domain.preferences.ActivityRecordingDashboardField
 import tech.mmarca.openvitals.domain.preferences.ActivityRecordingDashboardItemSize
 import tech.mmarca.openvitals.domain.preferences.ActivityRecordingDashboardLayout

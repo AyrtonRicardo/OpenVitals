@@ -20,20 +20,20 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.cycle.CycleSymptom
+import tech.mmarca.healthcalculations.cycle.CycleTrackingProfile
+import tech.mmarca.healthcalculations.cycle.TrackingContext
+import tech.mmarca.healthcalculations.model.CycleEntry
+import tech.mmarca.healthcalculations.model.CycleEntryKind
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.model.CycleRecordValues
+import tech.mmarca.healthcalculations.model.MenstruationFlowEntry
 import tech.mmarca.openvitals.data.repository.contract.CycleRepository
 import tech.mmarca.openvitals.data.repository.contract.FakeCycleJournalRepository
 import tech.mmarca.openvitals.data.repository.contract.FakePreferences
-import tech.mmarca.openvitals.domain.cycle.CycleSymptom
-import tech.mmarca.openvitals.domain.cycle.CycleTrackingProfile
-import tech.mmarca.openvitals.domain.cycle.TrackingContext
 import tech.mmarca.openvitals.domain.model.CycleDayLog
 import tech.mmarca.openvitals.domain.model.CycleDayLogWrite
-import tech.mmarca.openvitals.domain.model.CycleEntry
-import tech.mmarca.openvitals.domain.model.CycleEntryKind
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
-import tech.mmarca.openvitals.domain.model.CycleRecordValues
 import tech.mmarca.openvitals.domain.model.DayBleedingChoice
-import tech.mmarca.openvitals.domain.model.MenstruationFlowEntry
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.features.cycle.reminders.FakeCycleReminderSettings
 import tech.mmarca.openvitals.features.homewidgets.HomeWidgetRefreshScheduler
@@ -149,7 +149,7 @@ class CycleEntryViewModelTest {
             flow = CycleRecordValues.FLOW_LIGHT,
             source = "OpenVitals",
             id = "own",
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         val repository = repository(granted = emptySet(), log = CycleDayLog(date = today, ownFlow = flow))
         val vm = viewModel(repository)

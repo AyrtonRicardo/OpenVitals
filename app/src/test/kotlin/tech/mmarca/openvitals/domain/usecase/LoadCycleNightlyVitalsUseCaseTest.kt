@@ -13,11 +13,11 @@ import org.junit.Test
 import tech.mmarca.openvitals.data.repository.contract.HeartRepository
 import tech.mmarca.openvitals.data.repository.contract.SleepRepository
 import tech.mmarca.openvitals.data.repository.contract.VitalsRepository
-import tech.mmarca.openvitals.domain.cycle.NightlySignal
-import tech.mmarca.openvitals.domain.model.HrvSample
-import tech.mmarca.openvitals.domain.model.RespiratoryRateEntry
-import tech.mmarca.openvitals.domain.model.RestingHeartRateSample
-import tech.mmarca.openvitals.domain.model.SleepData
+import tech.mmarca.healthcalculations.cycle.NightlySignal
+import tech.mmarca.healthcalculations.model.HrvSample
+import tech.mmarca.healthcalculations.model.RespiratoryRateEntry
+import tech.mmarca.healthcalculations.model.RestingHeartRateSample
+import tech.mmarca.healthcalculations.model.SleepData
 
 class LoadCycleNightlyVitalsUseCaseTest {
 

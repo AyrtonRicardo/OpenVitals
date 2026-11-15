@@ -9,17 +9,17 @@ import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import tech.mmarca.healthcalculations.insights.BodyEnergyBucketState
+import tech.mmarca.healthcalculations.insights.BodyEnergyCalibrationMode
+import tech.mmarca.healthcalculations.insights.BodyEnergyConfidence
+import tech.mmarca.healthcalculations.insights.BodyEnergyInputSummary
+import tech.mmarca.healthcalculations.insights.BodyEnergyPrimaryInfluence
+import tech.mmarca.healthcalculations.insights.BodyEnergyReasonCode
+import tech.mmarca.healthcalculations.insights.BodyEnergySeedSource
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimeline
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimelinePoint
 import tech.mmarca.openvitals.data.local.bodyenergy.BodyEnergyBucketRetentionDays
 import tech.mmarca.openvitals.data.local.bodyenergy.FakeBodyEnergyTimelineDao
-import tech.mmarca.openvitals.domain.insights.BodyEnergyBucketState
-import tech.mmarca.openvitals.domain.insights.BodyEnergyCalibrationMode
-import tech.mmarca.openvitals.domain.insights.BodyEnergyConfidence
-import tech.mmarca.openvitals.domain.insights.BodyEnergyInputSummary
-import tech.mmarca.openvitals.domain.insights.BodyEnergyPrimaryInfluence
-import tech.mmarca.openvitals.domain.insights.BodyEnergyReasonCode
-import tech.mmarca.openvitals.domain.insights.BodyEnergySeedSource
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimeline
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimelinePoint
 
 class BodyEnergyTimelineStoreTest {
 

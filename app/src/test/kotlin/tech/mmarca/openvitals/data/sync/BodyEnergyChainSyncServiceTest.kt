@@ -39,16 +39,16 @@ import tech.mmarca.openvitals.data.repository.contract.BodyEnergyTimelineResult
 import tech.mmarca.openvitals.data.repository.contract.HealthRepository
 import tech.mmarca.openvitals.data.repository.grantedHealthRepository
 import tech.mmarca.openvitals.data.repository.inMemoryPreferences
-import tech.mmarca.openvitals.domain.insights.BodyEnergyBucketState
-import tech.mmarca.openvitals.domain.insights.BodyEnergyConfidence
-import tech.mmarca.openvitals.domain.insights.BodyEnergyInputSummary
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimeline
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimelineAlgorithmVersion
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimelinePoint
-import tech.mmarca.openvitals.domain.insights.bodyEnergySeedScore
-import tech.mmarca.openvitals.domain.preferences.BodyEnergyCalibration
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
-import tech.mmarca.openvitals.domain.preferences.HeartZoneThresholds
+import tech.mmarca.healthcalculations.insights.BodyEnergyBucketState
+import tech.mmarca.healthcalculations.insights.BodyEnergyConfidence
+import tech.mmarca.healthcalculations.insights.BodyEnergyInputSummary
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimeline
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimelineAlgorithmVersion
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimelinePoint
+import tech.mmarca.healthcalculations.insights.bodyEnergySeedScore
+import tech.mmarca.healthcalculations.preferences.BodyEnergyCalibration
+import tech.mmarca.healthcalculations.preferences.BodyProfile
+import tech.mmarca.healthcalculations.preferences.HeartZoneThresholds
 
 /** Records which days it was asked for, and persists each one so the "already stored" skip is real. */
 private class RecordingRepository(

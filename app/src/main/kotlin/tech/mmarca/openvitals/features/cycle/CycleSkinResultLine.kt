@@ -6,10 +6,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import tech.mmarca.healthcalculations.cycle.SkinTemperatureShiftResult
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.cycle.SkinTemperatureShiftResult
 import tech.mmarca.openvitals.ui.theme.Spacing
 
 /**

@@ -15,6 +15,7 @@ import androidx.compose.ui.test.performScrollToNode
 import java.time.LocalDate
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.DailySteps
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.TimeRange
@@ -23,7 +24,6 @@ import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.MetricDetailSectionContext
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
 import tech.mmarca.openvitals.domain.model.DailyNutrition
-import tech.mmarca.openvitals.domain.model.DailySteps
 import tech.mmarca.openvitals.domain.preferences.DefaultMetricDetailSectionOrder
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.testing.string

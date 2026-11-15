@@ -7,7 +7,7 @@ import androidx.compose.ui.unit.dp
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.DisplayValue
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.SleepData
+import tech.mmarca.healthcalculations.model.SleepData
 import java.time.LocalDate
 import java.time.ZoneId
 import kotlin.math.roundToLong

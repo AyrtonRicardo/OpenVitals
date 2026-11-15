@@ -5,11 +5,11 @@ import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.SleepSessionRecord
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.data.repository.contract.SleepRepository
-import tech.mmarca.openvitals.domain.model.DailySleepDuration
+import tech.mmarca.healthcalculations.model.DailySleepDuration
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
-import tech.mmarca.openvitals.domain.model.SleepData
-import tech.mmarca.openvitals.domain.model.mergeSleepSessions
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
+import tech.mmarca.healthcalculations.model.SleepData
+import tech.mmarca.healthcalculations.model.mergeSleepSessions
+import tech.mmarca.healthcalculations.preferences.SleepWindow
 import tech.mmarca.openvitals.domain.query.SleepPeriodData
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
 import java.time.LocalDate

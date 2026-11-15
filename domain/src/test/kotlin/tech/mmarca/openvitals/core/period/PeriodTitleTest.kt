@@ -6,6 +6,7 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.DatePeriod
 
 class PeriodTitleTest {
     private val today = LocalDate.of(2026, 6, 10)

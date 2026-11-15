@@ -21,14 +21,14 @@ import org.junit.Assert.assertTrue
 import org.junit.Assert.assertThrows
 import org.junit.Before
 import org.junit.Test
-import tech.mmarca.openvitals.domain.cycle.CycleEstimateBasis
-import tech.mmarca.openvitals.domain.cycle.OvulationMarker
-import tech.mmarca.openvitals.domain.model.CycleEntry
-import tech.mmarca.openvitals.domain.model.CycleEntryKind
-import tech.mmarca.openvitals.domain.model.CycleEntryWriteRequest
-import tech.mmarca.openvitals.domain.model.CycleRecordValues
+import tech.mmarca.healthcalculations.cycle.CycleEstimateBasis
+import tech.mmarca.healthcalculations.cycle.OvulationMarker
+import tech.mmarca.healthcalculations.model.CycleEntry
+import tech.mmarca.healthcalculations.model.CycleEntryKind
+import tech.mmarca.healthcalculations.model.CycleEntryWriteRequest
+import tech.mmarca.healthcalculations.model.CycleRecordValues
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
-import tech.mmarca.openvitals.domain.model.OvulationTestEntry
+import tech.mmarca.healthcalculations.model.OvulationTestEntry
 import tech.mmarca.openvitals.data.repository.contract.FakeCycleJournalRepository
 import tech.mmarca.openvitals.data.repository.contract.FakePreferences
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
@@ -121,7 +121,7 @@ class CycleRepositoryWriteTest {
             kind = CycleEntryKind.MENSTRUATION_FLOW,
             time = oldTime,
             flow = CycleRecordValues.FLOW_LIGHT,
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         val repository = CycleRepositoryImpl(hc, FakeCycleJournalRepository(), FakePreferences(), FakePreferences())
 
@@ -144,7 +144,7 @@ class CycleRepositoryWriteTest {
             kind = CycleEntryKind.MENSTRUATION_FLOW,
             time = oldTime,
             flow = CycleRecordValues.FLOW_LIGHT,
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         val repository = CycleRepositoryImpl(hc, FakeCycleJournalRepository(), FakePreferences(), FakePreferences())
 
@@ -176,7 +176,7 @@ class CycleRepositoryWriteTest {
         val hc = hc(granted = setOf(readMenstruation))
         coEvery { hc.readMenstruationFlowEntries(any(), any()) } returns emptyList()
         coEvery { hc.readMenstruationPeriods(any(), any()) } returns listOf(
-            tech.mmarca.openvitals.domain.model.MenstruationPeriodEntry(
+            tech.mmarca.healthcalculations.model.MenstruationPeriodEntry(
                 startTime = LocalDate.of(2026, 7, 1).atStartOfDay(zone).toInstant(),
                 endTime = LocalDate.of(2026, 7, 5).atStartOfDay(zone).toInstant(),
                 source = "other.app",
@@ -236,7 +236,7 @@ class CycleRepositoryWriteTest {
         coVerify(exactly = 0) { hc.readCervicalMucusEntries(any(), any()) }
     }
 
-    private fun period(start: LocalDate) = tech.mmarca.openvitals.domain.model.MenstruationPeriodEntry(
+    private fun period(start: LocalDate) = tech.mmarca.healthcalculations.model.MenstruationPeriodEntry(
         startTime = start.atStartOfDay(zone).toInstant(),
         endTime = start.plusDays(4).atStartOfDay(zone).toInstant(),
         source = "other.app",

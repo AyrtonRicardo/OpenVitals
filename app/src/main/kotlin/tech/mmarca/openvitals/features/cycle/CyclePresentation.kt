@@ -4,17 +4,17 @@ import android.content.res.Resources
 import androidx.health.connect.client.records.SexualActivityRecord
 import androidx.compose.runtime.Composable
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.BasalBodyTemperatureEntry
-import tech.mmarca.openvitals.domain.model.CervicalMucusEntry
-import tech.mmarca.openvitals.domain.model.CycleData
-import tech.mmarca.openvitals.domain.model.CycleEntryKind
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
-import tech.mmarca.openvitals.domain.model.CycleRecordValues
-import tech.mmarca.openvitals.domain.model.MenstruationFlowEntry
-import tech.mmarca.openvitals.domain.model.MenstruationPeriodEntry
-import tech.mmarca.openvitals.domain.model.OvulationTestEntry
+import tech.mmarca.healthcalculations.model.BasalBodyTemperatureEntry
+import tech.mmarca.healthcalculations.model.CervicalMucusEntry
+import tech.mmarca.healthcalculations.model.CycleData
+import tech.mmarca.healthcalculations.model.CycleEntryKind
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.model.CycleRecordValues
+import tech.mmarca.healthcalculations.model.MenstruationFlowEntry
+import tech.mmarca.healthcalculations.model.MenstruationPeriodEntry
+import tech.mmarca.healthcalculations.model.OvulationTestEntry
 import java.time.DayOfWeek
 import java.time.Instant
 import java.time.LocalDate
@@ -48,7 +48,7 @@ internal data class CycleObservation(
     val source: String,
     val id: String = "",
     val kind: CycleEntryKind? = null,
-    val isOpenVitalsEntry: Boolean = false,
+    val isOwnEntry: Boolean = false,
     /** Set for a journal row: it opens that day's log instead of a record editor. */
     val dayLogDate: LocalDate? = null,
 ) {
@@ -125,8 +125,8 @@ internal fun observationsFor(
                     source = flow.source,
                     id = flow.id,
                     kind = CycleEntryKind.MENSTRUATION_FLOW,
-                    isOpenVitalsEntry = flow.isOpenVitalsEntry,
-                    dayLogDate = ownDayLogDate(flow.isOpenVitalsEntry, flow.time, zone),
+                    isOwnEntry = flow.isOwnEntry,
+                    dayLogDate = ownDayLogDate(flow.isOwnEntry, flow.time, zone),
                 )
             )
         }
@@ -139,8 +139,8 @@ internal fun observationsFor(
                     source = test.source,
                     id = test.id,
                     kind = CycleEntryKind.OVULATION_TEST,
-                    isOpenVitalsEntry = test.isOpenVitalsEntry,
-                    dayLogDate = ownDayLogDate(test.isOpenVitalsEntry, test.time, zone),
+                    isOwnEntry = test.isOwnEntry,
+                    dayLogDate = ownDayLogDate(test.isOwnEntry, test.time, zone),
                 )
             )
         }
@@ -153,8 +153,8 @@ internal fun observationsFor(
                     source = mucus.source,
                     id = mucus.id,
                     kind = CycleEntryKind.CERVICAL_MUCUS,
-                    isOpenVitalsEntry = mucus.isOpenVitalsEntry,
-                    dayLogDate = ownDayLogDate(mucus.isOpenVitalsEntry, mucus.time, zone),
+                    isOwnEntry = mucus.isOwnEntry,
+                    dayLogDate = ownDayLogDate(mucus.isOwnEntry, mucus.time, zone),
                 )
             )
         }
@@ -171,8 +171,8 @@ internal fun observationsFor(
                     source = temperature.source,
                     id = temperature.id,
                     kind = CycleEntryKind.BASAL_BODY_TEMPERATURE,
-                    isOpenVitalsEntry = temperature.isOpenVitalsEntry,
-                    dayLogDate = ownDayLogDate(temperature.isOpenVitalsEntry, temperature.time, zone),
+                    isOwnEntry = temperature.isOwnEntry,
+                    dayLogDate = ownDayLogDate(temperature.isOwnEntry, temperature.time, zone),
                 )
             )
         }
@@ -185,8 +185,8 @@ internal fun observationsFor(
                     source = bleeding.source,
                     id = bleeding.id,
                     kind = CycleEntryKind.SPOTTING,
-                    isOpenVitalsEntry = bleeding.isOpenVitalsEntry,
-                    dayLogDate = ownDayLogDate(bleeding.isOpenVitalsEntry, bleeding.time, zone),
+                    isOwnEntry = bleeding.isOwnEntry,
+                    dayLogDate = ownDayLogDate(bleeding.isOwnEntry, bleeding.time, zone),
                 )
             )
         }
@@ -199,8 +199,8 @@ internal fun observationsFor(
                     source = activity.source,
                     id = activity.id,
                     kind = CycleEntryKind.SEXUAL_ACTIVITY,
-                    isOpenVitalsEntry = activity.isOpenVitalsEntry,
-                    dayLogDate = ownDayLogDate(activity.isOpenVitalsEntry, activity.time, zone),
+                    isOwnEntry = activity.isOwnEntry,
+                    dayLogDate = ownDayLogDate(activity.isOwnEntry, activity.time, zone),
                 )
             )
         }
@@ -212,7 +212,7 @@ internal fun observationsFor(
                     value = journalSummary(entry, resources),
                     source = resources.getString(R.string.app_name),
                     id = entry.date.toString(),
-                    isOpenVitalsEntry = true,
+                    isOwnEntry = true,
                     dayLogDate = entry.date,
                 )
             )

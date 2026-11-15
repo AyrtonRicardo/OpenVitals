@@ -3,9 +3,9 @@ package tech.mmarca.openvitals.data.repository.contract
 import java.time.LocalDate
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.domain.query.SleepPeriodData
-import tech.mmarca.openvitals.domain.model.DailySleepDuration
-import tech.mmarca.openvitals.domain.model.SleepData
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
+import tech.mmarca.healthcalculations.model.DailySleepDuration
+import tech.mmarca.healthcalculations.model.SleepData
+import tech.mmarca.healthcalculations.preferences.SleepWindow
 
 interface SleepRepository {
     suspend fun loadSleepPeriod(

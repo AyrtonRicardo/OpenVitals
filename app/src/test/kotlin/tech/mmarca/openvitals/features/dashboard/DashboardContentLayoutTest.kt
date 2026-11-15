@@ -6,12 +6,12 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import tech.mmarca.healthcalculations.insights.CardioLoadConfidence
+import tech.mmarca.healthcalculations.model.DashboardWeeklyCardioLoad
+import tech.mmarca.healthcalculations.model.DashboardWeeklyCardioLoadTargetSource
+import tech.mmarca.healthcalculations.model.ExerciseData
 import tech.mmarca.openvitals.core.presentation.DisplayValue
-import tech.mmarca.openvitals.domain.insights.CardioLoadConfidence
 import tech.mmarca.openvitals.domain.model.DashboardData
-import tech.mmarca.openvitals.domain.model.DashboardWeeklyCardioLoad
-import tech.mmarca.openvitals.domain.model.DashboardWeeklyCardioLoadTargetSource
-import tech.mmarca.openvitals.domain.model.ExerciseData
 
 /** The dashboard body's own derivations, pure functions extracted from `DashboardContent`. */
 class DashboardContentLayoutTest {

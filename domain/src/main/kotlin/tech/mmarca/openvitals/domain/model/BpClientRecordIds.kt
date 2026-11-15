@@ -1,18 +1,8 @@
 package tech.mmarca.openvitals.domain.model
 
-/**
- * When a blood-pressure reading was taken relative to meals. Health Connect
- * has no field for it, so OpenVitals encodes it in its own `clientRecordId`.
- * Foreign records fall back to time-of-day inference.
- */
-enum class BpMealContext(val token: String) {
-    BEFORE_BREAKFAST("beforebreakfast"),
-    AFTER_BREAKFAST("afterbreakfast"),
-    BEFORE_LUNCH("beforelunch"),
-    AFTER_LUNCH("afterlunch"),
-    BEFORE_DINNER("beforedinner"),
-    AFTER_DINNER("afterdinner"),
-}
+import tech.mmarca.healthcalculations.model.BpMealContext
+
+// A blood pressure reading's meal context and pulse, in OpenVitals' own clientRecordId.
 
 /** The marker separating the context token from the rest of the client id. */
 private const val BpContextSeparator = "_bpctx-"

@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.map
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
 import tech.mmarca.openvitals.core.presentation.rememberMetricDetailSectionOrdering
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
 import tech.mmarca.openvitals.features.vitals.bloodGlucoseContent
 import tech.mmarca.openvitals.features.vitals.bloodPressureContent
 import tech.mmarca.openvitals.features.vitals.bodyTemperatureContent

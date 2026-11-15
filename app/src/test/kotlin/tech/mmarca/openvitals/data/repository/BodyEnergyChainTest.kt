@@ -9,20 +9,20 @@ import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.insights.BodyEnergyConfidence
+import tech.mmarca.healthcalculations.insights.BodyEnergyNeutralStartScore
+import tech.mmarca.healthcalculations.insights.BodyEnergySeedSource
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimeline
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimelineAlgorithmVersion
+import tech.mmarca.healthcalculations.insights.bodyEnergySeedScore
+import tech.mmarca.healthcalculations.model.DatePeriod
+import tech.mmarca.healthcalculations.preferences.BodyEnergyCalibration
+import tech.mmarca.healthcalculations.preferences.HeartZoneThresholds
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.data.local.bodyenergy.FakeBodyEnergyTimelineDao
 import tech.mmarca.openvitals.data.repository.contract.BodyEnergyTimelineQuery
 import tech.mmarca.openvitals.data.repository.contract.HealthRepository
-import tech.mmarca.openvitals.domain.insights.BodyEnergyConfidence
-import tech.mmarca.openvitals.domain.insights.BodyEnergyNeutralStartScore
-import tech.mmarca.openvitals.domain.insights.BodyEnergySeedSource
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimeline
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimelineAlgorithmVersion
-import tech.mmarca.openvitals.domain.insights.bodyEnergySeedScore
 import tech.mmarca.openvitals.domain.model.RefreshMode
-import tech.mmarca.openvitals.domain.preferences.BodyEnergyCalibration
-import tech.mmarca.openvitals.domain.preferences.HeartZoneThresholds
 
 /**
  * The chain: what a day opens on, and what invalidates that claim.

@@ -13,9 +13,9 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import tech.mmarca.openvitals.domain.model.ActivityExerciseSegmentWrite
-import tech.mmarca.openvitals.domain.model.ActivityPauseInterval
+import tech.mmarca.healthcalculations.model.ActivityPauseInterval
 import tech.mmarca.openvitals.domain.model.ActivityWriteRequest
-import tech.mmarca.openvitals.domain.model.CaloriesBurnedSource
+import tech.mmarca.healthcalculations.model.CaloriesBurnedSource
 import tech.mmarca.openvitals.domain.model.PlannedExerciseCompletion
 import tech.mmarca.openvitals.domain.model.PlannedExerciseStepData
 

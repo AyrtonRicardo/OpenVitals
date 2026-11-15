@@ -13,31 +13,31 @@ import androidx.health.connect.client.records.Vo2MaxRecord
 import androidx.health.connect.client.records.metadata.Device
 import androidx.health.connect.client.records.metadata.Metadata
 import androidx.health.connect.client.time.TimeRangeFilter
-import tech.mmarca.openvitals.core.stats.timeBucketedAverageOrNull
-import tech.mmarca.openvitals.domain.model.BloodGlucoseEntry
-import tech.mmarca.openvitals.domain.model.BloodPressureEntry
-import tech.mmarca.openvitals.domain.model.bpMealContextFromClientRecordId
-import tech.mmarca.openvitals.domain.model.bpPulseClientRecordId
-import tech.mmarca.openvitals.domain.model.bpPulseFromClientRecordId
-import tech.mmarca.openvitals.domain.model.withBpPulse
-import tech.mmarca.openvitals.domain.model.withBpMealContext
-import tech.mmarca.openvitals.domain.model.BodyTempEntry
-import tech.mmarca.openvitals.domain.model.DailyBloodPressurePoint
-import tech.mmarca.openvitals.domain.model.DailyVitalPoint
-import tech.mmarca.openvitals.domain.model.RespiratoryRateEntry
-import tech.mmarca.openvitals.domain.model.SkinTemperatureDeltaSample
-import tech.mmarca.openvitals.domain.model.SkinTemperatureEntry
-import tech.mmarca.openvitals.domain.model.SpO2Entry
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementEntry
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementWriteRequest
-import tech.mmarca.openvitals.domain.model.Vo2MaxEntry
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 import java.util.UUID
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import tech.mmarca.healthcalculations.model.BloodGlucoseEntry
+import tech.mmarca.healthcalculations.model.BloodPressureEntry
+import tech.mmarca.healthcalculations.model.BodyTempEntry
+import tech.mmarca.healthcalculations.model.DailyBloodPressurePoint
+import tech.mmarca.healthcalculations.model.DailyVitalPoint
+import tech.mmarca.healthcalculations.model.RespiratoryRateEntry
+import tech.mmarca.healthcalculations.model.SkinTemperatureDeltaSample
+import tech.mmarca.healthcalculations.model.SkinTemperatureEntry
+import tech.mmarca.healthcalculations.model.SpO2Entry
+import tech.mmarca.healthcalculations.model.VitalsMeasurementEntry
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.model.VitalsMeasurementWriteRequest
+import tech.mmarca.healthcalculations.model.Vo2MaxEntry
+import tech.mmarca.healthcalculations.stats.timeBucketedAverageOrNull
+import tech.mmarca.openvitals.domain.model.bpMealContextFromClientRecordId
+import tech.mmarca.openvitals.domain.model.bpPulseClientRecordId
+import tech.mmarca.openvitals.domain.model.bpPulseFromClientRecordId
+import tech.mmarca.openvitals.domain.model.withBpMealContext
+import tech.mmarca.openvitals.domain.model.withBpPulse
 
 internal class VitalsHealthReader(
     private val support: HealthConnectReaderSupport,
@@ -290,7 +290,7 @@ internal class VitalsHealthReader(
             diastolicMmHg = diastolic.inMillimetersOfMercury.toInt(),
             source = SyncedSourceOverlay.displaySource(metadata),
             id = metadata.id,
-            isOpenVitalsEntry = isOpenVitalsRecord(metadata.dataOrigin.packageName, appPackageName),
+            isOwnEntry = isOpenVitalsRecord(metadata.dataOrigin.packageName, appPackageName),
             mealContext = bpMealContextFromClientRecordId(metadata.clientRecordId),
             bodyPosition = bodyPosition,
             measurementLocation = measurementLocation,
@@ -303,7 +303,7 @@ internal class VitalsHealthReader(
             percent = percentage.value,
             source = SyncedSourceOverlay.displaySource(metadata),
             id = metadata.id,
-            isOpenVitalsEntry = isOpenVitalsRecord(metadata.dataOrigin.packageName, appPackageName),
+            isOwnEntry = isOpenVitalsRecord(metadata.dataOrigin.packageName, appPackageName),
         )
 
     private fun RespiratoryRateRecord.toEntry(): RespiratoryRateEntry =
@@ -312,7 +312,7 @@ internal class VitalsHealthReader(
             breathsPerMinute = rate,
             source = SyncedSourceOverlay.displaySource(metadata),
             id = metadata.id,
-            isOpenVitalsEntry = isOpenVitalsRecord(metadata.dataOrigin.packageName, appPackageName),
+            isOwnEntry = isOpenVitalsRecord(metadata.dataOrigin.packageName, appPackageName),
         )
 
     private fun BodyTemperatureRecord.toEntry(): BodyTempEntry =
@@ -321,7 +321,7 @@ internal class VitalsHealthReader(
             temperatureCelsius = temperature.inCelsius,
             source = SyncedSourceOverlay.displaySource(metadata),
             id = metadata.id,
-            isOpenVitalsEntry = isOpenVitalsRecord(metadata.dataOrigin.packageName, appPackageName),
+            isOwnEntry = isOpenVitalsRecord(metadata.dataOrigin.packageName, appPackageName),
         )
 
     private fun Vo2MaxRecord.toEntry(): Vo2MaxEntry =
@@ -330,7 +330,7 @@ internal class VitalsHealthReader(
             vo2MaxMlPerKgPerMin = vo2MillilitersPerMinuteKilogram,
             source = SyncedSourceOverlay.displaySource(metadata),
             id = metadata.id,
-            isOpenVitalsEntry = isOpenVitalsRecord(metadata.dataOrigin.packageName, appPackageName),
+            isOwnEntry = isOpenVitalsRecord(metadata.dataOrigin.packageName, appPackageName),
         )
 
     private fun BloodGlucoseRecord.toEntry(): BloodGlucoseEntry =
@@ -342,7 +342,7 @@ internal class VitalsHealthReader(
             relationToMeal = relationToMeal,
             source = SyncedSourceOverlay.displaySource(metadata),
             id = metadata.id,
-            isOpenVitalsEntry = isOpenVitalsRecord(metadata.dataOrigin.packageName, appPackageName),
+            isOwnEntry = isOpenVitalsRecord(metadata.dataOrigin.packageName, appPackageName),
         )
 
     private fun SkinTemperatureRecord.toEntry(): SkinTemperatureEntry {

@@ -8,7 +8,7 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import tech.mmarca.openvitals.core.performance.LoadCoordinator
 import tech.mmarca.openvitals.core.presentation.ScreenError
 import tech.mmarca.openvitals.core.presentation.toScreenError
-import tech.mmarca.openvitals.domain.model.SleepData
+import tech.mmarca.healthcalculations.model.SleepData
 import tech.mmarca.openvitals.data.repository.contract.SleepRepository
 import tech.mmarca.openvitals.navigation.SLEEP_DETAIL_ID_ARG
 import javax.inject.Inject

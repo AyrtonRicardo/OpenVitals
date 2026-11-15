@@ -6,7 +6,7 @@ import android.os.Build
 import android.os.SystemClock
 import java.time.Duration
 import java.time.Instant
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.domain.preferences.ActivityRecordingPreferences
 
 internal fun Location.toRoutePoint(timeOverride: Instant? = null): ExerciseRoutePoint =

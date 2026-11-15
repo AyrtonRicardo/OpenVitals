@@ -9,13 +9,13 @@ import java.time.Instant
 import kotlin.math.pow
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.CaffeineEntry
+import tech.mmarca.healthcalculations.model.CaffeineEntryInsight
+import tech.mmarca.healthcalculations.model.CaffeineInsights
+import tech.mmarca.healthcalculations.model.CaffeinePoint
+import tech.mmarca.healthcalculations.model.CaffeineSourceCategory
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.CaffeineEntry
-import tech.mmarca.openvitals.domain.model.CaffeineEntryInsight
-import tech.mmarca.openvitals.domain.model.CaffeineInsights
-import tech.mmarca.openvitals.domain.model.CaffeinePoint
-import tech.mmarca.openvitals.domain.model.CaffeineSourceCategory
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.testing.OpenVitalsVisualTestSurface
 import tech.mmarca.openvitals.testing.assertVisualRootMatchesGolden
@@ -152,7 +152,7 @@ class CaffeineCurveGoldenTest {
                     name = "Coffee",
                     source = "openvitals",
                     mealType = 0,
-                    isOpenVitalsEntry = true,
+                    isOwnEntry = true,
                 ),
                 currentContributionMg = mg,
                 inferredCategory = CaffeineSourceCategory.COFFEE,

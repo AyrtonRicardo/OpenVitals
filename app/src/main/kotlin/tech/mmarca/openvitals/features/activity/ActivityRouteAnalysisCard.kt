@@ -33,12 +33,12 @@ import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.DisplayValue
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
 import tech.mmarca.openvitals.domain.model.ActivityRecordingMarker
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.ExerciseRouteStatus
-import tech.mmarca.openvitals.features.manualentry.activity.recording.ActivityRecordingSplit
-import tech.mmarca.openvitals.features.manualentry.activity.recording.activityRecordingIntervalSplits
-import tech.mmarca.openvitals.features.manualentry.activity.recording.activityRecordingTimeSplits
-import tech.mmarca.openvitals.features.manualentry.activity.recording.exerciseLapSplits
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseRouteStatus
+import tech.mmarca.healthcalculations.insights.ActivityRecordingSplit
+import tech.mmarca.healthcalculations.insights.activityRecordingIntervalSplits
+import tech.mmarca.healthcalculations.insights.activityRecordingTimeSplits
+import tech.mmarca.healthcalculations.insights.exerciseLapSplits
 import tech.mmarca.openvitals.features.manualentry.activity.recording.formatRecordingElapsed
 import tech.mmarca.openvitals.ui.theme.WorkoutColor
 

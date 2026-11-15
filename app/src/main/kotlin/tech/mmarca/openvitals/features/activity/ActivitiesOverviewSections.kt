@@ -55,29 +55,29 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.health.connect.client.records.metadata.Metadata
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.BaselineValue
-import tech.mmarca.openvitals.domain.insights.CardioLoadConfidence
-import tech.mmarca.openvitals.domain.insights.CrossMetricValue
-import tech.mmarca.openvitals.domain.insights.DataValueKind
-import tech.mmarca.openvitals.domain.insights.DailyGoalValue
-import tech.mmarca.openvitals.domain.insights.MetricDailyGoalKey
-import tech.mmarca.openvitals.domain.insights.WorkoutGuidelineStatus
-import tech.mmarca.openvitals.domain.insights.crossMetricInsight
-import tech.mmarca.openvitals.domain.insights.dailyGoalProgress
-import tech.mmarca.openvitals.domain.insights.dataConfidence
-import tech.mmarca.openvitals.domain.insights.periodComparison
-import tech.mmarca.openvitals.domain.insights.personalBaselineInsight
-import tech.mmarca.openvitals.domain.insights.workoutGuidelineProgress
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.insights.BaselineValue
+import tech.mmarca.healthcalculations.insights.CardioLoadConfidence
+import tech.mmarca.healthcalculations.insights.CrossMetricValue
+import tech.mmarca.healthcalculations.insights.DataValueKind
+import tech.mmarca.healthcalculations.insights.DailyGoalValue
+import tech.mmarca.healthcalculations.insights.MetricDailyGoalKey
+import tech.mmarca.healthcalculations.insights.WorkoutGuidelineStatus
+import tech.mmarca.healthcalculations.insights.crossMetricInsight
+import tech.mmarca.healthcalculations.insights.dailyGoalProgress
+import tech.mmarca.healthcalculations.insights.dataConfidence
+import tech.mmarca.healthcalculations.insights.periodComparison
+import tech.mmarca.healthcalculations.insights.personalBaselineInsight
+import tech.mmarca.healthcalculations.insights.workoutGuidelineProgress
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.domain.preferences.ActivityWeekMode
 import tech.mmarca.openvitals.domain.preferences.toWeekPeriodMode
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.DisplayValue
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.CaloriesBurnedSource
-import tech.mmarca.openvitals.domain.model.DailyRestingHR
-import tech.mmarca.openvitals.domain.model.ExerciseData
+import tech.mmarca.healthcalculations.model.CaloriesBurnedSource
+import tech.mmarca.healthcalculations.model.DailyRestingHR
+import tech.mmarca.healthcalculations.model.ExerciseData
 import tech.mmarca.openvitals.domain.model.PlannedExerciseData
 import tech.mmarca.openvitals.ui.components.AutoResizeText
 import tech.mmarca.openvitals.ui.components.CrossMetricInsightCard
@@ -1125,14 +1125,14 @@ private fun metricModifier(): Modifier =
         .padding(horizontal = 16.dp, vertical = 8.dp)
 
 internal fun ExerciseData.editAction(onEditActivity: (String) -> Unit): (() -> Unit)? =
-    if (isOpenVitalsEntry && id.isNotBlank()) {
+    if (isOwnEntry && id.isNotBlank()) {
         { onEditActivity(id) }
     } else {
         null
     }
 
 internal fun ExerciseData.deleteAction(onDeleteActivity: (String) -> Unit): (() -> Unit)? =
-    if (isOpenVitalsEntry && id.isNotBlank()) {
+    if (isOwnEntry && id.isNotBlank()) {
         { onDeleteActivity(id) }
     } else {
         null

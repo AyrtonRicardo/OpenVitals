@@ -1,7 +1,7 @@
 package tech.mmarca.openvitals.data.repository.contract
 
 import kotlinx.coroutines.flow.Flow
-import tech.mmarca.openvitals.domain.preferences.BodyEnergyCalibration
+import tech.mmarca.healthcalculations.preferences.BodyEnergyCalibration
 
 /** The Body Energy zone ladder and the gains the watch learner tunes. */
 interface BodyEnergyCalibrationPreferences {

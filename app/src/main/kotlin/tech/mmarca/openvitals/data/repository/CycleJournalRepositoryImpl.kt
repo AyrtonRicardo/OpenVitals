@@ -9,14 +9,14 @@ import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
+import tech.mmarca.healthcalculations.cycle.CycleExclusionReason
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
 import tech.mmarca.openvitals.core.performance.DefaultDispatcherProvider
 import tech.mmarca.openvitals.core.performance.DispatcherProvider
 import tech.mmarca.openvitals.data.local.cycle.CycleExclusionEntity
 import tech.mmarca.openvitals.data.local.cycle.CycleJournalDao
 import tech.mmarca.openvitals.data.local.cycle.CycleJournalEntryEntity
 import tech.mmarca.openvitals.data.repository.contract.CycleJournalRepository
-import tech.mmarca.openvitals.domain.cycle.CycleExclusionReason
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
 
 /** The journal lives in Room because Health Connect cannot hold subjective scales, symptoms or notes. */
 @Singleton

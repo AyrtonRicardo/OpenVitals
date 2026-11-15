@@ -33,15 +33,15 @@ import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
 import tech.mmarca.openvitals.core.presentation.resolve
-import tech.mmarca.openvitals.domain.insights.ActivitySplits
-import tech.mmarca.openvitals.domain.insights.HeartRateRecoveryReading
-import tech.mmarca.openvitals.domain.model.ActivityCadenceSample
+import tech.mmarca.healthcalculations.insights.ActivitySplits
+import tech.mmarca.healthcalculations.insights.HeartRateRecoveryReading
+import tech.mmarca.healthcalculations.model.ActivityCadenceSample
 import tech.mmarca.openvitals.domain.model.ActivityRecordingMarker
 import tech.mmarca.openvitals.domain.model.CoMapsNavigationSnapshot
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.ExerciseRouteStatus
-import tech.mmarca.openvitals.domain.model.HeartRateSample
-import tech.mmarca.openvitals.domain.model.SpeedSample
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseRouteStatus
+import tech.mmarca.healthcalculations.model.HeartRateSample
+import tech.mmarca.healthcalculations.model.SpeedSample
 import tech.mmarca.openvitals.ui.components.ErrorMessage
 import tech.mmarca.openvitals.ui.components.FullScreenLoading
 import tech.mmarca.openvitals.ui.components.OpenVitalsButton
@@ -501,7 +501,7 @@ internal fun ActivityDetailContent(
                 )
             }
         }
-        if (workout.isOpenVitalsEntry && workout.id.isNotBlank()) {
+        if (workout.isOwnEntry && workout.id.isNotBlank()) {
             item {
                 Column(
                     modifier = Modifier

@@ -9,7 +9,7 @@ import kotlinx.coroutines.withContext
 import tech.mmarca.openvitals.data.repository.AppleHealthImportRepository
 import tech.mmarca.openvitals.data.repository.contract.ActivityRepository
 import tech.mmarca.openvitals.data.repository.contract.CycleJournalRepository
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
 import tech.mmarca.openvitals.healthconnect.HealthConnectRateLimitBackoff
 
 /** Records handed to Health Connect per insert call. */

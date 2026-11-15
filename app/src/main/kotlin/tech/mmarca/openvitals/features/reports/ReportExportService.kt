@@ -27,9 +27,9 @@ import tech.mmarca.openvitals.data.repository.report.ReportCancellation
 import tech.mmarca.openvitals.data.repository.report.ReportDataLoader
 import tech.mmarca.openvitals.data.repository.report.ReportProgress
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
-import tech.mmarca.openvitals.domain.cycle.CycleExclusionReason
-import tech.mmarca.openvitals.domain.cycle.CycleSymptom
-import tech.mmarca.openvitals.domain.model.CycleRecordValues
+import tech.mmarca.healthcalculations.cycle.CycleExclusionReason
+import tech.mmarca.healthcalculations.cycle.CycleSymptom
+import tech.mmarca.healthcalculations.model.CycleRecordValues
 import tech.mmarca.openvitals.domain.model.GlucoseRecordValues
 import tech.mmarca.openvitals.domain.model.NutrientLabelUnit
 import tech.mmarca.openvitals.domain.model.NutritionNutrient
@@ -174,15 +174,15 @@ class ReportExportService @Inject constructor(
             bpReadings = context.getString(R.string.report_pdf_bp_readings),
             bpAllReadings = context.getString(R.string.report_pdf_bp_all_readings),
             bpDateTime = context.getString(R.string.report_pdf_bp_date_time),
-            bpContexts = tech.mmarca.openvitals.domain.model.BpMealContext.entries.associateWith { bpContext ->
+            bpContexts = tech.mmarca.healthcalculations.model.BpMealContext.entries.associateWith { bpContext ->
                 context.getString(
                     when (bpContext) {
-                        tech.mmarca.openvitals.domain.model.BpMealContext.BEFORE_BREAKFAST -> R.string.bp_context_before_breakfast
-                        tech.mmarca.openvitals.domain.model.BpMealContext.AFTER_BREAKFAST -> R.string.bp_context_after_breakfast
-                        tech.mmarca.openvitals.domain.model.BpMealContext.BEFORE_LUNCH -> R.string.bp_context_before_lunch
-                        tech.mmarca.openvitals.domain.model.BpMealContext.AFTER_LUNCH -> R.string.bp_context_after_lunch
-                        tech.mmarca.openvitals.domain.model.BpMealContext.BEFORE_DINNER -> R.string.bp_context_before_dinner
-                        tech.mmarca.openvitals.domain.model.BpMealContext.AFTER_DINNER -> R.string.bp_context_after_dinner
+                        tech.mmarca.healthcalculations.model.BpMealContext.BEFORE_BREAKFAST -> R.string.bp_context_before_breakfast
+                        tech.mmarca.healthcalculations.model.BpMealContext.AFTER_BREAKFAST -> R.string.bp_context_after_breakfast
+                        tech.mmarca.healthcalculations.model.BpMealContext.BEFORE_LUNCH -> R.string.bp_context_before_lunch
+                        tech.mmarca.healthcalculations.model.BpMealContext.AFTER_LUNCH -> R.string.bp_context_after_lunch
+                        tech.mmarca.healthcalculations.model.BpMealContext.BEFORE_DINNER -> R.string.bp_context_before_dinner
+                        tech.mmarca.healthcalculations.model.BpMealContext.AFTER_DINNER -> R.string.bp_context_after_dinner
                     },
                 )
             },

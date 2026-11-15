@@ -12,10 +12,10 @@ import androidx.core.app.NotificationManagerCompat
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
+import tech.mmarca.healthcalculations.model.CycleReminderConfig
+import tech.mmarca.healthcalculations.model.CycleReminderVisibility
 import tech.mmarca.openvitals.MainActivity
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.model.CycleReminderConfig
-import tech.mmarca.openvitals.domain.model.CycleReminderVisibility
 import tech.mmarca.openvitals.domain.model.PillDay
 
 /**

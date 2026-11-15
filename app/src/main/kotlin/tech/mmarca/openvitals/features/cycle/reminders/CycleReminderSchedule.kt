@@ -3,8 +3,8 @@ package tech.mmarca.openvitals.features.cycle.reminders
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZonedDateTime
-import tech.mmarca.openvitals.domain.cycle.CycleEstimateResult
-import tech.mmarca.openvitals.domain.model.CycleReminderConfig
+import tech.mmarca.healthcalculations.cycle.CycleEstimateResult
+import tech.mmarca.healthcalculations.model.CycleReminderConfig
 import tech.mmarca.openvitals.domain.model.PillPlan
 
 /** The cycle reminders and the pill. The ordinal is the alarm request code offset, so new ones go last. */

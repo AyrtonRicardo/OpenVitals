@@ -1,6 +1,6 @@
 package tech.mmarca.openvitals.features.cycle.reminders
 
-import tech.mmarca.openvitals.domain.model.CycleReminderConfig
+import tech.mmarca.healthcalculations.model.CycleReminderConfig
 
 /** Records the calls; a test reads back how often the alarms were re-planned. */
 class FakeCycleReminderSettings(

@@ -14,18 +14,18 @@ import androidx.health.connect.client.time.TimeRangeFilter
 import androidx.health.connect.client.units.celsius
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import tech.mmarca.openvitals.domain.cycle.CycleCalculations
-import tech.mmarca.openvitals.domain.model.BasalBodyTemperatureEntry
-import tech.mmarca.openvitals.domain.model.CervicalMucusEntry
-import tech.mmarca.openvitals.domain.model.CycleEntry
-import tech.mmarca.openvitals.domain.model.CycleEntryKind
-import tech.mmarca.openvitals.domain.model.CycleEntryWriteRequest
-import tech.mmarca.openvitals.domain.model.CycleRecordValues
-import tech.mmarca.openvitals.domain.model.IntermenstrualBleedingEntry
-import tech.mmarca.openvitals.domain.model.MenstruationFlowEntry
-import tech.mmarca.openvitals.domain.model.MenstruationPeriodEntry
-import tech.mmarca.openvitals.domain.model.OvulationTestEntry
-import tech.mmarca.openvitals.domain.model.SexualActivityEntry
+import tech.mmarca.healthcalculations.cycle.CycleCalculations
+import tech.mmarca.healthcalculations.model.BasalBodyTemperatureEntry
+import tech.mmarca.healthcalculations.model.CervicalMucusEntry
+import tech.mmarca.healthcalculations.model.CycleEntry
+import tech.mmarca.healthcalculations.model.CycleEntryKind
+import tech.mmarca.healthcalculations.model.CycleEntryWriteRequest
+import tech.mmarca.healthcalculations.model.CycleRecordValues
+import tech.mmarca.healthcalculations.model.IntermenstrualBleedingEntry
+import tech.mmarca.healthcalculations.model.MenstruationFlowEntry
+import tech.mmarca.healthcalculations.model.MenstruationPeriodEntry
+import tech.mmarca.healthcalculations.model.OvulationTestEntry
+import tech.mmarca.healthcalculations.model.SexualActivityEntry
 import java.time.Duration
 import java.time.Instant
 import java.time.LocalDate
@@ -50,7 +50,7 @@ internal class CycleHealthReader(
                     flow = record.flow,
                     source = SyncedSourceOverlay.displaySource(record.metadata),
                     id = record.metadata.id,
-                    isOpenVitalsEntry = record.isOpenVitalsEntry(),
+                    isOwnEntry = record.isOwnEntry(),
                 )
             }
         }
@@ -68,7 +68,7 @@ internal class CycleHealthReader(
                     endTime = record.endTime,
                     source = SyncedSourceOverlay.displaySource(record.metadata),
                     id = record.metadata.id,
-                    isOpenVitalsEntry = record.isOpenVitalsEntry(),
+                    isOwnEntry = record.isOwnEntry(),
                 )
             }
         }
@@ -86,7 +86,7 @@ internal class CycleHealthReader(
                     result = record.result,
                     source = SyncedSourceOverlay.displaySource(record.metadata),
                     id = record.metadata.id,
-                    isOpenVitalsEntry = record.isOpenVitalsEntry(),
+                    isOwnEntry = record.isOwnEntry(),
                 )
             }
         }
@@ -105,7 +105,7 @@ internal class CycleHealthReader(
                     sensation = record.sensation,
                     source = SyncedSourceOverlay.displaySource(record.metadata),
                     id = record.metadata.id,
-                    isOpenVitalsEntry = record.isOpenVitalsEntry(),
+                    isOwnEntry = record.isOwnEntry(),
                 )
             }
         }
@@ -124,7 +124,7 @@ internal class CycleHealthReader(
                     measurementLocation = record.measurementLocation,
                     source = SyncedSourceOverlay.displaySource(record.metadata),
                     id = record.metadata.id,
-                    isOpenVitalsEntry = record.isOpenVitalsEntry(),
+                    isOwnEntry = record.isOwnEntry(),
                 )
             }
         }
@@ -141,7 +141,7 @@ internal class CycleHealthReader(
                     time = record.time,
                     source = SyncedSourceOverlay.displaySource(record.metadata),
                     id = record.metadata.id,
-                    isOpenVitalsEntry = record.isOpenVitalsEntry(),
+                    isOwnEntry = record.isOwnEntry(),
                 )
             }
         }
@@ -159,7 +159,7 @@ internal class CycleHealthReader(
                     protectionUsed = record.protectionUsed,
                     source = SyncedSourceOverlay.displaySource(record.metadata),
                     id = record.metadata.id,
-                    isOpenVitalsEntry = record.isOpenVitalsEntry(),
+                    isOwnEntry = record.isOwnEntry(),
                 )
             }
         }
@@ -308,7 +308,7 @@ internal class CycleHealthReader(
         }
     }
 
-    private fun Record.isOpenVitalsEntry(): Boolean =
+    private fun Record.isOwnEntry(): Boolean =
         isOpenVitalsRecord(metadata.dataOrigin.packageName, appPackageName)
 
     private fun Record.toCycleEntry(
@@ -319,7 +319,7 @@ internal class CycleHealthReader(
         kind = kind,
         time = instantOf(this),
         source = SyncedSourceOverlay.displaySource(metadata),
-        isOpenVitalsEntry = isOpenVitalsEntry(),
+        isOwnEntry = isOwnEntry(),
     ).fill()
 
     private companion object {

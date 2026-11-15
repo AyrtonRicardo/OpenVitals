@@ -59,7 +59,7 @@ import tech.mmarca.openvitals.ui.theme.Motion
 import tech.mmarca.openvitals.ui.theme.loopingMotionAllowed
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.domain.model.BodyMeasurementType
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
 import tech.mmarca.openvitals.features.manualentry.body.accentColor
 import tech.mmarca.openvitals.features.manualentry.body.icon
 import tech.mmarca.openvitals.features.manualentry.body.titleRes

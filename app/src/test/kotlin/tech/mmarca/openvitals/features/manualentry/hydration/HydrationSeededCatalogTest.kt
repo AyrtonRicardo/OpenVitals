@@ -26,7 +26,7 @@ import tech.mmarca.openvitals.data.repository.contract.HydrationRepository
 import tech.mmarca.openvitals.util.FakeSharedPreferences
 import tech.mmarca.openvitals.domain.insights.CaffeineHealthDrinkCatalog
 import tech.mmarca.openvitals.domain.model.BeverageCategory
-import tech.mmarca.openvitals.domain.model.CaffeineSourceCategory
+import tech.mmarca.healthcalculations.model.CaffeineSourceCategory
 import tech.mmarca.openvitals.domain.model.CustomHydrationDrink
 import tech.mmarca.openvitals.util.MainDispatcherRule
 

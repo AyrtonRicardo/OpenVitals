@@ -39,10 +39,10 @@ import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import tech.mmarca.healthcalculations.cycle.LongitudinalCycleItem
+import tech.mmarca.healthcalculations.cycle.LongitudinalCycleStats
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
-import tech.mmarca.openvitals.domain.cycle.LongitudinalCycleItem
-import tech.mmarca.openvitals.domain.cycle.LongitudinalCycleStats
 import tech.mmarca.openvitals.ui.components.OpenVitalsCard
 import tech.mmarca.openvitals.ui.components.OpenVitalsOutlinedButton
 import tech.mmarca.openvitals.ui.theme.CycleColor

@@ -16,9 +16,9 @@ import java.time.Duration
 import java.time.Instant
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.ActivityPauseInterval
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.model.ActivityPauseInterval
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.features.manualentry.activity.ActivityEntryUiState
 import tech.mmarca.openvitals.features.manualentry.activity.TestActivityEntryCard
 import tech.mmarca.openvitals.features.manualentry.activity.pushUpsEntryType

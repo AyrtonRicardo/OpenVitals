@@ -1,8 +1,8 @@
 package tech.mmarca.openvitals.domain.insights
 
 import java.util.Locale
-import tech.mmarca.openvitals.domain.model.CaffeineCatalogItem
-import tech.mmarca.openvitals.domain.model.CaffeineSourceCategory
+import tech.mmarca.healthcalculations.model.CaffeineCatalogItem
+import tech.mmarca.healthcalculations.model.CaffeineSourceCategory
 import tech.mmarca.openvitals.domain.model.NutritionNutrient
 
 object BeverageNutritionDefaults {

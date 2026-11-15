@@ -1,7 +1,7 @@
 package tech.mmarca.openvitals.data.repository
 
 import java.time.LocalDate
-import tech.mmarca.openvitals.domain.model.HeartRateDayAggregate
+import tech.mmarca.healthcalculations.model.HeartRateDayAggregate
 
 /** Assumed size of a day whose sample count is missing: a full day at 1 Hz. */
 private const val UnknownDaySamples = 86_400L

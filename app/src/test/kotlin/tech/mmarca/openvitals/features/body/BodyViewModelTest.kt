@@ -201,7 +201,7 @@ class BodyViewModelTest {
                 weightKg = 75.0,
                 source = "com.example",
                 id = "external-weight-id",
-                isOpenVitalsEntry = false,
+                isOwnEntry = false,
             )
         )
         val repo = emptyRepo()
@@ -273,7 +273,7 @@ class BodyViewModelTest {
         weightKg = kg,
         source = "tech.mmarca.openvitals.debug",
         id = id,
-        isOpenVitalsEntry = true,
+        isOwnEntry = true,
     )
 
     @Test fun `deleting an entry rebuilds the display without waiting for the reload`() = runTest {
@@ -283,7 +283,7 @@ class BodyViewModelTest {
             weightKg = 71.0,
             source = "com.example",
             id = "w2",
-            isOpenVitalsEntry = false,
+            isOwnEntry = false,
         )
         var entries = listOf(mine, theirs)
         val gate = CompletableDeferred<Unit>()

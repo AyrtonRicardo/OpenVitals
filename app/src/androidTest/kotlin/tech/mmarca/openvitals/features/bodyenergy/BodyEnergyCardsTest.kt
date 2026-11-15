@@ -14,10 +14,10 @@ import androidx.compose.ui.test.performScrollTo
 import java.time.LocalDate
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.insights.BodyEnergyConfidence
+import tech.mmarca.healthcalculations.insights.BodyEnergyReasonCode
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimeline
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.BodyEnergyConfidence
-import tech.mmarca.openvitals.domain.insights.BodyEnergyReasonCode
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimeline
 import tech.mmarca.openvitals.testing.bodyEnergyInputSummary
 import tech.mmarca.openvitals.testing.bodyEnergyTimeline
 import tech.mmarca.openvitals.testing.string

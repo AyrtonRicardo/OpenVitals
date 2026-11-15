@@ -5,8 +5,8 @@ import androidx.core.content.edit
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 import javax.inject.Singleton
+import tech.mmarca.healthcalculations.model.BpRecordValues
 import tech.mmarca.openvitals.data.repository.contract.CsvImportPreferences
-import tech.mmarca.openvitals.domain.model.BpRecordValues
 
 /** In a preference file of its own: [PreferencesRepository] is at its size ceiling. */
 @Singleton

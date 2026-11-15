@@ -45,7 +45,8 @@ These features already show the intended direction.
 Beyond the metric screens, the app now carries a few subsystems that are not metric features and do not follow the period-detail pattern:
 
 - `features/devicesync/` — phone-to-phone Health Connect sync over Bluetooth Classic RFCOMM.
-- `domain/` — the `:domain` Gradle module: the app-local pure code (`domain/model`, `domain/insights`, `domain/preferences`, `domain/cycle`, `domain/dashboard`, `domain/report`, `domain/medical`, and `core/period`, `core/fit`, `core/geo`, `core/stats`, `core/export`, `core/privacy`), with the same package names as the app. It exists so its lint and tests run beside the app's. Nothing in it may import `data/`, `healthconnect/`, `features/` or `ui/`; `domain/query` and `domain/usecase` stay in `:app` because they do.
+- `health-calculations/` — a git submodule and composite build, like `openlink/`: the health calculations OpenVitals and OpenWatch share (energy, heart rate, training load, recovery, sleep, readiness, stress, the cycle, caffeine) with the models and settings they read, as plain Kotlin under `tech.mmarca.healthcalculations`. Its own `AGENTS.md` holds its rules.
+- `domain/` — the `:domain` Gradle module: the app-local pure code (`domain/model`, `domain/insights` (the drink catalogs), `domain/preferences`, `domain/dashboard`, `domain/report`, `domain/medical`, and `core/period`, `core/fit`, `core/geo`, `core/export`, `core/privacy`), with the same package names as the app. It exists so its lint and tests run beside the app's. Nothing in it may import `data/`, `healthconnect/`, `features/` or `ui/`; `domain/query` and `domain/usecase` stay in `:app` because they do.
 - `data/migration/` — a one-time Flutter-to-Kotlin data importer that runs in two phases from `OpenVitalsApp.onCreate()`. Its ordering around `super.onCreate()` is load-bearing; read the architecture doc before touching startup.
 
 The following areas are still transitional and should not be copied as the default pattern:
@@ -96,6 +97,7 @@ Do not break these without an explicit decision. They are app-wide, and each has
 - **Text that leaves the app is structure, not data.** Reports, the crash draft and the diagnostics log hold counts, types, reasons and masked error text, never a value, a record's time, a name or a file name. Exception text goes through `core/privacy/PrivacyRedactor`; a copy goes through `sensitiveTextClip`; a log line logs a count or passes the throwable, never a value. Seed `PrivacySentinels` in a test of any new report.
 - **Nothing waits on the main thread.** No `runBlocking` in `app/src/main` (`NoRunBlockingRatchetTest` holds the allow-list). A receiver never holds a broadcast for a Health Connect read. Composables `remember` any pass over samples.
 - **Every locale ships complete.** A new string goes to `values/strings.xml` and to every `values-*/strings.xml`, with the plural shape each locale needs; `python3 scripts/verify-translations.py` checks them. See [translations.md](docs/engineering/translations.md) and the translation-gate note in [development.md](docs/engineering/development.md).
+- **One copy of each health calculation.** A formula lives in the `health-calculations/` submodule, not in `domain/` or a feature. Moving the submodule changes OpenWatch's numbers too, so it moves in both apps together.
 - **Room is at version 18.** A new entity means a `MIGRATION_18_19` and a bump, not `fallbackToDestructiveMigration`.
 - **The docs are checked against the code.** `ArchitectureDocTest` fails when a Room table, the Room version or a package is missing from the docs. `HealthConnectLayeringTest` holds the Health Connect layering rule. `FileSizeRatchetTest` stops a file passing 800 lines, and `FunctionLengthRatchetTest` stops a new function passing 150. When one fails, fix the code or the doc in the same commit.
 
@@ -119,7 +121,8 @@ Shared code belongs in:
 
 - `ui/components` for reusable shell components
 - `core/period` for app-local period math and formatting (in the `:domain` module)
-- `domain/model`, `domain/insights`, and `domain/preferences` for app-local pure models, calculations, and preference enums (in `:domain`; a member the app uses is `public`, since `internal` stops at the module)
+- `health-calculations/` (the submodule) for a health calculation and the models it reads, so OpenWatch computes the same number; it is plain Kotlin, so Health Connect types come in as their values (`ExerciseSessionRecord.EXERCISE_TYPE_*` is mirrored there and checked by `ExerciseTypeMirrorTest`)
+- `domain/model` and `domain/preferences` for app-local pure models and preference enums (in `:domain`; a member the app uses is `public`, since `internal` stops at the module)
 - `core/presentation` for shared formatters, `ScreenError`, and UI models that remain repository-free
 - `core/fit` for FIT container decoding; interpretation stays with the consumer
 

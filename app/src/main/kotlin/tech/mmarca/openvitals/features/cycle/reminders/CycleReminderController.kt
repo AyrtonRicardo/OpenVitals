@@ -23,8 +23,8 @@ import tech.mmarca.openvitals.data.repository.contract.CycleJournalRepository
 import tech.mmarca.openvitals.data.repository.contract.CyclePreferences
 import tech.mmarca.openvitals.data.repository.contract.PillIntakeRepository
 import tech.mmarca.openvitals.data.repository.contract.CycleRepository
-import tech.mmarca.openvitals.domain.cycle.CycleEstimateResult
-import tech.mmarca.openvitals.domain.model.CycleReminderConfig
+import tech.mmarca.healthcalculations.cycle.CycleEstimateResult
+import tech.mmarca.healthcalculations.model.CycleReminderConfig
 import tech.mmarca.openvitals.domain.model.PillPlan
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
 import tech.mmarca.openvitals.healthconnect.withStrictHealthConnectReads

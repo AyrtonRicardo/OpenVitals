@@ -3,10 +3,10 @@ package tech.mmarca.openvitals.features.activity
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.period.WeekPeriodMode
-import tech.mmarca.openvitals.domain.insights.PeriodComparisonDirection
-import tech.mmarca.openvitals.domain.model.ActivityProgressPoint
+import tech.mmarca.healthcalculations.insights.PeriodComparisonDirection
+import tech.mmarca.healthcalculations.model.ActivityProgressPoint
 import tech.mmarca.openvitals.domain.model.DailyNutrition
-import tech.mmarca.openvitals.domain.model.DailySteps
+import tech.mmarca.healthcalculations.model.DailySteps
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId

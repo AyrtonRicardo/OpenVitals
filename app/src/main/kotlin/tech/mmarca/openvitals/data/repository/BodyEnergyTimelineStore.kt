@@ -4,20 +4,20 @@ import java.time.Instant
 import java.time.LocalDate
 import javax.inject.Inject
 import javax.inject.Singleton
+import tech.mmarca.healthcalculations.insights.BodyEnergyBucketState
+import tech.mmarca.healthcalculations.insights.BodyEnergyCalibrationMode
+import tech.mmarca.healthcalculations.insights.BodyEnergyConfidence
+import tech.mmarca.healthcalculations.insights.BodyEnergyInputSummary
+import tech.mmarca.healthcalculations.insights.BodyEnergyPrimaryInfluence
+import tech.mmarca.healthcalculations.insights.BodyEnergySeedSource
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimeline
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimelinePoint
+import tech.mmarca.healthcalculations.insights.bodyEnergyReasonCodeForText
 import tech.mmarca.openvitals.data.local.bodyenergy.BodyEnergyBucketEntity
 import tech.mmarca.openvitals.data.local.bodyenergy.BodyEnergyBucketRetentionDays
 import tech.mmarca.openvitals.data.local.bodyenergy.BodyEnergyChainCursorKey
 import tech.mmarca.openvitals.data.local.bodyenergy.BodyEnergyDayEntity
 import tech.mmarca.openvitals.data.local.bodyenergy.BodyEnergyTimelineDao
-import tech.mmarca.openvitals.domain.insights.BodyEnergyBucketState
-import tech.mmarca.openvitals.domain.insights.BodyEnergyCalibrationMode
-import tech.mmarca.openvitals.domain.insights.BodyEnergyConfidence
-import tech.mmarca.openvitals.domain.insights.BodyEnergyInputSummary
-import tech.mmarca.openvitals.domain.insights.BodyEnergyPrimaryInfluence
-import tech.mmarca.openvitals.domain.insights.BodyEnergySeedSource
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimeline
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimelinePoint
-import tech.mmarca.openvitals.domain.insights.bodyEnergyReasonCodeForText
 
 /**
  * How long a past day stays eligible for recomputation. Watches sync late

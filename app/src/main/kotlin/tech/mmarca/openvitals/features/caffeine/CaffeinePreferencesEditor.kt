@@ -29,14 +29,14 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import java.time.LocalTime
+import tech.mmarca.healthcalculations.preferences.BodyProfile
+import tech.mmarca.healthcalculations.preferences.CaffeineAlcoholUse
+import tech.mmarca.healthcalculations.preferences.CaffeineGenotype
+import tech.mmarca.healthcalculations.preferences.CaffeineHabituation
+import tech.mmarca.healthcalculations.preferences.CaffeineHormonalStatus
+import tech.mmarca.healthcalculations.preferences.CaffeinePreferences
+import tech.mmarca.healthcalculations.preferences.CaffeineSleepSensitivity
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
-import tech.mmarca.openvitals.domain.preferences.CaffeineAlcoholUse
-import tech.mmarca.openvitals.domain.preferences.CaffeineGenotype
-import tech.mmarca.openvitals.domain.preferences.CaffeineHabituation
-import tech.mmarca.openvitals.domain.preferences.CaffeineHormonalStatus
-import tech.mmarca.openvitals.domain.preferences.CaffeinePreferences
-import tech.mmarca.openvitals.domain.preferences.CaffeineSleepSensitivity
 
 /** The four caffeine-model parameters. The physiological factors live in [MetabolismEditor]. */
 @Composable

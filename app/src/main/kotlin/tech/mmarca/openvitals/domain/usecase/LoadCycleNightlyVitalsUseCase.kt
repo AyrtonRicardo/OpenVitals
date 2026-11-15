@@ -6,15 +6,15 @@ import javax.inject.Inject
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import tech.mmarca.healthcalculations.cycle.NightSample
+import tech.mmarca.healthcalculations.cycle.NightWindow
+import tech.mmarca.healthcalculations.cycle.NightlySignal
+import tech.mmarca.healthcalculations.cycle.NightlyVitals
+import tech.mmarca.healthcalculations.cycle.NightlyVitalsCalculator
 import tech.mmarca.openvitals.core.presentation.isPermissionFailure
 import tech.mmarca.openvitals.data.repository.contract.HeartRepository
 import tech.mmarca.openvitals.data.repository.contract.SleepRepository
 import tech.mmarca.openvitals.data.repository.contract.VitalsRepository
-import tech.mmarca.openvitals.domain.cycle.NightSample
-import tech.mmarca.openvitals.domain.cycle.NightWindow
-import tech.mmarca.openvitals.domain.cycle.NightlySignal
-import tech.mmarca.openvitals.domain.cycle.NightlyVitals
-import tech.mmarca.openvitals.domain.cycle.NightlyVitalsCalculator
 
 /**
  * The current cycle's nightly resting pulse, HRV and breathing rate, cut by the sleep

@@ -2,7 +2,7 @@
 
 > **Status:** Current implemented behavior.
 > **Audience:** Users and contributors.
-> **Implementation:** `features/readiness`, `features/bodyenergy`, `domain/insights`.
+> **Implementation:** `features/readiness`, `features/bodyenergy`, `insights` in health-calculations.
 > **Navigation:** `Screen.DailyReadiness`, `Screen.BodyEnergyDetails`, `Screen.TrainingReadinessDetails`, `Screen.StressDetails`.
 > **Related:** [Feature map](feature-map.md), [Body Energy](body-energy.md), [Sleep score and recovery](sleep-score-and-recovery.md).
 

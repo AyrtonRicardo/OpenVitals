@@ -24,7 +24,7 @@ import java.time.LocalTime
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import kotlin.math.roundToInt
-import tech.mmarca.openvitals.domain.insights.BodyEnergyPrimaryInfluence
+import tech.mmarca.healthcalculations.insights.BodyEnergyPrimaryInfluence
 import tech.mmarca.openvitals.ui.components.ChartTokens
 import tech.mmarca.openvitals.ui.components.ChartViewport
 import tech.mmarca.openvitals.ui.components.ChartXAxisWithYAxis

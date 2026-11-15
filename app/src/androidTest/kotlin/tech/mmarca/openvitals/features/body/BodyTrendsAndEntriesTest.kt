@@ -20,8 +20,8 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.MetricDetailSectionContext
@@ -83,7 +83,7 @@ class BodyTrendsAndEntriesTest {
         // Health Connect only lets an app delete its own records.
         val deleted = mutableListOf<Pair<BodyMeasurementType, String>>()
         setBody(
-            state(weights = listOf(weight(isOpenVitalsEntry = false, source = "com.other.scale"))),
+            state(weights = listOf(weight(isOwnEntry = false, source = "com.other.scale"))),
             onDelete = { type, id -> deleted += type to id },
         )
 
@@ -115,14 +115,14 @@ class BodyTrendsAndEntriesTest {
     )
 
     private fun weight(
-        isOpenVitalsEntry: Boolean = true,
+        isOwnEntry: Boolean = true,
         source: String = "tech.mmarca.openvitals",
     ) = WeightEntry(
         id = WEIGHT_ID,
         time = ANCHOR.atStartOfDay(ZoneId.systemDefault()).plusHours(7).toInstant(),
         weightKg = WEIGHT_KG,
         source = source,
-        isOpenVitalsEntry = isOpenVitalsEntry,
+        isOwnEntry = isOwnEntry,
     )
 
     private fun setBody(

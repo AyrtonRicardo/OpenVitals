@@ -3,13 +3,13 @@ package tech.mmarca.openvitals.features.activity
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.period.displayPeriodFor
-import tech.mmarca.openvitals.domain.insights.BaselineValue
-import tech.mmarca.openvitals.domain.insights.DailyGoalValue
-import tech.mmarca.openvitals.domain.insights.dailyGoalProgress
-import tech.mmarca.openvitals.domain.insights.periodComparison
-import tech.mmarca.openvitals.domain.model.ActivityProgressPoint
+import tech.mmarca.healthcalculations.insights.BaselineValue
+import tech.mmarca.healthcalculations.insights.DailyGoalValue
+import tech.mmarca.healthcalculations.insights.dailyGoalProgress
+import tech.mmarca.healthcalculations.insights.periodComparison
+import tech.mmarca.healthcalculations.model.ActivityProgressPoint
 import tech.mmarca.openvitals.domain.model.DailyNutrition
-import tech.mmarca.openvitals.domain.model.DailySteps
+import tech.mmarca.healthcalculations.model.DailySteps
 import java.time.LocalDate
 
 object ActivityPresentationMapper {
@@ -106,7 +106,7 @@ object ActivityPresentationMapper {
 private fun stepsDisplay(
     query: PeriodLoadQuery,
     dailyGoal: Double,
-    period: tech.mmarca.openvitals.core.period.DatePeriod,
+    period: tech.mmarca.healthcalculations.model.DatePeriod,
     dailySteps: List<DailySteps>,
     previousDailySteps: List<DailySteps>,
     baselineDailySteps: List<DailySteps>,
@@ -144,7 +144,7 @@ private fun stepsDisplay(
 private fun distanceDisplay(
     query: PeriodLoadQuery,
     dailyGoal: Double,
-    period: tech.mmarca.openvitals.core.period.DatePeriod,
+    period: tech.mmarca.healthcalculations.model.DatePeriod,
     dailySteps: List<DailySteps>,
     previousDailySteps: List<DailySteps>,
     baselineDailySteps: List<DailySteps>,
@@ -184,7 +184,7 @@ private fun distanceDisplay(
 private fun caloriesBurnedDisplay(
     query: PeriodLoadQuery,
     dailyGoal: Double,
-    period: tech.mmarca.openvitals.core.period.DatePeriod,
+    period: tech.mmarca.healthcalculations.model.DatePeriod,
     nutrition: List<DailyNutrition>,
     previousNutrition: List<DailyNutrition>,
     baselineNutrition: List<DailyNutrition>,
@@ -224,7 +224,7 @@ private fun caloriesBurnedDisplay(
 private fun activeCaloriesDisplay(
     query: PeriodLoadQuery,
     dailyGoal: Double,
-    period: tech.mmarca.openvitals.core.period.DatePeriod,
+    period: tech.mmarca.healthcalculations.model.DatePeriod,
     dailySteps: List<DailySteps>,
     previousDailySteps: List<DailySteps>,
     baselineDailySteps: List<DailySteps>,
@@ -264,7 +264,7 @@ private fun activeCaloriesDisplay(
 private fun floorsDisplay(
     query: PeriodLoadQuery,
     dailyGoal: Double,
-    period: tech.mmarca.openvitals.core.period.DatePeriod,
+    period: tech.mmarca.healthcalculations.model.DatePeriod,
     dailySteps: List<DailySteps>,
     previousDailySteps: List<DailySteps>,
     baselineDailySteps: List<DailySteps>,
@@ -304,7 +304,7 @@ private fun floorsDisplay(
 private fun elevationDisplay(
     query: PeriodLoadQuery,
     dailyGoal: Double,
-    period: tech.mmarca.openvitals.core.period.DatePeriod,
+    period: tech.mmarca.healthcalculations.model.DatePeriod,
     dailySteps: List<DailySteps>,
     previousDailySteps: List<DailySteps>,
     baselineDailySteps: List<DailySteps>,
@@ -344,7 +344,7 @@ private fun elevationDisplay(
 private fun wheelchairPushesDisplay(
     query: PeriodLoadQuery,
     dailyGoal: Double,
-    period: tech.mmarca.openvitals.core.period.DatePeriod,
+    period: tech.mmarca.healthcalculations.model.DatePeriod,
     dailySteps: List<DailySteps>,
     previousDailySteps: List<DailySteps>,
     baselineDailySteps: List<DailySteps>,
@@ -391,7 +391,7 @@ private fun metricDisplay(
     baselineValues: List<BaselineValue>,
     activeDays: Int,
     dailyGoal: Double,
-    period: tech.mmarca.openvitals.core.period.DatePeriod,
+    period: tech.mmarca.healthcalculations.model.DatePeriod,
     metric: ActivityMetric,
     intradayPoints: List<ActivityIntradayPoint>,
     dayTotal: Double,

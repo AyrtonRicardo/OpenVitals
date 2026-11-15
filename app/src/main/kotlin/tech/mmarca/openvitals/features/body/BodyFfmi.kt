@@ -4,7 +4,7 @@ import androidx.compose.runtime.Immutable
 import java.time.Duration
 import java.time.Instant
 import java.time.ZoneId
-import tech.mmarca.openvitals.domain.insights.BaselineValue
+import tech.mmarca.healthcalculations.insights.BaselineValue
 import tech.mmarca.openvitals.domain.model.BodyFatEntry
 import tech.mmarca.openvitals.domain.model.WeightEntry
 

@@ -69,11 +69,11 @@ import tech.mmarca.openvitals.domain.model.CoMapsNavigationSnapshot
 import tech.mmarca.openvitals.domain.model.CoMapsNavigationState
 import tech.mmarca.openvitals.domain.model.CoMapsRoutePolyline
 import tech.mmarca.openvitals.domain.model.sensorCapabilitiesForExercise
-import tech.mmarca.openvitals.domain.model.ActivityPauseInterval
-import tech.mmarca.openvitals.domain.model.ActivityRecordingLap
+import tech.mmarca.healthcalculations.model.ActivityPauseInterval
+import tech.mmarca.healthcalculations.model.ActivityRecordingLap
 import tech.mmarca.openvitals.domain.model.ActivityRecordingMarker
 import tech.mmarca.openvitals.domain.model.ActivityRecordingMarkerType
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.domain.model.BleDeviceConnectionStatus
 import tech.mmarca.openvitals.domain.model.BleRecordingMetrics
 import tech.mmarca.openvitals.domain.model.BleRecordingSampleBuffer
@@ -82,6 +82,7 @@ import tech.mmarca.openvitals.domain.preferences.ActivityRecordingPreferences
 import tech.mmarca.openvitals.domain.model.PlannedExerciseData
 import tech.mmarca.openvitals.features.workoutplans.toPlanRunSteps
 import tech.mmarca.openvitals.sensors.ble.BleSensorCoordinator
+import tech.mmarca.healthcalculations.insights.activityRecordingRouteDistanceMeters
 
 enum class ActivityRecordingStatus {
     IDLE,

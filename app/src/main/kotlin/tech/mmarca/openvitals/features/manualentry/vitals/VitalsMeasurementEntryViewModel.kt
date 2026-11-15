@@ -26,12 +26,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
-import tech.mmarca.openvitals.domain.model.BpMealContext
-import tech.mmarca.openvitals.domain.model.GlucoseContext
-import tech.mmarca.openvitals.domain.model.GlucoseMgPerDlPerMmolPerL
+import tech.mmarca.healthcalculations.model.BpMealContext
+import tech.mmarca.healthcalculations.model.GlucoseContext
+import tech.mmarca.healthcalculations.model.GlucoseMgPerDlPerMmolPerL
 import tech.mmarca.openvitals.domain.model.GlucoseRecordValues
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementWriteRequest
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.model.VitalsMeasurementWriteRequest
 import tech.mmarca.openvitals.core.presentation.ScreenError
 import tech.mmarca.openvitals.core.presentation.toScreenError
 import tech.mmarca.openvitals.data.repository.contract.VitalsRepository
@@ -335,7 +335,7 @@ class VitalsMeasurementEntryViewModel @Inject constructor(
             runCatching {
                 repository.loadVitalsMeasurementEntry(type, recordId)
             }.onSuccess { entry ->
-                if (entry == null || !entry.isOpenVitalsEntry) {
+                if (entry == null || !entry.isOwnEntry) {
                     _uiState.value = _uiState.value.copy(
                         entryError = VitalsMeasurementEntryError.WRITE_FAILED,
                         writeError = ScreenError.Text(R.string.screen_error_entry_not_editable),

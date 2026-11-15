@@ -1,7 +1,7 @@
 package tech.mmarca.openvitals.features.sleep
 
 import tech.mmarca.openvitals.core.presentation.ScreenError
-import tech.mmarca.openvitals.domain.model.SleepData
+import tech.mmarca.healthcalculations.model.SleepData
 import tech.mmarca.openvitals.data.repository.contract.SleepRepository
 import tech.mmarca.openvitals.util.MainDispatcherRule
 import io.mockk.coEvery

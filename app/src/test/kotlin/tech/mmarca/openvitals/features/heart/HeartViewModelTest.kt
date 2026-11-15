@@ -1,15 +1,15 @@
 package tech.mmarca.openvitals.features.heart
 
-import tech.mmarca.openvitals.domain.model.HeartRateThresholds
+import tech.mmarca.healthcalculations.model.HeartRateThresholds
 import tech.mmarca.openvitals.navigation.METRIC_ID_ARG
 import tech.mmarca.openvitals.data.repository.contract.FakePreferences
 import androidx.lifecycle.SavedStateHandle
 import tech.mmarca.openvitals.core.presentation.ScreenError
-import tech.mmarca.openvitals.domain.model.BloodPressureEntry
-import tech.mmarca.openvitals.domain.model.DailyHrv
-import tech.mmarca.openvitals.domain.model.DailyRestingHR
-import tech.mmarca.openvitals.domain.model.HeartRateSample
-import tech.mmarca.openvitals.domain.model.HeartRateSummary
+import tech.mmarca.healthcalculations.model.BloodPressureEntry
+import tech.mmarca.healthcalculations.model.DailyHrv
+import tech.mmarca.healthcalculations.model.DailyRestingHR
+import tech.mmarca.healthcalculations.model.HeartRateSample
+import tech.mmarca.healthcalculations.model.HeartRateSummary
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.domain.query.HeartPeriodData
@@ -20,7 +20,7 @@ import tech.mmarca.openvitals.domain.query.VitalsPeriodData
 import tech.mmarca.openvitals.data.repository.VitalsPeriodMetric
 import tech.mmarca.openvitals.data.repository.contract.VitalsRepository
 import tech.mmarca.openvitals.domain.usecase.LoadHeartPeriodUseCase
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
 import tech.mmarca.openvitals.util.MainDispatcherRule
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -273,7 +273,7 @@ class HeartViewModelTest {
             diastolicMmHg = 80,
             source = "tech.mmarca.openvitals.debug",
             id = "bp-id",
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         var entries = listOf(entry)
         val vitalsRepo = emptyVitalsRepo()
@@ -305,7 +305,7 @@ class HeartViewModelTest {
                 diastolicMmHg = 80,
                 source = "com.example",
                 id = "external-bp-id",
-                isOpenVitalsEntry = false,
+                isOwnEntry = false,
             )
         )
         val vitalsRepo = emptyVitalsRepo()

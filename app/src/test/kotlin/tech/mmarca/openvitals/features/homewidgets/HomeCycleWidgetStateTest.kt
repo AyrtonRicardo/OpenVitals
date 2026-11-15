@@ -6,10 +6,10 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import tech.mmarca.openvitals.domain.cycle.CycleEstimate
-import tech.mmarca.openvitals.domain.cycle.CycleEstimateResult
-import tech.mmarca.openvitals.domain.cycle.CycleStatistics
-import tech.mmarca.openvitals.domain.cycle.RecordedCycle
+import tech.mmarca.healthcalculations.cycle.CycleEstimate
+import tech.mmarca.healthcalculations.cycle.CycleEstimateResult
+import tech.mmarca.healthcalculations.cycle.CycleStatistics
+import tech.mmarca.healthcalculations.cycle.RecordedCycle
 import tech.mmarca.openvitals.features.cycle.CycleEstimateSummary
 import tech.mmarca.openvitals.features.cycle.cycleEstimateSummary
 import tech.mmarca.openvitals.navigation.Screen

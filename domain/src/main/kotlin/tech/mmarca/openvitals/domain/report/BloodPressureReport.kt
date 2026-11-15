@@ -1,8 +1,8 @@
 package tech.mmarca.openvitals.domain.report
 
 import java.time.ZoneId
-import tech.mmarca.openvitals.domain.model.BloodPressureEntry
-import tech.mmarca.openvitals.domain.model.BpMealContext
+import tech.mmarca.healthcalculations.model.BloodPressureEntry
+import tech.mmarca.healthcalculations.model.BpMealContext
 import tech.mmarca.openvitals.domain.model.ReportBloodPressureDetail
 import tech.mmarca.openvitals.domain.model.ReportBpReading
 import tech.mmarca.openvitals.domain.model.ReportBpSlotAverage

@@ -40,11 +40,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import java.time.LocalDate
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.resolve
-import tech.mmarca.openvitals.domain.insights.DailyReadinessFactor
-import tech.mmarca.openvitals.domain.insights.DailyReadinessInsight
-import tech.mmarca.openvitals.domain.insights.ReadinessConfidence
-import tech.mmarca.openvitals.domain.insights.ReadinessFactorKind
-import tech.mmarca.openvitals.domain.insights.ReadinessState
+import tech.mmarca.healthcalculations.insights.DailyReadinessFactor
+import tech.mmarca.healthcalculations.insights.DailyReadinessInsight
+import tech.mmarca.healthcalculations.insights.ReadinessConfidence
+import tech.mmarca.healthcalculations.insights.ReadinessFactorKind
+import tech.mmarca.healthcalculations.insights.ReadinessState
 import tech.mmarca.openvitals.healthconnect.HealthConnectFeature
 import tech.mmarca.openvitals.ui.components.DayNavigator
 import tech.mmarca.openvitals.ui.components.DataSourceEducationItem

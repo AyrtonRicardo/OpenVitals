@@ -5,7 +5,7 @@ import java.time.Instant
 import org.junit.Test
 import org.mapsforge.core.model.BoundingBox
 import org.mapsforge.core.model.Dimension
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 
 /** The Mapsforge decisions: the tile-cache name and the zoom. All were defects. */
 class MapsforgeRouteMapSupportTest {

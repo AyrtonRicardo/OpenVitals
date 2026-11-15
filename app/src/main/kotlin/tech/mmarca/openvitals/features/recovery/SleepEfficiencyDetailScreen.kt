@@ -36,8 +36,8 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import java.time.ZoneId
 import kotlin.math.roundToLong
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.SleepScoreConfidence
-import tech.mmarca.openvitals.domain.insights.SleepScoreEstimate
+import tech.mmarca.healthcalculations.insights.SleepScoreConfidence
+import tech.mmarca.healthcalculations.insights.SleepScoreEstimate
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.DisplayValue
 import tech.mmarca.openvitals.core.presentation.UnitFormatter

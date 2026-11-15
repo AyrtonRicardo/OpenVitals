@@ -43,8 +43,8 @@ import java.time.temporal.ChronoUnit
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.cycle.SkinTemperatureShiftResult
-import tech.mmarca.openvitals.domain.cycle.ThermalShiftResult
+import tech.mmarca.healthcalculations.cycle.SkinTemperatureShiftResult
+import tech.mmarca.healthcalculations.cycle.ThermalShiftResult
 import tech.mmarca.openvitals.ui.components.OpenVitalsCard
 import tech.mmarca.openvitals.ui.components.chartSemantics
 import tech.mmarca.openvitals.ui.components.plotSemanticSummary

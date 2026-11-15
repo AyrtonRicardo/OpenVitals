@@ -1,8 +1,8 @@
 package tech.mmarca.openvitals.features.activity
 
 import androidx.compose.runtime.Immutable
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.movingDurationMs
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.movingDurationMs
 
 @Immutable
 data class ActivityTypeAggregate(

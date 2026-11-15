@@ -885,7 +885,7 @@ class HydrationEntryViewModelTest {
             endTime = anHourAgo,
             liters = 0.33,
             source = "OpenVitals",
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         coEvery { repo.updateHydrationEntry(any(), any()) } returns Unit
         val vm = HydrationEntryViewModel(
@@ -954,7 +954,7 @@ class HydrationEntryViewModelTest {
             liters = 0.25,
             source = "OpenVitals",
             clientRecordId = "openvitals_hydration_${instant.toEpochMilli()}_drink_${drinkId}_record",
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
     }
 
@@ -976,7 +976,7 @@ class HydrationEntryViewModelTest {
             sugarGrams = null,
             source = "OpenVitals",
             clientRecordId = clientRecordId,
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
     }
 }

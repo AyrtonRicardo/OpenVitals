@@ -8,13 +8,13 @@ import org.junit.Assert.assertNotNull
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import tech.mmarca.openvitals.domain.insights.heartRateRecoveryWindowFor
-import tech.mmarca.openvitals.domain.model.ActivityPauseInterval
+import tech.mmarca.healthcalculations.insights.heartRateRecoveryWindowFor
+import tech.mmarca.healthcalculations.model.ActivityPauseInterval
 import tech.mmarca.openvitals.domain.model.ActivityWriteRequest
 import tech.mmarca.openvitals.domain.model.BleHeartRateSample
 import tech.mmarca.openvitals.domain.model.BleRecordingSampleBuffer
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.ExerciseSegmentData
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseSegmentData
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import java.time.Instant
 

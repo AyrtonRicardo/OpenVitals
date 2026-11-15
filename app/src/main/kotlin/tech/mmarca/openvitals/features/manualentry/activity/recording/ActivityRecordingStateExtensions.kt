@@ -4,8 +4,9 @@ import androidx.health.connect.client.records.ExerciseSessionRecord
 import java.time.Duration
 import java.time.Instant
 import kotlin.math.abs
-import tech.mmarca.openvitals.domain.insights.RouteElevation
-import tech.mmarca.openvitals.domain.model.ActivityRecordingLap
+import tech.mmarca.healthcalculations.insights.RouteElevation
+import tech.mmarca.healthcalculations.insights.activityRecordingRouteDistanceMeters
+import tech.mmarca.healthcalculations.model.ActivityRecordingLap
 import tech.mmarca.openvitals.domain.model.BleRecordingMetrics
 import tech.mmarca.openvitals.domain.preferences.ActivityRecordingPreferences
 

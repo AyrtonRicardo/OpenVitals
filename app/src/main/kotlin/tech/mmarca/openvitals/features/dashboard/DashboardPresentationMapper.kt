@@ -3,12 +3,12 @@ package tech.mmarca.openvitals.features.dashboard
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.DisplayValue
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.insights.SleepScoreConfidence
-import tech.mmarca.openvitals.domain.model.CaloriesBurnedSource
+import tech.mmarca.healthcalculations.insights.SleepScoreConfidence
+import tech.mmarca.healthcalculations.model.CaloriesBurnedSource
 import tech.mmarca.openvitals.domain.model.DashboardData
 import tech.mmarca.openvitals.domain.model.DashboardMetric
 import tech.mmarca.openvitals.domain.model.NutritionNutrient
-import tech.mmarca.openvitals.domain.model.asleepDurationMs
+import tech.mmarca.healthcalculations.model.asleepDurationMs
 import tech.mmarca.openvitals.features.cycle.cycleSecondaryLine
 import tech.mmarca.openvitals.features.nutrition.displayValue
 import java.time.ZoneId
@@ -480,7 +480,7 @@ object DashboardPresentationMapper {
     private fun weeklyCardioLoadWidget(
         id: DashboardWidgetId,
         style: DashboardWidgetStyle,
-        weeklyCardioLoad: tech.mmarca.openvitals.domain.model.DashboardWeeklyCardioLoad?,
+        weeklyCardioLoad: tech.mmarca.healthcalculations.model.DashboardWeeklyCardioLoad?,
         hasRecentHistory: Boolean = false,
         isLoading: Boolean,
     ): DashboardWidgetDisplayModel =

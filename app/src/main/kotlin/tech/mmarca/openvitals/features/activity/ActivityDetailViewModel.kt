@@ -19,19 +19,19 @@ import tech.mmarca.openvitals.data.repository.contract.ActivityRepository
 import tech.mmarca.openvitals.domain.model.PlannedExerciseData
 import tech.mmarca.openvitals.data.repository.contract.CoMapsNavigationRepository
 import tech.mmarca.openvitals.data.repository.contract.HeartRepository
-import tech.mmarca.openvitals.domain.insights.ActivitySplits
-import tech.mmarca.openvitals.domain.insights.HeartRateRecoveryReading
-import tech.mmarca.openvitals.domain.insights.buildActivitySplits
-import tech.mmarca.openvitals.domain.insights.calculateHeartRateRecovery
-import tech.mmarca.openvitals.domain.insights.heartRateRecoveryWindowFor
-import tech.mmarca.openvitals.domain.model.ActivityCadenceSample
+import tech.mmarca.healthcalculations.insights.ActivitySplits
+import tech.mmarca.healthcalculations.insights.HeartRateRecoveryReading
+import tech.mmarca.healthcalculations.insights.buildActivitySplits
+import tech.mmarca.healthcalculations.insights.calculateHeartRateRecovery
+import tech.mmarca.healthcalculations.insights.heartRateRecoveryWindowFor
+import tech.mmarca.healthcalculations.model.ActivityCadenceSample
 import tech.mmarca.openvitals.domain.model.ActivityRecordingMarker
 import tech.mmarca.openvitals.domain.model.CoMapsNavigationSnapshot
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.ExerciseRouteStatus
-import tech.mmarca.openvitals.domain.model.HeartRateSample
-import tech.mmarca.openvitals.domain.model.SpeedSample
-import tech.mmarca.openvitals.domain.model.withSampleBackfilledMetrics
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseRouteStatus
+import tech.mmarca.healthcalculations.model.HeartRateSample
+import tech.mmarca.healthcalculations.model.SpeedSample
+import tech.mmarca.healthcalculations.model.withSampleBackfilledMetrics
 import tech.mmarca.openvitals.domain.preferences.ActivitySplitDistance
 import tech.mmarca.openvitals.navigation.ACTIVITY_DETAIL_ID_ARG
 import javax.inject.Inject
@@ -200,7 +200,7 @@ internal class ActivityDetailViewModel @Inject constructor(
 
     fun deleteActivity(onDeleted: () -> Unit = {}) {
         val workout = _uiState.value.workout ?: return
-        if (!workout.isOpenVitalsEntry || workout.id.isBlank()) return
+        if (!workout.isOwnEntry || workout.id.isBlank()) return
 
         viewModelScope.launch {
             _uiState.value = _uiState.value.copy(isDeleting = true, error = null)

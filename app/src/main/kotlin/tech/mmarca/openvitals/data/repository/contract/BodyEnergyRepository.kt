@@ -1,8 +1,8 @@
 package tech.mmarca.openvitals.data.repository.contract
 
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimeline
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimeline
 import tech.mmarca.openvitals.domain.model.RefreshMode
 
 data class BodyEnergyTimelineQuery(

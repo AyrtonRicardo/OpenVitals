@@ -19,12 +19,12 @@ import org.junit.Rule
 import org.junit.Test
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.testing.string
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
-import tech.mmarca.openvitals.domain.insights.DataConfidence
-import tech.mmarca.openvitals.domain.insights.DataConfidenceLevel
-import tech.mmarca.openvitals.domain.insights.DataSourceConsistency
-import tech.mmarca.openvitals.domain.insights.DataValueKind
+import tech.mmarca.healthcalculations.insights.DataConfidence
+import tech.mmarca.healthcalculations.insights.DataConfidenceLevel
+import tech.mmarca.healthcalculations.insights.DataSourceConsistency
+import tech.mmarca.healthcalculations.insights.DataValueKind
 import tech.mmarca.openvitals.ui.theme.OpenVitalsTheme
 import java.time.LocalDate
 

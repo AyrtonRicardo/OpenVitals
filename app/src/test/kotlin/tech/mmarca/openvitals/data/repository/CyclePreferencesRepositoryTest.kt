@@ -9,10 +9,10 @@ import java.time.LocalDate
 import org.junit.Assert.assertEquals
 import org.junit.Test
 import tech.mmarca.openvitals.util.FakeSharedPreferences
-import tech.mmarca.openvitals.domain.cycle.AgeBand
-import tech.mmarca.openvitals.domain.cycle.CycleTrackingProfile
-import tech.mmarca.openvitals.domain.cycle.HormonalContraception
-import tech.mmarca.openvitals.domain.cycle.HormonalContraceptionKind
+import tech.mmarca.healthcalculations.cycle.AgeBand
+import tech.mmarca.healthcalculations.cycle.CycleTrackingProfile
+import tech.mmarca.healthcalculations.cycle.HormonalContraception
+import tech.mmarca.healthcalculations.cycle.HormonalContraceptionKind
 import tech.mmarca.openvitals.domain.model.PillPlan
 
 /** The hormonal method survives a restart, and clearing the cycle settings forgets it. */

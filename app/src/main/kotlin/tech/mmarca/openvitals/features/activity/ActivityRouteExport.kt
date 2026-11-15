@@ -9,8 +9,8 @@ import androidx.core.content.FileProvider
 import org.xmlpull.v1.XmlSerializer
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.export.stageExport
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.OutputStream

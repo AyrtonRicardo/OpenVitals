@@ -7,11 +7,11 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.RespiratoryRateEntry
+import tech.mmarca.healthcalculations.model.RespiratoryRateEntry
 import tech.mmarca.openvitals.ui.components.MetricLinePoint
 import tech.mmarca.openvitals.ui.components.dailyAverageLinePoints
 import tech.mmarca.openvitals.ui.components.mapLinePoints

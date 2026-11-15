@@ -6,14 +6,14 @@ import kotlin.math.atan2
 import kotlin.math.cos
 import kotlin.math.roundToInt
 import kotlin.math.sin
-import tech.mmarca.openvitals.domain.model.AwakeStageTypes
+import tech.mmarca.healthcalculations.model.AwakeStageTypes
+import tech.mmarca.healthcalculations.model.SleepData
+import tech.mmarca.healthcalculations.model.SleepStage
+import tech.mmarca.healthcalculations.model.durationMsForTypes
+import tech.mmarca.healthcalculations.model.sleepSessionHasReliableStages
 import tech.mmarca.openvitals.domain.model.ReportSleepDetail
 import tech.mmarca.openvitals.domain.model.ReportSleepNight
 import tech.mmarca.openvitals.domain.model.ReportSleepStageMix
-import tech.mmarca.openvitals.domain.model.SleepData
-import tech.mmarca.openvitals.domain.model.SleepStage
-import tech.mmarca.openvitals.domain.model.durationMsForTypes
-import tech.mmarca.openvitals.domain.model.sleepSessionHasReliableStages
 
 /** Sessions shorter than this are naps, not nights — excluded throughout. */
 private const val MinNightDurationMs = 3 * 60 * 60 * 1000L

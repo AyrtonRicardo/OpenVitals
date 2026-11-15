@@ -2,12 +2,15 @@ package tech.mmarca.openvitals.domain.model
 
 import java.time.Instant
 import java.time.LocalDate
-import kotlin.math.roundToInt
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimeline
-import tech.mmarca.openvitals.domain.insights.CardioLoadConfidence
-import tech.mmarca.openvitals.domain.insights.DefaultWeeklyIntensityMinutesTarget
-import tech.mmarca.openvitals.domain.insights.IntensityMinutesConfidence
-import tech.mmarca.openvitals.domain.insights.SleepScoreEstimate
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimeline
+import tech.mmarca.healthcalculations.insights.SleepScoreEstimate
+import tech.mmarca.healthcalculations.model.CaloriesBurnedSource
+import tech.mmarca.healthcalculations.model.DashboardWeeklyCardioLoad
+import tech.mmarca.healthcalculations.model.DashboardWeeklyIntensityMinutes
+import tech.mmarca.healthcalculations.model.DaySignal
+import tech.mmarca.healthcalculations.model.DaySignals
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.SleepData
 
 data class DashboardData(
     val date: LocalDate,
@@ -277,62 +280,43 @@ fun DashboardData.mergeLoaded(other: DashboardData): DashboardData =
         metricSourcePackages = metricSourcePackages + other.metricSourcePackages,
     )
 
-data class DashboardWeeklyCardioLoad(
-    val currentScore: Int,
-    val targetScore: Int,
-    val todayScore: Int,
-    val confidence: CardioLoadConfidence,
-    val targetSource: DashboardWeeklyCardioLoadTargetSource,
-) {
-    val progressFraction: Float
-        get() = if (targetScore > 0) {
-            (currentScore / targetScore.toFloat()).coerceIn(0f, 1f)
-        } else {
-            0f
+/** The figures the readiness and stress scores read, with the metrics this aggregate loaded. */
+fun DashboardData.toDaySignals(): DaySignals = DaySignals(
+    loadedMetrics = loadedMetrics.mapNotNullTo(mutableSetOf()) { metric ->
+        when (metric) {
+            DashboardMetric.SLEEP -> DaySignal.SLEEP
+            DashboardMetric.HRV -> DaySignal.HRV
+            DashboardMetric.RESTING_HEART_RATE -> DaySignal.RESTING_HEART_RATE
+            DashboardMetric.AVG_HEART_RATE -> DaySignal.AVG_HEART_RATE
+            DashboardMetric.INTENSITY_MINUTES -> DaySignal.INTENSITY_MINUTES
+            DashboardMetric.BODY_TEMPERATURE -> DaySignal.BODY_TEMPERATURE
+            DashboardMetric.SKIN_TEMPERATURE -> DaySignal.SKIN_TEMPERATURE
+            DashboardMetric.HYDRATION -> DaySignal.HYDRATION
+            else -> null
         }
-
-    val progressPercent: Int
-        get() = (progressFraction * 100f).roundToInt()
-
-    val todayProgressPercent: Int
-        get() = if (targetScore > 0) {
-            (todayScore * 100.0 / targetScore).roundToInt().coerceAtLeast(0)
-        } else {
-            0
-        }
-}
-
-enum class DashboardWeeklyCardioLoadTargetSource {
-    RECENT_HISTORY,
-    CURRENT_PACE,
-}
-
-data class DashboardWeeklyIntensityMinutes(
-    val moderateMinutes: Int,
-    val vigorousMinutes: Int,
-    val moderateEquivalentMinutes: Int,
-    val targetMinutes: Int = DefaultWeeklyIntensityMinutesTarget,
-    val todayModerateEquivalentMinutes: Int,
-    val daysElapsed: Int,
-    val confidence: IntensityMinutesConfidence,
-) {
-    val progressFraction: Float
-        get() = if (targetMinutes > 0) {
-            (moderateEquivalentMinutes / targetMinutes.toFloat()).coerceIn(0f, 1f)
-        } else {
-            0f
-        }
-
-    val progressPercent: Int
-        get() = (progressFraction * 100f).roundToInt()
-
-    val expectedByNowMinutes: Int
-        get() = if (targetMinutes > 0) {
-            (targetMinutes * daysElapsed.coerceIn(1, 7) / 7.0).roundToInt().coerceAtLeast(1)
-        } else {
-            0
-        }
-
-    val isOnPace: Boolean
-        get() = moderateEquivalentMinutes >= expectedByNowMinutes
-}
+    },
+    avgHeartRateBpm = avgHeartRateBpm,
+    heartRateSampleCount = heartRateSampleCount,
+    heartRateSampleStartTime = heartRateSampleStartTime,
+    heartRateSampleEndTime = heartRateSampleEndTime,
+    restingHeartRateBpm = restingHeartRateBpm,
+    restingHeartRateBaselineBpm = restingHeartRateBaselineBpm,
+    hrvRmssdMs = hrvRmssdMs,
+    hrvBaselineRmssdMs = hrvBaselineRmssdMs,
+    hrvSampleCount = hrvSampleCount,
+    hrvSampleStartTime = hrvSampleStartTime,
+    hrvSampleEndTime = hrvSampleEndTime,
+    sleepScore = sleepScore,
+    hydrationLiters = hydrationLiters,
+    mindfulnessMinutes = mindfulnessMinutes,
+    caloriesInKcal = caloriesInKcal,
+    proteinGrams = proteinGrams,
+    carbsGrams = carbsGrams,
+    fatGrams = fatGrams,
+    latestBodyTemperatureCelsius = latestBodyTemperatureCelsius,
+    latestSkinTemperatureDeltaCelsius = latestSkinTemperatureDeltaCelsius,
+    weeklyCardioLoad = weeklyCardioLoad,
+    weeklyIntensityMinutes = weeklyIntensityMinutes,
+    workouts = workouts,
+    bodyEnergyTimeline = bodyEnergyTimeline,
+)

@@ -50,7 +50,7 @@ import java.time.LocalDate
 import kotlinx.coroutines.withTimeoutOrNull
 import tech.mmarca.openvitals.MainActivity
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.DisplayValue
@@ -59,13 +59,13 @@ import tech.mmarca.openvitals.data.repository.dashboard.DashboardDataLoader
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
 import tech.mmarca.openvitals.data.repository.contract.BodyEnergyRepository
 import tech.mmarca.openvitals.data.repository.contract.BodyEnergyTimelineQuery
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimeline
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimeline
 import tech.mmarca.openvitals.domain.model.DashboardData
 import tech.mmarca.openvitals.domain.model.DashboardMetric
 import tech.mmarca.openvitals.domain.model.DashboardQuery
 import tech.mmarca.openvitals.domain.model.NutritionNutrient
 import tech.mmarca.openvitals.domain.model.RefreshMode
-import tech.mmarca.openvitals.domain.model.asleepDurationMs
+import tech.mmarca.healthcalculations.model.asleepDurationMs
 import tech.mmarca.openvitals.features.cycle.cycleSummarySecondaryLine
 import tech.mmarca.openvitals.features.dashboard.DashboardWidgetId
 import tech.mmarca.openvitals.features.dashboard.toDashboardMetricOrNull

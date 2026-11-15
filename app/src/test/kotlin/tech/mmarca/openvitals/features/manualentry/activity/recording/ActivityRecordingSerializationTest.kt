@@ -13,7 +13,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
 import tech.mmarca.openvitals.util.FakeSharedPreferences
-import tech.mmarca.openvitals.domain.model.ActivityPauseInterval
+import tech.mmarca.healthcalculations.model.ActivityPauseInterval
 import tech.mmarca.openvitals.domain.model.ActivityRecordingMarker
 import tech.mmarca.openvitals.domain.model.BleCyclingCadenceSample
 import tech.mmarca.openvitals.domain.model.BleHeartRateSample
@@ -21,7 +21,7 @@ import tech.mmarca.openvitals.domain.model.BlePowerSample
 import tech.mmarca.openvitals.domain.model.BleRecordingSampleBuffer
 import tech.mmarca.openvitals.domain.model.BleSpeedSample
 import tech.mmarca.openvitals.domain.model.BleStepsCadenceSample
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 
 /** Metadata goes to SharedPreferences and route points to a file, so the round-trip drives both halves of [ActivityRecordingStore]. */
 class ActivityRecordingSerializationTest {

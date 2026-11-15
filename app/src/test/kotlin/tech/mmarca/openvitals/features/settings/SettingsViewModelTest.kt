@@ -22,7 +22,7 @@ import tech.mmarca.openvitals.data.repository.contract.HealthRepository
 import tech.mmarca.openvitals.data.repository.contract.HeartRepository
 import tech.mmarca.openvitals.data.repository.contract.SleepRepository
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
-import tech.mmarca.openvitals.domain.preferences.BloodPressureGuideline
+import tech.mmarca.healthcalculations.preferences.BloodPressureGuideline
 import tech.mmarca.openvitals.features.cycle.reminders.CycleReminderController
 import tech.mmarca.openvitals.features.hydration.reminders.HydrationReminderController
 import tech.mmarca.openvitals.healthconnect.HealthConnectPermissionUxState

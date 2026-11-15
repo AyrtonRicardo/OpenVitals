@@ -30,10 +30,10 @@ Most importantly, body and entry/session browsing now live in metric-owned detai
 | Package | Owns |
 |---|---|
 | `comaps/` | the CoMaps navigation provider: the `ContentResolver` source and the guidance feed |
-| `core/` | app-wide primitives: `presentation`, `performance`, `diagnostics` in `:app`; `period`, `stats`, `geo`, `fit`, `export` (share staging), `privacy` (masking text that leaves the app) in `:domain` |
+| `core/` | app-wide primitives: `presentation`, `performance`, `diagnostics` in `:app`; `period`, `geo` (the offline elevation tiles), `fit`, `export` (share staging), `privacy` (masking text that leaves the app) in `:domain` |
 | `data/` | `local` (Room), `repository` (feature-facing repositories + `contract` interfaces), `sync` (history/backfill services), `migration` (one-time Flutter import) |
 | `di/` | `AppModule`, `RepositoryModule`, `PreferencesModule`, `RemindersModule` |
-| `domain/` | pure code: `model`, `insights`, `preferences`, `cycle`, `dashboard` (the aggregator), `report` (report roll-ups), `medical` (FHIR parsing, id repair, source grouping, the patient check, record summaries, the export bundle) in `:domain`; `query` and `usecase`, which reach into the repositories, in `:app` |
+| `domain/` | pure code: `model`, `insights` (the drink catalogs), `preferences`, `dashboard` (the aggregator), `report` (report roll-ups), `medical` (FHIR parsing, id repair, source grouping, the patient check, record summaries, the export bundle) in `:domain`; `query` and `usecase`, which reach into the repositories, in `:app` |
 | `features/` | one package per user-facing feature area |
 | `healthconnect/` | the Health Connect integration boundary: manager, per-area readers, permission/UX services |
 | `navigation/` | routes and graph registration |
@@ -314,7 +314,7 @@ Two implemented features intentionally do not follow the canonical period-detail
 
 ### Cross-metric insights
 
-Cross-metric insight calculations should live in `domain/insights`, even when the card is rendered by one feature. The feature ViewModel or use case can load the secondary signal, and the presentation mapper can attach the resulting insight to the feature display state.
+Cross-metric insight calculations should live in health-calculations' `insights` package (see [health-calculations](#health-calculations)), even when the card is rendered by one feature. The feature ViewModel or use case can load the secondary signal, and the presentation mapper can attach the resulting insight to the feature display state.
 
 This keeps metric UI declarative: composables render precomputed insight models and do not own thresholds, correlation rules, or score adjustments. Missing secondary data should remain neutral. For example, planned caffeine-aware sleep insights should attach caffeine signals to sleep presentation state only after the domain signal and mapper are implemented; missing caffeine records must not reduce sleep scores. Today, caffeine timing guidance lives in the standalone caffeine feature.
 
@@ -328,13 +328,27 @@ Interpretation lives with the consumer: [`features/manualentry/activity/routeimp
 
 ## Module `:domain`
 
-The app-local code that nothing in the rest of the phone app sits below, in `domain/`: the packages `domain/model`, `domain/insights`, `domain/preferences`, `domain/cycle`, `domain/dashboard`, `domain/report` and `domain/medical`, and the primitives `core/period`, `core/fit`, `core/geo`, `core/stats`, `core/export` and `core/privacy`. Package names are unchanged, so an import does not say which module a class is in. `:app` depends on it.
+The app-local code that nothing in the rest of the phone app sits below, in `domain/`: the packages `domain/model`, `domain/insights` (the drink catalogs), `domain/preferences`, `domain/dashboard`, `domain/report` and `domain/medical`, and the primitives `core/period`, `core/fit`, `core/geo`, `core/export` and `core/privacy`. Package names are unchanged, so an import does not say which module a class is in. `:app` depends on it. The calculations it held moved to [health-calculations](#health-calculations), which it takes as an `api` dependency.
 
-It is an Android library, not plain Kotlin: a few files use Health Connect record constants (`ExerciseTypeTraits`, `PlannedExerciseSteps`, the activity splits) and the platform's locale data (`SystemUnitSystemProvider`, `AppLanguage`), and Android lint then still checks it. It has the app's build types (`ci`, `nightly`), so the app's `ci` variant takes the module's `ci` variant and the module's tests and lint run on that one compile. Nothing in it is injected: it holds no Hilt module, and its classes are constructed by the app's repositories and the app's `di/` modules.
+It is an Android library, not plain Kotlin: a few files use Health Connect record constants (`ExerciseTypeNames`, `PlannedExerciseSteps`) and the platform's locale data (`SystemUnitSystemProvider`, `AppLanguage`), and Android lint then still checks it. It has the app's build types (`ci`, `nightly`), so the app's `ci` variant takes the module's `ci` variant and the module's tests and lint run on that one compile. Nothing in it is injected: it holds no Hilt module, and its classes are constructed by the app's repositories and the app's `di/` modules.
 
 Its test fixtures (`testFixtures`) hold the FHIR, C-CDA and SMART Health Card fixtures that both its own tests and the app's import tests use, and the privacy sentinels (`PrivacySentinels`) that tests of crash drafts, logs and reports seed and look for, with the FHIR sample files under `domain/src/testFixtures/resources/fhir/`. Its tests and lint are part of the phone gate (`verifyCiUnitTest` depends on `:domain:testCiUnitTest`, `verifyCiLint` on `:domain:lintCi`), its lockfile is `domain/gradle.lockfile`, and the ratchet tests and the `runBlocking` allow-list cover its files under the same package-relative paths as the app's.
 
 The module exists for the build: the app's lint and tests no longer cover these lines, and a change elsewhere leaves this module's compile, lint and test results in the build cache. What does not belong here: anything with an inbound dependency from `data/`, `healthconnect/` or `features/` (`domain/query` and `domain/usecase` stay in `:app` for that reason), resources, and Hilt wiring. `ArchitectureDocTest` fails when a Gradle module is missing from this document.
+
+## health-calculations
+
+The health calculations OpenVitals and OpenWatch share live in their own repository, [Hale-MTU/health-calculations](https://github.com/Hale-MTU/health-calculations), taken in as the git submodule `health-calculations/` and a composite build (`includeBuild("health-calculations")` in `settings.gradle.kts`), the way `openlink/` is. `:domain` depends on it with `api`, so `:app` sees it too. It is plain Kotlin on the JDK with no dependency, so OpenWatch's watch app and `:wearlink` take the same code.
+
+It holds every calculation that turns health data into a figure, and the models and settings those read: workout and walking energy, basal metabolic rate, maximum heart rate, cardio load, intensity minutes, heart rate recovery, splits and route elevation, body composition, the sleep score and sleep-session merging, Body Energy, daily readiness, physiological stress, the cycle estimates and nightly vitals, caffeine, baselines and comparisons, the averages and the median, and the haversine distance. Its packages keep the last segment of the app's (`domain.insights` became `tech.mmarca.healthcalculations.insights`; also `cycle`, `model`, `preferences`, `stats`, `geo`, and `signal` for the watch's raw sensors), so an import says which side a class is on.
+
+Three seams keep it free of the app:
+
+- Health Connect's exercise and segment types are copied as constants under their Health Connect names (`model/ExerciseSessionRecord.kt`, `model/ExerciseSegment.kt`), so a record's `exerciseType` passes straight in. `ExerciseTypeMirrorTest` in `:domain` checks every value against the real classes, both ways.
+- Readiness and stress read `DaySignals`: a day's figures and which of them were read. `DashboardData.toDaySignals()` builds it from the dashboard's aggregate.
+- The caffeine calculations sort drinks through a `CaffeineCatalog`. `CaffeineHealthDrinkCatalog` is OpenVitals' answer; the drink data stays in the app.
+
+What stays in the app: Health Connect reads and writes, the screens, their formatting and the period navigation, the drink catalogs, the FIT codec, the offline elevation tiles (`core/geo/HgtTile`) and the sensors an activity reads (`domain/model/ExerciseSensorCapabilities.kt`). A calculation is changed in the library and reaches the app when the submodule moves; it moves in OpenWatch in the same step, so both apps give the same number. The library carries the same file-size and function-length ratchets as the app.
 
 ## Phone-To-Phone Sync
 

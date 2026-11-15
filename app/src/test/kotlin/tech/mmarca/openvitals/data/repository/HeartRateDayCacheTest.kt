@@ -16,11 +16,11 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.HeartRateDayAggregate
+import tech.mmarca.healthcalculations.model.HeartRateSummary
 import tech.mmarca.openvitals.data.local.heartratecache.HeartRateDayCacheDao
 import tech.mmarca.openvitals.data.local.heartratecache.HeartRateDayEntity
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
-import tech.mmarca.openvitals.domain.model.HeartRateDayAggregate
-import tech.mmarca.openvitals.domain.model.HeartRateSummary
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
 
 /**

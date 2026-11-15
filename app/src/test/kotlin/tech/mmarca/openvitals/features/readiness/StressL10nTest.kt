@@ -5,10 +5,10 @@ import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import tech.mmarca.openvitals.domain.insights.PhysiologicalStressConfidence
-import tech.mmarca.openvitals.domain.insights.PhysiologicalStressLevel
-import tech.mmarca.openvitals.domain.insights.StressItemTemplate
-import tech.mmarca.openvitals.domain.insights.StressListItem
+import tech.mmarca.healthcalculations.insights.PhysiologicalStressConfidence
+import tech.mmarca.healthcalculations.insights.PhysiologicalStressLevel
+import tech.mmarca.healthcalculations.insights.StressItemTemplate
+import tech.mmarca.healthcalculations.insights.StressListItem
 
 /** The template-to-resource mapping (total and collision-free) and the NaN-as-absent argument handling. */
 class StressL10nTest {

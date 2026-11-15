@@ -8,8 +8,8 @@ import java.time.LocalDate
 import java.time.ZoneId
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.MetricDetailSectionContext
@@ -68,7 +68,7 @@ class BodyContentTest {
         time = ANCHOR.atStartOfDay(ZoneId.systemDefault()).plusHours(7).toInstant(),
         weightKg = 72.5,
         source = "tech.mmarca.openvitals",
-        isOpenVitalsEntry = true,
+        isOwnEntry = true,
     )
 
     private fun setContent(state: BodyUiState) {

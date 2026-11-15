@@ -26,13 +26,13 @@ import tech.mmarca.openvitals.data.repository.contract.FakeCycleJournalRepositor
 import tech.mmarca.openvitals.data.repository.contract.FakePillIntakeRepository
 import tech.mmarca.openvitals.data.repository.contract.FakePreferences
 import tech.mmarca.openvitals.domain.model.PillPlan
-import tech.mmarca.openvitals.domain.cycle.CycleEstimate
-import tech.mmarca.openvitals.domain.cycle.CycleEstimateResult
-import tech.mmarca.openvitals.domain.cycle.CycleStatistics
+import tech.mmarca.healthcalculations.cycle.CycleEstimate
+import tech.mmarca.healthcalculations.cycle.CycleEstimateResult
+import tech.mmarca.healthcalculations.cycle.CycleStatistics
 import tech.mmarca.openvitals.domain.model.CycleDayLog
-import tech.mmarca.openvitals.domain.model.CycleRecordValues
-import tech.mmarca.openvitals.domain.model.CycleReminderConfig
-import tech.mmarca.openvitals.domain.model.MenstruationFlowEntry
+import tech.mmarca.healthcalculations.model.CycleRecordValues
+import tech.mmarca.healthcalculations.model.CycleReminderConfig
+import tech.mmarca.healthcalculations.model.MenstruationFlowEntry
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
 import tech.mmarca.openvitals.util.MainDispatcherRule
 
@@ -272,6 +272,6 @@ class CycleReminderControllerTest {
         flow = CycleRecordValues.FLOW_MEDIUM,
         source = "OpenVitals",
         id = "own",
-        isOpenVitalsEntry = true,
+        isOwnEntry = true,
     )
 }

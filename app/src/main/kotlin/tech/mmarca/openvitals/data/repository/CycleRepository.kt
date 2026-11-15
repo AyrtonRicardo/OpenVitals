@@ -16,20 +16,20 @@ import kotlinx.coroutines.coroutineScope
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.data.repository.contract.CycleJournalRepository
 import tech.mmarca.openvitals.data.repository.contract.CyclePreferences
-import tech.mmarca.openvitals.domain.cycle.CycleCalculations
-import tech.mmarca.openvitals.domain.cycle.CycleObservations
-import tech.mmarca.openvitals.domain.cycle.CycleStatistics
-import tech.mmarca.openvitals.domain.cycle.DayBleeding
-import tech.mmarca.openvitals.domain.cycle.OvulationMarkerDetector
-import tech.mmarca.openvitals.domain.cycle.RecordedCycle
-import tech.mmarca.openvitals.domain.model.CycleData
+import tech.mmarca.healthcalculations.cycle.CycleCalculations
+import tech.mmarca.healthcalculations.cycle.CycleObservations
+import tech.mmarca.healthcalculations.cycle.CycleStatistics
+import tech.mmarca.healthcalculations.cycle.DayBleeding
+import tech.mmarca.healthcalculations.cycle.OvulationMarkerDetector
+import tech.mmarca.healthcalculations.cycle.RecordedCycle
+import tech.mmarca.healthcalculations.model.CycleData
 import tech.mmarca.openvitals.domain.model.CycleDayLog
 import tech.mmarca.openvitals.domain.model.CycleDayLogWrite
-import tech.mmarca.openvitals.domain.model.CycleEntryKind
-import tech.mmarca.openvitals.domain.model.CycleEntryWriteRequest
-import tech.mmarca.openvitals.domain.model.CycleRecordValues
+import tech.mmarca.healthcalculations.model.CycleEntryKind
+import tech.mmarca.healthcalculations.model.CycleEntryWriteRequest
+import tech.mmarca.healthcalculations.model.CycleRecordValues
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
-import tech.mmarca.openvitals.domain.model.SkinTemperatureEntry
+import tech.mmarca.healthcalculations.model.SkinTemperatureEntry
 import tech.mmarca.openvitals.domain.query.CyclePeriodData
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
 import java.time.LocalDate
@@ -349,18 +349,18 @@ class CycleRepositoryImpl @Inject constructor(
 }
 
 /** The app's own record of each kind, the latest when there are several, plus what other apps recorded. */
-private fun CycleData.toDayLog(date: LocalDate, journal: tech.mmarca.openvitals.domain.model.CycleJournalEntry?): CycleDayLog =
+private fun CycleData.toDayLog(date: LocalDate, journal: tech.mmarca.healthcalculations.model.CycleJournalEntry?): CycleDayLog =
     CycleDayLog(
         date = date,
         journal = journal,
-        ownFlow = menstruationFlows.filter { it.isOpenVitalsEntry }.maxByOrNull { it.time },
-        ownSpotting = intermenstrualBleeding.filter { it.isOpenVitalsEntry }.maxByOrNull { it.time },
-        ownBasalBodyTemperature = basalBodyTemperature.filter { it.isOpenVitalsEntry }.maxByOrNull { it.time },
-        ownCervicalMucus = cervicalMucus.filter { it.isOpenVitalsEntry }.maxByOrNull { it.time },
-        ownOvulationTest = ovulationTests.filter { it.isOpenVitalsEntry }.maxByOrNull { it.time },
-        ownSexualActivity = sexualActivity.filter { it.isOpenVitalsEntry }.maxByOrNull { it.time },
-        foreignFlowLevel = menstruationFlows.filterNot { it.isOpenVitalsEntry }.maxOfOrNull { it.flow },
-        foreignSpotting = intermenstrualBleeding.any { !it.isOpenVitalsEntry },
+        ownFlow = menstruationFlows.filter { it.isOwnEntry }.maxByOrNull { it.time },
+        ownSpotting = intermenstrualBleeding.filter { it.isOwnEntry }.maxByOrNull { it.time },
+        ownBasalBodyTemperature = basalBodyTemperature.filter { it.isOwnEntry }.maxByOrNull { it.time },
+        ownCervicalMucus = cervicalMucus.filter { it.isOwnEntry }.maxByOrNull { it.time },
+        ownOvulationTest = ovulationTests.filter { it.isOwnEntry }.maxByOrNull { it.time },
+        ownSexualActivity = sexualActivity.filter { it.isOwnEntry }.maxByOrNull { it.time },
+        foreignFlowLevel = menstruationFlows.filterNot { it.isOwnEntry }.maxOfOrNull { it.flow },
+        foreignSpotting = intermenstrualBleeding.any { !it.isOwnEntry },
     )
 
 /**

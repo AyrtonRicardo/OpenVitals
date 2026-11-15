@@ -10,11 +10,11 @@ import tech.mmarca.openvitals.data.repository.contract.CycleJournalRepository
 import tech.mmarca.openvitals.data.repository.contract.FakeCycleJournalRepository
 import tech.mmarca.openvitals.data.repository.contract.FakePillIntakeRepository
 import tech.mmarca.openvitals.data.repository.contract.FakePreferences
-import tech.mmarca.openvitals.domain.cycle.CycleExclusionReason
-import tech.mmarca.openvitals.domain.model.CycleEntryKind
-import tech.mmarca.openvitals.domain.model.CycleEntryWriteRequest
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
-import tech.mmarca.openvitals.domain.model.CycleRecordValues
+import tech.mmarca.healthcalculations.cycle.CycleExclusionReason
+import tech.mmarca.healthcalculations.model.CycleEntryKind
+import tech.mmarca.healthcalculations.model.CycleEntryWriteRequest
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.model.CycleRecordValues
 import tech.mmarca.openvitals.features.cycle.reminders.FakeCycleReminderSettings
 import tech.mmarca.openvitals.features.homewidgets.HomeWidgetRefreshScheduler
 import tech.mmarca.openvitals.core.presentation.ScreenError
@@ -35,8 +35,8 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
-import tech.mmarca.openvitals.domain.model.CycleData
-import tech.mmarca.openvitals.domain.model.MenstruationFlowEntry
+import tech.mmarca.healthcalculations.model.CycleData
+import tech.mmarca.healthcalculations.model.MenstruationFlowEntry
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.domain.query.CyclePeriodData
@@ -293,7 +293,7 @@ class CycleViewModelTest {
     }
 
     @Test fun `deleting an own record asks the repository once and re-plans`() = runTest {
-        val flow = MenstruationFlowEntry(time = Instant.now(), flow = 2, source = "OpenVitals", id = "own", isOpenVitalsEntry = true)
+        val flow = MenstruationFlowEntry(time = Instant.now(), flow = 2, source = "OpenVitals", id = "own", isOwnEntry = true)
         val repo = repo(data = CycleData(menstruationFlows = listOf(flow)))
         coEvery { repo.deleteCycleEntry(any(), any()) } returns Unit
         val reminders = FakeCycleReminderSettings()

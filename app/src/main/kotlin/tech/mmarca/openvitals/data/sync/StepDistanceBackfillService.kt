@@ -12,7 +12,7 @@ import javax.inject.Inject
 import javax.inject.Singleton
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
-import tech.mmarca.openvitals.domain.preferences.StrideLength
+import tech.mmarca.healthcalculations.preferences.StrideLength
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
 import tech.mmarca.openvitals.healthconnect.historyReadStart
 import tech.mmarca.openvitals.healthconnect.withStrictHealthConnectReads

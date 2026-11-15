@@ -1,8 +1,8 @@
 package tech.mmarca.openvitals.domain.model
 
 import java.time.LocalDate
+import tech.mmarca.healthcalculations.preferences.SleepWindow
 import tech.mmarca.openvitals.domain.preferences.ActivityWeekMode
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
 
 data class DashboardQuery(
     val date: LocalDate = LocalDate.now(),

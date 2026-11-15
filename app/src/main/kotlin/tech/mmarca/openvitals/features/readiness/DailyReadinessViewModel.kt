@@ -9,31 +9,32 @@ import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimeline
+import tech.mmarca.healthcalculations.insights.DailyReadinessGoalInputs
+import tech.mmarca.healthcalculations.insights.DailyReadinessInsight
+import tech.mmarca.healthcalculations.insights.MetricDailyGoalKey
+import tech.mmarca.healthcalculations.insights.calculateDailyReadiness
+import tech.mmarca.healthcalculations.model.DatePeriod
+import tech.mmarca.healthcalculations.preferences.SleepWindow
 import tech.mmarca.openvitals.R
+import tech.mmarca.openvitals.core.performance.LoadCoordinator
+import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.ScreenError
 import tech.mmarca.openvitals.core.presentation.toScreenError
-import tech.mmarca.openvitals.core.performance.LoadCoordinator
-import tech.mmarca.openvitals.core.period.DatePeriod
-import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.data.repository.contract.BodyEnergyCalibrationPreferences
+import tech.mmarca.openvitals.data.repository.contract.BodyEnergyRepository
+import tech.mmarca.openvitals.data.repository.contract.BodyEnergyTimelineQuery
 import tech.mmarca.openvitals.data.repository.contract.DailyGoalPreferences
 import tech.mmarca.openvitals.data.repository.contract.HydrationGoalPreferences
 import tech.mmarca.openvitals.data.repository.contract.PeriodPreferences
 import tech.mmarca.openvitals.data.repository.contract.SleepWindowPreferences
-import tech.mmarca.openvitals.data.repository.contract.BodyEnergyRepository
-import tech.mmarca.openvitals.data.repository.contract.BodyEnergyTimelineQuery
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimeline
-import tech.mmarca.openvitals.domain.usecase.LoadDashboardDayUseCase
-import tech.mmarca.openvitals.domain.insights.DailyReadinessGoalInputs
-import tech.mmarca.openvitals.domain.insights.DailyReadinessInsight
-import tech.mmarca.openvitals.domain.insights.MetricDailyGoalKey
-import tech.mmarca.openvitals.domain.insights.calculateDailyReadiness
 import tech.mmarca.openvitals.domain.model.DashboardData
 import tech.mmarca.openvitals.domain.model.DashboardMetric
 import tech.mmarca.openvitals.domain.model.DashboardQuery
 import tech.mmarca.openvitals.domain.model.RefreshMode
+import tech.mmarca.openvitals.domain.model.toDaySignals
 import tech.mmarca.openvitals.domain.preferences.ActivityWeekMode
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
+import tech.mmarca.openvitals.domain.usecase.LoadDashboardDayUseCase
 
 @Immutable
 data class DailyReadinessUiState(
@@ -92,7 +93,7 @@ class DailyReadinessViewModel @Inject constructor(
                 sleepWindow = sleepWindow,
                 activityWeekMode = activityWeekMode,
                 goals = goals,
-                insight = current.data?.let { data -> calculateDailyReadiness(data, goals) },
+                insight = current.data?.let { data -> calculateDailyReadiness(data.toDaySignals(), goals) },
             )
             if (
                 current.sleepWindow != sleepWindow ||
@@ -165,7 +166,7 @@ class DailyReadinessViewModel @Inject constructor(
                     if (!isCurrent) return@load
                     _uiState.value = _uiState.value.copy(
                         data = data,
-                        insight = calculateDailyReadiness(data, goals),
+                        insight = calculateDailyReadiness(data.toDaySignals(), goals),
                         isLoading = false,
                     )
                 }

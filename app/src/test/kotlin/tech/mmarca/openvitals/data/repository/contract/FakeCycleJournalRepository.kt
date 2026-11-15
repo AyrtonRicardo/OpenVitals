@@ -3,8 +3,8 @@ package tech.mmarca.openvitals.data.repository.contract
 import java.time.LocalDate
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableSharedFlow
-import tech.mmarca.openvitals.domain.cycle.CycleExclusionReason
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.cycle.CycleExclusionReason
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
 
 /** In-memory journal. Set what a test needs, read back what the code wrote. */
 class FakeCycleJournalRepository(

@@ -13,6 +13,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import tech.mmarca.healthcalculations.insights.CaffeineInsightCalculator
+import tech.mmarca.healthcalculations.insights.PeriodComparison
+import tech.mmarca.healthcalculations.insights.periodComparison
+import tech.mmarca.healthcalculations.model.CaffeineEntry
+import tech.mmarca.healthcalculations.model.CaffeineInsights
+import tech.mmarca.healthcalculations.preferences.BodyProfile
+import tech.mmarca.healthcalculations.preferences.CaffeinePreferences
 import tech.mmarca.openvitals.core.performance.DefaultDispatcherProvider
 import tech.mmarca.openvitals.core.performance.DispatcherProvider
 import tech.mmarca.openvitals.core.performance.LoadCoordinator
@@ -29,13 +36,7 @@ import tech.mmarca.openvitals.data.repository.contract.CaffeineModelPreferences
 import tech.mmarca.openvitals.data.repository.contract.CaffeineRepository
 import tech.mmarca.openvitals.data.repository.contract.NutritionRepository
 import tech.mmarca.openvitals.data.repository.contract.PeriodPreferences
-import tech.mmarca.openvitals.domain.insights.CaffeineInsightCalculator
-import tech.mmarca.openvitals.domain.insights.PeriodComparison
-import tech.mmarca.openvitals.domain.insights.periodComparison
-import tech.mmarca.openvitals.domain.model.CaffeineEntry
-import tech.mmarca.openvitals.domain.model.CaffeineInsights
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
-import tech.mmarca.openvitals.domain.preferences.CaffeinePreferences
+import tech.mmarca.openvitals.domain.insights.CaffeineHealthDrinkCatalog
 import tech.mmarca.openvitals.navigation.CAFFEINE_ENTRY_ID_ARG
 import tech.mmarca.openvitals.navigation.selectedDayOrNull
 
@@ -160,6 +161,7 @@ class CaffeineViewModel @Inject constructor(
                         period = query.windows.current,
                         preferences = preferences,
                         bodyProfile = bodyProfile,
+                        catalog = CaffeineHealthDrinkCatalog,
                     )
                 }
                 if (!isCurrent) return@load
@@ -199,7 +201,7 @@ class CaffeineViewModel @Inject constructor(
     fun deleteCaffeineEntry(entryId: String) {
         if (entryId.isBlank()) return
         val entry = _uiState.value.entries.firstOrNull { it.id == entryId } ?: return
-        if (!entry.isOpenVitalsEntry) return
+        if (!entry.isOwnEntry) return
         viewModelScope.launch {
             val previous = _uiState.value
             _uiState.value = previous.copy(
@@ -259,6 +261,7 @@ class CaffeineViewModel @Inject constructor(
                 period = currentQuery().windows.current,
                 preferences = state.preferences,
                 bodyProfile = state.bodyProfile,
+                catalog = CaffeineHealthDrinkCatalog,
             )
         }
         _uiState.value = _uiState.value.copy(

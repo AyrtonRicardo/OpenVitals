@@ -1,6 +1,6 @@
 package tech.mmarca.openvitals.domain.preferences
 
-import tech.mmarca.openvitals.domain.insights.DefaultSplitDistanceMeters
+import tech.mmarca.healthcalculations.insights.DefaultSplitDistanceMeters
 
 /**
  * The split distance preference, stored in meters. Imperial presets are

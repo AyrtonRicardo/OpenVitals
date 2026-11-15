@@ -172,7 +172,7 @@ class NutritionViewModel @Inject constructor(
     fun deleteNutritionEntry(entryId: String) {
         if (entryId.isBlank()) return
         val entry = _uiState.value.entries.firstOrNull { it.id == entryId } ?: return
-        if (!entry.isOpenVitalsEntry) return
+        if (!entry.isOwnEntry) return
         viewModelScope.launch {
             val previous = _uiState.value
             // Rebuilt synchronously: the swipe row needs the item gone before the next frame.
@@ -206,7 +206,7 @@ class NutritionViewModel @Inject constructor(
                     hydrationRepository.loadHydrationEntries(day, day)
                 }.onSuccess { hydrationEntries ->
                     val drink = hydrationEntries.firstOrNull { hydrationEntry ->
-                        hydrationEntry.isOpenVitalsEntry &&
+                        hydrationEntry.isOwnEntry &&
                             hydrationEntry.id.isNotBlank() &&
                             hydrationEntry.clientRecordId == hydrationClientRecordId
                     }

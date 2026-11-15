@@ -21,16 +21,16 @@ import tech.mmarca.openvitals.data.repository.contract.FakeCycleJournalRepositor
 import tech.mmarca.openvitals.data.repository.contract.FakePillIntakeRepository
 import tech.mmarca.openvitals.data.repository.contract.FakePreferences
 import tech.mmarca.openvitals.domain.model.PillPlan
-import tech.mmarca.openvitals.domain.cycle.AgeBand
-import tech.mmarca.openvitals.domain.cycle.CycleExclusionReason
-import tech.mmarca.openvitals.domain.cycle.CycleSymptom
-import tech.mmarca.openvitals.domain.cycle.CycleTrackingProfile
-import tech.mmarca.openvitals.domain.cycle.HormonalContraception
-import tech.mmarca.openvitals.domain.cycle.HormonalContraceptionKind
-import tech.mmarca.openvitals.domain.cycle.TrackingContext
-import tech.mmarca.openvitals.domain.model.BbtDisturbance
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
-import tech.mmarca.openvitals.domain.model.HcgTestResult
+import tech.mmarca.healthcalculations.cycle.AgeBand
+import tech.mmarca.healthcalculations.cycle.CycleExclusionReason
+import tech.mmarca.healthcalculations.cycle.CycleSymptom
+import tech.mmarca.healthcalculations.cycle.CycleTrackingProfile
+import tech.mmarca.healthcalculations.cycle.HormonalContraception
+import tech.mmarca.healthcalculations.cycle.HormonalContraceptionKind
+import tech.mmarca.healthcalculations.cycle.TrackingContext
+import tech.mmarca.healthcalculations.model.BbtDisturbance
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.model.HcgTestResult
 import tech.mmarca.openvitals.features.devicesync.protocol.SyncItem
 
 /** The journal on the wire: content keys both phones agree on, the newer edit wins, settings fill an empty phone. */

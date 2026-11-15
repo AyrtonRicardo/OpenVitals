@@ -7,9 +7,9 @@ import java.time.ZonedDateTime
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
-import tech.mmarca.openvitals.domain.cycle.CycleEstimate
-import tech.mmarca.openvitals.domain.cycle.CycleEstimateResult
-import tech.mmarca.openvitals.domain.model.CycleReminderConfig
+import tech.mmarca.healthcalculations.cycle.CycleEstimate
+import tech.mmarca.healthcalculations.cycle.CycleEstimateResult
+import tech.mmarca.healthcalculations.model.CycleReminderConfig
 
 /** The three alarms' timing rules, on a fixed clock. */
 class CycleReminderScheduleTest {
