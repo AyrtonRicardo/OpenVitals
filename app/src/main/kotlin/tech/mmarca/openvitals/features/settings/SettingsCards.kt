@@ -223,6 +223,7 @@ internal val SettingsSection.icon: ImageVector
         SettingsSection.DATA_IMPORT -> Icons.Outlined.FolderOpen
         SettingsSection.OPENWATCH -> Icons.Outlined.Watch
         SettingsSection.DEVICE_SYNC -> Icons.Outlined.Devices
+        SettingsSection.DATA_SHARING -> Icons.Outlined.Share
         SettingsSection.HEALTH_CONNECT -> Icons.Outlined.HealthAndSafety
         SettingsSection.DEBUG_DIAGNOSTICS -> Icons.Outlined.BugReport
     }

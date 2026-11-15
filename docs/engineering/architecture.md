@@ -39,6 +39,7 @@ Most importantly, body and entry/session browsing now live in metric-owned detai
 | `navigation/` | routes and graph registration |
 | `openwatch/` | the OpenLink client to OpenWatch (the `openlink/` submodule, a composite build): the body profile both ways, the dashboard watch tile and its sync, a recording session that keeps the watch streaming, and its live heart rate into `sensors/ble` |
 | `sensors/ble/` | live BLE sensor streaming during activity recording |
+| `sharing/` | the read-only data sharing API other apps query: `DataSharingProvider`, the switch and access log, `contract` (groups, URIs, columns, the metric catalog) and `source` (the reads behind each table) |
 | `ui/` | shared components, charts, theme |
 
 ## Architectural Principles

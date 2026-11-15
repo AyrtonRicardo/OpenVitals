@@ -178,6 +178,72 @@
     <uses-permission android:name="app.comaps.google.permission.READ_NAVIGATION_DATA" />
     <uses-permission android:name="app.comaps.huawei.permission.READ_NAVIGATION_DATA" />
 
+    <!--
+        The data sharing API (sharing/DataSharingProvider): one runtime permission
+        per group, so the user allows each kind of data on its own. The names carry
+        the application id, so debug and release builds install side by side.
+        Android's Allow dialog shows the label and the description.
+    -->
+    <permission
+        android:name="${applicationId}.permission.READ_ACTIVITY"
+        android:description="@string/data_sharing_permission_activity_description"
+        android:label="@string/data_sharing_permission_activity_label"
+        android:protectionLevel="dangerous" />
+    <permission
+        android:name="${applicationId}.permission.READ_WORKOUTS"
+        android:description="@string/data_sharing_permission_workouts_description"
+        android:label="@string/data_sharing_permission_workouts_label"
+        android:protectionLevel="dangerous" />
+    <permission
+        android:name="${applicationId}.permission.READ_ROUTES"
+        android:description="@string/data_sharing_permission_routes_description"
+        android:label="@string/data_sharing_permission_routes_label"
+        android:protectionLevel="dangerous" />
+    <permission
+        android:name="${applicationId}.permission.READ_SLEEP"
+        android:description="@string/data_sharing_permission_sleep_description"
+        android:label="@string/data_sharing_permission_sleep_label"
+        android:protectionLevel="dangerous" />
+    <permission
+        android:name="${applicationId}.permission.READ_HEART"
+        android:description="@string/data_sharing_permission_heart_description"
+        android:label="@string/data_sharing_permission_heart_label"
+        android:protectionLevel="dangerous" />
+    <permission
+        android:name="${applicationId}.permission.READ_VITALS"
+        android:description="@string/data_sharing_permission_vitals_description"
+        android:label="@string/data_sharing_permission_vitals_label"
+        android:protectionLevel="dangerous" />
+    <permission
+        android:name="${applicationId}.permission.READ_BODY"
+        android:description="@string/data_sharing_permission_body_description"
+        android:label="@string/data_sharing_permission_body_label"
+        android:protectionLevel="dangerous" />
+    <permission
+        android:name="${applicationId}.permission.READ_NUTRITION"
+        android:description="@string/data_sharing_permission_nutrition_description"
+        android:label="@string/data_sharing_permission_nutrition_label"
+        android:protectionLevel="dangerous" />
+    <permission
+        android:name="${applicationId}.permission.READ_RECOVERY"
+        android:description="@string/data_sharing_permission_recovery_description"
+        android:label="@string/data_sharing_permission_recovery_label"
+        android:protectionLevel="dangerous" />
+    <permission
+        android:name="${applicationId}.permission.READ_CYCLE"
+        android:description="@string/data_sharing_permission_cycle_description"
+        android:label="@string/data_sharing_permission_cycle_label"
+        android:protectionLevel="dangerous" />
+    <permission
+        android:name="${applicationId}.permission.READ_SEXUAL_ACTIVITY"
+        android:description="@string/data_sharing_permission_sexual_activity_description"
+        android:label="@string/data_sharing_permission_sexual_activity_label"
+        android:protectionLevel="dangerous" />
+    <!-- The provider refuses writes in code; this also stops them before they reach it. -->
+    <permission
+        android:name="${applicationId}.permission.WRITE_DATA"
+        android:protectionLevel="signature" />
+
     <!-- OpenVitals is offline-only. Do not inherit network permissions from dependencies. -->
     <uses-permission
         android:name="android.permission.INTERNET"
@@ -548,6 +614,54 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <!--
+            The data sharing API. Exported so other apps can read it. Each group's
+            path needs that group's permission, and the provider checks again in
+            code. No provider-wide read permission: /groups and /metrics hold no
+            health data and stay open. Writes are refused.
+        -->
+        <provider
+            android:name=".sharing.DataSharingProvider"
+            android:authorities="${applicationId}.data"
+            android:enabled="${dataSharingEnabled}"
+            android:exported="true"
+            android:grantUriPermissions="false"
+            android:writePermission="${applicationId}.permission.WRITE_DATA">
+            <path-permission
+                android:pathPrefix="/activity"
+                android:readPermission="${applicationId}.permission.READ_ACTIVITY" />
+            <path-permission
+                android:pathPrefix="/workouts"
+                android:readPermission="${applicationId}.permission.READ_WORKOUTS" />
+            <path-permission
+                android:pathPrefix="/routes"
+                android:readPermission="${applicationId}.permission.READ_ROUTES" />
+            <path-permission
+                android:pathPrefix="/sleep"
+                android:readPermission="${applicationId}.permission.READ_SLEEP" />
+            <path-permission
+                android:pathPrefix="/heart"
+                android:readPermission="${applicationId}.permission.READ_HEART" />
+            <path-permission
+                android:pathPrefix="/vitals"
+                android:readPermission="${applicationId}.permission.READ_VITALS" />
+            <path-permission
+                android:pathPrefix="/body"
+                android:readPermission="${applicationId}.permission.READ_BODY" />
+            <path-permission
+                android:pathPrefix="/nutrition"
+                android:readPermission="${applicationId}.permission.READ_NUTRITION" />
+            <path-permission
+                android:pathPrefix="/recovery"
+                android:readPermission="${applicationId}.permission.READ_RECOVERY" />
+            <path-permission
+                android:pathPrefix="/cycle"
+                android:readPermission="${applicationId}.permission.READ_CYCLE" />
+            <path-permission
+                android:pathPrefix="/sexual_activity"
+                android:readPermission="${applicationId}.permission.READ_SEXUAL_ACTIVITY" />
+        </provider>
+
         <activity-alias
             android:name=".ViewPermissionUsageActivity"
             android:exported="true"
@@ -556,6 +670,18 @@
             <intent-filter>
                 <action android:name="android.intent.action.VIEW_PERMISSION_USAGE" />
                 <category android:name="android.intent.category.HEALTH_PERMISSIONS" />
+            </intent-filter>
+        </activity-alias>
+
+        <!-- Lets another app open the sharing settings, for example when /groups says sharing is off. -->
+        <activity-alias
+            android:name=".ManageDataSharingActivity"
+            android:enabled="${dataSharingEnabled}"
+            android:exported="true"
+            android:targetActivity=".MainActivity">
+            <intent-filter>
+                <action android:name="tech.mmarca.openvitals.action.MANAGE_DATA_SHARING" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity-alias>
 

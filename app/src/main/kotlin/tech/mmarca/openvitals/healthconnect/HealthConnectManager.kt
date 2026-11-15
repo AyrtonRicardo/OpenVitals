@@ -122,6 +122,7 @@ class HealthConnectManager @Inject constructor(
     private val stepDistanceReader = StepDistanceHealthReader(readerSupport, context.packageName)
     private val bmrEstimateReader = BmrEstimateHealthReader(readerSupport, context.packageName)
     private val vitalsReader = VitalsHealthReader(readerSupport, context.packageName)
+    private val sharedSamplesReader = SharedSamplesHealthReader(readerSupport)
     private val changesReader = HealthConnectChangesReader(readerSupport)
     private val syncRecordsReader = SyncRecordsReader(readerSupport)
 
@@ -729,6 +730,10 @@ class HealthConnectManager @Inject constructor(
             )
         }
     }
+
+    /** The samples of one record type in `[start, end)`, for the data sharing API. */
+    internal suspend fun readSharedSamples(type: SharedSampleType, start: Instant, end: Instant): List<SharedSample> =
+        sharedSamplesReader.read(type, start, end)
 
     /** Every record of [recordType] in `[start, end)`, for phone-to-phone sync. Type-agnostic. */
     suspend fun forEachSyncRecordPage(
