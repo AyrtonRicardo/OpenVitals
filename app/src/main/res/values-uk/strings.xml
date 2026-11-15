@@ -454,7 +454,7 @@
     <string name="exercise_type_swimming_open_water">Плавання (відкрита вода)</string>
     <string name="exercise_type_golf">Гольф</string>
     <string name="exercise_type_strength_training">Силове тренування</string>
-    <string name="exercise_type_calisthenics">Калістеника</string>
+    <string name="exercise_type_calisthenics">Вправи без інвентарю</string>
     <string name="exercise_type_strength_sets">Силові підходи</string>
     <string name="exercise_type_treadmill">Бігова доріжка</string>
     <string name="exercise_type_push_ups">Віджимання</string>
@@ -773,7 +773,7 @@
     <string name="hc_exercise_type_biking_stationary">Велосипед (тренажер)</string>
     <string name="hc_exercise_type_boot_camp">Буткемп</string>
     <string name="hc_exercise_type_boxing">Бокс</string>
-    <string name="hc_exercise_type_calisthenics">Калістеника</string>
+    <string name="hc_exercise_type_calisthenics">Вправи без інвентарю</string>
     <string name="hc_exercise_type_cricket">Крикет</string>
     <string name="hc_exercise_type_dancing">Танці</string>
     <string name="hc_exercise_type_elliptical">Еліптичний тренажер</string>
@@ -794,7 +794,7 @@
     <string name="hc_exercise_type_paddling">Гребля</string>
     <string name="hc_exercise_type_paragliding">Парапланеризм</string>
     <string name="hc_exercise_type_pilates">Пілатес</string>
-    <string name="hc_exercise_type_racquetball">Ракетбол</string>
+    <string name="hc_exercise_type_racquetball">Гра з ракеткою</string>
     <string name="hc_exercise_type_rock_climbing">Скалолазіння</string>
     <string name="hc_exercise_type_roller_hockey">Хокей на роликах</string>
     <string name="hc_exercise_type_rowing">Веслування</string>
@@ -2668,8 +2668,8 @@
     <string name="settings_elevation_toggle_body">Маршрут, який не повністю покритий вашими плитками, зберігає власні висоти.</string>
     <string name="settings_elevation_tiles_empty">Плиток висоти ще немає. OpenVitals не має доступу до інтернету. Завантажте плитки для свого регіону на компʼютері й імпортуйте їх тут.</string>
     <string name="settings_elevation_tile_detail">%1$s • %2$s</string>
-    <string name="settings_elevation_tile_resolution_1">1 арксекунда (30 м)</string>
-    <string name="settings_elevation_tile_resolution_3">3 арксекунди (90 м)</string>
+    <string name="settings_elevation_tile_resolution_1">1 кутова секунда (30 м)</string>
+    <string name="settings_elevation_tile_resolution_3">3 кутові секунди (90 м)</string>
     <string name="settings_elevation_tile_import_action">Імпортувати плитку висоти</string>
     <string name="settings_elevation_tile_importing">Імпорт…</string>
     <string name="settings_elevation_tile_import_result">Імпортовано %1$s (%2$s).</string>
