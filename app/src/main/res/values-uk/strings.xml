@@ -432,7 +432,7 @@
     <string name="activity_recording_guidance_squats">Покладіть телефон екраном вгору на підлогу між ніг або тримайте перед собою. Датчик наближення рахує повторення щоразу, коли ви наближаєтеся до нього внизу присідання.</string>
     <string name="activity_recording_guidance_pull_ups">Закріпіть телефон на тілі. Акселерометр рахує рух підтягування і розслаблення.</string>
     <string name="activity_recording_guidance_rope_skipping">Тримайте телефон закріпленим на тілі. Акселерометр рахує стрибки.</string>
-    <string name="activity_recording_guidance_trampoline_jumping">Тримайте телефон закріпленим на тілі. Розпізнавання стрибків використовує більше вікно стрибка, ніж стрибки на скакалці.</string>
+    <string name="activity_recording_guidance_trampoline_jumping">Тримайте телефон закріпленим на тілі. Розпізнавання стрибків використовує довше вікно стрибка, ніж стрибки на скакалці.</string>
     <string name="activity_recording_guidance_treadmill">Тримайте телефон на тілі. Крокомір Android рахує кроки; GPS-маршрут не записується.</string>
     <string name="activity_recording_sensor_ready">Датчик готовий</string>
     <string name="activity_recording_sensor_unavailable_manual">На цьому пристрої немає живого підрахунку. Ручний запис залишається доступним.</string>
@@ -511,7 +511,7 @@
     <string name="body_entry_invalid_value">Введіть коректне значення для цього вимірювання.</string>
     <string name="body_entry_write_failed">Не вдалося зберегти вимірювання тіла: %1$s</string>
     <string name="body_entry_nothing_to_save">Введіть щонайменше одне значення.</string>
-    <string name="body_composition_entry_subtitle">Введіть те, що показує вага, а решту залиште порожнім. Кожне значення зберігається у Health Connect з тим самим часом.</string>
+    <string name="body_composition_entry_subtitle">Введіть те, що показують ваги, а решту залиште порожнім. Кожне значення зберігається у Health Connect з тим самим часом.</string>
     <string name="body_composition_entry_permission_needed">Щоб зберегти ці значення, OpenVitals потрібен дозвіл на запис у Health Connect для кожного з них. Застосунок не зберігає ці дані; записи зберігаються у Health Connect.</string>
     <string name="body_composition_entry_save">Зберегти вимірювання</string>
     <string name="body_composition_entry_invalid_values">Перевірте виділені значення.</string>
@@ -534,7 +534,7 @@
     <string name="vitals_entry_add_selected">Додати %1$s</string>
     <string name="vitals_entry_invalid_value">Введіть коректне значення для цього показника.</string>
     <string name="vitals_entry_write_failed">Не вдалося зберегти показник: %1$s</string>
-    <string name="vitals_entry_glucose_meal_label">Їжа</string>
+    <string name="vitals_entry_glucose_meal_label">Приймання їжі</string>
     <string name="vitals_entry_glucose_sample_label">Зразок</string>
     <string name="glucose_sample_capillary">Прокол пальця (капілярна кров)</string>
     <string name="glucose_sample_interstitial">Датчик (інтерстиціальна рідина)</string>
@@ -789,7 +789,7 @@
     <string name="hc_exercise_type_high_intensity_interval_training">Інтервальне тренування високої інтенсивності</string>
     <string name="hc_exercise_type_hiking">Похід</string>
     <string name="hc_exercise_type_ice_hockey">Хокей</string>
-    <string name="hc_exercise_type_ice_skating">Ковзанярський спорт на льоду</string>
+    <string name="hc_exercise_type_ice_skating">Катання на ковзанах</string>
     <string name="hc_exercise_type_martial_arts">Бойові мистецтва</string>
     <string name="hc_exercise_type_paddling">Гребля</string>
     <string name="hc_exercise_type_paragliding">Парапланеризм</string>
@@ -851,7 +851,7 @@
     <string name="hc_segment_forward_twist">Скручування вперед</string>
     <string name="hc_segment_front_raise">Піднімання вперед</string>
     <string name="hc_segment_high_intensity_interval_training">Інтервальне тренування високої інтенсивності</string>
-    <string name="hc_segment_hip_thrust">Становий міст</string>
+    <string name="hc_segment_hip_thrust">Жим бедрами</string>
     <string name="hc_segment_hula_hoop">Обруч</string>
     <string name="hc_segment_jumping_jack">Стрибки-розведення</string>
     <string name="hc_segment_jump_rope">Скакалка</string>
@@ -989,7 +989,7 @@
     <string name="cardio_load_calculation_title">Як це обчислюється</string>
     <string name="cardio_load_day_numbers_title">Сьогоднішні показники</string>
     <string name="cardio_load_references_title">Підтверджені посилання</string>
-    <string name="cardio_load_calculation_summary">OpenVitals використовує TRIMP на основі пульсу, коли дані пульсу доступні, а тоді відкатується до руху, коли пульс непридатний.</string>
+    <string name="cardio_load_calculation_summary">OpenVitals використовує TRIMP на основі пульсу, коли дані пульсу доступні, а тоді переходить до руху, коли пульс непридатний.</string>
     <string name="cardio_load_formula">TRIMP = хвилини × HRR × a × e^(b × HRR)</string>
     <string name="cardio_load_formula_body">HRR - резерв пульсу: (пульс - пульс спокою) / (максимальний пульс - пульс спокою). OpenVitals сумує це за доступними інтервалами пульсу за день.</string>
     <string name="cardio_load_formula_weighting">a = 0.64 і b = 1.92 для чоловіків, a = 0.86 і b = 1.67 для жінок (Banister). Якщо у вашому профілі тіла не вказано стать, використовуються значення для чоловіків.</string>
@@ -1023,7 +1023,7 @@
     <string name="section_sleep_sessions">Сесії сну</string>
     <string name="section_weight">Вага</string>
     <string name="section_entries">Записи</string>
-    <string name="section_meals">Приймання їжі</string>
+    <string name="section_meals">Страви</string>
     <string name="section_sessions">Сесії</string>
     <string name="section_daily_breakdown">Поділ за днями</string>
     <string name="section_vitals">Показники</string>
@@ -1046,7 +1046,7 @@
     <string name="summary_daily_average">%1$s щоденно, у середньому</string>
     <string name="summary_days_in_range">%1$s днів у діапазоні</string>
     <string name="summary_entries">Записів: %1$s</string>
-    <string name="summary_readings">Показань: %1$s</string>
+    <string name="summary_readings">Вимірювань: %1$s</string>
     <string name="summary_nights">Ночей: %1$s</string>
     <string name="summary_recorded_stages">Записаних стадій: %1$s</string>
     <string name="summary_average">Сер.</string>
@@ -1077,7 +1077,7 @@
     <string name="stat_nutrient_per_day">%1$s на день</string>
     <string name="stat_caption_period_total">%1$s %2$s усього</string>
     <string name="calories_stat_active_average">Активне у середньому</string>
-    <string name="calories_stat_bmr_readings">Показань БМ</string>
+    <string name="calories_stat_bmr_readings">Вимірювань БМ</string>
     <string name="stat_average_duration">Середня тривалість</string>
     <string name="stat_total_intake">Усього спожито</string>
     <string name="stat_best_day">Найкращий день</string>
@@ -1088,7 +1088,7 @@
     <string name="stat_fastest_pace">Найшвидший темп</string>
     <string name="stat_best_speed">Найкраща швидкість</string>
     <string name="stat_longest_session">Найдовша сесія</string>
-    <string name="stat_bbt_readings">Показань БТТ</string>
+    <string name="stat_bbt_readings">Вимірювань БТТ</string>
     <string name="stat_goal_streak">Серія цілей</string>
     <string name="stat_longest_goal_streak">Найдовша серія</string>
     <string name="stat_goals_met">Цілей виконано</string>
@@ -1170,11 +1170,11 @@
     <string name="interpretation_sleep_near_body">Середній сон близький до вашої налаштованої цілі: %1$s проти %2$s.</string>
     <string name="interpretation_sleep_met_body">Середній сон відповідає вашій налаштованій цілі: %1$s проти %2$s.</string>
     <string name="interpretation_sleep_source">На основі вашої налаштованої цілі сну, а не медичної оцінки сну.</string>
-    <string name="interpretation_macro_title">Співвідношення макро</string>
+    <string name="interpretation_macro_title">Співвідношення макроелементів</string>
     <string name="interpretation_macro_within">У межах орієнтиру</string>
     <string name="interpretation_macro_outside">Поза межами орієнтиру</string>
-    <string name="interpretation_macro_body">Білок %1$s, вуглеводи %2$s, жир %3$s від записаних калорій макро.</string>
-    <string name="interpretation_macro_source">Джерело: референтні значення AMDR дорослих Національних академій; лише записані макро.</string>
+    <string name="interpretation_macro_body">Білок %1$s, вуглеводи %2$s, жир %3$s від записаних калорій макроелементів.</string>
+    <string name="interpretation_macro_source">Джерело: референтні значення AMDR дорослих Національних академій; лише записані макроелементи.</string>
     <string name="interpretation_workout_title">Виконання рекомендацій щодо тренувань</string>
     <string name="interpretation_workout_none">Немає записаних хвилин</string>
     <string name="interpretation_workout_below">Нижче тижневого орієнтиру</string>
@@ -1440,16 +1440,16 @@
     <string name="message_no_heart_samples_day">Цього дня не записано зразків пульсу.</string>
     <string name="message_heart_empty_hint">Спробуйте іншу дату або перевірте, чи підключений пристрій синхронізував дані пульсу на певний момент.</string>
     <string name="message_no_weight_period">Немає даних ваги у вибраному періоді.\n\nСинхронізуйте ваги або пристрій, що носиться, який передає вагу до Health Connect.</string>
-    <string name="message_no_hydration_period">У цей період не записано жодного запису про напої.</string>
+    <string name="message_no_hydration_period">У цей період не було записів про напої.</string>
     <string name="message_no_hydration_added_period">У цей період не додано впливу на водний баланс.</string>
-    <string name="message_no_nutrition_period">У цей період не записано жодного запису про харчування.</string>
+    <string name="message_no_nutrition_period">У цей період не було записів харчування.</string>
     <string name="message_no_mindfulness_period">У цей період не записано жодної сесії усвідомленості.</string>
     <string name="message_no_vitals_period">У цей період не записано показників.</string>
     <string name="message_no_readings_period">У цей період немає вимірювань.</string>
     <string name="message_too_much_data_range">Занадто багато даних для графіка за цей діапазон.</string>
     <string name="message_no_cycle_period">У цей період не записано даних циклу.</string>
     <string name="message_no_segments">Сегменти не записані.</string>
-    <string name="message_no_laps">Кола не записані.</string>
+    <string name="message_no_laps">Жодного кола не записано.</string>
     <string name="message_no_route_points">Точки маршруту не записані.</string>
     <string name="message_route_consent_required">Дані маршруту доступні, але доступ до маршруту ще не надано. Відкрийте дозволи Health Connect у Налаштуваннях, щоб увімкнути попередній перегляд маршрутів.</string>
     <string name="message_no_route_data">Дані маршруту не записані.</string>
@@ -1502,7 +1502,7 @@
     <string name="onboarding_hc_category_body">Вимірювання тіла</string>
     <string name="onboarding_hc_category_body_desc">Читати й зберігати:\n• Вагу\n• Зріст\n• Жир у тілі\n• Безжирову масу\n• Кісткову масу\n• Масу води у тілі\n• Базовий рівень метаболізму</string>
     <string name="onboarding_hc_category_nutrition">Харчування</string>
-    <string name="onboarding_hc_category_nutrition_desc">Читати й зберігати записи їжі та напоїв, включно з напоями.</string>
+    <string name="onboarding_hc_category_nutrition_desc">Читати й зберігати записи їжі та напоїв, включно з водним балансом.</string>
     <string name="onboarding_hc_category_sleep">Сон</string>
     <string name="onboarding_hc_category_sleep_desc">Читати й зберігати сесії сну та їхні стадії.</string>
     <string name="onboarding_hc_category_vitals">Показники</string>
@@ -1542,7 +1542,7 @@
     <string name="settings_sensors_group_title">Датчики та пристрої</string>
     <string name="settings_sensors_group_body">Датчики пульсу, каденції та потужності</string>
     <string name="settings_sensors_empty_title">Датчиків ще немає</string>
-    <string name="settings_sensors_empty_body">Додайте Bluetooth-ремінь пульсу, датчик каденції, велотренажер із потужністю або педометр, щоб використовувати під час запису активності.</string>
+    <string name="settings_sensors_empty_body">Додайте Bluetooth-ремінь пульсу, датчик каденції, датчик потужності або датчик кроку на взутті, щоб використовувати під час запису активності.</string>
     <string name="settings_sensors_add_device">Додати датчик</string>
     <string name="settings_sensors_edit_device">Редагувати датчик</string>
     <string name="settings_sensors_remove_device">Прибрати датчик</string>
@@ -1732,7 +1732,7 @@
     <string name="health_connect_promote_hydration_title">Відстежувати напої</string>
     <string name="health_connect_promote_hydration_body">Дозвольте дані про водний баланс і харчування, щоб бачити щоденні напої та історію.</string>
     <string name="health_connect_promote_nutrition_title">Бачити харчування</string>
-    <string name="health_connect_promote_nutrition_body">Дозвольте дані про харчування, щоб переглядати калорії та макро з ваших джерел.</string>
+    <string name="health_connect_promote_nutrition_body">Дозвольте дані про харчування, щоб переглядати калорії та макроелементи з ваших джерел.</string>
     <string name="health_connect_promote_mindfulness_title">Відстежувати усвідомленість</string>
     <string name="health_connect_promote_mindfulness_body">Дозвольте дані про сесії усвідомленості, щоб бачити свою практику з часом.</string>
     <string name="health_connect_promote_cycle_title">Відстежувати дані циклу</string>
@@ -1750,7 +1750,7 @@
     <string name="medical_category_lab_results">Результати аналізів</string>
     <string name="medical_category_procedures">Процедури</string>
     <string name="medical_category_visits">Візити</string>
-    <string name="medical_category_vital_signs">Показники</string>
+    <string name="medical_category_vital_signs">Вітальні показники</string>
     <string name="medical_category_pregnancy">Вагітність</string>
     <string name="medical_category_social_history">Соціальний анамнез</string>
     <string name="medical_category_personal_details">Особисті дані</string>
@@ -1799,7 +1799,7 @@
     <string name="medical_field_body_site">Місце на тілі</string>
     <string name="medical_field_participant">Учасник</string>
     <string name="medical_field_location">Місце розташування</string>
-    <string name="medical_field_service_provider">Постачальник послуг</string>
+    <string name="medical_field_service_provider">Медичний заклад</string>
     <string name="medical_field_period">Період</string>
     <string name="medical_field_birth_date">Дата народження</string>
     <string name="medical_field_gender">Стать</string>
@@ -1809,7 +1809,7 @@
     <string name="medical_status_active">Активний</string>
     <string name="medical_status_inactive">Неактивний</string>
     <string name="medical_status_resolved">Знято</string>
-    <string name="medical_status_recurrence">Повторення</string>
+    <string name="medical_status_recurrence">Рецидив</string>
     <string name="medical_status_relapse">Рецидив</string>
     <string name="medical_status_remission">Ремісія</string>
     <string name="medical_status_completed">Завершено</string>
@@ -1978,7 +1978,7 @@
     <string name="medical_entry_date_visit">Дата візиту</string>
     <string name="medical_entry_date_performed">Дата виконання</string>
     <string name="medical_entry_date_collected">Дата забору</string>
-    <string name="medical_entry_setting">Умова</string>
+    <string name="medical_entry_setting">Умови</string>
     <string name="medical_visit_outpatient">Амбулаторно</string>
     <string name="medical_visit_emergency">Невідкладна допомога</string>
     <string name="medical_visit_inpatient">Стаціонар</string>
@@ -1999,7 +1999,7 @@
     <string name="medical_entry_qualification">Кваліфікація</string>
     <string name="medical_entry_contact">Телефон або пошта</string>
     <string name="medical_entry_address">Адреса</string>
-    <string name="medical_entry_future_date">Дата після сьогоднішньої може бути лише в чомусь, що ще попереду, наприклад у запланованого візиту.</string>
+    <string name="medical_entry_future_date">Дата після сьогоднішньої може бути лише в чомусь, що ще попереду, наприклад у запланованому візиті.</string>
     <string name="medical_visit_acute">Гострий стаціонар</string>
     <string name="medical_visit_nonacute">Негострий стаціонар</string>
     <string name="medical_visit_observation">Стаціонар під спостереженням</string>
@@ -2219,7 +2219,7 @@
     <string name="settings_activity_week_title">Плаваючі дати</string>
     <string name="settings_activity_week_body">Використовувати плаваючі вікна 7, 30 і 365 днів замість календарного тижня, місяця та року.</string>
     <string name="settings_activity_week_monday_to_sunday">Календар</string>
-    <string name="settings_activity_week_last_7_days">Плаваючі</string>
+    <string name="settings_activity_week_last_7_days">Плаваюче</string>
     <string name="settings_favorite_activity_title">Улюблена активність</string>
     <string name="settings_favorite_activity_body">Типово використовувати останню записану активність або вибрати один тип, який завжди буде вибрано заздалегідь.</string>
     <string name="settings_favorite_activity_latest">За останньою</string>
@@ -2261,7 +2261,7 @@
     <string name="settings_calorie_data_title">Дані про загальні калорії</string>
     <string name="settings_calorie_data_body">Типово показувати прості загальні калорії з Health Connect. Увімкніть розрахунки OpenVitals, щоб заповнювати відсутні загальні значення з активних калорій і БМ.</string>
     <string name="settings_nutrition_average_title">Лише за днями з записами</string>
-    <string name="settings_nutrition_average_body">У середніх значеннях харчування ділення відбувається на дні, коли ви записували їжу. Вимкніть, щоб ділити на всі дні тижня, місяця чи року.</string>
+    <string name="settings_nutrition_average_body">У середніх значеннях харчування ділиться на кількість днів, коли ви записували їжу. Вимкніть, щоб ділити на всі дні тижня, місяця чи року.</string>
     <string name="settings_caffeine_title">Модель кофеїну</string>
     <string name="settings_caffeine_body">Ці значення персоналізують рівень кофеїну, прогноз часу засинання та висновки про безпечний сон. Записи залишаються в Health Connect.</string>
     <string name="settings_sleep_night_start_title">Ніч починається о</string>
@@ -2393,7 +2393,7 @@
     <string name="settings_apple_health_import_category_vitals">Показники</string>
     <string name="settings_apple_health_import_category_vitals_desc">Кровʼяний тиск, сатурація киснем, частота дихання, температура тіла, глюкоза крові та VO2 max.</string>
     <string name="settings_apple_health_import_category_nutrition">Харчування</string>
-    <string name="settings_apple_health_import_category_nutrition_desc">Енергія їжі, макро, кофеїн, мінерали та вітаміни.</string>
+    <string name="settings_apple_health_import_category_nutrition_desc">Енергія їжі, макроелементи, кофеїн, мінерали та вітаміни.</string>
     <string name="settings_apple_health_import_category_hydration">Водний баланс</string>
     <string name="settings_apple_health_import_category_hydration_desc">Записи про вживання води.</string>
     <string name="settings_apple_health_import_category_mindfulness">Усвідомленість</string>
@@ -2456,7 +2456,7 @@
     <string name="settings_csv_import_role_timestamp">Дата й час</string>
     <string name="settings_csv_import_role_end_timestamp">Кінцева дата й час</string>
     <string name="settings_csv_import_role_food_name">Назва їжі</string>
-    <string name="settings_csv_import_interval_end_hint">Кожен рядок охоплює від дати й часу до стовпця \"Кінцева дата й час\". Без нього рядок вважається однією хвилиною.</string>
+    <string name="settings_csv_import_interval_end_hint">Кожен рядок охоплює період від дати й часу до стовпця \"Кінцева дата й час\". Без нього рядок вважається однією хвилиною.</string>
     <string name="settings_csv_import_metric_weight">Вага</string>
     <string name="settings_csv_import_metric_body_fat">Жир у тілі</string>
     <string name="settings_csv_import_metric_lean_body_mass">Безжирова маса (мʼязова маса)</string>
@@ -2757,7 +2757,7 @@
     <string name="recording_comaps_next_stop_with_time">Наступна зупинка %1$s</string>
     <string name="recording_comaps_route_time_with_duration">Маршрут %1$s</string>
     <string name="recording_comaps_completion">Завершено на %1$d%%</string>
-    <string name="recording_comaps_exit">Зʼїзд %1$s</string>
+    <string name="recording_comaps_exit">Вихід %1$s</string>
     <string name="recording_comaps_dashboard_label">Підказки CoMaps</string>
     <string name="settings_activity_recording_comaps_title">Навігаційні підказки CoMaps</string>
     <string name="settings_activity_recording_comaps_body">Показувати покрокові підказки CoMaps під час запису GPS-активностей. OpenVitals лише читає те, що веде CoMaps.</string>
@@ -2785,7 +2785,7 @@
     <string name="sleep_stage_light">Легкий</string>
     <string name="sleep_stage_deep">Глибокий</string>
     <string name="sleep_stage_rem">REM</string>
-    <string name="sleep_stage_awake_in_bed">Бадьорує у ліжку</string>
+    <string name="sleep_stage_awake_in_bed">Неспання у ліжку</string>
     <string name="sleep_stage_unknown">Невідомо</string>
     <string name="sleep_stages_share_title">Частка часу у ліжку</string>
     <string name="cycle_observation_menstruation_period">Період місячних</string>
@@ -2864,8 +2864,8 @@
     <string name="heart_rate_samples_at_or_below">Зразків на рівні або нижче %1$d уд/хв</string>
     <string name="heart_rate_days_at_or_above">Днів на рівні або вище %1$d уд/хв</string>
     <string name="heart_rate_days_at_or_below">Днів на рівні або нижче %1$d уд/хв</string>
-    <string name="cd_decrease_hr_threshold">Поріг зниження пульсу</string>
-    <string name="cd_increase_hr_threshold">Поріг підвищення пульсу</string>
+    <string name="cd_decrease_hr_threshold">Зменшити поріг пульсу</string>
+    <string name="cd_increase_hr_threshold">Збільшити поріг пульсу</string>
     <string name="heart_rate_recovery_title">Відновлення пульсу</string>
     <string name="heart_rate_recovery_headline">Зниження на %1$d уд/хв за хвилину</string>
     <string name="heart_rate_recovery_headline_unavailable">Зниження за хвилину не виміряно</string>
@@ -3104,7 +3104,7 @@
     <string name="body_energy_personalization_title">Персональне підлаштування</string>
     <string name="body_energy_personalization_reset">Скинути персональне підлаштування</string>
     <string name="body_energy_gain_activity">Повсякденна активність втомлює вас</string>
-    <string name="body_energy_gain_sleep">Сон підзаряджає вас</string>
+    <string name="body_energy_gain_sleep">Сон відновлює вашу енергію</string>
     <string name="body_energy_gain_basal">Базове споживання</string>
     <string name="body_energy_gain_stress">Стрес втомлює вас</string>
     <string name="readiness_factor_body_energy_drained_label">Енергія тіла вичерпана</string>
@@ -3436,7 +3436,7 @@
     <string name="cycle_legend_cycle_start">Початок циклу</string>
     <string name="section_cycle_history">Історія циклів</string>
     <string name="section_cycle_thermal">Температурна діаграма</string>
-    <string name="section_cycle_patterns">Патерни симптомів</string>
+    <string name="section_cycle_patterns">Закономірності симптомів</string>
     <string name="cycle_variability_subtitle">Тривалість кожного циклу проти еталонної зони 21-35 днів.</string>
     <string name="cycle_variability_total">Усього: %1$d циклів</string>
     <string name="cycle_variability_median">Медіана: %1$.1f д</string>
@@ -3487,9 +3487,9 @@
     <string name="cycle_skin_title">Температура шкіри та ваш цикл</string>
     <string name="cycle_skin_intro">Годинники й кільця вимірюють температуру вашої шкіри вночі. Після овуляції вона має тенденцію бути трохи вищою, приблизно на %1$s, за одним малим дослідженням із кільцем. OpenVitals показує підйом, який знаходить у ваші ночі, після факту й за весь цикл, ніколи наперед.</string>
     <string name="cycle_skin_accuracy">У великому дослідженні з Apple Watch день овуляції оцінено для 81%% циклів із підйомом щонайменше на %1$s, і 89%% із тих оцінок були в межах 2 днів від дня, знайденого тестами на ЛГ. Дослідження із кільцем знайшло середню помилку 1,3 дня проти 3,4 дня при відліку від календаря. Це результати власного методу кожного дослідження; вони не переносяться на кожен годинник чи кожен метод.</string>
-    <string name="cycle_skin_note_hormonal">Ви вказали гормональний метод або припинили його за останні два місяці. Гормональні методи діють на той самий ритм температури тіла, про який ця картка, і багато з них припиняють овуляцію (вихід яйцеклітини), за якою слідує підйом температури. Тому ваша власна температура може не показувати чіткого патерну «до і після». Велике дослідження температури запʼястя виключило людей на гормональних методах і два місяці після їх припинення, тому його результати мало що говорять про вас. Це інформація, а не порада.</string>
+    <string name="cycle_skin_note_hormonal">Ви вказали гормональний метод або припинили його за останні два місяці. Гормональні методи діють на той самий ритм температури тіла, про який ця картка, і багато з них припиняють овуляцію (вихід яйцеклітини), за якою слідує підйом температури. Тому ваша власна температура може не показувати чіткої закономірності «до і після». Велике дослідження температури запʼястя виключило людей на гормональних методах і два місяці після їх припинення, тому його результати мало що говорять про вас. Це інформація, а не порада.</string>
     <string name="cycle_skin_limits">• Відсутність підйому не означає відсутність овуляції: у дослідженні 437 циклів сталий підйом показався в 82%%.\n• Підйом може зʼявитися й без овуляції: невелике дослідження запʼястя часто фіксувало підйом у циклах без овуляції.\n• Лихоманка або хвороба також підвищують температуру шкіри.\n• Температура шкіри не є внутрішньою температурою тіла: в одному дослідженні вона повʼязувалася з оральною температурою лише помірно (r = 0,56).</string>
-    <string name="cycle_skin_note_pcos">Ви вказали СПКЯ. Ми не знайшли досліджень виявлення овуляції за температурою при СПКЯ, тому читайте будь-який температурний патерн з особливою обережністю.</string>
+    <string name="cycle_skin_note_pcos">Ви вказали СПКЯ. Ми не знайшли досліджень виявлення овуляції за температурою при СПКЯ, тому читайте будь-яку температурну закономірність з особливою обережністю.</string>
     <string name="cycle_skin_not_a_method">OpenVitals показує виявлений зсув, але не використовує температуру шкіри для своїх оцінок. Це не метод контрацепції чи прогнозу фертильності й не медична порада.</string>
     <string name="cycle_skin_show_details">Показати числа й джерела</string>
     <string name="cycle_skin_hide_details">Сховати деталі</string>
@@ -3541,11 +3541,11 @@
     <string name="cycle_nightly_evidence_gonzalez_sleep">У 2 596 жінок із 42 759 записаними циклами, що носили WHOOP, пульс спокою піднімався на 1,2%%, коли тижневий сон падав на 10%%, незалежно від фази циклу.</string>
     <string name="cycle_nightly_evidence_pietila_alcohol">У 4 098 фінських працівників вживання алкоголю дозозалежно повʼязувалося з слабшим парасимпатичним регулюванням перші 3 години сну. Міра відновлення на основі ВСР падала на 9,3, 24,0 і 39,2 відсоткових пункти після низького, помірного й високого вживання.</string>
     <string name="cycle_nightly_evidence_shi_small_gain">Систематичний огляд і мережева метааналіз 27 досліджень знайшли лише невеликий виграш від поєднання кількох сигналів носіїв із температурою (обʼєднана точність 0,89 проти 0,87) з перекривними довірчими інтервалами.</string>
-    <string name="cycle_nightly_method">Як робиться нічне значення: OpenVitals бере медіану всіх вимірювань у межах нічної сесії сну й ставить її на день, коли ви прокинулися. Дослідження агрегують інакше: у огляді ВСР дослідження з кільцем Oura використовували 5-хвилинні інтервали вночі, одне дослідження WHOOP використовувало останній цикл повільного сну, а інше - увесь час небадьорування основного сну. Тому абсолютні значення не можна порівнювати з дослідженнями. Коли кілька застосунків чи пристроїв записали сигнал, малюється лише той, що покриває більшість ночей.</string>
+    <string name="cycle_nightly_method">Як робиться нічне значення: OpenVitals бере медіану всіх вимірювань у межах нічної сесії сну й ставить її на день, коли ви прокинулися. Дослідження агрегують інакше: у огляді ВСР дослідження з кільцем Oura використовували 5-хвилинні інтервали вночі, одне дослідження WHOOP використовувало останній цикл повільного сну, а інше - увесь час неспання основного сну. Тому абсолютні значення не можна порівнювати з дослідженнями. Коли кілька застосунків чи пристроїв записали сигнал, малюється лише той, що покриває більшість ночей.</string>
     <string name="cycle_nightly_caveats">Сон, алкоголь і гормональна контрацепція теж зсувають ці лінії, тому одна ніч мало що говорить, а виграш від поєднання кількох сигналів у огляді вище був малим. OpenVitals не використовує жодного з цих значень для оцінки, фази чи будь-якого твердження про фертильність.</string>
     <string name="cycle_patterns_subtitle">Як часто кожен симптом записували в кожній фазі. Лише підрахунки; нічого не діагностується й не прогнозується.</string>
     <string name="cycle_patterns_empty_title">Симптомів ще немає</string>
-    <string name="cycle_patterns_empty_body">Патерни зʼявляться тут, коли ви записуватимете симптоми протягом своїх циклів.</string>
+    <string name="cycle_patterns_empty_body">Закономірності зʼявляться тут, коли ви записуватимете симптоми протягом своїх циклів.</string>
     <string name="cycle_patterns_total">%1$s в усіх %2$s</string>
     <string name="cycle_patterns_breakdown">Менструальна: %1$d · Фолікулярна: %2$d · Овуляторна: %3$d · Лютеїнова: %4$d</string>
     <string name="cycle_patterns_most_frequent">Найчастіше в %1$s фазі (%2$d)</string>
@@ -3788,11 +3788,11 @@
     </plurals>
     <string name="cycle_journal_import_failed">Нічого не імпортовано: файл не є експортом журналу.</string>
     <string name="cycle_hormonal_title">Гормональна контрацепція</string>
-    <string name="cycle_hormonal_body">Гормональні методи можуть змінювати цикл і температурний патерн. Перелічено лише методи, що використовують гормони: мідні ВМС, презервативи та діафрагми не використовують гормонів, тому тут їх немає. Це контекст для вашого виду циклу, нічого більше.</string>
+    <string name="cycle_hormonal_body">Гормональні методи можуть змінювати цикл і температурну закономірність. Перелічено лише методи, що використовують гормони: мідні ВМС, презервативи та діафрагми не використовують гормонів, тому тут їх немає. Це контекст для вашого виду циклу, нічого більше.</string>
     <string name="cycle_hormonal_set_by_pill">Встановлено на %1$s за вашою схемою таблеток. Вимкніть схему, щоб вибрати інший метод.</string>
     <string name="cycle_hormonal_stopped_on">Припинено (необовʼязково; майбутня дата означає, що ще діє)</string>
     <string name="cycle_hormonal_stopped_clear">Очистити дату припинення</string>
-    <string name="cycle_hormonal_kind_none">Жодного</string>
+    <string name="cycle_hormonal_kind_none">Немає</string>
     <string name="cycle_hormonal_kind_pill">Таблетка</string>
     <string name="cycle_hormonal_kind_hormonal_iud">Гормональна ВМС (спіраль)</string>
     <string name="cycle_hormonal_kind_implant">Імплант</string>
@@ -3847,8 +3847,8 @@
     <string name="openwatch_capability_recording">Тримати ваш годинник у потоці під час запису</string>
     <string name="openwatch_capability_live">Використовувати пульс вашого годинника під час запису</string>
     <string name="openwatch_just_now">щойно</string>
-    <string name="body_profile_openwatch_synced">Утримується в синхронізації з OpenWatch</string>
-    <string name="body_profile_openwatch_synced_updated">Утримується в синхронізації з OpenWatch · оновлено %1$s</string>
+    <string name="body_profile_openwatch_synced">Синхронізується з OpenWatch</string>
+    <string name="body_profile_openwatch_synced_updated">Синхронізується з OpenWatch · оновлено %1$s</string>
     <string name="openwatch_profile_sync_now">Синхронізувати профіль тіла зараз</string>
     <string name="openwatch_profile_nothing_to_sync">Спочатку введіть свій профіль тіла в Налаштуваннях, Профіль тіла</string>
 </resources>
