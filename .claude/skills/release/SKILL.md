@@ -254,6 +254,12 @@ either way: Zulip readers see it first too.
   70% is missing, and translate them or say so in the notes (2.9.1 had 35).
 - `scripts/generate-translation-coverage.py` takes its first argument as an
   output directory. `--help` creates a `--help/` folder in the repo root.
+- OpenWatch 0.4.0's watch promotion failed with "You must let us know whether
+  your app uses any Foreground Service permissions": its watch app had added
+  `FOREGROUND_SERVICE_LOCATION`. A new foreground service type in the manifest
+  (`git diff vLAST..HEAD -- '*AndroidManifest.xml'`) needs Play Console's App
+  content, Foreground service permissions declaration before the production
+  run.
 - 2.17.0's push was refused by a ruleset without a bypass list (`main-1`);
   the commit and the tag waited locally until it was disabled, then
   `git push --atomic origin main vX.Y.Z` finished what the script started.
