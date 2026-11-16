@@ -1724,4 +1724,5 @@
     <string name="medical_field_specialty">Ειδικότητα</string>
     <string name="medical_field_type">Τύπος</string>
     <string name="medical_field_contact">Επαφή</string>
+    <string name="medical_status_active">Ενεργό</string>
 </resources>
