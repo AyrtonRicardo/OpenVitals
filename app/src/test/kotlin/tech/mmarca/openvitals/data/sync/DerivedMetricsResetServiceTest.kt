@@ -16,12 +16,12 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import tech.mmarca.healthcalculations.preferences.BodyEnergyCalibration
+import tech.mmarca.healthcalculations.preferences.HeartZoneThresholds
 import tech.mmarca.openvitals.data.local.bodyenergy.FakeBodyEnergyTimelineDao
 import tech.mmarca.openvitals.data.repository.BodyEnergyTimelineStore
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
 import tech.mmarca.openvitals.data.repository.inMemoryPreferences
-import tech.mmarca.openvitals.domain.preferences.BodyEnergyCalibration
-import tech.mmarca.openvitals.domain.preferences.HeartZoneThresholds
 
 /** The reset leaves nothing to seed from, leaves everything the user typed, and kicks the rebuilds itself. */
 class DerivedMetricsResetServiceTest {

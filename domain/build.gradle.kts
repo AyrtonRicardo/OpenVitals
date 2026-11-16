@@ -58,6 +58,9 @@ android {
 dependencies {
     // Public types of this module reference it.
     api(libs.health.connect.client)
+    // The calculations and the models they read, shared with OpenWatch
+    // (the health-calculations/ submodule, a composite build). The app uses them too.
+    api("tech.mmarca.healthcalculations:health-calculations")
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.zxing.core)
     implementation(libs.androidx.core.ktx)

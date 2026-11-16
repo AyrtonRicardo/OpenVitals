@@ -4,9 +4,9 @@ import org.maplibre.geojson.Feature
 import org.maplibre.geojson.FeatureCollection
 import org.maplibre.geojson.LineString
 import org.maplibre.geojson.Point
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.domain.model.CoMapsCoordinate
 import tech.mmarca.openvitals.domain.model.CoMapsRoutePolyline
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
 
 internal fun routeLineFeatureCollection(
     points: List<ExerciseRoutePoint>,

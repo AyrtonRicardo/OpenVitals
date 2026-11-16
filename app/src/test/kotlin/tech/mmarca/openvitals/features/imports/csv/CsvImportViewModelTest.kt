@@ -25,12 +25,12 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.BpRecordValues
 import tech.mmarca.openvitals.data.repository.AppleHealthImportRepository
 import tech.mmarca.openvitals.data.repository.contract.ActivityRepository
 import tech.mmarca.openvitals.data.repository.contract.CsvImportPreferences
 import tech.mmarca.openvitals.data.repository.contract.HealthRepository
 import tech.mmarca.openvitals.domain.model.ActivityWriteRequest
-import tech.mmarca.openvitals.domain.model.BpRecordValues
 import tech.mmarca.openvitals.domain.model.NutritionNutrient
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
 import tech.mmarca.openvitals.util.MainDispatcherRule

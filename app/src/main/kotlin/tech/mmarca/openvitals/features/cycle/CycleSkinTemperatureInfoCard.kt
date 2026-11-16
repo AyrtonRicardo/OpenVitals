@@ -17,10 +17,10 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import tech.mmarca.healthcalculations.cycle.CycleSource
+import tech.mmarca.healthcalculations.cycle.CycleSources
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.cycle.CycleSource
-import tech.mmarca.openvitals.domain.cycle.CycleSources
 import tech.mmarca.openvitals.ui.components.AccentIconChip
 import tech.mmarca.openvitals.ui.components.OpenVitalsCard
 import tech.mmarca.openvitals.ui.components.OpenVitalsTextButton

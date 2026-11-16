@@ -19,7 +19,7 @@ enum class NutritionEntryEditKind {
  * or a drink logged without water. A food stays delete-only, so its catalog portion holds.
  */
 fun NutritionEntry.editKind(): NutritionEntryEditKind? {
-    if (!isOpenVitalsEntry || id.isBlank()) return null
+    if (!isOwnEntry || id.isBlank()) return null
     val clientRecordId = clientRecordId ?: return null
     return when {
         clientRecordId.startsWith(OpenVitalsManualNutritionClientRecordPrefix) -> NutritionEntryEditKind.TYPED

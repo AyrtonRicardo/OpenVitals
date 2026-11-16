@@ -1,24 +1,22 @@
 package tech.mmarca.openvitals.healthconnect
 
-import tech.mmarca.openvitals.domain.model.NutritionWriteRequest
-import tech.mmarca.openvitals.domain.model.NutritionNutrient
-import androidx.health.connect.client.records.NutritionRecord
 import android.util.Log
 import androidx.health.connect.client.HealthConnectClient
 import androidx.health.connect.client.records.BasalBodyTemperatureRecord
 import androidx.health.connect.client.records.BasalMetabolicRateRecord
 import androidx.health.connect.client.records.BloodGlucoseRecord
+import androidx.health.connect.client.records.BloodPressureRecord
+import androidx.health.connect.client.records.BodyTemperatureMeasurementLocation
 import androidx.health.connect.client.records.BodyWaterMassRecord
 import androidx.health.connect.client.records.BoneMassRecord
-import androidx.health.connect.client.records.BloodPressureRecord
 import androidx.health.connect.client.records.HeartRateRecord
-import androidx.health.connect.client.records.BodyTemperatureMeasurementLocation
 import androidx.health.connect.client.records.HydrationRecord
 import androidx.health.connect.client.records.IntermenstrualBleedingRecord
 import androidx.health.connect.client.records.LeanBodyMassRecord
 import androidx.health.connect.client.records.MealType
 import androidx.health.connect.client.records.MenstruationFlowRecord
 import androidx.health.connect.client.records.MindfulnessSessionRecord
+import androidx.health.connect.client.records.NutritionRecord
 import androidx.health.connect.client.records.OvulationTestRecord
 import androidx.health.connect.client.records.OxygenSaturationRecord
 import androidx.health.connect.client.records.Record
@@ -44,20 +42,22 @@ import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.BpMealContext
+import tech.mmarca.healthcalculations.model.CycleEntryKind
+import tech.mmarca.healthcalculations.model.CycleEntryWriteRequest
+import tech.mmarca.healthcalculations.model.GlucoseContext
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.model.VitalsMeasurementWriteRequest
+import tech.mmarca.healthcalculations.model.Vo2MaxRecordValues
 import tech.mmarca.openvitals.core.performance.DispatcherProvider
 import tech.mmarca.openvitals.domain.model.BodyMeasurementType
-import tech.mmarca.openvitals.domain.model.BpMealContext
-import tech.mmarca.openvitals.domain.model.bpPulseClientRecordId
 import tech.mmarca.openvitals.domain.model.BodyMeasurementWriteRequest
-import tech.mmarca.openvitals.domain.model.CycleEntryKind
-import tech.mmarca.openvitals.domain.model.CycleEntryWriteRequest
-import tech.mmarca.openvitals.domain.model.GlucoseContext
 import tech.mmarca.openvitals.domain.model.GlucoseRecordValues
 import tech.mmarca.openvitals.domain.model.HydrationWriteRequest
 import tech.mmarca.openvitals.domain.model.MindfulnessSessionWriteRequest
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementWriteRequest
-import tech.mmarca.openvitals.domain.model.Vo2MaxRecordValues
+import tech.mmarca.openvitals.domain.model.NutritionNutrient
+import tech.mmarca.openvitals.domain.model.NutritionWriteRequest
+import tech.mmarca.openvitals.domain.model.bpPulseClientRecordId
 
 /**
  * Write, edit and delete of one entry, per reader, on Google's fake client. The activity
@@ -139,7 +139,7 @@ class EntryWritePathsTest {
         assertThat(all(BasalMetabolicRateRecord::class).single().basalMetabolicRate.inKilocaloriesPerDay)
             .isWithin(1e-6).of(1_712.0)
         val leanId = all(LeanBodyMassRecord::class).single().metadata.id
-        assertThat(reader.readBodyMeasurementEntry(BodyMeasurementType.LEAN_MASS, leanId)?.isOpenVitalsEntry).isTrue()
+        assertThat(reader.readBodyMeasurementEntry(BodyMeasurementType.LEAN_MASS, leanId)?.isOwnEntry).isTrue()
 
         reader.updateBodyMeasurementEntry(leanId, BodyMeasurementWriteRequest(BodyMeasurementType.LEAN_MASS, NOON, 62.8))
         reader.deleteBodyMeasurementEntry(BodyMeasurementType.BONE_MASS, all(BoneMassRecord::class).single().metadata.id)
@@ -183,7 +183,7 @@ class EntryWritePathsTest {
 
         val editableByEstimate = all(BasalMetabolicRateRecord::class).associate { record ->
             record.metadata.clientRecordId.orEmpty().startsWith(BmrEstimateClientRecordIdPrefix) to
-                reader.readBodyMeasurementEntry(BodyMeasurementType.BMR, record.metadata.id)?.isOpenVitalsEntry
+                reader.readBodyMeasurementEntry(BodyMeasurementType.BMR, record.metadata.id)?.isOwnEntry
         }
 
         assertThat(editableByEstimate).containsExactly(true, false, false, true)
@@ -603,7 +603,7 @@ class EntryWritePathsTest {
 
         val loaded = reader.readCycleEntry(CycleEntryKind.MENSTRUATION_FLOW, id)
         assertThat(loaded?.flow).isEqualTo(MenstruationFlowRecord.FLOW_LIGHT)
-        assertThat(loaded?.isOpenVitalsEntry).isTrue()
+        assertThat(loaded?.isOwnEntry).isTrue()
 
         reader.updateCycleEntry(id, CycleEntryWriteRequest(CycleEntryKind.MENSTRUATION_FLOW, NOON, flow = MenstruationFlowRecord.FLOW_HEAVY))
 

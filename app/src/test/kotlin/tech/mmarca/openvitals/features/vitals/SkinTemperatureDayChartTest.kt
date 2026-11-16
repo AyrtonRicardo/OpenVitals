@@ -4,8 +4,8 @@ import java.time.Instant
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
-import tech.mmarca.openvitals.domain.model.SkinTemperatureDeltaSample
-import tech.mmarca.openvitals.domain.model.SkinTemperatureEntry
+import tech.mmarca.healthcalculations.model.SkinTemperatureDeltaSample
+import tech.mmarca.healthcalculations.model.SkinTemperatureEntry
 
 /** The day chart draws the samples the records carry, not one dot per record. */
 class SkinTemperatureDayChartTest {

@@ -1,6 +1,6 @@
 package tech.mmarca.openvitals.domain.report
 
-import tech.mmarca.openvitals.domain.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseData
 import tech.mmarca.openvitals.domain.model.ReportWorkoutSession
 import tech.mmarca.openvitals.domain.model.ReportWorkoutTypeTotal
 import tech.mmarca.openvitals.domain.model.ReportWorkoutsDetail

@@ -30,7 +30,11 @@ private fun AppleHealthImportConverter.buildSingleRecord(record: AppleRecord): C
     val interval = interval(start, end)
     val value = record.numericValue
 
-    fun metadata(targetType: String): Metadata = appleMetadata(record, targetType, record.sourceFingerprint)
+    var legacyClientRecordId: String? = null
+    fun metadata(targetType: String): Metadata {
+        legacyClientRecordId = record.legacyClientRecordId(targetType)
+        return appleMetadata(record, targetType)
+    }
     fun converted(targetType: String, fingerprint: String, healthRecord: Record): ConvertedAppleRecord =
         ConvertedAppleRecord(
             appleType = record.type,
@@ -246,5 +250,5 @@ private fun AppleHealthImportConverter.buildSingleRecord(record: AppleRecord): C
         AppleMindfulSession -> convertMindfulness(record, interval, metadata("MindfulnessSessionRecord"))
         AppleHeartRateVariabilitySdnn -> unsupportedNull(record, "Apple exports HRV as SDNN; Health Connect record in this SDK is RMSSD, so this is not imported.")
         else -> unsupportedNull(record, "No direct Health Connect mapping is implemented for this Apple record type.")
-    }
+    }?.copy(legacyClientRecordId = legacyClientRecordId)
 }

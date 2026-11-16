@@ -124,7 +124,7 @@ import tech.mmarca.openvitals.domain.model.ActivityRecordingMarker
 import tech.mmarca.openvitals.domain.model.BleSensorCapability
 import tech.mmarca.openvitals.domain.model.CoMapsNavigationState
 import tech.mmarca.openvitals.domain.model.CoMapsRoutePolyline
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.features.activity.maps.OfflineRouteMapOrPreview
 import tech.mmarca.openvitals.domain.preferences.ActivityRecordingDashboardField
 import tech.mmarca.openvitals.domain.preferences.ActivityRecordingDashboardItemSize

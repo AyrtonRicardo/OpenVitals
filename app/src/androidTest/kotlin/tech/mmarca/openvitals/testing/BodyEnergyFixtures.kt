@@ -3,13 +3,13 @@ package tech.mmarca.openvitals.testing
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
-import tech.mmarca.openvitals.domain.insights.BodyEnergyBucketState
-import tech.mmarca.openvitals.domain.insights.BodyEnergyConfidence
-import tech.mmarca.openvitals.domain.insights.BodyEnergyInputSummary
-import tech.mmarca.openvitals.domain.insights.BodyEnergyPrimaryInfluence
-import tech.mmarca.openvitals.domain.insights.BodyEnergyReasonCode
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimeline
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimelinePoint
+import tech.mmarca.healthcalculations.insights.BodyEnergyBucketState
+import tech.mmarca.healthcalculations.insights.BodyEnergyConfidence
+import tech.mmarca.healthcalculations.insights.BodyEnergyInputSummary
+import tech.mmarca.healthcalculations.insights.BodyEnergyPrimaryInfluence
+import tech.mmarca.healthcalculations.insights.BodyEnergyReasonCode
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimeline
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimelinePoint
 
 /** A fixed past day, so nothing here moves with the wall clock. */
 val BodyEnergyFixtureDate: LocalDate = LocalDate.of(2026, 6, 23)

@@ -4,6 +4,8 @@ import androidx.health.connect.client.records.BloodPressureRecord
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.BpMealContext
+import tech.mmarca.healthcalculations.model.BpRecordValues
 
 /** The clientRecordId token is the only place the BP meal context lives, so encode/parse must round-trip and a foreign id must read as "no context". */
 class BpMealContextTest {

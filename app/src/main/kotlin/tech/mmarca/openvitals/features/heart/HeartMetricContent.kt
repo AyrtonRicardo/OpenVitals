@@ -26,16 +26,16 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.MetricDetailSectionContext
-import tech.mmarca.openvitals.core.stats.averageOrNull
-import tech.mmarca.openvitals.core.stats.timeBucketedAverageOrNull
+import tech.mmarca.healthcalculations.stats.averageOrNull
+import tech.mmarca.healthcalculations.stats.timeBucketedAverageOrNull
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.DailyHrv
-import tech.mmarca.openvitals.domain.model.DailyRestingHR
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.model.DailyHrv
+import tech.mmarca.healthcalculations.model.DailyRestingHR
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
 import tech.mmarca.openvitals.features.vitals.heartRateSeries
 import tech.mmarca.openvitals.ui.components.ChartDaySelection
 import tech.mmarca.openvitals.ui.components.MetricLineChart
@@ -695,7 +695,7 @@ internal fun LazyListScope.hrvContent(
                             source = { it.source },
                             time = { it.time },
                             dateTimeFormatterProvider = dateTimeFormatterProvider,
-                            editable = { it.isOpenVitalsEntry && it.id.isNotBlank() },
+                            editable = { it.isOwnEntry && it.id.isNotBlank() },
                             onEdit = { onEditVitalsMeasurement(VitalsMeasurementType.HRV, it.id) },
                             onDelete = { onDeleteVitalsMeasurement(VitalsMeasurementType.HRV, it.id) },
                         )

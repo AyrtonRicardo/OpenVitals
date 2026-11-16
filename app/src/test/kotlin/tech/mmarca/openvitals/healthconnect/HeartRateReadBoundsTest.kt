@@ -17,7 +17,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import tech.mmarca.openvitals.domain.model.HeartRateInsightBucketDuration
+import tech.mmarca.healthcalculations.model.HeartRateInsightBucketDuration
 
 /**
  * A long window must never come back sample by sample. 28 days of a 1 Hz

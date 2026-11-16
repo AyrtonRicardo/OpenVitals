@@ -17,8 +17,8 @@ import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.DailySteps
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
-import tech.mmarca.openvitals.domain.model.DailySteps
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
 

@@ -38,49 +38,47 @@ import tech.mmarca.openvitals.core.performance.DefaultDispatcherProvider
 import tech.mmarca.openvitals.core.performance.DispatcherProvider
 import tech.mmarca.openvitals.core.performance.PerformanceTrace
 import tech.mmarca.openvitals.data.repository.contract.CycleRepository
-import tech.mmarca.openvitals.domain.insights.CardioLoadConfidence
-import tech.mmarca.openvitals.domain.insights.CardioLoadEstimate
-import tech.mmarca.openvitals.domain.insights.CardioLoadTimeWindow
-import tech.mmarca.openvitals.domain.insights.IntensityMinutesConfidence
-import tech.mmarca.openvitals.domain.insights.IntensityMinutesEstimate
-import tech.mmarca.openvitals.domain.insights.IntensityWorkoutInput
-import tech.mmarca.openvitals.domain.insights.OvernightHrvInput
-import tech.mmarca.openvitals.domain.insights.SleepScoreEstimate
-import tech.mmarca.openvitals.domain.insights.SleepScoreLookbackDays
-import tech.mmarca.openvitals.domain.insights.calculateCardioLoad
-import tech.mmarca.openvitals.domain.insights.calculateIntensityMinutes
-import tech.mmarca.openvitals.domain.insights.calculateSleepScoreForDate
+import tech.mmarca.healthcalculations.insights.CardioLoadConfidence
+import tech.mmarca.healthcalculations.insights.CardioLoadEstimate
+import tech.mmarca.healthcalculations.insights.CardioLoadTimeWindow
+import tech.mmarca.healthcalculations.insights.IntensityMinutesConfidence
+import tech.mmarca.healthcalculations.insights.IntensityMinutesEstimate
+import tech.mmarca.healthcalculations.insights.IntensityWorkoutInput
+import tech.mmarca.healthcalculations.insights.SleepScoreEstimate
+import tech.mmarca.healthcalculations.insights.SleepScoreLookbackDays
+import tech.mmarca.healthcalculations.insights.calculateCardioLoad
+import tech.mmarca.healthcalculations.insights.observedMaxHeartRateLookbackDays
+import tech.mmarca.healthcalculations.insights.calculateIntensityMinutes
+import tech.mmarca.healthcalculations.insights.calculateSleepScoreForDate
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.period.periodFor
-import tech.mmarca.openvitals.core.stats.timeBucketedAverageOrNull
+import tech.mmarca.healthcalculations.stats.timeBucketedAverageOrNull
 import tech.mmarca.openvitals.domain.model.toDashboardSummary
 import tech.mmarca.openvitals.domain.preferences.ActivityWeekMode
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
+import tech.mmarca.healthcalculations.preferences.SleepWindow
 import tech.mmarca.openvitals.domain.preferences.toWeekPeriodMode
 import tech.mmarca.openvitals.domain.model.DashboardData
 import tech.mmarca.openvitals.domain.model.DashboardMetric
 import tech.mmarca.openvitals.domain.model.DashboardQuery
-import tech.mmarca.openvitals.domain.model.DashboardWeeklyCardioLoad
-import tech.mmarca.openvitals.domain.model.DashboardWeeklyCardioLoadTargetSource
-import tech.mmarca.openvitals.domain.model.DashboardWeeklyIntensityMinutes
-import tech.mmarca.openvitals.domain.model.CaloriesBurnedSource
-import tech.mmarca.openvitals.domain.model.DailySteps
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.DailyRestingHR
-import tech.mmarca.openvitals.domain.model.HeartRateSample
+import tech.mmarca.healthcalculations.model.DashboardWeeklyCardioLoad
+import tech.mmarca.healthcalculations.model.DashboardWeeklyCardioLoadTargetSource
+import tech.mmarca.healthcalculations.model.DashboardWeeklyIntensityMinutes
+import tech.mmarca.healthcalculations.model.CaloriesBurnedSource
+import tech.mmarca.healthcalculations.model.DailySteps
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.DailyRestingHR
+import tech.mmarca.healthcalculations.model.HeartRateSample
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
 import tech.mmarca.openvitals.domain.model.NutritionNutrient
-import tech.mmarca.openvitals.domain.model.SleepData
-import tech.mmarca.openvitals.domain.model.dailySleepSummary
+import tech.mmarca.healthcalculations.model.SleepData
+import tech.mmarca.healthcalculations.model.dailySleepSummary
 import tech.mmarca.openvitals.domain.model.minutesByStartDate
-import tech.mmarca.openvitals.domain.model.sleepRangeStartFor
+import tech.mmarca.healthcalculations.model.sleepRangeStartFor
 import tech.mmarca.openvitals.domain.dashboard.DashboardAggregator
 import tech.mmarca.openvitals.domain.dashboard.DashboardAggregator.cardioLoadWindows
 import tech.mmarca.openvitals.domain.dashboard.DashboardAggregator.datesInRange
 import tech.mmarca.openvitals.domain.dashboard.DashboardAggregator.intensityWorkoutInputs
-import tech.mmarca.openvitals.domain.dashboard.DashboardAggregator.medianDoubleOrNull
 import tech.mmarca.openvitals.domain.dashboard.DashboardAggregator.medianDoubleValuesOrNull
-import tech.mmarca.openvitals.domain.dashboard.DashboardAggregator.medianLongOrNull
 import tech.mmarca.openvitals.domain.dashboard.DashboardAggregator.roundCardioTarget
 import tech.mmarca.openvitals.domain.dashboard.DashboardAggregator.weeklyCardioConfidence
 import tech.mmarca.openvitals.domain.dashboard.DashboardAggregator.weeklyIntensityConfidence
@@ -94,14 +92,18 @@ import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneId
 import tech.mmarca.openvitals.data.repository.toCaffeineEntry
-import tech.mmarca.openvitals.domain.insights.CaffeineInsightCalculator
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
-import tech.mmarca.openvitals.domain.preferences.CaffeinePreferences
+import tech.mmarca.healthcalculations.insights.CaffeineInsightCalculator
+import tech.mmarca.healthcalculations.insights.overnightHrvInput
+import tech.mmarca.healthcalculations.insights.bodyMassIndex
+import tech.mmarca.healthcalculations.insights.adjustedFatFreeMassIndex
+import tech.mmarca.healthcalculations.preferences.BodyProfile
+import tech.mmarca.healthcalculations.preferences.CaffeinePreferences
 import java.time.temporal.ChronoUnit
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.math.roundToInt
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
+import tech.mmarca.healthcalculations.stats.lowerMedianOrNull
 
 @Singleton
 class DashboardDataLoader @Inject constructor(
@@ -399,7 +401,7 @@ class DashboardDataLoader @Inject constructor(
             hc.readDailyRestingHR(date.minusDays(28), date.minusDays(1))
                 .map { it.bpm }
                 .filter { it > 0L }
-                .medianLongOrNull()
+                .lowerMedianOrNull()
         }
         val hrvSamples = readIfNeeded(wants(DashboardMetric.HRV), readHrvPermission, "HRV samples") {
             hc.readHrvSamples(nightStart, effectiveDayEnd)
@@ -558,11 +560,7 @@ class DashboardDataLoader @Inject constructor(
             .timeBucketedAverageOrNull(time = { it.time }, value = { it.rmssdMs })
         val dayHrvBaselineRmssd = hrvBaseline?.await()
         val latestBodyFatPercent = bodyFat?.await()
-        val overnightHrv = dayHrvRmssd?.let { rmssd ->
-            dayHrvBaselineRmssd?.takeIf { it > 0.0 }?.let { baseline ->
-                OvernightHrvInput(rmssdMs = rmssd, baselineRmssdMs = baseline)
-            }
-        }
+        val overnightHrv = overnightHrvInput(dayHrvRmssd, dayHrvBaselineRmssd)
         val sleepScore = when {
             !calculateDerivedMetrics -> SleepScoreEstimate.NoData
             dashboardSleep == null -> SleepScoreEstimate.NoData
@@ -629,16 +627,12 @@ class DashboardDataLoader @Inject constructor(
             heightCm = latestHeight?.heightCm,
             heightTime = latestHeight?.time,
             bmi = if (calculateDerivedMetrics && wants(DashboardMetric.BMI)) {
-                latestWeight?.weightKg?.let { weightKg ->
-                    latestHeight?.heightCm
-                        ?.takeIf { it > 0.0 }
-                        ?.let { heightCm -> weightKg / ((heightCm / 100.0) * (heightCm / 100.0)) }
-                }
+                bodyMassIndex(latestWeight?.weightKg, latestHeight?.heightCm)
             } else {
                 null
             },
             ffmi = if (calculateDerivedMetrics && wants(DashboardMetric.FFMI)) {
-                calculateAdjustedFfmi(
+                adjustedFatFreeMassIndex(
                     weightKg = latestWeight?.weightKg,
                     heightCm = latestHeight?.heightCm,
                     bodyFatPercent = latestBodyFatPercent,
@@ -703,23 +697,6 @@ class DashboardDataLoader @Inject constructor(
             supportedMetrics = supportedMetrics(),
             metricSourcePackages = metricSourcePackages,
         )
-    }
-
-    /** Kouri et al. 1995 (doi:10.1097/00042752-199510000-00003): FFM / m², normalised to 1.80 m by 6.3 × (1.80 − m). */
-    private fun calculateAdjustedFfmi(
-        weightKg: Double?,
-        heightCm: Double?,
-        bodyFatPercent: Double?,
-    ): Double? {
-        val weight = weightKg?.takeIf { it > 0.0 } ?: return null
-        val heightMeters = heightCm?.takeIf { it > 0.0 }?.let { it / 100.0 } ?: return null
-        val bodyFatRatio = bodyFatPercent
-            ?.takeIf { it in 0.0..100.0 }
-            ?.let { it / 100.0 }
-            ?: return null
-        val fatFreeMassKg = weight * (1.0 - bodyFatRatio)
-        val ffmi = fatFreeMassKg / (heightMeters * heightMeters)
-        return ffmi + (6.3 * (1.8 - heightMeters))
     }
 
     private suspend fun readDashboardSleep(
@@ -791,6 +768,15 @@ class DashboardDataLoader @Inject constructor(
             } else {
                 emptyList()
             },
+            // The year before the period's end, as every observed maximum in the app. An aggregate.
+            observedMaxHeartRate = if (readHeartRatePermission in granted) {
+                hc.readMaxHeartRate(
+                    heartRateSampleEndInstant.minus(Duration.ofDays(observedMaxHeartRateLookbackDays)),
+                    heartRateSampleEndInstant,
+                )
+            } else {
+                null
+            },
             restingHeartRates = if (readRestingHRPermission in granted) {
                 hc.readDailyRestingHR(rangeStart, rangeEnd)
             } else {
@@ -836,8 +822,8 @@ class DashboardDataLoader @Inject constructor(
         return withContext(dispatchers.default) {
             val stepsByDate = dailySteps.associateBy { it.date }
             val restingHeartRateByDate = restingHeartRates.associateBy { it.date }
-            val baselineRestingHeartRate = restingHeartRates.map { it.bpm }.medianLongOrNull()
-            val observedMaxHeartRate = heartRateSamples.maxOfOrNull { it.beatsPerMinute }
+            val baselineRestingHeartRate = restingHeartRates.map { it.bpm }.lowerMedianOrNull()
+            val observedMaxHeartRate = rawData.observedMaxHeartRate
             val heartRateSamplesByDate = heartRateSamples
                 .sortedBy { it.time }
                 .groupBy { it.time.atZone(zone).toLocalDate() }
@@ -1010,6 +996,7 @@ private data class DashboardWeeklyTrainingSignals(
 private data class DashboardWeeklyTrainingRawData(
     val dailySteps: List<DailySteps>,
     val heartRateSamples: List<HeartRateSample>,
+    val observedMaxHeartRate: Long?,
     val restingHeartRates: List<DailyRestingHR>,
     val workouts: List<ExerciseData>,
 )

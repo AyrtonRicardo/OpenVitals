@@ -7,8 +7,8 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.SkinTemperatureEntry
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.SkinTemperatureEntry
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 
 /** Skin temperature is a variation from a per-record baseline; the screen keeps the two apart. */

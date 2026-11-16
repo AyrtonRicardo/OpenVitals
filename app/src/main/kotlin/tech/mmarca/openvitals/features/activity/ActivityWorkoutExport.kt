@@ -10,10 +10,10 @@ import androidx.health.connect.client.records.ExerciseSessionRecord
 import org.xmlpull.v1.XmlSerializer
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.export.stageExport
-import tech.mmarca.openvitals.domain.model.ActivityCadenceKind
-import tech.mmarca.openvitals.domain.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ActivityCadenceKind
+import tech.mmarca.healthcalculations.model.ExerciseData
 import tech.mmarca.openvitals.domain.model.ExerciseTypeNames
-import tech.mmarca.openvitals.domain.model.HeartRateSample
+import tech.mmarca.healthcalculations.model.HeartRateSample
 import java.io.File
 import java.io.OutputStream
 import tech.mmarca.openvitals.core.performance.offMainIo
@@ -90,7 +90,7 @@ internal suspend fun Context.shareActivityWorkout(
         )
     }
 
-private fun writeActivityWorkoutExport(
+internal fun writeActivityWorkoutExport(
     workout: ExerciseData,
     series: ActivityWorkoutSeries,
     format: ActivityWorkoutExportFormat,

@@ -2,10 +2,10 @@ package tech.mmarca.openvitals.features.dashboard
 
 import androidx.compose.runtime.Immutable
 import java.time.Instant
+import tech.mmarca.healthcalculations.insights.SleepScoreConfidence
+import tech.mmarca.healthcalculations.model.CaloriesBurnedSource
+import tech.mmarca.healthcalculations.model.DashboardWeeklyCardioLoad
 import tech.mmarca.openvitals.core.presentation.DisplayValue
-import tech.mmarca.openvitals.domain.insights.SleepScoreConfidence
-import tech.mmarca.openvitals.domain.model.CaloriesBurnedSource
-import tech.mmarca.openvitals.domain.model.DashboardWeeklyCardioLoad
 import tech.mmarca.openvitals.features.cycle.CycleSecondaryLine
 
 @Immutable

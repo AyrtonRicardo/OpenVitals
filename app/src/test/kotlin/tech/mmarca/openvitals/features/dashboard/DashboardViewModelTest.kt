@@ -2,10 +2,10 @@ package tech.mmarca.openvitals.features.dashboard
 
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.ScreenError
-import tech.mmarca.openvitals.domain.insights.MetricDailyGoalKey
+import tech.mmarca.healthcalculations.insights.MetricDailyGoalKey
 import tech.mmarca.openvitals.domain.preferences.ActivityWeekMode
-import tech.mmarca.openvitals.domain.preferences.BodyEnergyCalibration
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
+import tech.mmarca.healthcalculations.preferences.BodyEnergyCalibration
+import tech.mmarca.healthcalculations.preferences.SleepWindow
 import tech.mmarca.openvitals.domain.model.BleConnectionStatus
 import tech.mmarca.openvitals.domain.model.BleDeviceConnectionStatus
 import tech.mmarca.openvitals.domain.model.BleRecordingMetrics
@@ -14,16 +14,16 @@ import tech.mmarca.openvitals.domain.model.BleSensorDevice
 import tech.mmarca.openvitals.domain.model.DashboardData
 import tech.mmarca.openvitals.domain.model.DashboardMetric
 import tech.mmarca.openvitals.domain.model.DashboardQuery
-import tech.mmarca.openvitals.domain.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseData
 import tech.mmarca.openvitals.data.repository.BleDeviceRepository
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.data.repository.contract.ActivityRepository
 import tech.mmarca.openvitals.data.repository.contract.BodyEnergyRepository
 import tech.mmarca.openvitals.data.repository.contract.BodyEnergyTimelineQuery
 import tech.mmarca.openvitals.data.repository.contract.BodyEnergyTimelineResult
-import tech.mmarca.openvitals.domain.insights.BodyEnergyConfidence
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimeline
+import tech.mmarca.healthcalculations.insights.BodyEnergyConfidence
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimeline
 import tech.mmarca.openvitals.data.repository.contract.HealthRepository
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
@@ -1374,7 +1374,7 @@ class DashboardViewModelTest {
     }
 
     @Test fun `deleteActivityEntry deletes OpenVitals dashboard activity and refreshes`() = runTest {
-        val workout = dashboardWorkout(id = "activity-1", isOpenVitalsEntry = true)
+        val workout = dashboardWorkout(id = "activity-1", isOwnEntry = true)
         val loader = mockDashboardDataLoader()
         val activityRepo = mockk<ActivityRepository>()
         loader.answersEveryPassWith(DashboardData(date = today, workouts = listOf(workout)))
@@ -1389,7 +1389,7 @@ class DashboardViewModelTest {
         }
     }
 
-    private fun dashboardWorkout(id: String, isOpenVitalsEntry: Boolean) = ExerciseData(
+    private fun dashboardWorkout(id: String, isOwnEntry: Boolean) = ExerciseData(
         id = id,
         title = "Workout",
         exerciseType = 56,
@@ -1397,7 +1397,7 @@ class DashboardViewModelTest {
         endTime = Instant.EPOCH.plusSeconds(60),
         durationMs = 60_000,
         source = "test",
-        isOpenVitalsEntry = isOpenVitalsEntry,
+        isOwnEntry = isOwnEntry,
     )
 
     private fun dashboardViewModel(

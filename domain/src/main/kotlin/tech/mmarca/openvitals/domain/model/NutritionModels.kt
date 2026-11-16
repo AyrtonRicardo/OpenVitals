@@ -2,6 +2,8 @@ package tech.mmarca.openvitals.domain.model
 
 import java.time.Instant
 import java.time.LocalDate
+import tech.mmarca.healthcalculations.model.CaffeineSourceCategory
+import tech.mmarca.healthcalculations.model.CaloriesBurnedSource
 
 /**
  * The client-record-id prefix of a record typed into the nutrition entry form. It must not
@@ -33,17 +35,6 @@ data class DailyNutrition(
     val hasCaloriesBurnedData: Boolean = caloriesBurnedSource != CaloriesBurnedSource.NO_DATA,
 )
 
-enum class CaloriesBurnedSource {
-    NO_DATA,
-    RECORDED_TOTAL,
-    ESTIMATED_ACTIVE_AND_BMR,
-}
-
-data class CaloriesBurnedValue(
-    val kcal: Double,
-    val source: CaloriesBurnedSource,
-)
-
 data class DailyHydration(
     val date: LocalDate,
     val liters: Double,
@@ -56,7 +47,7 @@ data class HydrationEntry(
     val source: String,
     val id: String = "",
     val clientRecordId: String? = null,
-    val isOpenVitalsEntry: Boolean = false,
+    val isOwnEntry: Boolean = false,
     val recordType: HydrationEntryRecordType = HydrationEntryRecordType.HYDRATION,
     val displayName: String? = null,
     val nutrientValues: Map<NutritionNutrient, Double> = emptyMap(),
@@ -141,7 +132,7 @@ data class NutritionEntry(
     val nutrientValues: Map<NutritionNutrient, Double> = emptyMap(),
     val id: String = "",
     val clientRecordId: String? = null,
-    val isOpenVitalsEntry: Boolean = false,
+    val isOwnEntry: Boolean = false,
 ) {
     /**
      * Logged in OpenVitals, not only written by it. An Apple Health or CSV import, or a record
@@ -149,7 +140,7 @@ data class NutritionEntry(
      * like another app's: a meal from it is not a drink.
      */
     val isLoggedInOpenVitals: Boolean
-        get() = isOpenVitalsEntry && !isImportedClientRecordId(clientRecordId)
+        get() = isOwnEntry && !isImportedClientRecordId(clientRecordId)
 }
 
 data class NutritionWriteRequest(

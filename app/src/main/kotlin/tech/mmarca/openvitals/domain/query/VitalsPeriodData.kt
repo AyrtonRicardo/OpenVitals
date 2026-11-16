@@ -1,14 +1,14 @@
 package tech.mmarca.openvitals.domain.query
 
-import tech.mmarca.openvitals.domain.model.BloodGlucoseEntry
-import tech.mmarca.openvitals.domain.model.BloodPressureEntry
-import tech.mmarca.openvitals.domain.model.BodyTempEntry
-import tech.mmarca.openvitals.domain.model.DailyBloodPressurePoint
-import tech.mmarca.openvitals.domain.model.DailyVitalPoint
-import tech.mmarca.openvitals.domain.model.RespiratoryRateEntry
-import tech.mmarca.openvitals.domain.model.SkinTemperatureEntry
-import tech.mmarca.openvitals.domain.model.SpO2Entry
-import tech.mmarca.openvitals.domain.model.Vo2MaxEntry
+import tech.mmarca.healthcalculations.model.BloodGlucoseEntry
+import tech.mmarca.healthcalculations.model.BloodPressureEntry
+import tech.mmarca.healthcalculations.model.BodyTempEntry
+import tech.mmarca.healthcalculations.model.DailyBloodPressurePoint
+import tech.mmarca.healthcalculations.model.DailyVitalPoint
+import tech.mmarca.healthcalculations.model.RespiratoryRateEntry
+import tech.mmarca.healthcalculations.model.SkinTemperatureEntry
+import tech.mmarca.healthcalculations.model.SpO2Entry
+import tech.mmarca.healthcalculations.model.Vo2MaxEntry
 import tech.mmarca.openvitals.data.repository.VitalsPeriodMetric
 
 data class VitalsPeriodData(

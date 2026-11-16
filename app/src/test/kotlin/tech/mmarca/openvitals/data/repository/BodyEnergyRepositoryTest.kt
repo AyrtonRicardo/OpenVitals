@@ -10,16 +10,16 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DailyVitalPoint
+import tech.mmarca.healthcalculations.model.DatePeriod
+import tech.mmarca.healthcalculations.model.RespiratoryRateEntry
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.data.local.bodyenergy.FakeBodyEnergyTimelineDao
 import tech.mmarca.openvitals.data.repository.contract.ActivityRepository
 import tech.mmarca.openvitals.data.repository.contract.BodyEnergyTimelineQuery
 import tech.mmarca.openvitals.data.repository.contract.BodyRepository
 import tech.mmarca.openvitals.data.repository.contract.VitalsRepository
-import tech.mmarca.openvitals.domain.model.DailyVitalPoint
 import tech.mmarca.openvitals.domain.model.RefreshMode
-import tech.mmarca.openvitals.domain.model.RespiratoryRateEntry
 
 /** The cache tiers and the input fan-out, one day at a time. */
 class BodyEnergyRepositoryTest {

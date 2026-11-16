@@ -27,13 +27,13 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseRouteData
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseRouteStatus
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.data.repository.contract.SessionDistancePreferences
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.ExerciseRouteData
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
-import tech.mmarca.openvitals.domain.model.ExerciseRouteStatus
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
 

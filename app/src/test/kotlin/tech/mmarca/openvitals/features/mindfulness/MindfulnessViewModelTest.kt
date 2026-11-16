@@ -183,7 +183,7 @@ class MindfulnessViewModelTest {
             endTime = now,
             durationMs = 1_800_000,
             source = "tech.mmarca.openvitals.debug",
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         val repo = emptyRepo()
         coEvery { repo.loadMindfulnessSessions(any(), any()) } returns listOf(entry)
@@ -210,7 +210,7 @@ class MindfulnessViewModelTest {
             endTime = now,
             durationMs = 1_800_000,
             source = "tech.mmarca.openvitals.debug",
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         var sessions = listOf(entry)
         val repo = emptyRepo()
@@ -239,7 +239,7 @@ class MindfulnessViewModelTest {
                 endTime = now,
                 durationMs = 1_800_000,
                 source = "com.example",
-                isOpenVitalsEntry = false,
+                isOwnEntry = false,
             )
         )
         val repo = emptyRepo()

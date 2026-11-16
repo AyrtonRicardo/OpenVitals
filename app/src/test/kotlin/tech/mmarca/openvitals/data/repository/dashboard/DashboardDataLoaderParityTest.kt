@@ -52,9 +52,11 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.insights.CaffeineInsightCalculator
+import tech.mmarca.healthcalculations.model.DatePeriod
+import tech.mmarca.healthcalculations.preferences.CaffeinePreferences
 import tech.mmarca.openvitals.data.repository.toCaffeineEntry
-import tech.mmarca.openvitals.domain.insights.CaffeineInsightCalculator
+import tech.mmarca.openvitals.domain.insights.CaffeineHealthDrinkCatalog
 import tech.mmarca.openvitals.domain.model.DashboardData
 import tech.mmarca.openvitals.domain.model.DashboardMetric
 import tech.mmarca.openvitals.domain.model.DashboardQuery
@@ -62,7 +64,6 @@ import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
 import tech.mmarca.openvitals.domain.model.NutritionEntry
 import tech.mmarca.openvitals.domain.model.NutritionNutrient
 import tech.mmarca.openvitals.domain.model.mergeLoaded
-import tech.mmarca.openvitals.domain.preferences.CaffeinePreferences
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
 
 /**
@@ -160,6 +161,7 @@ class DashboardDataLoaderParityTest {
             period = DatePeriod(today, today),
             preferences = CaffeinePreferences(),
             now = Instant.now(),
+            catalog = CaffeineHealthDrinkCatalog,
         ).currentMg
         // Active caffeine decays by well under 0.1 mg between the two "now" samples.
         assertEquals(screenCurrentMg, data.activeCaffeineMg ?: 0.0, 0.1)

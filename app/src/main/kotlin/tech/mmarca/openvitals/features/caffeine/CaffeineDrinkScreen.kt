@@ -24,12 +24,12 @@ import java.time.Instant
 import java.time.ZoneId
 import kotlin.math.roundToInt
 import kotlin.math.roundToLong
+import tech.mmarca.healthcalculations.insights.CaffeineDrinkProfile
+import tech.mmarca.healthcalculations.insights.CaffeineProfileHorizon
+import tech.mmarca.healthcalculations.insights.caffeineDrinkProfile
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.insights.CaffeineDrinkProfile
-import tech.mmarca.openvitals.domain.insights.CaffeineProfileHorizon
-import tech.mmarca.openvitals.domain.insights.caffeineDrinkProfile
 import tech.mmarca.openvitals.ui.components.ChartTokens
 import tech.mmarca.openvitals.ui.components.ChartXAxisWithYAxis
 import tech.mmarca.openvitals.ui.components.ChartZoom

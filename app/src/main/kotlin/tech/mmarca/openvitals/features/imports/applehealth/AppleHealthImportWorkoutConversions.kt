@@ -8,7 +8,7 @@ import androidx.health.connect.client.units.kilocalories
 import androidx.health.connect.client.units.meters
 import java.time.Duration
 import kotlin.math.roundToLong
-import tech.mmarca.openvitals.core.geo.haversineMeters
+import tech.mmarca.healthcalculations.geo.haversineMeters
 
 internal fun AppleHealthImportConverter.convertWorkouts(
     workouts: List<AppleWorkout>,

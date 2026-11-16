@@ -9,11 +9,11 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import tech.mmarca.openvitals.domain.model.CaffeineDistributionSlice
-import tech.mmarca.openvitals.domain.model.CaffeineInsights
-import tech.mmarca.openvitals.domain.model.CaffeinePoint
-import tech.mmarca.openvitals.domain.model.CaffeineTimeBucket
-import tech.mmarca.openvitals.domain.model.CaffeineTimeOfDayBucket
+import tech.mmarca.healthcalculations.model.CaffeineDistributionSlice
+import tech.mmarca.healthcalculations.model.CaffeineInsights
+import tech.mmarca.healthcalculations.model.CaffeinePoint
+import tech.mmarca.healthcalculations.model.CaffeineTimeBucket
+import tech.mmarca.healthcalculations.model.CaffeineTimeOfDayBucket
 
 /** The caffeine cards' derivations as pure functions: the sleep verdict, the top six slices, the curve's axis maximum. */
 class CaffeineDisplayTest {

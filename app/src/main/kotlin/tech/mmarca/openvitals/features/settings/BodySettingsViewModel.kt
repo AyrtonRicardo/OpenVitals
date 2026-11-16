@@ -21,14 +21,14 @@ import tech.mmarca.openvitals.data.sync.BodyEnergyChainSyncService
 import tech.mmarca.openvitals.data.sync.DerivedMetricsResetService
 import tech.mmarca.openvitals.domain.model.BodyMeasurementType
 import tech.mmarca.openvitals.domain.model.BodyMeasurementWriteRequest
-import tech.mmarca.openvitals.domain.model.HeartRateThresholds
-import tech.mmarca.openvitals.domain.insights.BmrInput
-import tech.mmarca.openvitals.domain.insights.basalMetabolicRateKcal
-import tech.mmarca.openvitals.domain.insights.bmrMissingInputs
-import tech.mmarca.openvitals.domain.preferences.BodyEnergyCalibration
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
-import tech.mmarca.openvitals.domain.preferences.CaffeinePreferences
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
+import tech.mmarca.healthcalculations.model.HeartRateThresholds
+import tech.mmarca.healthcalculations.insights.BmrInput
+import tech.mmarca.healthcalculations.insights.basalMetabolicRateKcal
+import tech.mmarca.healthcalculations.insights.bmrMissingInputs
+import tech.mmarca.healthcalculations.preferences.BodyEnergyCalibration
+import tech.mmarca.healthcalculations.preferences.BodyProfile
+import tech.mmarca.healthcalculations.preferences.CaffeinePreferences
+import tech.mmarca.healthcalculations.preferences.SleepWindow
 import tech.mmarca.openvitals.domain.preferences.UnitQuantity
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 

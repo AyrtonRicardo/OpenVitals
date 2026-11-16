@@ -12,10 +12,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import java.util.Locale
+import tech.mmarca.healthcalculations.model.BpRecordValues
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.BpBodyPositionLabels
 import tech.mmarca.openvitals.core.presentation.BpMeasurementLocationLabels
-import tech.mmarca.openvitals.domain.model.BpRecordValues
 import tech.mmarca.openvitals.ui.components.OpenVitalsCard
 import tech.mmarca.openvitals.ui.components.OptionDropdown
 import tech.mmarca.openvitals.ui.theme.Spacing

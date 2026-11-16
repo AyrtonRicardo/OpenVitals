@@ -3,6 +3,7 @@ package tech.mmarca.openvitals.core.period
 import java.time.DayOfWeek
 import java.time.LocalDate
 import java.time.temporal.TemporalAdjusters
+import tech.mmarca.healthcalculations.model.DatePeriod
 
 fun periodFor(
     range: TimeRange,

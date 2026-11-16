@@ -52,7 +52,7 @@ import tech.mmarca.openvitals.features.dashboard.DashboardWidgetId
 import tech.mmarca.openvitals.features.heart.HeartViewModel
 import tech.mmarca.openvitals.domain.preferences.AppThemeMode
 import tech.mmarca.openvitals.domain.model.BodyMeasurementType
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
 import tech.mmarca.openvitals.features.manualentry.body.titleRes
 import tech.mmarca.openvitals.features.manualentry.vitals.titleRes
 import tech.mmarca.openvitals.features.nutrition.NutritionScreen

@@ -4,10 +4,10 @@ import androidx.compose.runtime.Immutable
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import tech.mmarca.openvitals.domain.insights.CardioLoadConfidence
-import tech.mmarca.openvitals.domain.insights.CardioLoadEstimate
-import tech.mmarca.openvitals.domain.insights.CardioLoadTimeWindow
-import tech.mmarca.openvitals.domain.insights.calculateCardioLoad
+import tech.mmarca.healthcalculations.insights.CardioLoadConfidence
+import tech.mmarca.healthcalculations.insights.CardioLoadEstimate
+import tech.mmarca.healthcalculations.insights.CardioLoadTimeWindow
+import tech.mmarca.healthcalculations.insights.calculateCardioLoad
 import tech.mmarca.openvitals.core.presentation.ScreenError
 import tech.mmarca.openvitals.core.presentation.toScreenError
 import tech.mmarca.openvitals.core.performance.DefaultDispatcherProvider
@@ -16,18 +16,19 @@ import tech.mmarca.openvitals.core.performance.LoadCoordinator
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.period.displayPeriodFor
 import tech.mmarca.openvitals.domain.preferences.ActivityWeekMode
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
+import tech.mmarca.healthcalculations.preferences.BodyProfile
 import tech.mmarca.openvitals.domain.preferences.toWeekPeriodMode
-import tech.mmarca.openvitals.domain.model.CaloriesBurnedSource
-import tech.mmarca.openvitals.domain.model.DailyHrv
+import tech.mmarca.healthcalculations.model.CaloriesBurnedSource
+import tech.mmarca.healthcalculations.model.DailyHrv
 import tech.mmarca.openvitals.domain.model.DailyNutrition
-import tech.mmarca.openvitals.domain.model.DailyRestingHR
-import tech.mmarca.openvitals.domain.model.DailySteps
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.HeartRateSample
+import tech.mmarca.healthcalculations.model.DailyRestingHR
+import tech.mmarca.healthcalculations.model.DailySteps
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.HeartRateSample
 import tech.mmarca.openvitals.data.repository.contract.ActivityRepository
 import tech.mmarca.openvitals.data.repository.contract.BodyProfilePreferences
 import tech.mmarca.openvitals.data.repository.contract.HeartRepository
+import tech.mmarca.openvitals.data.repository.contract.loadObservedMaxHeartRate
 import tech.mmarca.openvitals.data.repository.contract.CalorieDisplayPreferences
 import tech.mmarca.openvitals.data.repository.contract.PeriodPreferences
 import tech.mmarca.openvitals.navigation.selectedDayOrNull
@@ -41,6 +42,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import tech.mmarca.healthcalculations.stats.lowerMedianOrNull
 
 private const val ActivityOverviewLookbackDays = 30L
 
@@ -180,6 +182,9 @@ class ActivityOverviewViewModel @Inject constructor(
         val heartRateSamples = async { heartRepository.loadHeartRateSamples(start, end) }
         val restingHeartRate = async { heartRepository.loadDailyRestingHR(start, end) }
         val hrv = async { heartRepository.loadDailyHRV(start, end) }
+        val observedMaxHeartRate = async {
+            heartRepository.loadObservedMaxHeartRate(end.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant())
+        }
         ActivityOverviewLoadResult(
             steps = steps.await(),
             nutrition = nutrition.await(),
@@ -187,6 +192,7 @@ class ActivityOverviewViewModel @Inject constructor(
             heartRateSamples = heartRateSamples.await(),
             restingHeartRate = restingHeartRate.await(),
             hrv = hrv.await(),
+            observedMaxHeartRate = observedMaxHeartRate.await(),
         )
     }
 
@@ -197,6 +203,8 @@ class ActivityOverviewViewModel @Inject constructor(
         val heartRateSamples: List<HeartRateSample>,
         val restingHeartRate: List<DailyRestingHR>,
         val hrv: List<DailyHrv>,
+        /** The year's highest bpm before the period's end ([HeartRepository.loadObservedMaxHeartRate]). */
+        val observedMaxHeartRate: Long?,
     )
 
     private fun ActivityOverviewLoadResult.toDays(
@@ -214,8 +222,7 @@ class ActivityOverviewViewModel @Inject constructor(
         val restingHeartRateByDate = restingHeartRate.associateBy { it.date }
         val baselineRestingHeartRate = restingHeartRate
             .map { it.bpm }
-            .medianOrNull()
-        val observedMaxHeartRate = heartRateSamples.maxOfOrNull { it.beatsPerMinute }
+            .lowerMedianOrNull()
         return generateSequence(start) { date ->
             date.plusDays(1).takeUnless { it.isAfter(end) }
         }.map { date ->
@@ -249,12 +256,6 @@ class ActivityOverviewViewModel @Inject constructor(
     }
 }
 
-private fun List<Long>.medianOrNull(): Long? {
-    if (isEmpty()) return null
-    val sorted = sorted()
-    return sorted[sorted.lastIndex / 2]
-}
-
 private fun List<ExerciseData>.overlapping(date: LocalDate, zone: ZoneId): List<ExerciseData> {
     val dayStart = date.atStartOfDay(zone).toInstant()
     val dayEnd = date.plusDays(1).atStartOfDay(zone).toInstant()
@@ -276,7 +277,7 @@ private fun List<ExerciseData>.toCardioLoadTimeWindows(date: LocalDate, zone: Zo
 
 private fun Double?.orZero(): Double = this ?: 0.0
 
-private fun List<ActivityOverviewDay>.daysIn(period: tech.mmarca.openvitals.core.period.DatePeriod): List<ActivityOverviewDay> {
+private fun List<ActivityOverviewDay>.daysIn(period: tech.mmarca.healthcalculations.model.DatePeriod): List<ActivityOverviewDay> {
     val daysByDate = associateBy { it.date }
     return generateSequence(period.start) { date ->
         date.plusDays(1).takeUnless { it.isAfter(period.end) }

@@ -3,14 +3,15 @@ package tech.mmarca.openvitals.domain.report
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
 import kotlin.math.sqrt
-import tech.mmarca.openvitals.domain.cycle.CycleSymptom
-import tech.mmarca.openvitals.domain.cycle.RecordedCycle
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.cycle.CycleSymptom
+import tech.mmarca.healthcalculations.cycle.RecordedCycle
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
 import tech.mmarca.openvitals.domain.model.ReportCycleDetail
 import tech.mmarca.openvitals.domain.model.ReportCycleNote
 import tech.mmarca.openvitals.domain.model.ReportCycleRow
 import tech.mmarca.openvitals.domain.model.ReportDailyValue
 import tech.mmarca.openvitals.domain.model.ReportSymptomFrequency
+import tech.mmarca.healthcalculations.stats.medianOrNull
 
 /** Pain is logged 1 to 5, where 1 is none. */
 private const val PainDayLevel = 2
@@ -42,7 +43,7 @@ fun cycleDetail(
     end: LocalDate,
 ): ReportCycleDetail? {
     val inRange = cycles
-        .filter { !it.startDate.isAfter(end) && (it.endDate == null || !it.endDate.isBefore(start)) }
+        .filter { !it.startDate.isAfter(end) && it.endDate?.isBefore(start) != true }
         .sortedBy { it.startDate }
     val entries = journal.filter { !it.date.isBefore(start) && !it.date.isAfter(end) }.sortedBy { it.date }
     if (inRange.isEmpty() && entries.isEmpty()) return null
@@ -73,7 +74,7 @@ fun cycleDetail(
         cycles = rows,
         completedCycles = lengths.size,
         meanLengthDays = lengths.takeIf { it.isNotEmpty() }?.average(),
-        medianLengthDays = median(lengths),
+        medianLengthDays = lengths.medianOrNull(),
         sdLengthDays = sampleStdDev(lengths),
         minLengthDays = lengths.firstOrNull(),
         maxLengthDays = lengths.lastOrNull(),
@@ -99,12 +100,6 @@ private fun symptomFrequency(entries: List<CycleJournalEntry>, bleedingDays: Set
         val off = entries.count { symptom in it.symptoms && it.date !in bleedingDays }
         if (on + off == 0) null else ReportSymptomFrequency(symptom, on, off)
     }.sortedWith(compareByDescending<ReportSymptomFrequency> { it.onBleeding + it.offBleeding }.thenBy { it.symptom.ordinal })
-
-private fun median(sorted: List<Int>): Double? {
-    if (sorted.isEmpty()) return null
-    val middle = sorted.size / 2
-    return if (sorted.size % 2 == 1) sorted[middle].toDouble() else (sorted[middle - 1] + sorted[middle]) / 2.0
-}
 
 private fun sampleStdDev(values: List<Int>): Double? {
     if (values.size < 2) return null

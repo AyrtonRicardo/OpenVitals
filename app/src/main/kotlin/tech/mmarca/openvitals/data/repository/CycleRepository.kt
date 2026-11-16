@@ -16,20 +16,22 @@ import kotlinx.coroutines.coroutineScope
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.data.repository.contract.CycleJournalRepository
 import tech.mmarca.openvitals.data.repository.contract.CyclePreferences
-import tech.mmarca.openvitals.domain.cycle.CycleCalculations
-import tech.mmarca.openvitals.domain.cycle.CycleObservations
-import tech.mmarca.openvitals.domain.cycle.CycleStatistics
-import tech.mmarca.openvitals.domain.cycle.DayBleeding
-import tech.mmarca.openvitals.domain.cycle.OvulationMarkerDetector
-import tech.mmarca.openvitals.domain.cycle.RecordedCycle
-import tech.mmarca.openvitals.domain.model.CycleData
+import tech.mmarca.healthcalculations.cycle.CycleCalculations
+import tech.mmarca.healthcalculations.cycle.CycleInputs
+import tech.mmarca.healthcalculations.cycle.CycleObservations
+import tech.mmarca.healthcalculations.cycle.CycleStatistics
+import tech.mmarca.healthcalculations.cycle.DayBleeding
+import tech.mmarca.healthcalculations.cycle.OvulationMarkerDetector
+import tech.mmarca.healthcalculations.cycle.RecordedCycle
+import tech.mmarca.healthcalculations.cycle.statisticsAsOf
+import tech.mmarca.healthcalculations.model.CycleData
 import tech.mmarca.openvitals.domain.model.CycleDayLog
 import tech.mmarca.openvitals.domain.model.CycleDayLogWrite
-import tech.mmarca.openvitals.domain.model.CycleEntryKind
-import tech.mmarca.openvitals.domain.model.CycleEntryWriteRequest
-import tech.mmarca.openvitals.domain.model.CycleRecordValues
+import tech.mmarca.healthcalculations.model.CycleEntryKind
+import tech.mmarca.healthcalculations.model.CycleEntryWriteRequest
+import tech.mmarca.healthcalculations.model.CycleRecordValues
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
-import tech.mmarca.openvitals.domain.model.SkinTemperatureEntry
+import tech.mmarca.healthcalculations.model.SkinTemperatureEntry
 import tech.mmarca.openvitals.domain.query.CyclePeriodData
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
 import java.time.LocalDate
@@ -223,14 +225,23 @@ class CycleRepositoryImpl @Inject constructor(
     }
 
     override suspend fun loadCycleStatistics(today: LocalDate): CycleStatistics? {
+        val inputs = loadCycleInputs(today) ?: return null
+        return inputs.statisticsAsOf(
+            day = today,
+            profile = preferences.cycleTrackingProfile().resolved(bodyProfile.bodyProfile(), today),
+            bleedingNone = journal.entry(today)?.bleedingNone == true,
+        )
+    }
+
+    override suspend fun loadCycleInputs(end: LocalDate, historyFrom: LocalDate?): CycleInputs? {
         val granted = grantedPermissionsIfAvailable()
         if (readMenstruationPermission !in granted) {
-            Log.w(TAG, "Skipping loadCycleStatistics missingCount=1")
+            Log.w(TAG, "Skipping loadCycleInputs missingCount=1")
             return null
         }
         val zone = ZoneId.systemDefault()
-        val startInstant = today.minusYears(STATISTICS_LOOKBACK_YEARS).atStartOfDay(zone).toInstant()
-        val endInstant = today.plusDays(1).atStartOfDay(zone).toInstant()
+        val startInstant = end.minusYears(STATISTICS_LOOKBACK_YEARS).atStartOfDay(zone).toInstant()
+        val endInstant = end.plusDays(1).atStartOfDay(zone).toInstant()
 
         return coroutineScope {
             val flows = async { hc.readMenstruationFlowEntries(startInstant, endInstant) }
@@ -241,7 +252,6 @@ class CycleRepositoryImpl @Inject constructor(
                 null
             }
             val exclusions = async { journal.exclusions() }
-            val todayEntry = async { journal.entry(today) }
 
             // A period span from another app counts as flow of unknown level; a flow record sets the level.
             val flowDays = mutableMapOf<LocalDate, Int>()
@@ -257,22 +267,34 @@ class CycleRepositoryImpl @Inject constructor(
                 val day = flow.time.toLocalDay()
                 flowDays[day] = maxOf(flowDays[day] ?: CycleRecordValues.FLOW_UNKNOWN, flow.flow)
             }
-            val spottingDays = spotting?.await().orEmpty().map { it.time.toLocalDay() }.toSet()
-            val todayBleeding = when {
-                today in spottingDays -> DayBleeding.SPOTTING
-                todayEntry.await()?.bleedingNone == true -> DayBleeding.NONE
-                else -> null
-            }
-            CycleCalculations.compute(
+            CycleInputs(
                 flowDays = flowDays,
-                today = today,
-                spottingDays = spottingDays,
+                spottingDays = spotting?.await().orEmpty().map { it.time.toLocalDay() }.toSet(),
                 exclusions = exclusions.await(),
-                profile = preferences.cycleTrackingProfile().resolved(bodyProfile.bodyProfile(), today),
-                todayBleeding = todayBleeding,
-                observations = markerObservations(flowDays.keys, today, granted),
+                observations = if (historyFrom == null) {
+                    markerObservations(flowDays.keys, end, granted)
+                } else {
+                    historyObservations(flowDays.keys, historyFrom, end, granted)
+                },
             )
         }
+    }
+
+    /**
+     * The observations every day from [from] to [end] needs: the estimate of a day learns from
+     * its own cycle and the six before, so the read starts that many cycles before [from].
+     */
+    private suspend fun historyObservations(
+        flowDays: Set<LocalDate>,
+        from: LocalDate,
+        end: LocalDate,
+        granted: Set<String>,
+    ): CycleObservations {
+        val starts = CycleCalculations.bleedingSegments(flowDays).map { it.start }
+        val first = starts.filter { !it.isAfter(from) }.takeLast(CycleCalculations.MarkerHistoryCycles).firstOrNull()
+            ?: starts.firstOrNull()
+            ?: return CycleObservations()
+        return observationsBetween(first, end, granted)
     }
 
     /**
@@ -349,18 +371,18 @@ class CycleRepositoryImpl @Inject constructor(
 }
 
 /** The app's own record of each kind, the latest when there are several, plus what other apps recorded. */
-private fun CycleData.toDayLog(date: LocalDate, journal: tech.mmarca.openvitals.domain.model.CycleJournalEntry?): CycleDayLog =
+private fun CycleData.toDayLog(date: LocalDate, journal: tech.mmarca.healthcalculations.model.CycleJournalEntry?): CycleDayLog =
     CycleDayLog(
         date = date,
         journal = journal,
-        ownFlow = menstruationFlows.filter { it.isOpenVitalsEntry }.maxByOrNull { it.time },
-        ownSpotting = intermenstrualBleeding.filter { it.isOpenVitalsEntry }.maxByOrNull { it.time },
-        ownBasalBodyTemperature = basalBodyTemperature.filter { it.isOpenVitalsEntry }.maxByOrNull { it.time },
-        ownCervicalMucus = cervicalMucus.filter { it.isOpenVitalsEntry }.maxByOrNull { it.time },
-        ownOvulationTest = ovulationTests.filter { it.isOpenVitalsEntry }.maxByOrNull { it.time },
-        ownSexualActivity = sexualActivity.filter { it.isOpenVitalsEntry }.maxByOrNull { it.time },
-        foreignFlowLevel = menstruationFlows.filterNot { it.isOpenVitalsEntry }.maxOfOrNull { it.flow },
-        foreignSpotting = intermenstrualBleeding.any { !it.isOpenVitalsEntry },
+        ownFlow = menstruationFlows.filter { it.isOwnEntry }.maxByOrNull { it.time },
+        ownSpotting = intermenstrualBleeding.filter { it.isOwnEntry }.maxByOrNull { it.time },
+        ownBasalBodyTemperature = basalBodyTemperature.filter { it.isOwnEntry }.maxByOrNull { it.time },
+        ownCervicalMucus = cervicalMucus.filter { it.isOwnEntry }.maxByOrNull { it.time },
+        ownOvulationTest = ovulationTests.filter { it.isOwnEntry }.maxByOrNull { it.time },
+        ownSexualActivity = sexualActivity.filter { it.isOwnEntry }.maxByOrNull { it.time },
+        foreignFlowLevel = menstruationFlows.filterNot { it.isOwnEntry }.maxOfOrNull { it.flow },
+        foreignSpotting = intermenstrualBleeding.any { !it.isOwnEntry },
     )
 
 /**

@@ -12,12 +12,12 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.jsonObject
+import tech.mmarca.healthcalculations.cycle.CycleExclusionReason
+import tech.mmarca.healthcalculations.cycle.CycleTrackingProfile
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
 import tech.mmarca.openvitals.data.repository.contract.CycleJournalRepository
 import tech.mmarca.openvitals.data.repository.contract.CyclePreferences
 import tech.mmarca.openvitals.data.repository.contract.PillIntakeRepository
-import tech.mmarca.openvitals.domain.cycle.CycleExclusionReason
-import tech.mmarca.openvitals.domain.cycle.CycleTrackingProfile
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
 import tech.mmarca.openvitals.domain.model.PillPlan
 import tech.mmarca.openvitals.features.cycle.CycleJournalJson
 import tech.mmarca.openvitals.features.devicesync.protocol.SyncItem

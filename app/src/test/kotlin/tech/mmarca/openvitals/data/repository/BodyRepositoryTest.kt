@@ -11,11 +11,11 @@ import java.time.Instant
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import tech.mmarca.healthcalculations.preferences.BodyProfile
 import tech.mmarca.openvitals.domain.model.BodyMeasurementType
 import tech.mmarca.openvitals.domain.model.BodyMeasurementWriteRequest
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
 import tech.mmarca.openvitals.domain.model.WeightEntry
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
 
 class BodyRepositoryTest {

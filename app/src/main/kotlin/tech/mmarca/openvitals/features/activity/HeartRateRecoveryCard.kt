@@ -22,10 +22,10 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import java.time.Duration
+import tech.mmarca.healthcalculations.insights.HeartRateRecoveryIssue
+import tech.mmarca.healthcalculations.insights.HeartRateRecoveryQuality
+import tech.mmarca.healthcalculations.insights.HeartRateRecoveryReading
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.HeartRateRecoveryIssue
-import tech.mmarca.openvitals.domain.insights.HeartRateRecoveryQuality
-import tech.mmarca.openvitals.domain.insights.HeartRateRecoveryReading
 import tech.mmarca.openvitals.ui.components.OpenVitalsCard
 
 /**

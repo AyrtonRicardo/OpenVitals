@@ -29,11 +29,11 @@ import androidx.compose.ui.unit.dp
 import kotlin.math.abs
 import kotlin.math.roundToInt
 import kotlin.math.roundToLong
+import tech.mmarca.healthcalculations.insights.ActivitySplit
+import tech.mmarca.healthcalculations.insights.ActivitySplits
+import tech.mmarca.healthcalculations.insights.SplitSource
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.insights.ActivitySplit
-import tech.mmarca.openvitals.domain.insights.ActivitySplits
-import tech.mmarca.openvitals.domain.insights.SplitSource
 import tech.mmarca.openvitals.domain.preferences.UnitQuantity
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.ui.components.OpenVitalsCard

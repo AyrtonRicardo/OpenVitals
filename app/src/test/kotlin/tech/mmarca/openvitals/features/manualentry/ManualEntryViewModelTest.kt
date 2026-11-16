@@ -24,7 +24,7 @@ import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import tech.mmarca.openvitals.domain.model.BodyMeasurementType
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
 import tech.mmarca.openvitals.util.MainDispatcherRule
 
 @OptIn(ExperimentalCoroutinesApi::class)

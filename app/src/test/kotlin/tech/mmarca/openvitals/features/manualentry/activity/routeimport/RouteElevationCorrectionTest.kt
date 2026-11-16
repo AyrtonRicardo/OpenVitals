@@ -8,9 +8,9 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertSame
 import org.junit.Test
+import tech.mmarca.healthcalculations.insights.RouteElevation
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
-import tech.mmarca.openvitals.domain.insights.RouteElevation
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.features.activity.elevation.ElevationTileRepository
 
 /** DEM altitudes replace the file's only when every point is covered; the gain follows. */

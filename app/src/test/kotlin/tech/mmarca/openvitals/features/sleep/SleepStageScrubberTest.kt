@@ -5,7 +5,7 @@ import java.time.Instant
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Test
-import tech.mmarca.openvitals.domain.model.SleepStage
+import tech.mmarca.healthcalculations.model.SleepStage
 
 /** The fraction-to-clock-time mapping and the stage lookup under the finger. */
 class SleepStageScrubberTest {

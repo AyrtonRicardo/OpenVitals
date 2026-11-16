@@ -3,8 +3,8 @@ package tech.mmarca.openvitals.features.manualentry.cycle
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import tech.mmarca.healthcalculations.model.CycleRecordValues
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.model.CycleRecordValues
 import tech.mmarca.openvitals.features.cycle.measurementLocationLabelRes
 import tech.mmarca.openvitals.ui.components.OptionDropdown
 

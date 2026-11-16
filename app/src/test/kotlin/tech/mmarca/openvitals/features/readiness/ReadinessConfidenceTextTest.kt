@@ -2,8 +2,8 @@ package tech.mmarca.openvitals.features.readiness
 
 import com.google.common.truth.Truth.assertThat
 import org.junit.Test
+import tech.mmarca.healthcalculations.insights.ReadinessConfidence
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.ReadinessConfidence
 
 /** The readiness confidence line, hoisted out of two private composables built from English literals. */
 class ReadinessConfidenceTextTest {

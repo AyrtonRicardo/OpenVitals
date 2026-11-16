@@ -19,7 +19,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import tech.mmarca.openvitals.domain.model.BodyMeasurementType
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
 import tech.mmarca.openvitals.data.repository.contract.WidgetOrderPreferences
 
 /**

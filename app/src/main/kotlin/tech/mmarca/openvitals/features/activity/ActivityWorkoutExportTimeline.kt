@@ -4,13 +4,13 @@ import androidx.health.connect.client.records.ExerciseSessionRecord
 import java.time.Instant
 import java.util.TreeMap
 import kotlin.math.roundToLong
-import tech.mmarca.openvitals.core.geo.haversineMeters
-import tech.mmarca.openvitals.domain.model.ActivityCadenceKind
-import tech.mmarca.openvitals.domain.model.ActivityCadenceSample
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
-import tech.mmarca.openvitals.domain.model.HeartRateSample
-import tech.mmarca.openvitals.domain.model.SpeedSample
+import tech.mmarca.healthcalculations.geo.haversineMeters
+import tech.mmarca.healthcalculations.model.ActivityCadenceKind
+import tech.mmarca.healthcalculations.model.ActivityCadenceSample
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.HeartRateSample
+import tech.mmarca.healthcalculations.model.SpeedSample
 
 /** The per-sample series the detail screen read for a workout, as the exports take them. */
 internal data class ActivityWorkoutSeries(

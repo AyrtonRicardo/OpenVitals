@@ -45,6 +45,7 @@ Use the [feature map](feature-map.md) when you need the route/widget/package map
 - [CSV import](csv-import.md): mapped import of body measurements, vitals, steps and nutrition from a CSV file, and the app's own workout export read back one workout a row.
 - [Health report export](health-report-export.md): PDF report of selected metrics built from Health Connect, to share or save.
 - [Sync with another phone](device-sync.md): copying Health Connect records between two phones over Bluetooth.
+- [Share with other apps](data-sharing.md): a read-only provider other apps query, one Android permission per data group.
 - [Offline maps support](offline-maps-support.md): PMTiles or Mapsforge packs for local activity maps.
 - [Elevation correction](elevation-correction.md): imported routes take their altitude from SRTM tiles stored on the phone.
 - [CoMaps navigation context](comaps-navigation-context.md): live CoMaps turn-by-turn guidance while recording GPS activities.

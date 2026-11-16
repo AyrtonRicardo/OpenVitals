@@ -3,8 +3,8 @@ package tech.mmarca.openvitals.core.presentation
 import java.util.Locale
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
 import tech.mmarca.openvitals.domain.model.BodyMeasurementType
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.features.manualentry.body.canonicalBodyMeasurementValue
 import tech.mmarca.openvitals.features.manualentry.hydration.hydrationInputAmountText

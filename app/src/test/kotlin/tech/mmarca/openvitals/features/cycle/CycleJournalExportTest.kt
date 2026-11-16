@@ -6,20 +6,20 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import tech.mmarca.openvitals.domain.cycle.AgeBand
-import tech.mmarca.openvitals.domain.cycle.CycleExclusionReason
-import tech.mmarca.openvitals.domain.cycle.CycleSymptom
-import tech.mmarca.openvitals.domain.cycle.CycleTrackingProfile
-import tech.mmarca.openvitals.domain.cycle.HormonalContraception
-import tech.mmarca.openvitals.domain.cycle.HormonalContraceptionKind
-import tech.mmarca.openvitals.domain.cycle.TrackingContext
-import tech.mmarca.openvitals.domain.model.BbtDisturbance
-import tech.mmarca.openvitals.domain.model.CervicalSensation
-import tech.mmarca.openvitals.domain.model.CervixFirmness
-import tech.mmarca.openvitals.domain.model.CervixOpening
-import tech.mmarca.openvitals.domain.model.CervixPosition
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
-import tech.mmarca.openvitals.domain.model.HcgTestResult
+import tech.mmarca.healthcalculations.cycle.AgeBand
+import tech.mmarca.healthcalculations.cycle.CycleExclusionReason
+import tech.mmarca.healthcalculations.cycle.CycleSymptom
+import tech.mmarca.healthcalculations.cycle.CycleTrackingProfile
+import tech.mmarca.healthcalculations.cycle.HormonalContraception
+import tech.mmarca.healthcalculations.cycle.HormonalContraceptionKind
+import tech.mmarca.healthcalculations.cycle.TrackingContext
+import tech.mmarca.healthcalculations.model.BbtDisturbance
+import tech.mmarca.healthcalculations.model.CervicalSensation
+import tech.mmarca.healthcalculations.model.CervixFirmness
+import tech.mmarca.healthcalculations.model.CervixOpening
+import tech.mmarca.healthcalculations.model.CervixPosition
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.model.HcgTestResult
 
 /** The backup file round-trips every field; a file that is not a journal export parses to nothing. */
 class CycleJournalExportTest {

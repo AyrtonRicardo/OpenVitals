@@ -4,6 +4,7 @@ import java.time.LocalDate
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.DatePeriod
 
 class PeriodSelectionTest {
 

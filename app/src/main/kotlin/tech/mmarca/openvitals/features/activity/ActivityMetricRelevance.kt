@@ -1,11 +1,11 @@
 package tech.mmarca.openvitals.features.activity
 
 import androidx.health.connect.client.records.ExerciseSessionRecord
-import tech.mmarca.openvitals.domain.model.cyclingExercises
-import tech.mmarca.openvitals.domain.model.distanceBasedExercises
-import tech.mmarca.openvitals.domain.model.indoorExercises
-import tech.mmarca.openvitals.domain.model.prefersPaceExercises
-import tech.mmarca.openvitals.domain.model.stepBasedExercises
+import tech.mmarca.healthcalculations.model.cyclingExercises
+import tech.mmarca.healthcalculations.model.distanceBasedExercises
+import tech.mmarca.healthcalculations.model.indoorExercises
+import tech.mmarca.healthcalculations.model.prefersPaceExercises
+import tech.mmarca.healthcalculations.model.stepBasedExercises
 
 /**
  * Which metric rows the activity detail screen shows. One rule: a row

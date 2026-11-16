@@ -8,10 +8,10 @@ import androidx.compose.ui.res.stringResource
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.temporal.ChronoUnit
+import tech.mmarca.healthcalculations.cycle.CurrentCyclePhase
+import tech.mmarca.healthcalculations.cycle.CycleEstimateResult
+import tech.mmarca.healthcalculations.cycle.CyclePhase
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.cycle.CurrentCyclePhase
-import tech.mmarca.openvitals.domain.cycle.CycleEstimateResult
-import tech.mmarca.openvitals.domain.cycle.CyclePhase
 
 /** Where today sits against the estimate. Pure, so the widget and the tile agree. */
 @Immutable

@@ -1,13 +1,13 @@
 package tech.mmarca.openvitals.features.activity
 
 import java.time.Instant
-import tech.mmarca.openvitals.domain.insights.ActivitySplits
-import tech.mmarca.openvitals.domain.insights.SplitSource
-import tech.mmarca.openvitals.domain.model.ActivityCadenceKind
-import tech.mmarca.openvitals.domain.model.ActivityCadenceSample
-import tech.mmarca.openvitals.domain.model.ExerciseRouteData
-import tech.mmarca.openvitals.domain.model.ExerciseRouteStatus
-import tech.mmarca.openvitals.domain.model.SpeedSample
+import tech.mmarca.healthcalculations.insights.ActivitySplits
+import tech.mmarca.healthcalculations.insights.SplitSource
+import tech.mmarca.healthcalculations.model.ActivityCadenceKind
+import tech.mmarca.healthcalculations.model.ActivityCadenceSample
+import tech.mmarca.healthcalculations.model.ExerciseRouteData
+import tech.mmarca.healthcalculations.model.ExerciseRouteStatus
+import tech.mmarca.healthcalculations.model.SpeedSample
 
 /** One point of the session's elevation profile. */
 internal data class ActivityElevationSample(

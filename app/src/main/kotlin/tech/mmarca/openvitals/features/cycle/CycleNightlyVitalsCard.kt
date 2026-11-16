@@ -27,12 +27,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import tech.mmarca.healthcalculations.cycle.NightlyEvidence
+import tech.mmarca.healthcalculations.cycle.NightlySeries
+import tech.mmarca.healthcalculations.cycle.NightlySignal
+import tech.mmarca.healthcalculations.cycle.NightlyVitals
+import tech.mmarca.healthcalculations.cycle.NightlyVitalsEvidence
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.cycle.NightlyEvidence
-import tech.mmarca.openvitals.domain.cycle.NightlySeries
-import tech.mmarca.openvitals.domain.cycle.NightlySignal
-import tech.mmarca.openvitals.domain.cycle.NightlyVitals
-import tech.mmarca.openvitals.domain.cycle.NightlyVitalsEvidence
 import tech.mmarca.openvitals.ui.components.OpenVitalsCard
 import tech.mmarca.openvitals.ui.components.OpenVitalsOutlinedButton
 import tech.mmarca.openvitals.ui.components.ReferenceLinkButton

@@ -3,9 +3,9 @@ package tech.mmarca.openvitals.features.imports.csv
 import com.google.common.truth.Truth.assertThat
 import java.time.ZoneOffset
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.BpRecordValues
 import tech.mmarca.openvitals.core.privacy.PrivacyRedactor
 import tech.mmarca.openvitals.core.privacy.PrivacySentinels
-import tech.mmarca.openvitals.domain.model.BpRecordValues
 import tech.mmarca.openvitals.domain.model.NutritionNutrient
 
 private fun reportMapping(

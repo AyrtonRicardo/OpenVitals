@@ -2,19 +2,19 @@ package tech.mmarca.openvitals.features.mindfulness
 
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.displayPeriodFor
-import tech.mmarca.openvitals.domain.insights.BaselineValue
-import tech.mmarca.openvitals.domain.insights.CrossMetricValue
-import tech.mmarca.openvitals.domain.insights.DailyGoalValue
-import tech.mmarca.openvitals.domain.insights.MetricDailyGoalKey
-import tech.mmarca.openvitals.domain.insights.crossMetricInsight
-import tech.mmarca.openvitals.domain.insights.dailyGoalProgress
-import tech.mmarca.openvitals.domain.insights.periodComparison
-import tech.mmarca.openvitals.domain.insights.personalBaselineInsight
+import tech.mmarca.healthcalculations.insights.BaselineValue
+import tech.mmarca.healthcalculations.insights.CrossMetricValue
+import tech.mmarca.healthcalculations.insights.DailyGoalValue
+import tech.mmarca.healthcalculations.insights.MetricDailyGoalKey
+import tech.mmarca.healthcalculations.insights.crossMetricInsight
+import tech.mmarca.healthcalculations.insights.dailyGoalProgress
+import tech.mmarca.healthcalculations.insights.periodComparison
+import tech.mmarca.healthcalculations.insights.personalBaselineInsight
 import tech.mmarca.openvitals.domain.model.MindfulnessSession
 import tech.mmarca.openvitals.domain.model.minutesByStartDate
-import tech.mmarca.openvitals.domain.model.SleepData
-import tech.mmarca.openvitals.domain.model.dailySleepSummary
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
+import tech.mmarca.healthcalculations.model.SleepData
+import tech.mmarca.healthcalculations.model.dailySleepSummary
+import tech.mmarca.healthcalculations.preferences.SleepWindow
 import java.time.ZoneId
 
 object MindfulnessPresentationMapper {
@@ -99,7 +99,7 @@ private fun mindfulnessDailyMinutes(sessions: List<MindfulnessSession>): List<Mi
 
 private fun sleepDurationValues(
     sessions: List<SleepData>,
-    period: tech.mmarca.openvitals.core.period.DatePeriod,
+    period: tech.mmarca.healthcalculations.model.DatePeriod,
     sleepWindow: SleepWindow,
 ): List<CrossMetricValue> {
     val zone = ZoneId.systemDefault()

@@ -26,10 +26,10 @@ import androidx.health.connect.client.records.metadata.Metadata
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.SleepData
-import tech.mmarca.openvitals.domain.model.SleepStage
-import tech.mmarca.openvitals.domain.model.sleepDurationMsFromStages
-import tech.mmarca.openvitals.domain.model.sleepSessionHasReliableStages
+import tech.mmarca.healthcalculations.model.SleepData
+import tech.mmarca.healthcalculations.model.SleepStage
+import tech.mmarca.healthcalculations.model.sleepDurationMsFromStages
+import tech.mmarca.healthcalculations.model.sleepSessionHasReliableStages
 import tech.mmarca.openvitals.ui.components.DetailRow
 import tech.mmarca.openvitals.ui.components.DetailSectionCard
 import tech.mmarca.openvitals.ui.components.OpenVitalsCard

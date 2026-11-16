@@ -15,17 +15,17 @@ import java.time.LocalDate
 import org.junit.Rule
 import org.junit.Test
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.MetricDetailSectionContext
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
 import tech.mmarca.openvitals.domain.preferences.DefaultMetricDetailSectionOrder
 import tech.mmarca.openvitals.ui.components.rememberMetricDetailSectionListState
-import tech.mmarca.openvitals.domain.cycle.CycleEstimate
-import tech.mmarca.openvitals.domain.cycle.CycleEstimateResult
-import tech.mmarca.openvitals.domain.cycle.RecordedCycle
-import tech.mmarca.openvitals.domain.model.CycleEntryKind
+import tech.mmarca.healthcalculations.cycle.CycleEstimate
+import tech.mmarca.healthcalculations.cycle.CycleEstimateResult
+import tech.mmarca.healthcalculations.cycle.RecordedCycle
+import tech.mmarca.healthcalculations.model.CycleEntryKind
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.testing.string
 import tech.mmarca.openvitals.ui.theme.OpenVitalsTheme
@@ -96,7 +96,7 @@ class CyclePeriodContentTest {
                     source = "OpenVitals",
                     id = "uid-1",
                     kind = CycleEntryKind.MENSTRUATION_FLOW,
-                    isOpenVitalsEntry = true,
+                    isOwnEntry = true,
                     dayLogDate = LocalDate.of(2026, 6, 20),
                 ),
                 CycleObservation(
@@ -106,7 +106,7 @@ class CyclePeriodContentTest {
                     source = "Gadgetbridge",
                     id = "uid-2",
                     kind = CycleEntryKind.MENSTRUATION_FLOW,
-                    isOpenVitalsEntry = false,
+                    isOwnEntry = false,
                 ),
             ),
         )

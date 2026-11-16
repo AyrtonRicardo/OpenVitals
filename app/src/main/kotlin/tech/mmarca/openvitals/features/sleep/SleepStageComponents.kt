@@ -55,7 +55,7 @@ import tech.mmarca.openvitals.core.presentation.UnitFormatter
 import tech.mmarca.openvitals.ui.components.ChartTokens
 import tech.mmarca.openvitals.ui.components.DetailSectionCard
 import tech.mmarca.openvitals.ui.theme.SleepColor
-import tech.mmarca.openvitals.domain.model.SleepStage
+import tech.mmarca.healthcalculations.model.SleepStage
 import java.time.Duration
 import java.time.Instant
 import java.time.ZoneId

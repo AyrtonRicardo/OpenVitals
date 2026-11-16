@@ -9,6 +9,10 @@ import java.time.LocalDate
 import java.time.ZoneId
 import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.Dispatchers
+import tech.mmarca.healthcalculations.model.DailyRestingHR
+import tech.mmarca.healthcalculations.model.HeartRateSample
+import tech.mmarca.healthcalculations.preferences.BodyEnergyCalibration
+import tech.mmarca.healthcalculations.preferences.BodyProfile
 import tech.mmarca.openvitals.core.performance.DispatcherProvider
 import tech.mmarca.openvitals.data.repository.contract.ActivityRepository
 import tech.mmarca.openvitals.data.repository.contract.BodyRepository
@@ -16,11 +20,7 @@ import tech.mmarca.openvitals.data.repository.contract.HealthRepository
 import tech.mmarca.openvitals.data.repository.contract.HeartRepository
 import tech.mmarca.openvitals.data.repository.contract.SleepRepository
 import tech.mmarca.openvitals.data.repository.contract.VitalsRepository
-import tech.mmarca.openvitals.domain.model.DailyRestingHR
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
-import tech.mmarca.openvitals.domain.model.HeartRateSample
-import tech.mmarca.openvitals.domain.preferences.BodyEnergyCalibration
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
 
 /** The zone every Body Energy test pins itself to, so a fixed clock is a fixed day. */
 val TestZone: ZoneId = ZoneId.of("UTC")

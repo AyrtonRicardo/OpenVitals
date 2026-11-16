@@ -12,15 +12,15 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.BasalBodyTemperatureEntry
-import tech.mmarca.openvitals.domain.model.CervicalMucusEntry
-import tech.mmarca.openvitals.domain.model.CycleData
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
-import tech.mmarca.openvitals.domain.model.MenstruationFlowEntry
-import tech.mmarca.openvitals.domain.model.MenstruationPeriodEntry
-import tech.mmarca.openvitals.domain.model.OvulationTestEntry
+import tech.mmarca.healthcalculations.model.BasalBodyTemperatureEntry
+import tech.mmarca.healthcalculations.model.CervicalMucusEntry
+import tech.mmarca.healthcalculations.model.CycleData
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.model.MenstruationFlowEntry
+import tech.mmarca.healthcalculations.model.MenstruationPeriodEntry
+import tech.mmarca.healthcalculations.model.OvulationTestEntry
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 
 class CyclePresentationTest {
@@ -164,7 +164,7 @@ class CyclePresentationTest {
                             time = instant("2026-04-13T10:00:00Z"),
                             flow = FLOW_HEAVY,
                             source = "flow",
-                            isOpenVitalsEntry = true,
+                            isOwnEntry = true,
                         )
                     ),
                 ),

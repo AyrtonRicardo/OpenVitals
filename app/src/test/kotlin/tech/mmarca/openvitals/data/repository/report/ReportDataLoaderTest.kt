@@ -2,10 +2,10 @@ package tech.mmarca.openvitals.data.repository.report
 
 import tech.mmarca.openvitals.data.repository.contract.CycleRepository
 import tech.mmarca.openvitals.data.repository.contract.FakeCycleJournalRepository
-import tech.mmarca.openvitals.domain.cycle.CycleStatistics
-import tech.mmarca.openvitals.domain.cycle.RecordedCycle
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
-import tech.mmarca.openvitals.domain.model.CycleRecordValues
+import tech.mmarca.healthcalculations.cycle.CycleStatistics
+import tech.mmarca.healthcalculations.cycle.RecordedCycle
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.model.CycleRecordValues
 import tech.mmarca.openvitals.domain.model.ReportCycleDetail
 import tech.mmarca.openvitals.healthconnect.StrictHealthConnectReads
 import kotlinx.coroutines.currentCoroutineContext
@@ -42,10 +42,10 @@ import tech.mmarca.openvitals.data.repository.contract.SleepRepository
 import tech.mmarca.openvitals.data.repository.contract.VitalsRepository
 import tech.mmarca.openvitals.domain.model.DailyHydration
 import tech.mmarca.openvitals.domain.model.DailyMacros
-import tech.mmarca.openvitals.domain.model.DailySleepDuration
-import tech.mmarca.openvitals.domain.model.DailySteps
+import tech.mmarca.healthcalculations.model.DailySleepDuration
+import tech.mmarca.healthcalculations.model.DailySteps
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
-import tech.mmarca.openvitals.domain.model.HeartRateSummary
+import tech.mmarca.healthcalculations.model.HeartRateSummary
 import tech.mmarca.openvitals.domain.model.NutritionNutrient
 import tech.mmarca.openvitals.domain.model.ReportGranularity
 import tech.mmarca.openvitals.domain.model.ReportMetric
@@ -395,20 +395,20 @@ class ReportDataLoaderTest {
         val zone = java.time.ZoneId.systemDefault()
         val day = end.minusDays(1)
         coEvery { vitals.loadBloodPressure(any(), any()) } returns listOf(
-            tech.mmarca.openvitals.domain.model.BloodPressureEntry(
+            tech.mmarca.healthcalculations.model.BloodPressureEntry(
                 time = day.atTime(8, 0).atZone(zone).toInstant(),
                 systolicMmHg = 110,
                 diastolicMmHg = 70,
                 source = "test",
             ),
-            tech.mmarca.openvitals.domain.model.BloodPressureEntry(
+            tech.mmarca.healthcalculations.model.BloodPressureEntry(
                 time = day.atTime(21, 0).atZone(zone).toInstant(),
                 systolicMmHg = 130,
                 diastolicMmHg = 84,
                 source = "test",
             ),
             // An exact duplicate must not skew the chart or double the list.
-            tech.mmarca.openvitals.domain.model.BloodPressureEntry(
+            tech.mmarca.healthcalculations.model.BloodPressureEntry(
                 time = day.atTime(8, 0).atZone(zone).toInstant(),
                 systolicMmHg = 110,
                 diastolicMmHg = 70,
@@ -439,7 +439,7 @@ class ReportDataLoaderTest {
     @Test fun `glucose reads raw entries and attaches the context detail`() = runTest {
         val zone = java.time.ZoneId.systemDefault()
         coEvery { vitals.loadBloodGlucose(any(), any()) } returns listOf(
-            tech.mmarca.openvitals.domain.model.BloodGlucoseEntry(
+            tech.mmarca.healthcalculations.model.BloodGlucoseEntry(
                 time = end.minusDays(1).atTime(8, 0).atZone(zone).toInstant(),
                 millimolesPerLiter = 5.0,
                 specimenSource = 0,
@@ -447,7 +447,7 @@ class ReportDataLoaderTest {
                 relationToMeal = tech.mmarca.openvitals.domain.model.GlucoseRecordValues.RELATION_TO_MEAL_FASTING,
                 source = "test",
             ),
-            tech.mmarca.openvitals.domain.model.BloodGlucoseEntry(
+            tech.mmarca.healthcalculations.model.BloodGlucoseEntry(
                 time = end.minusDays(1).atTime(21, 0).atZone(zone).toInstant(),
                 millimolesPerLiter = 7.4,
                 specimenSource = 0,
@@ -473,7 +473,7 @@ class ReportDataLoaderTest {
     @Test fun `a CGM-sized glucose range falls back to the daily chart without a detail`() = runTest {
         val zone = java.time.ZoneId.systemDefault()
         coEvery { vitals.loadBloodGlucose(any(), any()) } returns (0 until 600).map { index ->
-            tech.mmarca.openvitals.domain.model.BloodGlucoseEntry(
+            tech.mmarca.healthcalculations.model.BloodGlucoseEntry(
                 time = end.minusDays(1).atTime(0, 0).atZone(zone).toInstant().plusSeconds(index * 120L),
                 millimolesPerLiter = 5.5,
                 specimenSource = 0,
@@ -483,7 +483,7 @@ class ReportDataLoaderTest {
             )
         }
         coEvery { vitals.loadDailyVitals(any(), any(), any()) } returns listOf(
-            tech.mmarca.openvitals.domain.model.DailyVitalPoint(end.minusDays(1), 5.5, 600),
+            tech.mmarca.healthcalculations.model.DailyVitalPoint(end.minusDays(1), 5.5, 600),
         )
 
         val data = loader(additional = emptySet()).load(request(ReportMetric.BLOOD_GLUCOSE))
@@ -500,7 +500,7 @@ class ReportDataLoaderTest {
         val zone = java.time.ZoneId.systemDefault()
         val startTime = end.minusDays(2).atTime(18, 0).atZone(zone).toInstant()
         coEvery { activity.loadWorkoutsWithMetrics(any(), any()) } returns listOf(
-            tech.mmarca.openvitals.domain.model.ExerciseData(
+            tech.mmarca.healthcalculations.model.ExerciseData(
                 id = "w1",
                 title = null,
                 exerciseType = 56,
@@ -529,7 +529,7 @@ class ReportDataLoaderTest {
             DailySleepDuration(date = end, durationMs = 8 * 3_600_000L),
         )
         coEvery { sleep.loadSleepSessions(any(), any()) } returns listOf(
-            tech.mmarca.openvitals.domain.model.SleepData(
+            tech.mmarca.healthcalculations.model.SleepData(
                 id = "n1",
                 startTime = bedtime,
                 endTime = bedtime.plusSeconds(8 * 3_600),
@@ -548,10 +548,10 @@ class ReportDataLoaderTest {
     @Test fun `sparse body temperature gets a readings detail, a dense range does not`() = runTest {
         val zone = java.time.ZoneId.systemDefault()
         coEvery { vitals.loadDailyVitals(any(), any(), any()) } returns listOf(
-            tech.mmarca.openvitals.domain.model.DailyVitalPoint(end.minusDays(1), 36.8, 2),
+            tech.mmarca.healthcalculations.model.DailyVitalPoint(end.minusDays(1), 36.8, 2),
         )
         coEvery { vitals.loadBodyTemperature(any(), any()) } returns listOf(
-            tech.mmarca.openvitals.domain.model.BodyTempEntry(
+            tech.mmarca.healthcalculations.model.BodyTempEntry(
                 time = end.minusDays(1).atTime(8, 0).atZone(zone).toInstant(),
                 temperatureCelsius = 36.8,
                 source = "test",
@@ -563,7 +563,7 @@ class ReportDataLoaderTest {
         assertEquals(1, sparseDetail.readings.size)
 
         coEvery { vitals.loadBodyTemperature(any(), any()) } returns (0 until 300).map { index ->
-            tech.mmarca.openvitals.domain.model.BodyTempEntry(
+            tech.mmarca.healthcalculations.model.BodyTempEntry(
                 time = end.minusDays(1).atStartOfDay(zone).toInstant().plusSeconds(index * 200L),
                 temperatureCelsius = 36.5,
                 source = "wearable",

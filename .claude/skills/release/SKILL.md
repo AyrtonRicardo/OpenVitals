@@ -29,7 +29,11 @@ commit with the release notes, and pushes in one motion.
 - Scope the release: `git log --oneline vLAST..HEAD` is the list of what the notes must cover.
   Read the commit bodies, not only the subjects; the user-facing behaviour is
   usually described there. Translation merges from Codeberg Translate are in
-  scope too (which locales moved, whether a new one started).
+  scope too (which locales moved, whether a new one started). A change in the
+  `openlink/` or `health-calculations/` submodule ships with the app: read
+  `git diff vLAST..HEAD -- openlink health-calculations` and that repository's
+  log between the two commits. A moved `health-calculations/` changes the numbers
+  the app shows, and OpenWatch's release carries the same move.
 - Translations: every shipping locale should be at 100%. Count the keys each
   `values-*/strings.xml` is missing against `values/strings.xml` (translatable
   ones only) before writing the notes; `verifyTranslations` only enforces 70%.
@@ -43,6 +47,12 @@ commit with the release notes, and pushes in one motion.
   nothing, and enabling it afterwards does not replay the push (2.14.0). Check
   `state` is `active`:
   `gh api repos/Hale-MTU/OpenVitals/actions/workflows/release.yml --jq .state`.
+- No branch ruleset refuses the push. The script pushes `main` and the tag
+  atomically, so a refused `main` takes the tag with it. Every ruleset that
+  asks `main` for a pull request must say `always`:
+  `for id in $(gh api repos/Hale-MTU/OpenVitals/rules/branches/main --jq '[.[] | select(.type=="pull_request") | .ruleset_id] | unique[]'); do gh api repos/Hale-MTU/OpenVitals/rulesets/$id --jq '"\(.name): \(.current_user_can_bypass)"'; done`.
+  One that says `never` (2.17.0: `main-1`, added 2026-11-13 with no bypass
+  list) is the maintainer's to lift; ask before running the script.
 - The Play variable says whether the uploads go, and the footer of the notes
   depends on it: `gh variable list` shows `OPENVITALS_PLAY_PAUSED` when it is
   set. It is a variable; one created as a secret by mistake is not read
@@ -244,3 +254,20 @@ either way: Zulip readers see it first too.
   70% is missing, and translate them or say so in the notes (2.9.1 had 35).
 - `scripts/generate-translation-coverage.py` takes its first argument as an
   output directory. `--help` creates a `--help/` folder in the repo root.
+- OpenWatch 0.4.0's watch promotion failed with "You must let us know whether
+  your app uses any Foreground Service permissions": its watch app had added
+  `FOREGROUND_SERVICE_LOCATION`. A new foreground service type in the manifest
+  (`git diff vLAST..HEAD -- '*AndroidManifest.xml'`) needs Play Console's App
+  content, Foreground service permissions declaration before the production
+  run.
+- 2.17.0's push was refused by a ruleset without a bypass list (`main-1`);
+  the commit and the tag waited locally until it was disabled, then
+  `git push --atomic origin main vX.Y.Z` finished what the script started.
+  Check the rulesets in pre-flight.
+- F-Droid builds each tag from the recipe in fdroiddata
+  (`metadata/tech.mmarca.openvitals.yml`), copying the last build entry. A
+  release that adds a submodule or removes a module the recipe's `prebuild`
+  edits needs a recipe change: 2.17.0 is the first with `openlink/` and
+  `health-calculations/` (`submodules: true`, the foojay plugin out of their
+  `settings.gradle.kts`, `jvmToolchain(17)` in `health-calculations/`) and the
+  first without `wearlink/`, whose `sed` line fails.

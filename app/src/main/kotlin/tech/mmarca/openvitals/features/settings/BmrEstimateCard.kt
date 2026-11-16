@@ -17,8 +17,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import tech.mmarca.healthcalculations.insights.BmrInput
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.BmrInput
 import tech.mmarca.openvitals.ui.components.OpenVitalsCard
 import tech.mmarca.openvitals.ui.components.OpenVitalsTonalButton
 import tech.mmarca.openvitals.ui.components.labelRes

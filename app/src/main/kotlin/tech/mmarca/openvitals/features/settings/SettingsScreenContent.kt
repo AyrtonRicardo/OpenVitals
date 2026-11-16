@@ -74,6 +74,7 @@ internal fun LazyListScope.settingsScreenContent(
         SettingsSection.DATA_IMPORT,
         SettingsSection.DEVICE_SYNC,
         SettingsSection.OPENWATCH,
+        SettingsSection.DATA_SHARING,
         -> Unit
     }
 }

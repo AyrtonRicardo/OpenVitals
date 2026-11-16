@@ -1,7 +1,7 @@
 package tech.mmarca.openvitals.features.sleep
 
 import androidx.compose.foundation.lazy.LazyListScope
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.MetricDetailSectionContext
 import tech.mmarca.openvitals.core.presentation.UnitFormatter

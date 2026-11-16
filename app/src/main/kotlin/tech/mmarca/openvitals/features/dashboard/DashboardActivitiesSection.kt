@@ -33,7 +33,7 @@ import kotlinx.coroutines.launch
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseData
 import tech.mmarca.openvitals.ui.components.MetricCardPlaceholder
 import tech.mmarca.openvitals.ui.theme.WorkoutColor
 import java.time.ZoneId
@@ -58,7 +58,7 @@ internal fun LazyListScope.dashboardActivitiesToday(
             key = { index -> workouts[index].id.ifBlank { "workout_$index" } },
         ) { index ->
             val workout = workouts[index]
-            val editable = workout.isOpenVitalsEntry && workout.id.isNotBlank()
+            val editable = workout.isOwnEntry && workout.id.isNotBlank()
             val openAction = workout.id.takeIf { it.isNotBlank() }?.let { activityId ->
                 { onOpenActivity(activityId) }
             }

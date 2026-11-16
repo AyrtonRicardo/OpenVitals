@@ -268,7 +268,7 @@ class NutritionViewModelTest {
         sugarGrams = null,
         source = "test",
         id = id,
-        isOpenVitalsEntry = isOpenVitals,
+        isOwnEntry = isOpenVitals,
     )
 
     @Test fun `deleting an entry removes it optimistically and force-reloads`() = runTest {
@@ -373,7 +373,7 @@ class NutritionViewModelTest {
         source = "test",
         id = id,
         clientRecordId = clientRecordId,
-        isOpenVitalsEntry = true,
+        isOwnEntry = true,
     )
 
     @Test fun `a foreign or unidentified entry is never deleted`() = runTest {

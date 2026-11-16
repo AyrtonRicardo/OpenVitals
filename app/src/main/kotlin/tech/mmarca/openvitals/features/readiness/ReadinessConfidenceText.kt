@@ -1,8 +1,8 @@
 package tech.mmarca.openvitals.features.readiness
 
 import androidx.annotation.StringRes
+import tech.mmarca.healthcalculations.insights.ReadinessConfidence
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.ReadinessConfidence
 
 /**
  * The two halves of the readiness confidence line, as resource ids, so the

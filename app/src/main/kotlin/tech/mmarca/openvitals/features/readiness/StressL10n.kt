@@ -9,12 +9,12 @@ import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.Locale
 import kotlin.math.roundToInt
+import tech.mmarca.healthcalculations.insights.PhysiologicalStressConfidence
+import tech.mmarca.healthcalculations.insights.PhysiologicalStressEstimate
+import tech.mmarca.healthcalculations.insights.PhysiologicalStressLevel
+import tech.mmarca.healthcalculations.insights.StressItemTemplate
+import tech.mmarca.healthcalculations.insights.StressListItem
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.PhysiologicalStressConfidence
-import tech.mmarca.openvitals.domain.insights.PhysiologicalStressEstimate
-import tech.mmarca.openvitals.domain.insights.PhysiologicalStressLevel
-import tech.mmarca.openvitals.domain.insights.StressItemTemplate
-import tech.mmarca.openvitals.domain.insights.StressListItem
 
 /**
  * Renders the stress estimate through the string catalog. The English

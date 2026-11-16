@@ -16,13 +16,13 @@ import androidx.health.connect.client.units.percent
 import java.time.Instant
 import java.time.ZoneId
 import kotlin.reflect.KClass
-import tech.mmarca.openvitals.domain.model.BpRecordValues
-import tech.mmarca.openvitals.domain.model.GlucoseContext
+import tech.mmarca.healthcalculations.model.BpRecordValues
+import tech.mmarca.healthcalculations.model.GlucoseContext
+import tech.mmarca.healthcalculations.model.VitalsMeasurementEntry
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.model.VitalsMeasurementWriteRequest
+import tech.mmarca.healthcalculations.model.Vo2MaxRecordValues
 import tech.mmarca.openvitals.domain.model.GlucoseRecordValues
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementEntry
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementWriteRequest
-import tech.mmarca.openvitals.domain.model.Vo2MaxRecordValues
 import tech.mmarca.openvitals.domain.model.bpMealContextFromClientRecordId
 import tech.mmarca.openvitals.domain.model.bpPulseFromClientRecordId
 
@@ -95,14 +95,14 @@ internal fun VitalsMeasurementWriteRequest.toRecord(metadata: Metadata): Record 
 }
 
 /** A vitals record as the entry form reads it. Health Connect's unknowns come back as null. */
-internal fun Record.toVitalsMeasurementEntry(isOpenVitalsEntry: Boolean): VitalsMeasurementEntry {
+internal fun Record.toVitalsMeasurementEntry(isOwnEntry: Boolean): VitalsMeasurementEntry {
     fun entry(type: VitalsMeasurementType, time: Instant, value: Double) = VitalsMeasurementEntry(
         id = metadata.id,
         type = type,
         time = time,
         value = value,
         source = SyncedSourceOverlay.displaySource(metadata),
-        isOpenVitalsEntry = isOpenVitalsEntry,
+        isOwnEntry = isOwnEntry,
     )
     return when (this) {
         is BloodPressureRecord -> entry(VitalsMeasurementType.BLOOD_PRESSURE, time, systolic.inMillimetersOfMercury).copy(

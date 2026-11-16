@@ -1,8 +1,8 @@
 package tech.mmarca.openvitals.core.presentation
 
 import androidx.annotation.StringRes
+import tech.mmarca.healthcalculations.model.BpRecordValues
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.model.BpRecordValues
 
 /**
  * The body positions and cuff locations a blood pressure reading can name,

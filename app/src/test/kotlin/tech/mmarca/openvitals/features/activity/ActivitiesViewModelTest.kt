@@ -5,19 +5,19 @@ import tech.mmarca.openvitals.navigation.SELECTED_DAY_ARG
 import androidx.lifecycle.SavedStateHandle
 import tech.mmarca.openvitals.data.repository.contract.FakePreferences
 import androidx.health.connect.client.records.ExerciseSessionRecord
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.ScreenError
-import tech.mmarca.openvitals.domain.insights.CardioLoadEstimate
-import tech.mmarca.openvitals.domain.insights.MetricDailyGoalKey
-import tech.mmarca.openvitals.domain.insights.dailyGoalProgress
+import tech.mmarca.healthcalculations.insights.CardioLoadEstimate
+import tech.mmarca.healthcalculations.insights.MetricDailyGoalKey
+import tech.mmarca.healthcalculations.insights.dailyGoalProgress
 import tech.mmarca.openvitals.domain.preferences.ActivityWeekMode
-import tech.mmarca.openvitals.domain.preferences.BiologicalSex
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
-import tech.mmarca.openvitals.domain.model.DailyRestingHR
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.HeartRateSample
+import tech.mmarca.healthcalculations.preferences.BiologicalSex
+import tech.mmarca.healthcalculations.preferences.BodyProfile
+import tech.mmarca.healthcalculations.model.DailyRestingHR
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.HeartRateSample
 import tech.mmarca.openvitals.domain.model.PlannedExerciseData
 import tech.mmarca.openvitals.domain.query.ActivitiesPeriodData
 import tech.mmarca.openvitals.data.repository.contract.ActivityRepository
@@ -66,6 +66,7 @@ class ActivitiesViewModelTest {
         coEvery { repo.loadDailyRestingHR(any(), any()) } returns restingHeartRate
         coEvery { repo.loadDailyHRV(any(), any()) } returns emptyList()
         coEvery { repo.loadHeartRateSamples(any<LocalDate>(), any<LocalDate>()) } returns heartRateSamples
+        coEvery { repo.loadMaxHeartRate(any(), any()) } returns null
     }
 
     private fun emptyRepo() = mockk<ActivityRepository>().also { repo ->
@@ -92,7 +93,7 @@ class ActivitiesViewModelTest {
         val workout = workout(
             id = "activity-id",
             source = "tech.mmarca.openvitals.debug",
-            isOpenVitalsEntry = true,
+            isOwnEntry = true,
         )
         var workouts = listOf(workout)
         val repo = emptyRepo()
@@ -115,7 +116,7 @@ class ActivitiesViewModelTest {
             workout(
                 id = "external-activity-id",
                 source = "com.example",
-                isOpenVitalsEntry = false,
+                isOwnEntry = false,
             )
         )
         val repo = emptyRepo()
@@ -163,13 +164,13 @@ class ActivitiesViewModelTest {
         val walk = workout(
             id = "walk",
             source = "com.example",
-            isOpenVitalsEntry = false,
+            isOwnEntry = false,
             exerciseType = ExerciseSessionRecord.EXERCISE_TYPE_WALKING,
         )
         val bike = workout(
             id = "bike",
             source = "com.example",
-            isOpenVitalsEntry = false,
+            isOwnEntry = false,
             exerciseType = ExerciseSessionRecord.EXERCISE_TYPE_BIKING,
         )
         val bikePlan = plannedWorkout(
@@ -207,13 +208,13 @@ class ActivitiesViewModelTest {
         val walk = workout(
             id = "walk",
             source = "com.example",
-            isOpenVitalsEntry = false,
+            isOwnEntry = false,
             exerciseType = ExerciseSessionRecord.EXERCISE_TYPE_WALKING,
         )
         val bike = workout(
             id = "bike",
             source = "com.example",
-            isOpenVitalsEntry = false,
+            isOwnEntry = false,
             exerciseType = ExerciseSessionRecord.EXERCISE_TYPE_BIKING,
         )
         val repo = emptyRepo()
@@ -232,7 +233,7 @@ class ActivitiesViewModelTest {
         val walk = workout(
             id = "walk",
             source = "com.example",
-            isOpenVitalsEntry = false,
+            isOwnEntry = false,
             exerciseType = ExerciseSessionRecord.EXERCISE_TYPE_WALKING,
             totalDistanceMeters = 1_000.0,
             durationMs = 600_000,
@@ -240,7 +241,7 @@ class ActivitiesViewModelTest {
         val bike = workout(
             id = "bike",
             source = "com.example",
-            isOpenVitalsEntry = false,
+            isOwnEntry = false,
             exerciseType = ExerciseSessionRecord.EXERCISE_TYPE_BIKING,
             totalDistanceMeters = 2_000.0,
             durationMs = 300_000,
@@ -292,14 +293,14 @@ class ActivitiesViewModelTest {
         val run = workout(
             id = "run",
             source = "com.example",
-            isOpenVitalsEntry = false,
+            isOwnEntry = false,
             exerciseType = ExerciseSessionRecord.EXERCISE_TYPE_RUNNING,
             durationMs = 30 * 60_000L,
         )
         val ride = workout(
             id = "ride",
             source = "com.example",
-            isOpenVitalsEntry = false,
+            isOwnEntry = false,
             exerciseType = ExerciseSessionRecord.EXERCISE_TYPE_BIKING,
             durationMs = 60 * 60_000L,
         )
@@ -337,7 +338,7 @@ class ActivitiesViewModelTest {
             workout(
                 id = "run",
                 source = "com.example",
-                isOpenVitalsEntry = false,
+                isOwnEntry = false,
                 durationMs = 45 * 60_000L,
             )
         )
@@ -401,7 +402,7 @@ class ActivitiesViewModelTest {
                 workout(
                     id = "week",
                     source = "com.example",
-                    isOpenVitalsEntry = false,
+                    isOwnEntry = false,
                     durationMs = 99 * 60_000L,
                 )
             )
@@ -412,7 +413,7 @@ class ActivitiesViewModelTest {
                 workout(
                     id = "month",
                     source = "com.example",
-                    isOpenVitalsEntry = false,
+                    isOwnEntry = false,
                     durationMs = 10 * 60_000L,
                 )
             )
@@ -461,7 +462,7 @@ class ActivitiesViewModelTest {
         fun cardioLoadFor(profile: BodyProfile): CardioLoadEstimate {
             val repo = emptyRepo()
             coEvery { repo.loadWorkouts(any(), any()) } returns
-                listOf(workout(id = "walk", source = "watch", isOpenVitalsEntry = false))
+                listOf(workout(id = "walk", source = "watch", isOwnEntry = false))
             val vm = activitiesViewModel(
                 repo,
                 FakePreferences(initialProfile = profile),
@@ -485,7 +486,7 @@ class ActivitiesViewModelTest {
     private fun workout(
         id: String,
         source: String,
-        isOpenVitalsEntry: Boolean,
+        isOwnEntry: Boolean,
         exerciseType: Int = ExerciseSessionRecord.EXERCISE_TYPE_WALKING,
         totalDistanceMeters: Double? = null,
         durationMs: Long = 1_800_000,
@@ -503,7 +504,7 @@ class ActivitiesViewModelTest {
             source = source,
             totalDistanceMeters = totalDistanceMeters,
             averageSpeedMetersPerSecond = averageSpeedMetersPerSecond,
-            isOpenVitalsEntry = isOpenVitalsEntry,
+            isOwnEntry = isOwnEntry,
         )
     }
 

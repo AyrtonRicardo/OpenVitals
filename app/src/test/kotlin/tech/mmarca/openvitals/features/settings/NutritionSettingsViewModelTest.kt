@@ -19,10 +19,10 @@ import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.preferences.BodyProfile
+import tech.mmarca.healthcalculations.preferences.CaffeinePreferences
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
 import tech.mmarca.openvitals.data.repository.contract.BodyRepository
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
-import tech.mmarca.openvitals.domain.preferences.CaffeinePreferences
 import tech.mmarca.openvitals.domain.preferences.NutritionAverageBasis
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.util.MainDispatcherRule

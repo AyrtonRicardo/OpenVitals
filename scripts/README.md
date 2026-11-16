@@ -3,7 +3,9 @@
 Nothing in here ships in the app. The shell scripts at the top level are what
 CI and a release run (`ci-*.sh`, `release.sh`, `version-code.sh`, the publish
 and announce scripts) and the checks the gate calls (`verify-translations.py`,
-`verify-r8-keeps.py`, `generate-translation-coverage.py`). The fixture builders that
+`verify-r8-keeps.py`, `generate-translation-coverage.py`, and
+`ci-submodule-pointers.sh`, which fails when a submodule points at a commit its
+library's default branch does not reach). The fixture builders that
 once lived beside them (`tool/`, then here) were removed in 2026-10; the
 committed fixtures they produced stay as they are.
 

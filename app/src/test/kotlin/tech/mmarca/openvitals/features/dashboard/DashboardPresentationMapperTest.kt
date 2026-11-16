@@ -2,14 +2,14 @@ package tech.mmarca.openvitals.features.dashboard
 
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.insights.BodyEnergyConfidence
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimeline
-import tech.mmarca.openvitals.domain.cycle.CurrentCyclePhase
-import tech.mmarca.openvitals.domain.cycle.CycleEstimateResult
-import tech.mmarca.openvitals.domain.cycle.CyclePhase
-import tech.mmarca.openvitals.domain.cycle.PhaseCertainty
-import tech.mmarca.openvitals.domain.cycle.PhaseIndeterminateReason
-import tech.mmarca.openvitals.domain.model.CaloriesBurnedSource
+import tech.mmarca.healthcalculations.insights.BodyEnergyConfidence
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimeline
+import tech.mmarca.healthcalculations.cycle.CurrentCyclePhase
+import tech.mmarca.healthcalculations.cycle.CycleEstimateResult
+import tech.mmarca.healthcalculations.cycle.CyclePhase
+import tech.mmarca.healthcalculations.cycle.PhaseCertainty
+import tech.mmarca.healthcalculations.cycle.PhaseIndeterminateReason
+import tech.mmarca.healthcalculations.model.CaloriesBurnedSource
 import tech.mmarca.openvitals.domain.model.DashboardCycleSummary
 import tech.mmarca.openvitals.domain.model.DashboardData
 import tech.mmarca.openvitals.features.cycle.CycleEstimateSummary
@@ -174,22 +174,22 @@ class DashboardPresentationMapperTest {
     @Test
     fun build_sleepWidget_countsTimeAsleepNotTimeInBed() {
         val start = java.time.Instant.parse("2026-06-10T22:00:00Z")
-        val sleep = tech.mmarca.openvitals.domain.model.SleepData(
+        val sleep = tech.mmarca.healthcalculations.model.SleepData(
             id = "s1",
             startTime = start,
             endTime = start.plusSeconds(8 * 3600),
             durationMs = 8 * 3600_000L,
             source = "watch",
             stages = listOf(
-                tech.mmarca.openvitals.domain.model.SleepStage(
+                tech.mmarca.healthcalculations.model.SleepStage(
                     startTime = start,
                     endTime = start.plusSeconds(7 * 3600),
-                    stageType = tech.mmarca.openvitals.domain.model.SleepStage.STAGE_LIGHT,
+                    stageType = tech.mmarca.healthcalculations.model.SleepStage.STAGE_LIGHT,
                 ),
-                tech.mmarca.openvitals.domain.model.SleepStage(
+                tech.mmarca.healthcalculations.model.SleepStage(
                     startTime = start.plusSeconds(7 * 3600),
                     endTime = start.plusSeconds(8 * 3600),
-                    stageType = tech.mmarca.openvitals.domain.model.SleepStage.STAGE_AWAKE,
+                    stageType = tech.mmarca.healthcalculations.model.SleepStage.STAGE_AWAKE,
                 ),
             ),
         )

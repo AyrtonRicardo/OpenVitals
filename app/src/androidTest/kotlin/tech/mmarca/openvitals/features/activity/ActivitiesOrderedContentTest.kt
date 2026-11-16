@@ -16,14 +16,14 @@ import java.time.ZoneId
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.CaloriesBurnedSource
+import tech.mmarca.healthcalculations.model.DatePeriod
+import tech.mmarca.healthcalculations.model.ExerciseData
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.MetricDetailSectionContext
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.CaloriesBurnedSource
-import tech.mmarca.openvitals.domain.model.ExerciseData
 import tech.mmarca.openvitals.domain.preferences.DefaultMetricDetailSectionOrder
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.testing.string

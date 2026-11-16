@@ -18,17 +18,17 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.preferences.BiologicalSex
+import tech.mmarca.healthcalculations.preferences.BodyEnergyCalibration
+import tech.mmarca.healthcalculations.preferences.BodyProfile
+import tech.mmarca.healthcalculations.preferences.CaffeinePreferences
+import tech.mmarca.healthcalculations.preferences.SleepWindow
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
 import tech.mmarca.openvitals.data.repository.contract.BodyRepository
 import tech.mmarca.openvitals.data.sync.BmrEstimateService
 import tech.mmarca.openvitals.data.sync.BodyEnergyChainSyncService
 import tech.mmarca.openvitals.data.sync.DerivedMetricsResetService
 import tech.mmarca.openvitals.domain.model.BodyMeasurementType
-import tech.mmarca.openvitals.domain.preferences.BiologicalSex
-import tech.mmarca.openvitals.domain.preferences.BodyEnergyCalibration
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
-import tech.mmarca.openvitals.domain.preferences.CaffeinePreferences
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.util.MainDispatcherRule
 

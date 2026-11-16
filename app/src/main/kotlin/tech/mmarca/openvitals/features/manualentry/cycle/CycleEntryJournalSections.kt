@@ -19,10 +19,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import tech.mmarca.healthcalculations.cycle.CycleSymptom
+import tech.mmarca.healthcalculations.cycle.CycleSymptomGroup
+import tech.mmarca.healthcalculations.model.HcgTestResult
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.cycle.CycleSymptom
-import tech.mmarca.openvitals.domain.cycle.CycleSymptomGroup
-import tech.mmarca.openvitals.domain.model.HcgTestResult
 import tech.mmarca.openvitals.features.cycle.cycleSymptomLabelRes
 import tech.mmarca.openvitals.ui.theme.Spacing
 

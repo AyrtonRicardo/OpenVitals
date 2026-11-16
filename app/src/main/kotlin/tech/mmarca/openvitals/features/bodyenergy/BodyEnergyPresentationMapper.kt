@@ -3,13 +3,13 @@ package tech.mmarca.openvitals.features.bodyenergy
 import java.time.Duration
 import java.time.ZoneId
 import kotlin.math.roundToInt
+import tech.mmarca.healthcalculations.insights.BodyEnergyInputSummary
+import tech.mmarca.healthcalculations.insights.BodyEnergyPrimaryInfluence
+import tech.mmarca.healthcalculations.insights.BodyEnergySeedSource
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimeline
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimelinePoint
+import tech.mmarca.healthcalculations.insights.bodyEnergySeedScore
 import tech.mmarca.openvitals.data.repository.contract.BodyEnergyTimelineResult
-import tech.mmarca.openvitals.domain.insights.BodyEnergyInputSummary
-import tech.mmarca.openvitals.domain.insights.BodyEnergyPrimaryInfluence
-import tech.mmarca.openvitals.domain.insights.BodyEnergySeedSource
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimeline
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimelinePoint
-import tech.mmarca.openvitals.domain.insights.bodyEnergySeedScore
 
 data class BodyEnergyDisplayState(
     val timeline: BodyEnergyTimeline? = null,

@@ -14,8 +14,8 @@ import androidx.compose.ui.unit.dp
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.SkinTemperatureDeltaSample
-import tech.mmarca.openvitals.domain.model.SkinTemperatureEntry
+import tech.mmarca.healthcalculations.model.SkinTemperatureDeltaSample
+import tech.mmarca.healthcalculations.model.SkinTemperatureEntry
 import tech.mmarca.openvitals.ui.components.DayTimelineLinePlot
 import tech.mmarca.openvitals.ui.components.LineAxisRange
 import tech.mmarca.openvitals.ui.components.OpenVitalsCard

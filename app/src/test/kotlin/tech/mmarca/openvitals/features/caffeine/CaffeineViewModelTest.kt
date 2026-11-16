@@ -17,16 +17,16 @@ import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
 import androidx.lifecycle.SavedStateHandle
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.PeriodRangePreferenceKey
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.ScreenError
 import tech.mmarca.openvitals.data.repository.contract.CaffeineRepository
 import tech.mmarca.openvitals.data.repository.contract.NutritionRepository
-import tech.mmarca.openvitals.domain.model.CaffeineEntry
-import tech.mmarca.openvitals.domain.model.CaffeinePeriodData
-import tech.mmarca.openvitals.domain.preferences.CaffeinePreferences
+import tech.mmarca.healthcalculations.model.CaffeineEntry
+import tech.mmarca.healthcalculations.model.CaffeinePeriodData
+import tech.mmarca.healthcalculations.preferences.CaffeinePreferences
 import tech.mmarca.openvitals.navigation.CAFFEINE_ENTRY_ID_ARG
 import tech.mmarca.openvitals.navigation.SELECTED_DAY_ARG
 import tech.mmarca.openvitals.util.MainDispatcherRule
@@ -196,8 +196,8 @@ class CaffeineViewModelTest {
     @Test
     fun `deleting a drink removes it optimistically and force-reloads`() = runTest {
         val entries = listOf(
-            entryAt(today, id = "a", isOpenVitalsEntry = true),
-            entryAt(today, id = "b", isOpenVitalsEntry = true),
+            entryAt(today, id = "a", isOwnEntry = true),
+            entryAt(today, id = "b", isOwnEntry = true),
         )
         val repository = mockk<CaffeineRepository>()
         // The reload returns the trimmed list, as Health Connect would after the delete.
@@ -225,8 +225,8 @@ class CaffeineViewModelTest {
     @Test
     fun `a failed delete restores the drink and surfaces the error`() = runTest {
         val entries = listOf(
-            entryAt(today, id = "a", isOpenVitalsEntry = true),
-            entryAt(today, id = "b", isOpenVitalsEntry = true),
+            entryAt(today, id = "a", isOwnEntry = true),
+            entryAt(today, id = "b", isOwnEntry = true),
         )
         val nutrition = mockk<NutritionRepository>()
         coEvery { nutrition.deleteNutritionEntry("a") } throws RuntimeException("denied")
@@ -347,7 +347,7 @@ class CaffeineViewModelTest {
         date: LocalDate,
         id: String = "coffee",
         caffeineMg: Double = 100.0,
-        isOpenVitalsEntry: Boolean = false,
+        isOwnEntry: Boolean = false,
     ): CaffeineEntry {
         val start = date.atTime(8, 0).atZone(ZoneId.systemDefault()).toInstant()
         return CaffeineEntry(
@@ -358,7 +358,7 @@ class CaffeineViewModelTest {
             name = "Coffee",
             source = "test.source",
             mealType = 0,
-            isOpenVitalsEntry = isOpenVitalsEntry,
+            isOwnEntry = isOwnEntry,
         )
     }
 }

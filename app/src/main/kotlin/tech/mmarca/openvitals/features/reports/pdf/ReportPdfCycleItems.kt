@@ -1,7 +1,7 @@
 package tech.mmarca.openvitals.features.reports.pdf
 
-import tech.mmarca.openvitals.domain.cycle.CycleExclusionReason
-import tech.mmarca.openvitals.domain.cycle.CycleSymptom
+import tech.mmarca.healthcalculations.cycle.CycleExclusionReason
+import tech.mmarca.healthcalculations.cycle.CycleSymptom
 import tech.mmarca.openvitals.domain.model.ReportCycleDetail
 
 /** The cycle section's strings, resolved before the writer runs. */

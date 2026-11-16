@@ -2,8 +2,10 @@ package tech.mmarca.openvitals.domain.model
 
 import java.time.Instant
 import java.time.LocalDate
+import tech.mmarca.healthcalculations.model.BpMealContext
+import tech.mmarca.healthcalculations.model.BpRecordValues
+import tech.mmarca.healthcalculations.preferences.SleepWindow
 import tech.mmarca.openvitals.domain.preferences.ActivityWeekMode
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
 import tech.mmarca.openvitals.domain.preferences.UnitQuantity
 
 /** The section a metric renders under in the health report. */
@@ -352,12 +354,12 @@ data class ReportCycleRow(
     val peakFlow: Int?,
     val painDays: Int,
     val excluded: Boolean,
-    val exclusionReason: tech.mmarca.openvitals.domain.cycle.CycleExclusionReason? = null,
+    val exclusionReason: tech.mmarca.healthcalculations.cycle.CycleExclusionReason? = null,
 )
 
 /** How often a symptom was logged on bleeding days and on the others. */
 data class ReportSymptomFrequency(
-    val symptom: tech.mmarca.openvitals.domain.cycle.CycleSymptom,
+    val symptom: tech.mmarca.healthcalculations.cycle.CycleSymptom,
     val onBleeding: Int,
     val offBleeding: Int,
 )

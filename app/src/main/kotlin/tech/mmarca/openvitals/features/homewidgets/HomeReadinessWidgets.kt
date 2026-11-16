@@ -42,23 +42,24 @@ import dagger.hilt.android.EntryPointAccessors
 import java.time.LocalDate
 import kotlin.math.roundToInt
 import kotlinx.coroutines.withTimeoutOrNull
+import tech.mmarca.healthcalculations.insights.BodyEnergySeedSource
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimeline
+import tech.mmarca.healthcalculations.insights.DailyReadinessGoalInputs
+import tech.mmarca.healthcalculations.insights.DailyReadinessInsight
+import tech.mmarca.healthcalculations.insights.MetricDailyGoalKey
+import tech.mmarca.healthcalculations.insights.ReadinessState
+import tech.mmarca.healthcalculations.insights.calculateDailyReadiness
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
 import tech.mmarca.openvitals.data.repository.contract.BodyEnergyTimelineQuery
-import tech.mmarca.openvitals.domain.insights.BodyEnergySeedSource
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimeline
-import tech.mmarca.openvitals.domain.insights.DailyReadinessGoalInputs
-import tech.mmarca.openvitals.domain.insights.DailyReadinessInsight
-import tech.mmarca.openvitals.domain.insights.MetricDailyGoalKey
-import tech.mmarca.openvitals.domain.insights.ReadinessState
-import tech.mmarca.openvitals.domain.insights.calculateDailyReadiness
 import tech.mmarca.openvitals.domain.model.DashboardData
 import tech.mmarca.openvitals.domain.model.DashboardMetric
 import tech.mmarca.openvitals.domain.model.DashboardQuery
 import tech.mmarca.openvitals.domain.model.RefreshMode
+import tech.mmarca.openvitals.domain.model.toDaySignals
 import tech.mmarca.openvitals.features.dashboard.DashboardWidgetId
 import tech.mmarca.openvitals.navigation.Screen
 
@@ -665,7 +666,7 @@ private suspend fun loadReadinessInsight(context: Context): Result<DailyReadines
                 )
             )
         } ?: throw WidgetLoadTimeoutException()
-        calculateDailyReadiness(data, preferences.homeReadinessGoals())
+        calculateDailyReadiness(data.toDaySignals(), preferences.homeReadinessGoals())
     }
 
 private suspend fun loadBodyEnergyTimeline(context: Context): Result<BodyEnergyTimeline?> =

@@ -34,7 +34,7 @@ import kotlinx.coroutines.test.runTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
-import tech.mmarca.openvitals.domain.model.ActivityCadenceKind
+import tech.mmarca.healthcalculations.model.ActivityCadenceKind
 
 /**
  * Record to domain mapping, through the real readers. Each case seeds a record into
@@ -206,10 +206,10 @@ class HealthConnectReadMappingTest {
         assertThat(entries).hasSize(2)
         assertThat(entries.first().systolicMmHg).isEqualTo(120)
         assertThat(entries.first().diastolicMmHg).isEqualTo(80)
-        assertThat(entries.first().isOpenVitalsEntry).isTrue()
+        assertThat(entries.first().isOwnEntry).isTrue()
         // A reading written by another app is readable but never ours to edit.
         assertThat(entries.last().systolicMmHg).isEqualTo(131)
-        assertThat(entries.last().isOpenVitalsEntry).isFalse()
+        assertThat(entries.last().isOwnEntry).isFalse()
         assertThat(entries.last().source).isEqualTo(OTHER_PACKAGE)
     }
 
@@ -246,9 +246,9 @@ class HealthConnectReadMappingTest {
 
         // Ascending by time, exactly as Dart's fixture expects.
         assertThat(entries.map { it.weightKg }).containsExactly(79.0, 80.5).inOrder()
-        assertThat(entries.first().isOpenVitalsEntry).isFalse()
+        assertThat(entries.first().isOwnEntry).isFalse()
         assertThat(entries.first().source).isEqualTo(OTHER_PACKAGE)
-        assertThat(entries.last().isOpenVitalsEntry).isTrue()
+        assertThat(entries.last().isOwnEntry).isTrue()
     }
 
     // Sleep.

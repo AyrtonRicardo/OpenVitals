@@ -7,8 +7,8 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import tech.mmarca.openvitals.domain.model.BloodPressureEntry
-import tech.mmarca.openvitals.domain.model.BpMealContext
+import tech.mmarca.healthcalculations.model.BloodPressureEntry
+import tech.mmarca.healthcalculations.model.BpMealContext
 
 class BloodPressureReportTest {
 

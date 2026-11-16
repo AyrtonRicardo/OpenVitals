@@ -2,7 +2,7 @@
 
 > **Status:** Current implemented behavior for local derived views.
 > **Audience:** Users and contributors.
-> **Implementation:** `features/activity`, `features/readiness`, `features/bodyenergy`, `features/recovery`, `domain/insights`.
+> **Implementation:** `features/activity`, `features/readiness`, `features/bodyenergy`, `features/recovery`, `insights` in health-calculations.
 > **Navigation:** `Screen.Metric`, `Screen.DailyReadiness`; widgets `CARDIO_LOAD`, `WEEKLY_CARDIO_LOAD`, `BODY_ENERGY`.
 > **Related:** [Feature map](feature-map.md), [Daily readiness](daily-readiness.md), [Body Energy](body-energy.md).
 

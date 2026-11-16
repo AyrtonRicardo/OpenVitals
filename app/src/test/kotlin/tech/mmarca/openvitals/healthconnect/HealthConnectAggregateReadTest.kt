@@ -20,8 +20,8 @@ import androidx.health.connect.client.testing.FakeHealthConnectClient
 import androidx.health.connect.client.units.Energy
 import androidx.health.connect.client.units.Length
 import androidx.health.connect.client.units.Volume
-import tech.mmarca.openvitals.domain.model.HeartRateInsightBucketDuration
-import tech.mmarca.openvitals.domain.model.MaxHeartRateInsightAggregateBuckets
+import tech.mmarca.healthcalculations.model.HeartRateInsightBucketDuration
+import tech.mmarca.healthcalculations.model.MaxHeartRateInsightAggregateBuckets
 import com.google.common.truth.Truth.assertThat
 import io.mockk.every
 import io.mockk.mockk

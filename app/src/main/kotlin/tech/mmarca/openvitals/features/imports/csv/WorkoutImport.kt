@@ -15,6 +15,7 @@ import java.time.Instant
 import java.time.LocalDateTime
 import java.util.Locale
 import kotlin.math.roundToLong
+import tech.mmarca.healthcalculations.insights.matchExerciseType
 import tech.mmarca.openvitals.core.privacy.PrivacyRedactor
 import tech.mmarca.openvitals.domain.model.ActivityRecordSource
 import tech.mmarca.openvitals.domain.model.ActivityWriteLimits
@@ -24,7 +25,6 @@ import tech.mmarca.openvitals.domain.model.BleRecordingSampleBuffer
 import tech.mmarca.openvitals.domain.model.ExerciseTypeNames
 import tech.mmarca.openvitals.features.manualentry.activity.MaxActivityDurationMinutes
 import tech.mmarca.openvitals.features.manualentry.activity.activityEntryTypeForExerciseType
-import tech.mmarca.openvitals.features.manualentry.activity.matchExerciseType
 
 /**
  * The app's own workout CSV export, recognised by its header and read without a

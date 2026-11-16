@@ -1,9 +1,9 @@
 package tech.mmarca.openvitals.domain.query
 
-import tech.mmarca.openvitals.domain.model.ActivityProgressPoint
+import tech.mmarca.healthcalculations.model.ActivityProgressPoint
+import tech.mmarca.healthcalculations.model.DailySteps
+import tech.mmarca.healthcalculations.model.ExerciseData
 import tech.mmarca.openvitals.domain.model.DailyNutrition
-import tech.mmarca.openvitals.domain.model.DailySteps
-import tech.mmarca.openvitals.domain.model.ExerciseData
 import tech.mmarca.openvitals.domain.model.PlannedExerciseData
 
 data class ActivityPeriodData(

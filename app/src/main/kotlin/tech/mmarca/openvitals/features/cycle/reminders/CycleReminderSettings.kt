@@ -1,6 +1,6 @@
 package tech.mmarca.openvitals.features.cycle.reminders
 
-import tech.mmarca.openvitals.domain.model.CycleReminderConfig
+import tech.mmarca.healthcalculations.model.CycleReminderConfig
 
 /**
  * What a screen may do with the cycle reminders. The controller behind it

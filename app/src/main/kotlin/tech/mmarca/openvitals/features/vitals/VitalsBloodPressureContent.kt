@@ -5,11 +5,11 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Favorite
 import androidx.compose.ui.res.stringResource
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.MetricDetailSectionContext
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
 import tech.mmarca.openvitals.features.heart.BloodPressureContextCardContent
 import tech.mmarca.openvitals.features.heart.BloodPressureStatisticsContent
 import tech.mmarca.openvitals.features.heart.HeartEntryListContent
@@ -96,7 +96,7 @@ internal fun LazyListScope.bloodPressureContent(
                     source = { it.source },
                     time = { it.time },
                     dateTimeFormatterProvider = dateTimeFormatterProvider,
-                    editable = { it.isOpenVitalsEntry && it.id.isNotBlank() },
+                    editable = { it.isOwnEntry && it.id.isNotBlank() },
                     onEdit = { onEditVitalsMeasurement(VitalsMeasurementType.BLOOD_PRESSURE, it.id) },
                     onDelete = { onDeleteVitalsMeasurement(VitalsMeasurementType.BLOOD_PRESSURE, it.id) },
                 )

@@ -12,7 +12,7 @@ import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
 import tech.mmarca.openvitals.domain.model.BodyMeasurementType
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
 import tech.mmarca.openvitals.features.activity.ActiveCaloriesScreen
 import tech.mmarca.openvitals.features.activity.ActivityMetric
 import tech.mmarca.openvitals.features.activity.ActivityOverviewViewModel

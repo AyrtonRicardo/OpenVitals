@@ -8,8 +8,8 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import tech.mmarca.openvitals.domain.model.SleepStage
-import tech.mmarca.openvitals.domain.model.sleepDurationMsFromStages
+import tech.mmarca.healthcalculations.model.SleepStage
+import tech.mmarca.healthcalculations.model.sleepDurationMsFromStages
 
 private fun sleepAt(index: Int, part: CsvSleepPart, unit: CsvUnit? = null) = CsvColumnMapping(
     columnIndex = index,

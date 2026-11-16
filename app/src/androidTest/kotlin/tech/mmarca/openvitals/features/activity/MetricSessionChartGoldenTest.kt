@@ -9,11 +9,11 @@ import java.time.Instant
 import kotlin.math.sin
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.insights.SplitSource
+import tech.mmarca.healthcalculations.model.ActivityCadenceKind
+import tech.mmarca.healthcalculations.model.ActivityCadenceSample
+import tech.mmarca.healthcalculations.model.SpeedSample
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.insights.SplitSource
-import tech.mmarca.openvitals.domain.model.ActivityCadenceKind
-import tech.mmarca.openvitals.domain.model.ActivityCadenceSample
-import tech.mmarca.openvitals.domain.model.SpeedSample
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.testing.OpenVitalsVisualTestSurface
 import tech.mmarca.openvitals.testing.assertVisualRootMatchesGolden

@@ -1,8 +1,8 @@
 package tech.mmarca.openvitals.data.repository.contract
 
 import kotlinx.coroutines.flow.Flow
-import tech.mmarca.openvitals.domain.cycle.CycleTrackingProfile
-import tech.mmarca.openvitals.domain.model.CycleReminderConfig
+import tech.mmarca.healthcalculations.cycle.CycleTrackingProfile
+import tech.mmarca.healthcalculations.model.CycleReminderConfig
 import tech.mmarca.openvitals.domain.model.PillPlan
 
 /** The cycle screens' settings: declared contexts, the age band, and the reminders. */

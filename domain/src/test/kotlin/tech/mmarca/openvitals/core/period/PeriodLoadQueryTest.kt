@@ -3,6 +3,7 @@ package tech.mmarca.openvitals.core.period
 import java.time.LocalDate
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.DatePeriod
 
 class PeriodLoadQueryTest {
 

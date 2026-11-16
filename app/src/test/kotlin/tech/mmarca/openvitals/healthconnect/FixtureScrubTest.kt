@@ -54,7 +54,7 @@ class FixtureScrubTest {
 
         writers.forEach { writer ->
             val allowed = writer.startsWith("com.example.") ||
-                // Load-bearing: isOpenVitalsEntry, ownership, the manual-entry count.
+                // Load-bearing: isOwnEntry, ownership, the manual-entry count.
                 writer.startsWith("tech.mmarca.openvitals") ||
                 // Health Connect's own platform writers. Not a person.
                 writer == "android" ||

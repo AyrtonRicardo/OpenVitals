@@ -11,15 +11,15 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import tech.mmarca.healthcalculations.cycle.CurrentCyclePhase
+import tech.mmarca.healthcalculations.cycle.CycleEstimateResult
+import tech.mmarca.healthcalculations.cycle.CyclePhase
+import tech.mmarca.healthcalculations.cycle.PhaseCertainty
+import tech.mmarca.healthcalculations.model.SleepData
+import tech.mmarca.healthcalculations.model.SleepStage
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.cycle.CurrentCyclePhase
-import tech.mmarca.openvitals.domain.cycle.CycleEstimateResult
-import tech.mmarca.openvitals.domain.cycle.CyclePhase
-import tech.mmarca.openvitals.domain.cycle.PhaseCertainty
 import tech.mmarca.openvitals.domain.model.DashboardCycleSummary
 import tech.mmarca.openvitals.domain.model.DashboardData
-import tech.mmarca.openvitals.domain.model.SleepData
-import tech.mmarca.openvitals.domain.model.SleepStage
 import tech.mmarca.openvitals.features.dashboard.DashboardWidgetId
 import tech.mmarca.openvitals.navigation.Screen
 

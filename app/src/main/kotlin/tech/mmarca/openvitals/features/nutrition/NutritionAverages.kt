@@ -2,7 +2,7 @@ package tech.mmarca.openvitals.features.nutrition
 
 import java.time.LocalDate
 import java.time.temporal.ChronoUnit
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.domain.preferences.NutritionAverageBasis
 
 /**

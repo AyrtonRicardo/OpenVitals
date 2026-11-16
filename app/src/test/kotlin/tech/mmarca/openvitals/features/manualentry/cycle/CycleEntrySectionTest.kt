@@ -5,7 +5,7 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import tech.mmarca.openvitals.domain.model.CycleEntryKind
+import tech.mmarca.healthcalculations.model.CycleEntryKind
 
 class CycleEntrySectionTest {
     @Test fun `route values round-trip and unknown values give the full log`() {

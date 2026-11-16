@@ -507,7 +507,7 @@ Kotlin counterpart: none (ActivityRecordingService.kt + ActivityRecordingControl
 | finishRecording snapshots the session and hands back the BLE buffer | PORTED | ActivityRecordingControllerTest.kt: `finishRecording snapshots the session and hands back the BLE buffer` | — |
 
 ## /home/manu/Documentos/repos/mobile-app/test/features/manualentry/activity/recording/activity_recording_splits_test.dart
-Kotlin counterpart: /home/manu/Documentos/repos/openvitals-android/app/src/test/kotlin/tech/mmarca/openvitals/features/manualentry/activity/recording/ActivityRecordingSplitsTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/ActivityRecordingSplitsTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | interval splits are empty for empty and single point routes | PORTED | ActivityRecordingSplitsTest.kt `interval splits are empty for empty and single point routes` | identical assertions |
@@ -579,7 +579,7 @@ Kotlin counterpart: /home/manu/Documentos/repos/openvitals-android/app/src/test/
 | mergeHydrationAndNutrition > a hydration entry takes its name and nutrients from its paired nutrition record | DIVERGED | HydrationViewModelTest.kt `load adds OpenVitals standalone nutrition drinks to hydration entries` | paired-record exclusion asserted, but the hydration entry's adopted displayName/nutrients are never asserted |
 | mergeHydrationAndNutrition > the paired nutrition record is not also listed on its own | PORTED | HydrationViewModelTest.kt `load adds OpenVitals standalone nutrition drinks to hydration entries` | "paired-id" absent from the expected id list |
 | mergeHydrationAndNutrition > a beverage with nutrients but no volume is surfaced as a nutrition-only entry | PORTED | HydrationViewModelTest.kt `load adds OpenVitals standalone nutrition drinks to hydration entries` | NUTRITION_ONLY record type, name "Coffee", liters 0.0 asserted |
-| mergeHydrationAndNutrition > another app's caffeinated drink joins the beverage history | PORTED | HydrationViewModelTest.kt `load adds OpenVitals standalone nutrition drinks to hydration entries` | external "Red Bull" included with isOpenVitalsEntry=false |
+| mergeHydrationAndNutrition > another app's caffeinated drink joins the beverage history | PORTED | HydrationViewModelTest.kt `load adds OpenVitals standalone nutrition drinks to hydration entries` | external "Red Bull" included with isOwnEntry=false |
 | mergeHydrationAndNutrition > a plain meal is not a beverage | PORTED | HydrationViewModelTest.kt `load adds OpenVitals standalone nutrition drinks to hydration entries` | external "Sandwich" (no caffeine nutrient) excluded |
 | mergeHydrationAndNutrition > the carbs record OpenVitals writes for an activity is excluded | PORTED | HydrationViewModelTest.kt `load adds OpenVitals standalone nutrition drinks to hydration entries` | "OpenVitals carbs" entry excluded from ids |
 | mergeHydrationAndNutrition > an unpaired nutrition record at the same instant as an OpenVitals hydration entry is treated as its other half | PORTED | HydrationViewModelTest.kt `load adds OpenVitals standalone nutrition drinks to hydration entries` | same-instant no-client-id record excluded, later standalone kept |

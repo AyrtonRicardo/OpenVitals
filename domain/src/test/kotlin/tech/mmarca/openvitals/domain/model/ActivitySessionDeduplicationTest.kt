@@ -4,6 +4,10 @@ import java.time.Duration
 import java.time.Instant
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseRouteData
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseRouteStatus
 
 class ActivitySessionDeduplicationTest {
 

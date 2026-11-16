@@ -3,7 +3,7 @@ package tech.mmarca.openvitals.features.activity.maps
 import java.time.Instant
 import org.junit.Assert.assertEquals
 import org.junit.Test
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 
 /** Each 3 degree compass step used to hand the map the whole recorded track again. */
 class RouteMapWrittenStateTest {

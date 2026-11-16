@@ -17,7 +17,7 @@ import tech.mmarca.openvitals.core.presentation.UnitFormatter
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.data.repository.contract.ActivityRepository
 import tech.mmarca.openvitals.domain.model.ActivityWriteRequest
-import tech.mmarca.openvitals.domain.model.DailySteps
+import tech.mmarca.healthcalculations.model.DailySteps
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.testing.string
 import tech.mmarca.openvitals.ui.theme.OpenVitalsTheme

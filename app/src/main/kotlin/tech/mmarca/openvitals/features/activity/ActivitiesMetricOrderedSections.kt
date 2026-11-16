@@ -22,27 +22,27 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.health.connect.client.records.metadata.Metadata
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.DisplayValue
 import tech.mmarca.openvitals.core.presentation.MetricDetailSectionContext
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.insights.BaselineValue
-import tech.mmarca.openvitals.domain.insights.CrossMetricValue
-import tech.mmarca.openvitals.domain.insights.DailyGoalValue
-import tech.mmarca.openvitals.domain.insights.DataValueKind
-import tech.mmarca.openvitals.domain.insights.MetricDailyGoalKey
-import tech.mmarca.openvitals.domain.insights.WorkoutGuidelineStatus
-import tech.mmarca.openvitals.domain.insights.crossMetricInsight
-import tech.mmarca.openvitals.domain.insights.dailyGoalProgress
-import tech.mmarca.openvitals.domain.insights.dataConfidence
-import tech.mmarca.openvitals.domain.insights.periodComparison
-import tech.mmarca.openvitals.domain.insights.personalBaselineInsight
-import tech.mmarca.openvitals.domain.insights.workoutGuidelineProgress
-import tech.mmarca.openvitals.domain.model.CaloriesBurnedSource
-import tech.mmarca.openvitals.domain.model.DailyRestingHR
-import tech.mmarca.openvitals.domain.model.ExerciseData
+import tech.mmarca.healthcalculations.insights.BaselineValue
+import tech.mmarca.healthcalculations.insights.CrossMetricValue
+import tech.mmarca.healthcalculations.insights.DailyGoalValue
+import tech.mmarca.healthcalculations.insights.DataValueKind
+import tech.mmarca.healthcalculations.insights.MetricDailyGoalKey
+import tech.mmarca.healthcalculations.insights.WorkoutGuidelineStatus
+import tech.mmarca.healthcalculations.insights.crossMetricInsight
+import tech.mmarca.healthcalculations.insights.dailyGoalProgress
+import tech.mmarca.healthcalculations.insights.dataConfidence
+import tech.mmarca.healthcalculations.insights.periodComparison
+import tech.mmarca.healthcalculations.insights.personalBaselineInsight
+import tech.mmarca.healthcalculations.insights.workoutGuidelineProgress
+import tech.mmarca.healthcalculations.model.CaloriesBurnedSource
+import tech.mmarca.healthcalculations.model.DailyRestingHR
+import tech.mmarca.healthcalculations.model.ExerciseData
 import tech.mmarca.openvitals.domain.preferences.ActivityWeekMode
 import tech.mmarca.openvitals.domain.preferences.MetricDetailSectionId
 import tech.mmarca.openvitals.ui.components.ChartDaySelection
@@ -296,7 +296,7 @@ private fun ActivityKeyMetricsSectionContent(
             selectedRange = selectedRange,
             aggregation = ActivityOverviewMetricAggregation.SUM,
         ) { day ->
-            if (day.cardioLoadConfidence == tech.mmarca.openvitals.domain.insights.CardioLoadConfidence.NO_DATA) {
+            if (day.cardioLoadConfidence == tech.mmarca.healthcalculations.insights.CardioLoadConfidence.NO_DATA) {
                 null
             } else {
                 day.cardioLoad.toDouble()
@@ -414,7 +414,7 @@ private fun ActivityKeyMetricsSectionContent(
 private fun WorkoutStatisticsSectionContent(
     state: ActivitiesUiState,
     period: DatePeriod,
-    goalProgress: tech.mmarca.openvitals.domain.insights.DailyGoalProgress,
+    goalProgress: tech.mmarca.healthcalculations.insights.DailyGoalProgress,
     unitFormatter: UnitFormatter,
 ) {
     val workouts = state.workouts

@@ -1,15 +1,15 @@
 package tech.mmarca.openvitals.data.migration
 
+import tech.mmarca.healthcalculations.preferences.CaffeineAlcoholUse
+import tech.mmarca.healthcalculations.preferences.CaffeineGenotype
+import tech.mmarca.healthcalculations.preferences.CaffeineHabituation
+import tech.mmarca.healthcalculations.preferences.CaffeineHormonalStatus
+import tech.mmarca.healthcalculations.preferences.CaffeineSleepSensitivity
 import tech.mmarca.openvitals.core.period.PeriodRangePreferenceKey
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.domain.preferences.ActivityWeekMode
 import tech.mmarca.openvitals.domain.preferences.AppLanguage
 import tech.mmarca.openvitals.domain.preferences.AppThemeMode
-import tech.mmarca.openvitals.domain.preferences.CaffeineAlcoholUse
-import tech.mmarca.openvitals.domain.preferences.CaffeineGenotype
-import tech.mmarca.openvitals.domain.preferences.CaffeineHabituation
-import tech.mmarca.openvitals.domain.preferences.CaffeineHormonalStatus
-import tech.mmarca.openvitals.domain.preferences.CaffeineSleepSensitivity
 import tech.mmarca.openvitals.domain.preferences.ChartAggregationMode
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.features.dashboard.DashboardWidgetId

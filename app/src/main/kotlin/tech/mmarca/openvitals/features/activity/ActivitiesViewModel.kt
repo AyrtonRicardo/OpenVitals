@@ -5,15 +5,15 @@ import tech.mmarca.openvitals.navigation.selectedDayOrNull
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import tech.mmarca.openvitals.domain.insights.CardioLoadTimeWindow
-import tech.mmarca.openvitals.domain.insights.MetricDailyGoalKey
-import tech.mmarca.openvitals.domain.insights.calculateCardioLoad
+import tech.mmarca.healthcalculations.insights.CardioLoadTimeWindow
+import tech.mmarca.healthcalculations.insights.MetricDailyGoalKey
+import tech.mmarca.healthcalculations.insights.calculateCardioLoad
 import tech.mmarca.openvitals.core.presentation.ScreenError
 import tech.mmarca.openvitals.core.presentation.toScreenError
 import tech.mmarca.openvitals.core.performance.DefaultDispatcherProvider
 import tech.mmarca.openvitals.core.performance.DispatcherProvider
 import tech.mmarca.openvitals.core.performance.LoadCoordinator
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.PeriodRangePreferenceKey
 import tech.mmarca.openvitals.core.period.PeriodSelection
@@ -21,19 +21,20 @@ import tech.mmarca.openvitals.core.period.PeriodSelectionDriver
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.period.displayPeriodFor
 import tech.mmarca.openvitals.domain.preferences.ActivityWeekMode
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
+import tech.mmarca.healthcalculations.preferences.BodyProfile
 import tech.mmarca.openvitals.domain.preferences.toWeekPeriodMode
-import tech.mmarca.openvitals.domain.model.CaloriesBurnedSource
-import tech.mmarca.openvitals.domain.model.DailyHrv
+import tech.mmarca.healthcalculations.model.CaloriesBurnedSource
+import tech.mmarca.healthcalculations.model.DailyHrv
 import tech.mmarca.openvitals.domain.model.DailyNutrition
-import tech.mmarca.openvitals.domain.model.DailyRestingHR
-import tech.mmarca.openvitals.domain.model.DailySteps
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.HeartRateSample
+import tech.mmarca.healthcalculations.model.DailyRestingHR
+import tech.mmarca.healthcalculations.model.DailySteps
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.HeartRateSample
 import tech.mmarca.openvitals.domain.model.PlannedExerciseData
 import tech.mmarca.openvitals.data.repository.contract.ActivityRepository
 import tech.mmarca.openvitals.data.repository.contract.BodyProfilePreferences
 import tech.mmarca.openvitals.data.repository.contract.HeartRepository
+import tech.mmarca.openvitals.data.repository.contract.loadObservedMaxHeartRate
 import tech.mmarca.openvitals.data.repository.contract.DailyGoalPreferences
 import tech.mmarca.openvitals.data.repository.contract.PeriodPreferences
 import java.time.LocalDate
@@ -47,6 +48,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import tech.mmarca.healthcalculations.stats.lowerMedianOrNull
 
 @Immutable
 data class ActivitiesUiState(
@@ -182,7 +184,7 @@ class ActivitiesViewModel @Inject constructor(
     fun deleteActivityEntry(entryId: String) {
         if (entryId.isBlank()) return
         val entry = _uiState.value.workouts.firstOrNull { it.id == entryId } ?: return
-        if (!entry.isOpenVitalsEntry) return
+        if (!entry.isOwnEntry) return
         viewModelScope.launch {
             val previous = _uiState.value
             val previousResult = latestResult
@@ -241,6 +243,11 @@ class ActivitiesViewModel @Inject constructor(
                             heartRepository.loadHeartRateSamples(windows.current.start, currentDataEnd)
                         }
                     }
+                    val observedMaxHeartRate = async {
+                        heartRepository.loadObservedMaxHeartRate(
+                            currentDataEnd.plusDays(1).atStartOfDay(ZoneId.systemDefault()).toInstant(),
+                        )
+                    }
                     val loadedRestingHeartRate = restingHeartRate.await()
                     val loadedWorkouts = workouts.await()
                     val profile = bodyProfilePreferences.bodyProfile().normalized(windows.current.end)
@@ -260,6 +267,7 @@ class ActivitiesViewModel @Inject constructor(
                                 heartRateSamples = heartRateSamples.await(),
                                 restingHeartRate = loadedRestingHeartRate,
                                 hrv = hrv.await(),
+                                observedMaxHeartRate = observedMaxHeartRate.await(),
                                 profile = profile,
                             )
                         },
@@ -368,6 +376,7 @@ private fun activityOverviewDays(
     heartRateSamples: List<HeartRateSample>,
     restingHeartRate: List<DailyRestingHR>,
     hrv: List<DailyHrv>,
+    observedMaxHeartRate: Long?,
     profile: BodyProfile,
 ): List<ActivityOverviewDay> {
     val stepsByDate = steps.associateBy { it.date }
@@ -380,8 +389,7 @@ private fun activityOverviewDays(
     val restingHeartRateByDate = restingHeartRate.associateBy { it.date }
     val baselineRestingHeartRate = restingHeartRate
         .map { it.bpm }
-        .medianOrNull()
-    val observedMaxHeartRate = heartRateSamples.maxOfOrNull { it.beatsPerMinute }
+        .lowerMedianOrNull()
 
     return generateSequence(start) { date ->
         date.plusDays(1).takeUnless { it.isAfter(end) }
@@ -460,12 +468,6 @@ internal fun activityDisplayPeriod(
         today = today,
         weekPeriodMode = activityWeekMode.toWeekPeriodMode(),
     )
-}
-
-private fun List<Long>.medianOrNull(): Long? {
-    if (isEmpty()) return null
-    val sorted = sorted()
-    return sorted[sorted.lastIndex / 2]
 }
 
 private fun List<ExerciseData>.overlapping(date: LocalDate, zone: ZoneId): List<ExerciseData> {

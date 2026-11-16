@@ -12,14 +12,14 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import tech.mmarca.openvitals.data.repository.contract.CyclePreferences
-import tech.mmarca.openvitals.domain.cycle.AgeBand
-import tech.mmarca.openvitals.domain.cycle.CycleTrackingProfile
-import tech.mmarca.openvitals.domain.cycle.HormonalContraception
-import tech.mmarca.openvitals.domain.cycle.HormonalContraceptionKind
-import tech.mmarca.openvitals.domain.cycle.TrackingContext
-import tech.mmarca.openvitals.domain.model.CycleReminderConfig
+import tech.mmarca.healthcalculations.cycle.AgeBand
+import tech.mmarca.healthcalculations.cycle.CycleTrackingProfile
+import tech.mmarca.healthcalculations.cycle.HormonalContraception
+import tech.mmarca.healthcalculations.cycle.HormonalContraceptionKind
+import tech.mmarca.healthcalculations.cycle.TrackingContext
+import tech.mmarca.healthcalculations.model.CycleReminderConfig
 import tech.mmarca.openvitals.domain.model.PillPlan
-import tech.mmarca.openvitals.domain.model.CycleReminderVisibility
+import tech.mmarca.healthcalculations.model.CycleReminderVisibility
 
 /**
  * The cycle settings, in their own preference file. They stay out of

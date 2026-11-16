@@ -7,10 +7,10 @@ import org.junit.Assert.assertFalse
 import org.junit.Assert.assertThrows
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.ExerciseRouteData
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
-import tech.mmarca.openvitals.domain.model.ExerciseRouteStatus
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseRouteData
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ExerciseRouteStatus
 import tech.mmarca.openvitals.features.manualentry.activity.routeimport.RouteFileParser
 
 class ActivityRouteExportTest {

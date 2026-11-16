@@ -1,41 +1,37 @@
 package tech.mmarca.openvitals.features.sleep
 
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.baselinePeriodBefore
 import tech.mmarca.openvitals.core.period.displayPeriodFor
 import tech.mmarca.openvitals.core.period.previousPeriodFor
-import tech.mmarca.openvitals.domain.insights.CrossMetricValue
-import tech.mmarca.openvitals.domain.insights.SleepScoreConfidence
-import tech.mmarca.openvitals.domain.insights.SleepScoreLookbackDays
-import tech.mmarca.openvitals.domain.insights.calculateSleepScoreForDate
-import tech.mmarca.openvitals.domain.insights.overnightHrvInputsFromDaily
-import tech.mmarca.openvitals.domain.model.DailyHrv
-import tech.mmarca.openvitals.domain.model.DailySleepDuration
-import tech.mmarca.openvitals.domain.model.AwakeStageTypes
-import tech.mmarca.openvitals.domain.model.CoreStageTypes
-import tech.mmarca.openvitals.domain.model.SleepData
-import tech.mmarca.openvitals.domain.model.SleepStage
-import tech.mmarca.openvitals.domain.model.SleepNapGap
-import tech.mmarca.openvitals.domain.model.combineNightStages
-import tech.mmarca.openvitals.domain.model.dailyNaps
-import tech.mmarca.openvitals.domain.model.durationMsForTypes
-import tech.mmarca.openvitals.domain.model.dailySleepSummary
-import tech.mmarca.openvitals.domain.model.sleepDurationMsFromStages
-import tech.mmarca.openvitals.domain.model.sleepSessionsForRange
-import tech.mmarca.openvitals.domain.model.sleepSessionsUnionMs
-import tech.mmarca.openvitals.domain.model.splitNightAndNaps
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
+import tech.mmarca.healthcalculations.insights.CrossMetricValue
+import tech.mmarca.healthcalculations.insights.SleepScoreConfidence
+import tech.mmarca.healthcalculations.insights.SleepScoreLookbackDays
+import tech.mmarca.healthcalculations.insights.calculateSleepScoreForDate
+import tech.mmarca.healthcalculations.insights.overnightHrvInputsFromDaily
+import tech.mmarca.healthcalculations.model.DailyHrv
+import tech.mmarca.healthcalculations.model.DailySleepDuration
+import tech.mmarca.healthcalculations.model.AwakeStageTypes
+import tech.mmarca.healthcalculations.model.CoreStageTypes
+import tech.mmarca.healthcalculations.model.SleepData
+import tech.mmarca.healthcalculations.model.SleepStage
+import tech.mmarca.healthcalculations.model.SleepNapGap
+import tech.mmarca.healthcalculations.model.combineNightStages
+import tech.mmarca.healthcalculations.model.dailyNaps
+import tech.mmarca.healthcalculations.model.durationMsForTypes
+import tech.mmarca.healthcalculations.model.dailySleepSummary
+import tech.mmarca.healthcalculations.model.sleepDurationMsFromStages
+import tech.mmarca.healthcalculations.model.sleepSessionsForRange
+import tech.mmarca.healthcalculations.model.sleepSessionsUnionMs
+import tech.mmarca.healthcalculations.model.splitNightAndNaps
+import tech.mmarca.healthcalculations.preferences.SleepWindow
 import java.time.LocalDate
 import java.time.ZoneId
-import kotlin.math.PI
-import kotlin.math.atan2
-import kotlin.math.cos
 import kotlin.math.roundToInt
 import kotlin.math.roundToLong
-import kotlin.math.sin
+import tech.mmarca.healthcalculations.stats.circularMeanMinutes
 
-private const val MinutesPerDay = 24 * 60
 
 object SleepPresentationMapper {
 
@@ -305,10 +301,10 @@ private fun List<SleepData>.averageSchedule(): SleepOverviewSchedule? {
     val zone = ZoneId.systemDefault()
     val startMinute = circularMeanMinutes(
         map { session -> session.startTime.atZone(zone).toLocalTime().toMinuteOfDay() },
-    )
+    ) ?: return null
     val endMinute = circularMeanMinutes(
         map { session -> session.endTime.atZone(zone).toLocalTime().toMinuteOfDay() },
-    )
+    ) ?: return null
     return SleepOverviewSchedule(startMinute = startMinute, endMinute = endMinute)
 }
 
@@ -317,13 +313,5 @@ private fun List<SleepData>.mainSleepSession(): SleepData? =
 
 private fun List<SleepData>.stageDurationMs(stageTypes: Set<Int>): Long =
     sumOf { session -> session.stages.durationMsForTypes(stageTypes) }
-
-private fun circularMeanMinutes(values: List<Int>): Int {
-    if (values.isEmpty()) return 0
-    val sinMean = values.sumOf { sin(it.toDouble() / MinutesPerDay * 2.0 * PI) } / values.size
-    val cosMean = values.sumOf { cos(it.toDouble() / MinutesPerDay * 2.0 * PI) } / values.size
-    val angle = atan2(sinMean, cosMean).let { if (it < 0.0) it + 2.0 * PI else it }
-    return (angle / (2.0 * PI) * MinutesPerDay).roundToInt() % MinutesPerDay
-}
 
 private fun java.time.LocalTime.toMinuteOfDay(): Int = hour * 60 + minute

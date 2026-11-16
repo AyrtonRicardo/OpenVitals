@@ -12,7 +12,7 @@ import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performTouchInput
 import org.junit.Rule
 import org.junit.Test
-import tech.mmarca.openvitals.domain.insights.BodyEnergyPrimaryInfluence
+import tech.mmarca.healthcalculations.insights.BodyEnergyPrimaryInfluence
 import tech.mmarca.openvitals.ui.theme.OpenVitalsTheme
 
 /**

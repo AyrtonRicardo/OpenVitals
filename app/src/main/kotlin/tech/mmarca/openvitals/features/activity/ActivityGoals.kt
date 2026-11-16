@@ -1,6 +1,6 @@
 package tech.mmarca.openvitals.features.activity
 
-import tech.mmarca.openvitals.domain.insights.MetricDailyGoalKey
+import tech.mmarca.healthcalculations.insights.MetricDailyGoalKey
 
 internal val ActivityMetric.dailyGoalKey: MetricDailyGoalKey
     get() = when (this) {

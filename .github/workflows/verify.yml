@@ -1,9 +1,10 @@
 # The gate. A pull request and a push to main run it; the release workflow
 # (release.yml) looks its result up instead of running it again.
 #
-# Two jobs. app-test on every pull request and push; lint on pushes to main
-# only (lint alone is half of the gate's task time, and a finding is rarely
-# what a review turns on; main catches it before a nightly ships).
+# app-test, docs-links and submodule-pointers on every pull request and push;
+# lint on pushes to main only (lint alone is half of the gate's task time, and
+# a finding is rarely what a review turns on; main catches it before a nightly
+# ships).
 # Locally the whole gate is one invocation, verifyCi.
 #
 # Every workflow pins ubuntu-26.04, the image ubuntu-latest moves to between
@@ -54,6 +55,16 @@ jobs:
       - uses: actions/checkout@v5
       - run: python3 scripts/sync-wiki.py --repo "$GITHUB_REPOSITORY" --check
 
+  # A submodule pointer that names a commit only a pull request branch holds
+  # builds until that branch is deleted, and then no fresh clone can check it
+  # out. So each pointer must be on its library's default branch: the library's
+  # pull request merges first. Until it has, this job is red on purpose.
+  submodule-pointers:
+    runs-on: ubuntu-26.04
+    steps:
+      - uses: actions/checkout@v5
+      - run: scripts/ci-submodule-pointers.sh
+
   # The stock runner ships JDK 17 and the Android SDK; scripts/ci-android-setup.sh
   # installs the platform and build-tools when the image lacks them. Each job
   # gives setup-gradle a Gradle user home of its own: the action leaves caching
@@ -69,7 +80,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          # The OpenLink library is a submodule the app builds from.
+          # The OpenLink and health-calculations libraries are submodules the app builds from.
           submodules: true
       - run: echo "GRADLE_USER_HOME=$RUNNER_TEMP/gradle-user-home" >> "$GITHUB_ENV"
       - uses: gradle/actions/setup-gradle@v5
@@ -84,7 +95,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          # The OpenLink library is a submodule the app builds from.
+          # The OpenLink and health-calculations libraries are submodules the app builds from.
           submodules: true
       - run: echo "GRADLE_USER_HOME=$RUNNER_TEMP/gradle-user-home" >> "$GITHUB_ENV"
       - uses: gradle/actions/setup-gradle@v5

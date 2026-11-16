@@ -3,6 +3,9 @@ package tech.mmarca.openvitals.features.body
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.displayPeriodFor
 import tech.mmarca.openvitals.domain.query.BodyPeriodData
+import tech.mmarca.healthcalculations.insights.fatFreeMassIndex
+import tech.mmarca.healthcalculations.insights.bodyMassIndex
+import tech.mmarca.healthcalculations.insights.adjustedFatFreeMassIndex
 
 object BodyPresentationMapper {
 
@@ -102,7 +105,7 @@ private fun BodyPeriodData.summary(
         previousLatestBodyFatPercent = previousBodyFatEntries.maxByOrNull { it.time }?.percent,
         bmi = latestWeightKg.bmiWith(heightCm),
         ffmi = ffmi,
-        adjustedFfmi = ffmi.adjustedFfmiWith(heightCm),
+        adjustedFfmi = adjustedFatFreeMassIndex(latestWeightKg, heightCm, latestBodyFatPercent),
         latestHeightCm = latestHeightCm,
         previousLatestHeightCm = previousHeightEntries.maxByOrNull { it.time }?.heightCm,
         latestLeanMassKg = leanMassEntries.maxByOrNull { it.time }?.massKg ?: leanMassKg,
@@ -117,28 +120,7 @@ private fun BodyPeriodData.summary(
     )
 }
 
-internal fun Double?.bmiWith(heightCm: Double?): Double? {
-    val weight = this ?: return null
-    val height = heightCm ?: return null
-    if (height <= 0.0) return null
-    val heightMeters = height / 100.0
-    return weight / (heightMeters * heightMeters)
-}
+internal fun Double?.bmiWith(heightCm: Double?): Double? = bodyMassIndex(this, heightCm)
 
-internal fun Double?.ffmiWith(heightCm: Double?, bodyFatPercent: Double?): Double? {
-    val weight = this ?: return null
-    val height = heightCm ?: return null
-    val bodyFat = bodyFatPercent ?: return null
-    if (weight <= 0.0 || height <= 0.0 || bodyFat < 0.0 || bodyFat >= 100.0) return null
-    val heightMeters = height / 100.0
-    val fatFreeMassKg = weight * (1.0 - bodyFat / 100.0)
-    return fatFreeMassKg / (heightMeters * heightMeters)
-}
-
-internal fun Double?.adjustedFfmiWith(heightCm: Double?): Double? {
-    val ffmi = this ?: return null
-    val height = heightCm ?: return null
-    if (height <= 0.0) return null
-    val heightMeters = height / 100.0
-    return ffmi + (6.3 * (1.8 - heightMeters))
-}
+internal fun Double?.ffmiWith(heightCm: Double?, bodyFatPercent: Double?): Double? =
+    fatFreeMassIndex(this, heightCm, bodyFatPercent)

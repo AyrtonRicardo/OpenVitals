@@ -11,16 +11,16 @@ import java.time.ZoneId
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.BasalBodyTemperatureEntry
+import tech.mmarca.healthcalculations.model.CycleEntryKind
+import tech.mmarca.healthcalculations.model.CycleEntryWriteRequest
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.model.CycleRecordValues
+import tech.mmarca.healthcalculations.model.MenstruationFlowEntry
 import tech.mmarca.openvitals.data.repository.contract.CycleRepository
-import tech.mmarca.openvitals.domain.model.BasalBodyTemperatureEntry
 import tech.mmarca.openvitals.domain.model.CycleDayLog
 import tech.mmarca.openvitals.domain.model.CycleDayLogWrite
-import tech.mmarca.openvitals.domain.model.CycleEntryKind
-import tech.mmarca.openvitals.domain.model.CycleEntryWriteRequest
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
-import tech.mmarca.openvitals.domain.model.CycleRecordValues
 import tech.mmarca.openvitals.domain.model.DayBleedingChoice
-import tech.mmarca.openvitals.domain.model.MenstruationFlowEntry
 
 /**
  * A day-log save touches only the record kinds whose value changed, and only
@@ -106,7 +106,7 @@ class CycleDayLogWriterTest {
                 measurementLocation = CycleRecordValues.MEASUREMENT_LOCATION_UNKNOWN,
                 source = "OpenVitals",
                 id = "own-bbt",
-                isOpenVitalsEntry = true,
+                isOwnEntry = true,
             ),
         )
         val request = slot<CycleEntryWriteRequest>()
@@ -126,7 +126,7 @@ class CycleDayLogWriterTest {
         flow = level,
         source = "OpenVitals",
         id = "own-flow",
-        isOpenVitalsEntry = true,
+        isOwnEntry = true,
     )
 
     private fun write(

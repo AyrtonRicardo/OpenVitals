@@ -1,14 +1,14 @@
 package tech.mmarca.openvitals.domain.usecase
 
 import javax.inject.Inject
+import tech.mmarca.healthcalculations.insights.SleepScoreLookbackDays
+import tech.mmarca.healthcalculations.model.DailyHrv
+import tech.mmarca.healthcalculations.model.DailySleepDuration
+import tech.mmarca.healthcalculations.model.SleepData
+import tech.mmarca.healthcalculations.preferences.SleepWindow
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.data.repository.contract.HeartRepository
 import tech.mmarca.openvitals.data.repository.contract.SleepRepository
-import tech.mmarca.openvitals.domain.insights.SleepScoreLookbackDays
-import tech.mmarca.openvitals.domain.model.DailyHrv
-import tech.mmarca.openvitals.domain.model.DailySleepDuration
-import tech.mmarca.openvitals.domain.model.SleepData
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
 
 data class SleepPeriodLoadResult(
     val sessions: List<SleepData> = emptyList(),

@@ -1,10 +1,10 @@
 package tech.mmarca.openvitals.features.hydration
 
 import androidx.compose.runtime.Immutable
-import tech.mmarca.openvitals.core.period.DatePeriod
-import tech.mmarca.openvitals.domain.insights.BaselineValue
-import tech.mmarca.openvitals.domain.insights.CrossMetricInsight
-import tech.mmarca.openvitals.domain.insights.PeriodComparison
+import tech.mmarca.healthcalculations.model.DatePeriod
+import tech.mmarca.healthcalculations.insights.BaselineValue
+import tech.mmarca.healthcalculations.insights.CrossMetricInsight
+import tech.mmarca.healthcalculations.insights.PeriodComparison
 import java.time.LocalDate
 
 @Immutable

@@ -8,12 +8,12 @@ import org.junit.Assert.assertNull
 import org.junit.Test
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.ActivityCadenceKind
-import tech.mmarca.openvitals.domain.model.ActivityCadenceSample
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.ExerciseSegmentData
-import tech.mmarca.openvitals.domain.model.movingDurationMs
-import tech.mmarca.openvitals.domain.model.pausedDurationMs
+import tech.mmarca.healthcalculations.model.ActivityCadenceKind
+import tech.mmarca.healthcalculations.model.ActivityCadenceSample
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseSegmentData
+import tech.mmarca.healthcalculations.model.movingDurationMs
+import tech.mmarca.healthcalculations.model.pausedDurationMs
 
 class ActivityMetricsTest {
 

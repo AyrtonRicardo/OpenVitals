@@ -36,6 +36,7 @@ import tech.mmarca.openvitals.navigation.ExternalRouteImportRequest
 import tech.mmarca.openvitals.navigation.EXTRA_OPENVITALS_ROUTE
 import java.time.LocalDate
 import tech.mmarca.openvitals.navigation.Screen
+import tech.mmarca.openvitals.sharing.contract.DataSharingContract
 import tech.mmarca.openvitals.ui.theme.OpenVitalsTheme
 import java.util.Locale
 import tech.mmarca.openvitals.ui.components.AppBarState
@@ -184,6 +185,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateExternalNavigationRoute(intent: Intent?) {
         externalNavigationRoute = intent?.openVitalsRoute()
+            ?: intent?.dataSharingRoute()
     }
 }
 
@@ -192,6 +194,12 @@ private fun Intent.isHealthConnectOnboardingIntent(): Boolean {
     return action == "androidx.health.ACTION_SHOW_ONBOARDING" ||
         action == "android.health.connect.action.SHOW_ONBOARDING"
 }
+
+/** Another app asks to open the sharing settings, for example because sharing is off. */
+internal fun Intent.dataSharingRoute(): String? =
+    Screen.SettingsDataSharing.route.takeIf {
+        action == DataSharingContract.ACTION_MANAGE_DATA_SHARING
+    }
 
 internal fun Intent.openVitalsRoute(): String? =
     getStringExtra(EXTRA_OPENVITALS_ROUTE)

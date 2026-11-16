@@ -19,8 +19,8 @@ import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.ActivityPauseInterval
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
+import tech.mmarca.healthcalculations.model.ActivityPauseInterval
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 
 /** The moving time once pauses are taken out, and the averages computed over it. */

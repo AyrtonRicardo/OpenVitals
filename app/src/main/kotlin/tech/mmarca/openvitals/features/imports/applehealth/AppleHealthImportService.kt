@@ -843,8 +843,7 @@ class AppleHealthImportService
                 }
                 val existingClientRecordIds = findExistingClientRecordIds(deduplicated, importLogs)
                 val toInsert = deduplicated.filterNot { converted ->
-                    val clientRecordId = converted.clientRecordId
-                    val duplicate = clientRecordId != null && clientRecordId in existingClientRecordIds
+                    val duplicate = converted.knownClientRecordIds.any { it in existingClientRecordIds }
                     if (duplicate) {
                         addDiagnostic(
                             converted.diagnostic(
@@ -957,7 +956,7 @@ class AppleHealthImportService
         ): Set<String> {
             // Disjoint queries, unioned, so they run concurrently. Low parallelism for rate limits.
             val queries = records
-                .filter { it.clientRecordId != null }
+                .filter { it.knownClientRecordIds.isNotEmpty() }
                 .groupBy { it.recordType }
                 .flatMap { (recordType, grouped) ->
                     grouped.chunkForDuplicateCheck(MaxDuplicateCheckSpanSeconds).map { chunk -> recordType to chunk }
@@ -967,7 +966,7 @@ class AppleHealthImportService
                 queries.map { (recordType, chunk) ->
                     async {
                         semaphore.withPermit {
-                            val wantedIds = chunk.mapNotNullTo(mutableSetOf()) { it.clientRecordId }
+                            val wantedIds = chunk.flatMapTo(mutableSetOf()) { it.knownClientRecordIds }
                             val start = chunk.minOfOrNull { it.sourceTimeRange.start }?.minusSeconds(1)
                                 ?: return@withPermit emptySet()
                             val end = chunk.maxOfOrNull { it.sourceTimeRange.end }?.plusSeconds(1)
@@ -1142,6 +1141,10 @@ private fun debugImportLog(message: String) {
 
 private val ConvertedAppleRecord.clientRecordId: String?
     get() = record.metadata.clientRecordId?.takeIf { it.isNotBlank() }
+
+/** Health Connect may hold this record under its id or under the one an earlier release gave it. */
+private val ConvertedAppleRecord.knownClientRecordIds: List<String>
+    get() = listOfNotNull(clientRecordId, legacyClientRecordId)
 
 private fun List<ConvertedAppleRecord>.deduplicateWithinImport(
     diagnostics: MutableList<AppleHealthImportDiagnostic>,

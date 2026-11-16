@@ -6,6 +6,10 @@ No. The local OpenVitals app does not ship app-level internet permission and doe
 
 Health data is read from Health Connect on device. Entries explicitly saved by the user are written back to Health Connect.
 
+## Can Another App Read My OpenVitals Data?
+
+Only if you let it. Settings, Share with other apps is off by default. With it on, an app must still ask Android for each kind of data, and you allow or deny each one in Android's own dialog. OpenVitals stays offline either way, but an app you allow can send what it reads elsewhere, so allow only apps you trust. See [Share with other apps](../features/data-sharing.md).
+
 ## Why Does OpenVitals Ask For Many Health Connect Permissions?
 
 OpenVitals has dashboard and detail screens for many health areas: activity, sleep, heart, body, hydration, nutrition, mindfulness, vitals, and cycle tracking.

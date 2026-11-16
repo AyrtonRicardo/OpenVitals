@@ -15,15 +15,15 @@ import java.time.ZoneId
 import org.junit.Assert.assertTrue
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.insights.DailyGoalDay
+import tech.mmarca.healthcalculations.insights.DailyGoalDirection
+import tech.mmarca.healthcalculations.insights.DailyGoalProgress
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.core.period.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.MetricDetailSectionContext
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.insights.DailyGoalDay
-import tech.mmarca.openvitals.domain.insights.DailyGoalDirection
-import tech.mmarca.openvitals.domain.insights.DailyGoalProgress
 import tech.mmarca.openvitals.domain.model.DailyMacros
 import tech.mmarca.openvitals.domain.model.NutritionEntry
 import tech.mmarca.openvitals.domain.model.NutritionNutrient
@@ -105,7 +105,7 @@ class NutritionMetricScreenTest {
                     sugarGrams = 4.0,
                     source = "tech.mmarca.openvitals",
                     id = "meal-1",
-                    isOpenVitalsEntry = true,
+                    isOwnEntry = true,
                 ),
             ),
             display = NutritionDisplayState(

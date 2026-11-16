@@ -1,7 +1,7 @@
 package tech.mmarca.openvitals.domain.query
 
-import tech.mmarca.openvitals.domain.model.DailySleepDuration
-import tech.mmarca.openvitals.domain.model.SleepData
+import tech.mmarca.healthcalculations.model.DailySleepDuration
+import tech.mmarca.healthcalculations.model.SleepData
 
 data class SleepPeriodData(
     val sessions: List<SleepData> = emptyList(),

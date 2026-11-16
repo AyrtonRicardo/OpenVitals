@@ -33,10 +33,10 @@ import androidx.compose.ui.semantics.Role
 import java.time.Instant
 import java.time.LocalDate
 import java.time.ZoneOffset
+import tech.mmarca.healthcalculations.cycle.CycleExclusionReason
+import tech.mmarca.healthcalculations.cycle.LongitudinalCycleItem
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
-import tech.mmarca.openvitals.domain.cycle.CycleExclusionReason
-import tech.mmarca.openvitals.domain.cycle.LongitudinalCycleItem
 import tech.mmarca.openvitals.ui.theme.LayoutMetrics
 import tech.mmarca.openvitals.ui.theme.Spacing
 

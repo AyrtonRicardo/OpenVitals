@@ -22,7 +22,7 @@ import kotlin.math.roundToLong
 import kotlinx.coroutines.withContext
 import tech.mmarca.openvitals.core.performance.DefaultDispatcherProvider
 import tech.mmarca.openvitals.core.performance.DispatcherProvider
-import tech.mmarca.openvitals.domain.model.MaxInsightAggregateBuckets
+import tech.mmarca.healthcalculations.model.MaxInsightAggregateBuckets
 
 /**
  * Marks a block whose Health Connect reads must fail loudly.

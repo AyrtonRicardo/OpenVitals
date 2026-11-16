@@ -1,10 +1,10 @@
 package tech.mmarca.openvitals.features.heart
 
 import androidx.compose.runtime.Immutable
-import tech.mmarca.openvitals.core.period.DatePeriod
-import tech.mmarca.openvitals.domain.insights.BaselineValue
-import tech.mmarca.openvitals.domain.insights.PeriodComparison
-import tech.mmarca.openvitals.domain.model.HeartRateSummary
+import tech.mmarca.healthcalculations.model.DatePeriod
+import tech.mmarca.healthcalculations.insights.BaselineValue
+import tech.mmarca.healthcalculations.insights.PeriodComparison
+import tech.mmarca.healthcalculations.model.HeartRateSummary
 import tech.mmarca.openvitals.features.vitals.DoubleRangeSummary
 import tech.mmarca.openvitals.features.vitals.LongRangeSummary
 import java.time.LocalDate

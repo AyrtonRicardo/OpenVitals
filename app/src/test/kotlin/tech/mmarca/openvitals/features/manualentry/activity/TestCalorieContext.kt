@@ -1,8 +1,8 @@
 package tech.mmarca.openvitals.features.manualentry.activity
 
 import java.time.LocalDate
-import tech.mmarca.openvitals.domain.preferences.BiologicalSex
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
+import tech.mmarca.healthcalculations.preferences.BiologicalSex
+import tech.mmarca.healthcalculations.preferences.BodyProfile
 
 /** A complete body profile for tests that import or record a session and let it be estimated. */
 internal val TestCalorieContext = CalorieEstimateContext(

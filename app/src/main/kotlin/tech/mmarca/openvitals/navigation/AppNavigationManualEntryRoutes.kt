@@ -8,7 +8,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
 import tech.mmarca.openvitals.domain.preferences.AppThemeMode
-import tech.mmarca.openvitals.domain.model.VitalsMeasurementType
+import tech.mmarca.healthcalculations.model.VitalsMeasurementType
 import tech.mmarca.openvitals.features.manualentry.ManualEntryScreen
 import tech.mmarca.openvitals.features.manualentry.ManualEntryViewModel
 import tech.mmarca.openvitals.healthconnect.HealthConnectFeature

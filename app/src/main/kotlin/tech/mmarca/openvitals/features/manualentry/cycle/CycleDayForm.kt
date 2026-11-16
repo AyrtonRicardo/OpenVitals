@@ -5,20 +5,20 @@ import java.time.LocalDate
 import java.time.LocalTime
 import java.time.ZoneId
 import kotlin.math.abs
+import tech.mmarca.healthcalculations.cycle.CycleSymptom
+import tech.mmarca.healthcalculations.model.BbtDisturbance
+import tech.mmarca.healthcalculations.model.CervicalSensation
+import tech.mmarca.healthcalculations.model.CervixFirmness
+import tech.mmarca.healthcalculations.model.CervixOpening
+import tech.mmarca.healthcalculations.model.CervixPosition
+import tech.mmarca.healthcalculations.model.CycleEntryKind
+import tech.mmarca.healthcalculations.model.CycleJournalEntry
+import tech.mmarca.healthcalculations.model.CycleRecordValues
+import tech.mmarca.healthcalculations.model.HcgTestResult
 import tech.mmarca.openvitals.core.presentation.TemperatureUnits
-import tech.mmarca.openvitals.domain.cycle.CycleSymptom
-import tech.mmarca.openvitals.domain.model.BbtDisturbance
-import tech.mmarca.openvitals.domain.model.CervicalSensation
-import tech.mmarca.openvitals.domain.model.CervixFirmness
-import tech.mmarca.openvitals.domain.model.CervixOpening
-import tech.mmarca.openvitals.domain.model.CervixPosition
 import tech.mmarca.openvitals.domain.model.CycleDayLog
 import tech.mmarca.openvitals.domain.model.CycleDayLogWrite
-import tech.mmarca.openvitals.domain.model.CycleEntryKind
-import tech.mmarca.openvitals.domain.model.CycleJournalEntry
-import tech.mmarca.openvitals.domain.model.CycleRecordValues
 import tech.mmarca.openvitals.domain.model.DayBleedingChoice
-import tech.mmarca.openvitals.domain.model.HcgTestResult
 import tech.mmarca.openvitals.domain.preferences.UnitSystem
 
 /** The bleeding scale as the day log shows it. Null means not recorded. */

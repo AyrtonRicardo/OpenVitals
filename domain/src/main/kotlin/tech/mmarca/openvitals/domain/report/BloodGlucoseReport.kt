@@ -1,7 +1,7 @@
 package tech.mmarca.openvitals.domain.report
 
 import java.time.ZoneId
-import tech.mmarca.openvitals.domain.model.BloodGlucoseEntry
+import tech.mmarca.healthcalculations.model.BloodGlucoseEntry
 import tech.mmarca.openvitals.domain.model.GlucoseRecordValues
 import tech.mmarca.openvitals.domain.model.ReportGlucoseContextAverage
 import tech.mmarca.openvitals.domain.model.ReportGlucoseDetail

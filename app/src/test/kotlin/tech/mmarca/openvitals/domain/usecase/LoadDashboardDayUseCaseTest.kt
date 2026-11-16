@@ -10,7 +10,7 @@ import tech.mmarca.openvitals.data.repository.dashboard.DashboardDataLoader
 import tech.mmarca.openvitals.domain.model.DashboardData
 import tech.mmarca.openvitals.domain.model.DashboardQuery
 import tech.mmarca.openvitals.domain.preferences.ActivityWeekMode
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
+import tech.mmarca.healthcalculations.preferences.SleepWindow
 import java.time.LocalDate
 
 class LoadDashboardDayUseCaseTest {

@@ -4,14 +4,14 @@ import androidx.health.connect.client.records.ExerciseSessionRecord
 import java.io.OutputStream
 import kotlin.math.floor
 import kotlin.math.roundToLong
+import tech.mmarca.healthcalculations.model.ActivityCadenceKind
+import tech.mmarca.healthcalculations.model.ExerciseData
+import tech.mmarca.healthcalculations.model.ExerciseRoutePoint
 import tech.mmarca.openvitals.core.fit.FitBaseType
 import tech.mmarca.openvitals.core.fit.FitEncoder
 import tech.mmarca.openvitals.core.fit.FitEncoderField
 import tech.mmarca.openvitals.core.fit.fitSemicircles
 import tech.mmarca.openvitals.core.fit.fitTimestamp
-import tech.mmarca.openvitals.domain.model.ActivityCadenceKind
-import tech.mmarca.openvitals.domain.model.ExerciseData
-import tech.mmarca.openvitals.domain.model.ExerciseRoutePoint
 
 /**
  * A FIT Activity file in the order Garmin's cookbook writes one: file_id, a

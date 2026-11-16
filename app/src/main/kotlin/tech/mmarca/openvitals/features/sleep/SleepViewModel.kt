@@ -5,7 +5,7 @@ import tech.mmarca.openvitals.navigation.selectedDayOrNull
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import tech.mmarca.openvitals.domain.insights.MetricDailyGoalKey
+import tech.mmarca.healthcalculations.insights.MetricDailyGoalKey
 import tech.mmarca.openvitals.core.presentation.ScreenError
 import tech.mmarca.openvitals.core.presentation.toScreenError
 import tech.mmarca.openvitals.core.performance.DefaultDispatcherProvider
@@ -17,9 +17,9 @@ import tech.mmarca.openvitals.core.period.PeriodSelection
 import tech.mmarca.openvitals.core.period.PeriodSelectionDriver
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.period.WeekPeriodMode
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
-import tech.mmarca.openvitals.domain.model.DailyHrv
-import tech.mmarca.openvitals.domain.model.SleepData
+import tech.mmarca.healthcalculations.preferences.SleepWindow
+import tech.mmarca.healthcalculations.model.DailyHrv
+import tech.mmarca.healthcalculations.model.SleepData
 import tech.mmarca.openvitals.data.repository.contract.BodyProfilePreferences
 import tech.mmarca.openvitals.data.repository.contract.DailyGoalPreferences
 import tech.mmarca.openvitals.data.repository.contract.PeriodPreferences

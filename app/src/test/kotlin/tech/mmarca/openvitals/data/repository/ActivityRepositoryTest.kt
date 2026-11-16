@@ -15,11 +15,11 @@ import java.time.LocalDate
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import tech.mmarca.healthcalculations.model.ActivityProgressPoint
+import tech.mmarca.healthcalculations.model.DailySteps
 import tech.mmarca.openvitals.core.period.PeriodLoadQuery
 import tech.mmarca.openvitals.core.period.TimeRange
-import tech.mmarca.openvitals.domain.model.ActivityProgressPoint
 import tech.mmarca.openvitals.domain.model.DailyNutrition
-import tech.mmarca.openvitals.domain.model.DailySteps
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
 

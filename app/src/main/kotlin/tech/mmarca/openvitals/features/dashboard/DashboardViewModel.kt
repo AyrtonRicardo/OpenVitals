@@ -5,8 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.MetricDailyGoalKey
-import tech.mmarca.openvitals.core.period.DatePeriod
+import tech.mmarca.healthcalculations.insights.MetricDailyGoalKey
+import tech.mmarca.healthcalculations.model.DatePeriod
 import tech.mmarca.openvitals.core.period.TimeRange
 import tech.mmarca.openvitals.core.performance.DefaultDispatcherProvider
 import tech.mmarca.openvitals.core.performance.AppForegroundGate
@@ -20,7 +20,7 @@ import tech.mmarca.openvitals.data.repository.BleDeviceRepository
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
 import tech.mmarca.openvitals.domain.model.RefreshMode
 import tech.mmarca.openvitals.domain.preferences.ActivityWeekMode
-import tech.mmarca.openvitals.domain.preferences.SleepWindow
+import tech.mmarca.healthcalculations.preferences.SleepWindow
 import tech.mmarca.openvitals.domain.model.BleConnectionStatus
 import tech.mmarca.openvitals.domain.model.BleRecordingMetrics
 import tech.mmarca.openvitals.domain.model.DashboardData
@@ -295,7 +295,7 @@ class DashboardViewModel @Inject constructor(
             .plus(_uiState.value.data?.workout)
             .filterNotNull()
             .firstOrNull { it.id == entryId } ?: return
-        if (!entry.isOpenVitalsEntry) return
+        if (!entry.isOwnEntry) return
 
         viewModelScope.launch {
             runCatching {

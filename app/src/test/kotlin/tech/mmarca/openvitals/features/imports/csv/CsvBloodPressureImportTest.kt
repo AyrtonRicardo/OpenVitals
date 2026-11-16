@@ -7,7 +7,7 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertNull
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import tech.mmarca.openvitals.domain.model.BpRecordValues
+import tech.mmarca.healthcalculations.model.BpRecordValues
 import tech.mmarca.openvitals.domain.model.NutritionNutrient
 
 private fun partAt(index: Int, part: CsvBloodPressurePart) = CsvColumnMapping(

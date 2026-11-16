@@ -1,5 +1,85 @@
 # Changelog
 
+## 2.17.0 - 2026-11-15
+
+### English
+
+- **Watches and scales moved to OpenWatch.** Garmin and Wear OS watches and the Xiaomi S400 scale now pair and sync in OpenWatch, a separate app from the same project that writes what they record to Health Connect for OpenVitals to read. An updated install sees a notice once, and nothing in Health Connect is lost; the Garmin measurements Health Connect has no record for, such as stress and Body Battery, are not carried over. Install OpenWatch's watch app and uninstall the old OpenVitals one.
+- **OpenVitals and OpenWatch work together.** One body profile in both apps, an OpenWatch tile on the dashboard with the watch's battery, last sync and a Sync watch button, a Settings, OpenWatch screen that says where the connection stands, and the watch's heart rate in a recording when no Bluetooth sensor gives one. Only an OpenWatch signed by the project gets your profile unasked.
+- **Calorie estimates from published equations.** A workout without measured calories is estimated from its heart rate (Keytel), ACSM's walking and running equations or the 2024 Adult Compendium, with the weight from your body profile instead of a fixed 70 kg; the entry form and Body Energy say which profile fields are missing. One maximum heart rate for every estimate, and the same numbers as OpenWatch.
+- **Heart rate zones in the activity detail**, on the ACSM's intensity classes, or on your own limits when you set them in Body Energy.
+- **Sleep in the CSV importer.** A sleep app's history, such as Sleep Cycle's export, imports one night per row, with its stages.
+- **Espresso-and-milk drinks.** Espresso macchiato, cortado, flat white and latte macchiato join the preset drinks, and several coffees get their real serving volume.
+- **Workout plans.** Hold + to count the rest of a set, and the weights in the unit you chose.
+- **Ukrainian.** OpenVitals is translated into Ukrainian, complete from the start.
+- **Published by Hale.** New logo colours, Hale under the version line, the docs at docs.hale.ngo, donations to Hale, and a privacy policy that names the publisher, MTU Hale, with hello@hale.ngo as its contact.
+- **Fixes:** an Apple Health reading re-synced by another app no longer imports several times; an early bedtime no longer stretches the sleep schedule chart; Body Energy's moderate zone starts at 40 % of the heart rate reserve, as in the ACSM's guidance.
+
+### Espanol
+
+- **Los relojes y las basculas se han movido a OpenWatch.** Los relojes Garmin y Wear OS y la bascula Xiaomi S400 se emparejan y sincronizan ahora en OpenWatch, una app aparte del mismo proyecto que escribe lo que registran en Health Connect para que OpenVitals lo lea. Una instalacion actualizada ve un aviso una sola vez, y no se pierde nada de Health Connect; las mediciones de Garmin para las que Health Connect no tiene registro, como el estres y Body Battery, no se trasladan. Instala la app de reloj de OpenWatch y desinstala la antigua de OpenVitals.
+- **OpenVitals y OpenWatch trabajan juntos.** Un solo perfil corporal en las dos apps, una tarjeta de OpenWatch en el panel con la bateria del reloj, la ultima sincronizacion y un boton Sincronizar el reloj, una pantalla Ajustes, OpenWatch que dice como esta la conexion, y la frecuencia cardiaca del reloj en una grabacion cuando ningun sensor Bluetooth la da. Solo un OpenWatch firmado por el proyecto recibe tu perfil sin preguntar.
+- **Estimaciones de calorias con ecuaciones publicadas.** Un entrenamiento sin calorias medidas se estima a partir de su frecuencia cardiaca (Keytel), de las ecuaciones de caminar y correr del ACSM o del Compendio de actividades para adultos de 2024, con el peso de tu perfil corporal en lugar de 70 kg fijos; el formulario de entrada y Energia corporal dicen que campos del perfil faltan. Una sola frecuencia cardiaca maxima para todas las estimaciones, y las mismas cifras que OpenWatch.
+- **Zonas de frecuencia cardiaca en el detalle de actividad**, segun las clases de intensidad del ACSM, o segun tus propios limites cuando los fijas en Energia corporal.
+- **Sueno en el Importador CSV.** El historial de una app de sueno, como la exportacion de Sleep Cycle, se importa una noche por fila, con sus fases.
+- **Bebidas de espresso con leche.** Espresso macchiato, cortado, flat white y latte macchiato se suman a las bebidas predefinidas, y varios cafes reciben su volumen real por racion.
+- **Planes de entrenamiento.** Manten pulsado + para contar el resto de la serie, y los pesos en la unidad que elegiste.
+- **Ucraniano.** OpenVitals esta traducido al ucraniano, completo desde el principio.
+- **Publicado por Hale.** Nuevos colores del logotipo, Hale bajo la linea de version, la documentacion en docs.hale.ngo, las donaciones a Hale y una politica de privacidad que nombra al editor, MTU Hale, con hello@hale.ngo como contacto.
+- **Correcciones:** una lectura de Apple Health que otra app vuelve a sincronizar ya no se importa varias veces; una hora de acostarse temprana ya no estira el grafico del horario de sueno; la zona moderada de Energia corporal empieza en el 40 % de la reserva de frecuencia cardiaca, como indica el ACSM.
+
+### Deutsch
+
+- **Uhren und Waagen sind zu OpenWatch umgezogen.** Garmin- und Wear-OS-Uhren und die Xiaomi-Waage S400 werden jetzt in OpenWatch gekoppelt und synchronisiert, einer eigenen App desselben Projekts, die ihre Aufzeichnungen in Health Connect schreibt, wo OpenVitals sie liest. Eine aktualisierte Installation sieht einmal einen Hinweis, und nichts in Health Connect geht verloren; die Garmin-Messwerte, fuer die Health Connect keinen Eintrag hat, wie Stress und Body Battery, werden nicht uebernommen. Installiere die Uhren-App von OpenWatch und deinstalliere die alte von OpenVitals.
+- **OpenVitals und OpenWatch arbeiten zusammen.** Ein Koerperprofil in beiden Apps, eine OpenWatch-Kachel auf dem Dashboard mit Akku, letzter Synchronisierung und einer Schaltflaeche Uhr synchronisieren, ein Bildschirm Einstellungen, OpenWatch, der sagt, wie es um die Verbindung steht, und die Herzfrequenz der Uhr in einer Aufzeichnung, wenn kein Bluetooth-Sensor eine liefert. Nur ein vom Projekt signiertes OpenWatch erhaelt dein Profil ohne Nachfrage.
+- **Kalorienschaetzungen nach veroeffentlichten Gleichungen.** Ein Training ohne gemessene Kalorien wird aus seiner Herzfrequenz (Keytel), den Geh- und Laufgleichungen des ACSM oder dem Adult Compendium 2024 geschaetzt, mit dem Gewicht aus deinem Koerperprofil statt fester 70 kg; das Eingabeformular und Koerperenergie nennen die fehlenden Profilfelder. Eine maximale Herzfrequenz fuer jede Schaetzung, und dieselben Zahlen wie OpenWatch.
+- **Herzfrequenzzonen in den Aktivitaetsdetails**, nach den Intensitaetsklassen des ACSM oder nach deinen eigenen Grenzen, wenn du sie in Koerperenergie festlegst.
+- **Schlaf im CSV-Importer.** Der Verlauf einer Schlaf-App, etwa der Export von Sleep Cycle, wird mit einer Nacht pro Zeile importiert, samt ihren Phasen.
+- **Espresso-Getraenke mit Milch.** Espresso Macchiato, Cortado, Flat White und Latte Macchiato kommen zu den vordefinierten Getraenken, und mehrere Kaffees erhalten ihre echte Portionsgroesse.
+- **Trainingsplaene.** Halte + gedrueckt, um den Rest des Satzes zu zaehlen, und die Gewichte in der gewaehlten Einheit.
+- **Ukrainisch.** OpenVitals ist ins Ukrainische uebersetzt, von Anfang an vollstaendig.
+- **Herausgegeben von Hale.** Neue Logofarben, Hale unter der Versionszeile, die Dokumentation unter docs.hale.ngo, Spenden an Hale und eine Datenschutzerklaerung, die den Herausgeber nennt, MTU Hale, mit hello@hale.ngo als Kontakt.
+- **Korrekturen:** ein Apple-Health-Messwert, den eine andere App erneut synchronisiert, wird nicht mehr mehrfach importiert; eine fruehe Schlafenszeit dehnt das Schlafplan-Diagramm nicht mehr; die moderate Zone von Koerperenergie beginnt bei 40 % der Herzfrequenzreserve, wie in der Empfehlung des ACSM.
+
+### Italiano
+
+- **Orologi e bilance sono passati a OpenWatch.** Gli orologi Garmin e Wear OS e la bilancia Xiaomi S400 si abbinano e si sincronizzano ora in OpenWatch, un'app separata dello stesso progetto che scrive cio che registrano in Health Connect, dove OpenVitals lo legge. Un'installazione aggiornata vede un avviso una sola volta, e nulla in Health Connect va perso; le misure Garmin per cui Health Connect non ha un record, come lo stress e Body Battery, non vengono trasferite. Installa l'app per orologio di OpenWatch e disinstalla quella vecchia di OpenVitals.
+- **OpenVitals e OpenWatch lavorano insieme.** Un solo profilo corporeo nelle due app, un riquadro OpenWatch nella dashboard con la batteria dell'orologio, l'ultima sincronizzazione e un pulsante Sincronizza orologio, una schermata Impostazioni, OpenWatch che dice a che punto e la connessione, e la frequenza cardiaca dell'orologio in una registrazione quando nessun sensore Bluetooth la fornisce. Solo un OpenWatch firmato dal progetto riceve il tuo profilo senza chiedere.
+- **Stime delle calorie da equazioni pubblicate.** Un allenamento senza calorie misurate viene stimato dalla sua frequenza cardiaca (Keytel), dalle equazioni del cammino e della corsa dell'ACSM o dall'Adult Compendium del 2024, con il peso del tuo profilo corporeo invece di 70 kg fissi; il modulo di inserimento ed Energia corporea dicono quali campi del profilo mancano. Una sola frequenza cardiaca massima per ogni stima, e gli stessi numeri di OpenWatch.
+- **Zone di frequenza cardiaca nel dettaglio attivita**, sulle classi di intensita dell'ACSM, o sui tuoi limiti quando li imposti in Energia corporea.
+- **Il sonno nell'Importatore CSV.** La cronologia di un'app del sonno, come l'esportazione di Sleep Cycle, si importa una notte per riga, con le sue fasi.
+- **Bevande di espresso e latte.** Espresso macchiato, cortado, flat white e latte macchiato si aggiungono alle bevande predefinite, e diversi caffe ricevono il loro volume reale per porzione.
+- **Piani di allenamento.** Tieni premuto + per contare il resto della serie, e i pesi nell'unita che hai scelto.
+- **Ucraino.** OpenVitals e tradotto in ucraino, completo fin dall'inizio.
+- **Pubblicato da Hale.** Nuovi colori del logo, Hale sotto la riga della versione, la documentazione su docs.hale.ngo, le donazioni a Hale e un'informativa sulla privacy che nomina l'editore, MTU Hale, con hello@hale.ngo come contatto.
+- **Correzioni:** una lettura di Apple Health risincronizzata da un'altra app non viene piu importata piu volte; un orario di andata a letto anticipato non allunga piu il grafico degli orari del sonno; la zona moderata di Energia corporea parte dal 40 % della riserva di frequenza cardiaca, come indica l'ACSM.
+
+### Eesti
+
+- **Kellad ja kaalud kolisid OpenWatchi.** Garmini ja Wear OS-i kellad ning Xiaomi S400 kaal seotakse ja sunkroonitakse nuud OpenWatchis, sama projekti eraldi rakenduses, mis kirjutab nende salvestatu Health Connecti, kust OpenVitals seda loeb. Uuendatud paigaldus naeb uhe korra teadet ja Health Connectist ei kao midagi; Garmini mootmisi, mille jaoks Health Connectis kirjet pole, nagu stress ja Body Battery, ule ei tooda. Paigalda OpenWatchi kellarakendus ja eemalda vana OpenVitalsi oma.
+- **OpenVitals ja OpenWatch tootavad koos.** Uks kehaprofiil molemas rakenduses, OpenWatchi paan armatuurlaual kella aku, viimase sunkroonimise ja nupuga Sunkrooni kell, ekraan Seaded, OpenWatch, mis utleb, kuidas uhendusega lood on, ning kella pulss salvestuses, kui ukski Bluetoothi andur seda ei anna. Ainult projekti allkirjastatud OpenWatch saab sinu profiili kusimata.
+- **Kalorihinnangud avaldatud vorranditest.** Mootmata kaloritega treeningut hinnatakse selle pulsist (Keytel), ACSM-i konni- ja jooksuvorranditest voi 2024. aasta taiskasvanute Compendiumist, sinu kehaprofiili kaaluga fikseeritud 70 kg asemel; sisestusvorm ja Kehaenergia utlevad, millised profiilivaljad puuduvad. Uks maksimaalne pulss koigi hinnangute jaoks ja samad arvud mis OpenWatchis.
+- **Pulsitsoonid treeningu uksikasjades**, ACSM-i intensiivsusklasside jargi voi sinu enda piiride jargi, kui oled need Kehaenergias maaranud.
+- **Uni CSV-importijas.** Unerakenduse ajalugu, naiteks Sleep Cycle'i eksport, imporditakse uks oo rea kohta, koos unefaasidega.
+- **Espresso ja piimaga joogid.** Espresso macchiato, cortado, flat white ja latte macchiato lisanduvad eelseadistatud jookidele ning mitu kohvi saavad oma tegeliku portsjoni mahu.
+- **Treeningplaanid.** Hoia + all, et lugeda seeria ulejaanud kordused, ja raskused sinu valitud uhikus.
+- **Ukraina keel.** OpenVitals on tolgitud ukraina keelde, algusest peale taielikult.
+- **Valjaandja on Hale.** Uued logovarvid, Hale versioonirea all, dokumentatsioon aadressil docs.hale.ngo, annetused Halele ja privaatsuspoliitika, mis nimetab valjaandja, MTU Hale, kontaktiga hello@hale.ngo.
+- **Parandused:** Apple Healthi naitu, mille teine rakendus uuesti sunkroonib, ei impordita enam mitu korda; varajane magamaminekuaeg ei venita enam uneajakava graafikut; Kehaenergia moodukas tsoon algab 40 % juures pulsireservist, nagu ACSM soovitab.
+
+### Portugues
+
+- **Os relogios e as balancas passaram para o OpenWatch.** Os relogios Garmin e Wear OS e a balanca Xiaomi S400 emparelham-se e sincronizam-se agora no OpenWatch, uma app separada do mesmo projeto que escreve o que registam no Health Connect para o OpenVitals ler. Uma instalacao atualizada ve um aviso uma unica vez, e nada no Health Connect se perde; as medicoes da Garmin para as quais o Health Connect nao tem registo, como o stress e o Body Battery, nao sao transferidas. Instale a app de relogio do OpenWatch e desinstale a antiga do OpenVitals.
+- **O OpenVitals e o OpenWatch trabalham juntos.** Um so perfil corporal nas duas apps, um mosaico do OpenWatch no painel com a bateria do relogio, a ultima sincronizacao e um botao Sincronizar relogio, um ecra Definicoes, OpenWatch que diz como esta a ligacao, e a frequencia cardiaca do relogio numa gravacao quando nenhum sensor Bluetooth a fornece. So um OpenWatch assinado pelo projeto recebe o seu perfil sem perguntar.
+- **Estimativas de calorias com equacoes publicadas.** Um treino sem calorias medidas e estimado a partir da sua frequencia cardiaca (Keytel), das equacoes de caminhada e corrida do ACSM ou do Compendio de atividades para adultos de 2024, com o peso do seu perfil corporal em vez de 70 kg fixos; o formulario de registo e a Energia corporal dizem que campos do perfil faltam. Uma so frequencia cardiaca maxima para todas as estimativas, e os mesmos numeros que o OpenWatch.
+- **Zonas de frequencia cardiaca no detalhe da atividade**, segundo as classes de intensidade do ACSM, ou segundo os seus proprios limites quando os define na Energia corporal.
+- **Sono no Importador de CSV.** O historico de uma app de sono, como a exportacao do Sleep Cycle, e importado uma noite por linha, com as suas fases.
+- **Bebidas de espresso com leite.** Espresso macchiato, cortado, flat white e latte macchiato juntam-se as bebidas predefinidas, e varios cafes recebem o seu volume real por dose.
+- **Planos de treino.** Mantenha + premido para contar o resto da serie, e os pesos na unidade que escolheu.
+- **Ucraniano.** O OpenVitals esta traduzido para ucraniano, completo desde o inicio.
+- **Publicado pela Hale.** Novas cores do logotipo, Hale sob a linha da versao, a documentacao em docs.hale.ngo, os donativos para a Hale e uma politica de privacidade que nomeia o editor, MTU Hale, com hello@hale.ngo como contacto.
+- **Correcoes:** uma leitura do Apple Health que outra app volta a sincronizar ja nao e importada varias vezes; uma hora de deitar cedo ja nao estica o grafico do horario de sono; a zona moderada da Energia corporal comeca nos 40 % da reserva de frequencia cardiaca, como indica o ACSM.
+
 ## 2.16.0 - 2026-11-06
 
 ### English

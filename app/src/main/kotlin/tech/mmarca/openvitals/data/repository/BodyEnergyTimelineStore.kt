@@ -2,22 +2,24 @@ package tech.mmarca.openvitals.data.repository
 
 import java.time.Instant
 import java.time.LocalDate
+import java.time.ZoneId
 import javax.inject.Inject
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimelineAlgorithmVersion
 import javax.inject.Singleton
+import tech.mmarca.healthcalculations.insights.BodyEnergyBucketState
+import tech.mmarca.healthcalculations.insights.BodyEnergyCalibrationMode
+import tech.mmarca.healthcalculations.insights.BodyEnergyConfidence
+import tech.mmarca.healthcalculations.insights.BodyEnergyInputSummary
+import tech.mmarca.healthcalculations.insights.BodyEnergyPrimaryInfluence
+import tech.mmarca.healthcalculations.insights.BodyEnergySeedSource
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimeline
+import tech.mmarca.healthcalculations.insights.BodyEnergyTimelinePoint
+import tech.mmarca.healthcalculations.insights.bodyEnergyReasonCodeForText
 import tech.mmarca.openvitals.data.local.bodyenergy.BodyEnergyBucketEntity
 import tech.mmarca.openvitals.data.local.bodyenergy.BodyEnergyBucketRetentionDays
 import tech.mmarca.openvitals.data.local.bodyenergy.BodyEnergyChainCursorKey
 import tech.mmarca.openvitals.data.local.bodyenergy.BodyEnergyDayEntity
 import tech.mmarca.openvitals.data.local.bodyenergy.BodyEnergyTimelineDao
-import tech.mmarca.openvitals.domain.insights.BodyEnergyBucketState
-import tech.mmarca.openvitals.domain.insights.BodyEnergyCalibrationMode
-import tech.mmarca.openvitals.domain.insights.BodyEnergyConfidence
-import tech.mmarca.openvitals.domain.insights.BodyEnergyInputSummary
-import tech.mmarca.openvitals.domain.insights.BodyEnergyPrimaryInfluence
-import tech.mmarca.openvitals.domain.insights.BodyEnergySeedSource
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimeline
-import tech.mmarca.openvitals.domain.insights.BodyEnergyTimelinePoint
-import tech.mmarca.openvitals.domain.insights.bodyEnergyReasonCodeForText
 
 /**
  * How long a past day stays eligible for recomputation. Watches sync late
@@ -66,6 +68,30 @@ open class BodyEnergyTimelineStore @Inject constructor(
             )
         }
 
+    /**
+     * The days of `[start, end]` as last computed, for the data sharing API. A day computed by
+     * an older algorithm is left out: its numbers are not the ones the app shows any more.
+     */
+    open suspend fun sharedDaysBetween(start: LocalDate, end: LocalDate): List<BodyEnergySharedDay> =
+        dao.daysBetween(start.toEpochDay(), end.toEpochDay())
+            .filter { it.algorithmVersion == BodyEnergyTimelineAlgorithmVersion }
+            .map { row ->
+                BodyEnergySharedDay(
+                    date = LocalDate.ofEpochDay(row.epochDay),
+                    startScore = row.startScore.toDouble(),
+                    endScore = row.endScore.toDouble(),
+                    charged = row.charged.toDouble(),
+                    drained = row.drained.toDouble(),
+                )
+            }
+
+    /** The 5-minute scores of those days that fall in `[start, end)`, oldest first. */
+    open suspend fun sharedScoresBetween(start: Instant, end: Instant, zone: ZoneId): List<Pair<Instant, Double>> =
+        sharedDaysBetween(start.atZone(zone).toLocalDate(), end.atZone(zone).toLocalDate())
+            .flatMap { day -> dao.bucketsForDay(day.date.toEpochDay()) }
+            .filter { it.timeMillis >= start.toEpochMilli() && it.timeMillis < end.toEpochMilli() }
+            .map { Instant.ofEpochMilli(it.timeMillis) to it.score.toDouble() }
+
     /** Whether a stored day still has buckets. Signature-independent on purpose. */
     open suspend fun hasStoredPoints(date: LocalDate): Boolean =
         dao.countBucketsForDay(date.toEpochDay()) > 0
@@ -100,6 +126,15 @@ open class BodyEnergyTimelineStore @Inject constructor(
         dao.writeChainCursor(globalSignature = null, lastPassMillis = at.toEpochMilli())
     }
 }
+
+/** A stored day as another app is given it. */
+data class BodyEnergySharedDay(
+    val date: LocalDate,
+    val startScore: Double,
+    val endScore: Double,
+    val charged: Double,
+    val drained: Double,
+)
 
 /** A stored day's chain facts. Not a timeline: the walk-back must not pay a bucket read per day. */
 data class BodyEnergyStoredDay(

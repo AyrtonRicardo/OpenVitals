@@ -13,6 +13,7 @@ import tech.mmarca.openvitals.features.reports.ReportBuilderScreen
 import tech.mmarca.openvitals.features.settings.ActivitiesSettingsScreen
 import tech.mmarca.openvitals.features.settings.BodyProfileSettingsScreen
 import tech.mmarca.openvitals.features.settings.DataImportScreen
+import tech.mmarca.openvitals.features.settings.DataSharingSettingsScreen
 import tech.mmarca.openvitals.features.settings.DisplaySettingsScreen
 import tech.mmarca.openvitals.features.settings.NutritionSettingsScreen
 import tech.mmarca.openvitals.features.settings.CycleSettingsScreen
@@ -130,6 +131,9 @@ internal fun NavGraphBuilder.settingsRoutes(
     composable(Screen.SettingsOpenWatch.route) {
         OpenWatchSettingsScreen(viewModel = hiltViewModel())
     }
+    composable(Screen.SettingsDataSharing.route) {
+        DataSharingSettingsScreen(viewModel = hiltViewModel())
+    }
 
     composable(Screen.SettingsHealthConnect.route) {
         SettingsSectionScreen(SettingsSection.HEALTH_CONNECT)
@@ -159,6 +163,7 @@ private fun settingsSectionRoute(section: SettingsSection): String =
         SettingsSection.DATA_IMPORT -> Screen.SettingsDataImport.route
         SettingsSection.OPENWATCH -> Screen.SettingsOpenWatch.route
         SettingsSection.DEVICE_SYNC -> Screen.SettingsDeviceSync.route
+        SettingsSection.DATA_SHARING -> Screen.SettingsDataSharing.route
         SettingsSection.HEALTH_CONNECT -> Screen.SettingsHealthConnect.route
         SettingsSection.DEBUG_DIAGNOSTICS -> Screen.SettingsDebugDiagnostics.route
     }

@@ -11,11 +11,11 @@ import java.time.Duration
 import java.time.Instant
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.insights.HeartRateRecoveryIssue
+import tech.mmarca.healthcalculations.insights.HeartRateRecoveryMark
+import tech.mmarca.healthcalculations.insights.HeartRateRecoveryQuality
+import tech.mmarca.healthcalculations.insights.HeartRateRecoveryReading
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.HeartRateRecoveryIssue
-import tech.mmarca.openvitals.domain.insights.HeartRateRecoveryMark
-import tech.mmarca.openvitals.domain.insights.HeartRateRecoveryQuality
-import tech.mmarca.openvitals.domain.insights.HeartRateRecoveryReading
 import tech.mmarca.openvitals.testing.string
 import tech.mmarca.openvitals.ui.theme.OpenVitalsTheme
 

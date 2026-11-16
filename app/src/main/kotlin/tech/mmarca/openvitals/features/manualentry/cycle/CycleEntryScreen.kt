@@ -127,18 +127,18 @@ internal data class CycleEntryActions(
     val onDesire: (Int?) -> Unit,
     val onToggleMore: () -> Unit,
     val onToggleBiomarkers: () -> Unit,
-    val onToggleSymptom: (tech.mmarca.openvitals.domain.cycle.CycleSymptom) -> Unit,
+    val onToggleSymptom: (tech.mmarca.healthcalculations.cycle.CycleSymptom) -> Unit,
     val onCopyPreviousDay: () -> Unit,
     val onNotes: (String) -> Unit,
-    val onHcgTest: (tech.mmarca.openvitals.domain.model.HcgTestResult?) -> Unit,
+    val onHcgTest: (tech.mmarca.healthcalculations.model.HcgTestResult?) -> Unit,
     val onBbtInput: (String) -> Unit,
     val onBbtLocation: (Int?) -> Unit,
     val onBbtTime: (java.time.LocalTime?) -> Unit,
-    val onToggleBbtDisturbance: (tech.mmarca.openvitals.domain.model.BbtDisturbance) -> Unit,
-    val onCervicalSensation: (tech.mmarca.openvitals.domain.model.CervicalSensation?) -> Unit,
-    val onCervixOpening: (tech.mmarca.openvitals.domain.model.CervixOpening?) -> Unit,
-    val onCervixFirmness: (tech.mmarca.openvitals.domain.model.CervixFirmness?) -> Unit,
-    val onCervixPosition: (tech.mmarca.openvitals.domain.model.CervixPosition?) -> Unit,
+    val onToggleBbtDisturbance: (tech.mmarca.healthcalculations.model.BbtDisturbance) -> Unit,
+    val onCervicalSensation: (tech.mmarca.healthcalculations.model.CervicalSensation?) -> Unit,
+    val onCervixOpening: (tech.mmarca.healthcalculations.model.CervixOpening?) -> Unit,
+    val onCervixFirmness: (tech.mmarca.healthcalculations.model.CervixFirmness?) -> Unit,
+    val onCervixPosition: (tech.mmarca.healthcalculations.model.CervixPosition?) -> Unit,
     val onMucusAppearance: (Int?) -> Unit,
     val onMucusAmount: (Int?) -> Unit,
     val onOvulation: (Int?) -> Unit,
@@ -440,7 +440,7 @@ private fun CycleEntryBiomarkers(
     )
     CycleEntryOvulationSection(form = form, editable = editable, actions = actions)
     CycleEntrySexualActivitySection(form = form, editable = editable, actions = actions)
-    if (state.grantedKinds.size < tech.mmarca.openvitals.domain.model.CycleEntryKind.entries.size) {
+    if (state.grantedKinds.size < tech.mmarca.healthcalculations.model.CycleEntryKind.entries.size) {
         Text(
             text = stringResource(R.string.cycle_entry_partial_permission),
             style = MaterialTheme.typography.bodySmall,

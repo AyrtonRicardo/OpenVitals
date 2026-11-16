@@ -13,7 +13,7 @@ import androidx.health.connect.client.request.AggregateGroupByDurationRequest
 import androidx.health.connect.client.time.TimeRangeFilter
 import androidx.health.connect.client.units.Energy
 import androidx.health.connect.client.units.Mass
-import tech.mmarca.openvitals.domain.model.CaloriesBurnedSource
+import tech.mmarca.healthcalculations.model.CaloriesBurnedSource
 import tech.mmarca.openvitals.domain.model.DailyMacros
 import tech.mmarca.openvitals.domain.model.DailyNutrition
 import tech.mmarca.openvitals.domain.model.NutritionEntry
@@ -323,7 +323,7 @@ internal class NutritionHealthReader(
             nutrientValues = nutrientValues,
             id = metadata.id,
             clientRecordId = metadata.clientRecordId,
-            isOpenVitalsEntry = isOpenVitalsRecord(metadata.dataOrigin.packageName, appPackageName),
+            isOwnEntry = isOpenVitalsRecord(metadata.dataOrigin.packageName, appPackageName),
         )
     }
 }

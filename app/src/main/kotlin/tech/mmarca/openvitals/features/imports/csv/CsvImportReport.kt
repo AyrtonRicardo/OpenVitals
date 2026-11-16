@@ -1,7 +1,7 @@
 package tech.mmarca.openvitals.features.imports.csv
 
 import java.util.Locale
-import tech.mmarca.openvitals.domain.model.BpRecordValues
+import tech.mmarca.healthcalculations.model.BpRecordValues
 import tech.mmarca.openvitals.domain.model.NutritionNutrient
 
 /**

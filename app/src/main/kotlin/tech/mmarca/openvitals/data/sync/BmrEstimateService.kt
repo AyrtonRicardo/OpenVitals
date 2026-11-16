@@ -16,8 +16,8 @@ import kotlinx.coroutines.withContext
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
 import tech.mmarca.openvitals.domain.model.WeightEntry
-import tech.mmarca.openvitals.domain.insights.basalMetabolicRateKcal
-import tech.mmarca.openvitals.domain.preferences.BodyProfile
+import tech.mmarca.healthcalculations.insights.basalMetabolicRateKcal
+import tech.mmarca.healthcalculations.preferences.BodyProfile
 import tech.mmarca.openvitals.healthconnect.HealthConnectManager
 import tech.mmarca.openvitals.healthconnect.historyReadStart
 import tech.mmarca.openvitals.healthconnect.withStrictHealthConnectReads

@@ -31,7 +31,7 @@ import androidx.compose.ui.unit.dp
 import java.time.Duration
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
-import tech.mmarca.openvitals.domain.model.ActivityPauseInterval
+import tech.mmarca.healthcalculations.model.ActivityPauseInterval
 import tech.mmarca.openvitals.features.activity.maps.OfflineRouteMapOrPreview
 import tech.mmarca.openvitals.ui.components.OpenVitalsOutlinedButton
 import tech.mmarca.openvitals.ui.components.OpenVitalsSurface

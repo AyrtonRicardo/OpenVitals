@@ -53,6 +53,8 @@ class NoRunBlockingRatchetTest {
             "FlutterDatabaseImporter.kt",
             // SAX callbacks on a worker thread cannot suspend.
             "AppleHealthImportService.kt",
+            // ContentProvider.query() runs on a binder thread and must return a cursor.
+            "DataSharingProvider.kt",
         )
     }
 }

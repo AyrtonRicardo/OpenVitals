@@ -82,7 +82,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          # The OpenLink library is a submodule the app builds from.
+          # The OpenLink and health-calculations libraries are submodules the app builds from.
           submodules: true
           # The nightly skip check and the tag lookup need history and tags.
           fetch-depth: 0
@@ -178,7 +178,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          # The OpenLink library is a submodule the app builds from.
+          # The OpenLink and health-calculations libraries are submodules the app builds from.
           submodules: true
       - uses: actions/download-artifact@v8
         with:
@@ -282,7 +282,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          # The OpenLink library is a submodule the app builds from.
+          # The OpenLink and health-calculations libraries are submodules the app builds from.
           submodules: true
           fetch-depth: 0
       - uses: actions/download-artifact@v8
@@ -304,7 +304,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          # The OpenLink library is a submodule the app builds from.
+          # The OpenLink and health-calculations libraries are submodules the app builds from.
           submodules: true
       - uses: actions/download-artifact@v8
         with:
@@ -324,7 +324,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          # The OpenLink library is a submodule the app builds from.
+          # The OpenLink and health-calculations libraries are submodules the app builds from.
           submodules: true
       - uses: actions/download-artifact@v8
         with:
@@ -345,7 +345,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          # The OpenLink library is a submodule the app builds from.
+          # The OpenLink and health-calculations libraries are submodules the app builds from.
           submodules: true
       - env:
           GH_TOKEN: ${{ github.token }}
@@ -365,7 +365,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          # The OpenLink library is a submodule the app builds from.
+          # The OpenLink and health-calculations libraries are submodules the app builds from.
           submodules: true
       - uses: actions/download-artifact@v8
         with:
@@ -384,7 +384,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          # The OpenLink library is a submodule the app builds from.
+          # The OpenLink and health-calculations libraries are submodules the app builds from.
           submodules: true
       - uses: actions/download-artifact@v8
         with:
@@ -443,7 +443,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          # The OpenLink library is a submodule the app builds from.
+          # The OpenLink and health-calculations libraries are submodules the app builds from.
           submodules: true
       - uses: actions/download-artifact@v8
         with:
@@ -469,7 +469,7 @@ jobs:
     steps:
       - uses: actions/checkout@v5
         with:
-          # The OpenLink library is a submodule the app builds from.
+          # The OpenLink and health-calculations libraries are submodules the app builds from.
           submodules: true
       - uses: actions/download-artifact@v8
         with:

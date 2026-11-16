@@ -7,8 +7,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import tech.mmarca.healthcalculations.insights.BmrInput
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.BmrInput
 import tech.mmarca.openvitals.ui.theme.Spacing
 
 /**

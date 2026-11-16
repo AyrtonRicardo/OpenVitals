@@ -5,7 +5,7 @@ import androidx.health.connect.client.permission.HealthPermission
 import androidx.health.connect.client.records.BloodPressureRecord
 import androidx.health.connect.client.units.Pressure
 import java.util.Locale
-import tech.mmarca.openvitals.domain.model.BpRecordValues
+import tech.mmarca.healthcalculations.model.BpRecordValues
 
 /**
  * Blood pressure in the CSV importer. Like a nutrient, a blood pressure

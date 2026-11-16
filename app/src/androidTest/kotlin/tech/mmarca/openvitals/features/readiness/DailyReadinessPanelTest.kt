@@ -12,9 +12,9 @@ import androidx.compose.ui.test.performScrollTo
 import org.junit.Assert.assertEquals
 import org.junit.Rule
 import org.junit.Test
+import tech.mmarca.healthcalculations.insights.DailyReadinessInsight
+import tech.mmarca.healthcalculations.insights.ReadinessConfidence
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.DailyReadinessInsight
-import tech.mmarca.openvitals.domain.insights.ReadinessConfidence
 import tech.mmarca.openvitals.testing.readinessInsight
 import tech.mmarca.openvitals.testing.string
 import tech.mmarca.openvitals.ui.theme.OpenVitalsTheme

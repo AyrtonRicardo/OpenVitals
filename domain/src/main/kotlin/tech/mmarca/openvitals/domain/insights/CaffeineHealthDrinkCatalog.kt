@@ -2,16 +2,16 @@ package tech.mmarca.openvitals.domain.insights
 
 import java.text.Normalizer
 import java.util.Locale
-import tech.mmarca.openvitals.domain.model.CaffeineCatalogItem
-import tech.mmarca.openvitals.domain.model.CaffeineCatalogMatch
-import tech.mmarca.openvitals.domain.model.CaffeineCatalogMatchConfidence
-import tech.mmarca.openvitals.domain.model.CaffeineEntry
-import tech.mmarca.openvitals.domain.model.CaffeineSourceCategory
+import tech.mmarca.healthcalculations.insights.CaffeineCatalog
+import tech.mmarca.healthcalculations.model.CaffeineCatalogItem
+import tech.mmarca.healthcalculations.model.CaffeineCatalogMatch
+import tech.mmarca.healthcalculations.model.CaffeineCatalogMatchConfidence
+import tech.mmarca.healthcalculations.model.CaffeineSourceCategory
 import tech.mmarca.openvitals.domain.model.CustomHydrationDrink
 import tech.mmarca.openvitals.domain.model.toBeverageCategory
 
 /** Matching metadata from CaffeineHealth's GPL-3.0 catalog. Health Connect stays the source of truth. */
-object CaffeineHealthDrinkCatalog : HydrationDrinkCatalog {
+object CaffeineHealthDrinkCatalog : HydrationDrinkCatalog, CaffeineCatalog {
     private const val BeveragePresetIdPrefix = "caffeinehealth-"
     private val CombiningMarks = Regex("\\p{Mn}+")
     private val NonAlphaNumeric = Regex("[^a-z0-9]+")
@@ -1647,10 +1647,7 @@ object CaffeineHealthDrinkCatalog : HydrationDrinkCatalog {
         return itemsById[presetId.removePrefix(BeveragePresetIdPrefix)]
     }
 
-    fun match(entry: CaffeineEntry): CaffeineCatalogMatch? =
-        matchName(entry.name)
-
-    fun matchName(name: String?): CaffeineCatalogMatch? {
+    override fun matchName(name: String?): CaffeineCatalogMatch? {
         val normalized = normalize(name.orEmpty())
         if (normalized.isBlank()) return null
 
@@ -1685,10 +1682,7 @@ object CaffeineHealthDrinkCatalog : HydrationDrinkCatalog {
         return null
     }
 
-    fun categoryFor(entry: CaffeineEntry): CaffeineSourceCategory =
-        match(entry)?.item?.category ?: inferGenericCategory(entry.name)
-
-    fun inferGenericCategory(name: String?): CaffeineSourceCategory {
+    override fun inferGenericCategory(name: String?): CaffeineSourceCategory {
         val normalized = normalize(name.orEmpty())
         return when {
             containsAny(normalized, "espresso", "coffee", "latte", "cappuccino", "americano", "cold brew", "mocha", "macchiato", "frappe", "nespresso") -> CaffeineSourceCategory.COFFEE

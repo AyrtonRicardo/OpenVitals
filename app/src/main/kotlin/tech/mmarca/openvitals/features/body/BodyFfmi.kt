@@ -4,9 +4,10 @@ import androidx.compose.runtime.Immutable
 import java.time.Duration
 import java.time.Instant
 import java.time.ZoneId
-import tech.mmarca.openvitals.domain.insights.BaselineValue
+import tech.mmarca.healthcalculations.insights.BaselineValue
 import tech.mmarca.openvitals.domain.model.BodyFatEntry
 import tech.mmarca.openvitals.domain.model.WeightEntry
+import tech.mmarca.healthcalculations.insights.adjustedFatFreeMassIndex
 
 /** One point of FFMI history: a body-fat reading, with the weight nearest it in time. */
 @Immutable
@@ -33,7 +34,7 @@ internal fun ffmiReadings(
     return bodyFatEntries.mapNotNull { bodyFat ->
         val weight = weightEntries.minBy { Duration.between(it.time, bodyFat.time).abs() }
         val ffmi = weight.weightKg.ffmiWith(heightCm, bodyFat.percent) ?: return@mapNotNull null
-        val adjustedFfmi = ffmi.adjustedFfmiWith(heightCm) ?: return@mapNotNull null
+        val adjustedFfmi = adjustedFatFreeMassIndex(weight.weightKg, heightCm, bodyFat.percent) ?: return@mapNotNull null
         FfmiReading(
             time = bodyFat.time,
             source = bodyFat.source,

@@ -15,10 +15,10 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import tech.mmarca.healthcalculations.insights.BloodPressureCategoryBounds
+import tech.mmarca.healthcalculations.insights.bloodPressureCategoryBounds
+import tech.mmarca.healthcalculations.preferences.BloodPressureGuideline
 import tech.mmarca.openvitals.R
-import tech.mmarca.openvitals.domain.insights.BloodPressureCategoryBounds
-import tech.mmarca.openvitals.domain.insights.bloodPressureCategoryBounds
-import tech.mmarca.openvitals.domain.preferences.BloodPressureGuideline
 import tech.mmarca.openvitals.ui.components.OpenVitalsCard
 import tech.mmarca.openvitals.ui.components.OpenVitalsOutlinedButton
 import tech.mmarca.openvitals.ui.components.ReferenceLinkButton

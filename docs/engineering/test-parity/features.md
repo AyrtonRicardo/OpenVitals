@@ -5,7 +5,7 @@ Scope: test/features/ minus manualentry/, hydration/, mindfulness/, caffeine/, n
 Statuses: PORTED (same logic + equivalent assertions), DIVERGED (covered but weaker/different assertions), MISSING (no Kotlin coverage and portable to a JVM unit test), N/A-WIDGET (widget/golden case with no JVM-portable core), N/A-FRAMEWORK (Flutter-only plumbing, or an Android surface only instrumentation can drive), N/A-BEHAVIOR (the Kotlin behavior itself differs, so a 1:1 test cannot pass without changing production).
 
 ## test/features/activity/activities_display_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/features/activity/ActivitiesOverviewSectionsTest.kt (over `activityOverviewTotals` / `activityOverviewBuckets` / `limitActivityOverviewBuckets` and the extracted `workoutStatisticsValues` / `activityOverviewStripBuckets` / `activityTypeFilterOptions` seams), plus ActivitiesViewModelTest.kt, ui/charts/PeriodChartTest.kt, domain/insights/MetricInterpretationsTest.kt
+Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/features/activity/ActivitiesOverviewSectionsTest.kt (over `activityOverviewTotals` / `activityOverviewBuckets` / `limitActivityOverviewBuckets` and the extracted `workoutStatisticsValues` / `activityOverviewStripBuckets` / `activityTypeFilterOptions` seams), plus ActivitiesViewModelTest.kt, ui/charts/PeriodChartTest.kt, health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/MetricInterpretationsTest.kt
 
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
@@ -74,7 +74,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/features/activity
 | speed rebuilt from the splits > a lap with no distance or no time is skipped, not drawn at zero | PORTED | ActivityDetailDisplayTest.kt: `a lap with no distance or no time is skipped, not drawn at zero` | 800/185 average asserted |
 
 ## test/features/activity/activity_detail_metrics_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/features/activity/ActivityDetailViewModelTest.kt, ActivityMetricRelevanceTest.kt, domain/model/ActivityBackfillTest.kt
+Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/features/activity/ActivityDetailViewModelTest.kt, ActivityMetricRelevanceTest.kt, health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/model/ActivityBackfillTest.kt
 
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
@@ -91,7 +91,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/features/activity
 | a strength session shows no distance metrics at all | PORTED | ActivityMetricRelevanceTest.kt: `a strength session reports none of the distance metrics` | trait covered; per-metric relevance for strength unasserted |
 
 ## test/features/activity/activity_detail_splits_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/ActivitySplitsTest.kt, features/activity/ActivityDetailViewModelTest.kt, domain/preferences/ActivitySplitDistanceTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/ActivitySplitsTest.kt, features/activity/ActivityDetailViewModelTest.kt, domain/preferences/ActivitySplitDistanceTest.kt
 
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
@@ -114,7 +114,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/features/activity
 | keeps the screen and records the error when the delete fails | PORTED | ActivityDetailViewModelTest.kt: `keeps the screen and records the error when the delete fails` | delete-failure path untested |
 
 ## test/features/activity/activity_heart_rate_recovery_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/HeartRateRecoveryTest.kt, features/activity/ActivityDetailViewModelTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/HeartRateRecoveryTest.kt, features/activity/ActivityDetailViewModelTest.kt
 
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
@@ -131,7 +131,7 @@ Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/insights/H
 | ActivityHeartRateRecoveryCard > with no maximum knowable at all, the card appears and asks for one | PORTED | HeartRateRecoveryCardTest: `withNoMaximumKnowableTheCardAppearsAndAsksForOne` | Compose instrumentation; runs on a device, not in CI |
 
 ## test/features/activity/activity_metric_display_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/features/activity/ActivityPresentationMapperTest.kt, ActivityViewModelTest.kt, domain/insights/DailyGoalsTest.kt
+Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/features/activity/ActivityPresentationMapperTest.kt, ActivityViewModelTest.kt, health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/DailyGoalsTest.kt
 
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
@@ -437,7 +437,7 @@ Kotlin counterpart: none (buildBodyEnergyDiagnostics / BodyEnergyDiagnosticsRepo
 | toReportText > says so when the per-source read was truncated | MISSING | — | blocked - feature not ported to Kotlin (no buildBodyEnergyDiagnostics equivalent anywhere in app/src) |
 
 ## test/features/settings/body_settings_cards_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/features/settings/BodyProfileCardTest.kt, domain/preferences/BodyEnergyCalibrationTest.kt, features/settings/SettingsViewModelTest.kt
+Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/features/settings/BodyProfileCardTest.kt, health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/preferences/BodyEnergyCalibrationTest.kt, features/settings/SettingsViewModelTest.kt
 
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
@@ -806,7 +806,7 @@ Kotlin counterpart: none (Kotlin handles this natively in MainActivity via Exter
 | RouteImportIntentBootstrap > a pending file is parked in the seam and opens the form | N/A-FRAMEWORK | — | go_router navigation; Kotlin equivalent (MainActivity → ActivityEntryScreen pending-import) untested |
 | RouteImportIntentBootstrap > nothing pending leaves the seam empty and does not navigate | N/A-FRAMEWORK | — | |
 ## test/features/sleep/application/sleep_asleep_hours_test.dart
-Kotlin counterpart: app/src/test/kotlin/tech/mmarca/openvitals/domain/model/SleepSessionMergingTest.kt, features/sleep/SleepPresentationMapperTest.kt
+Kotlin counterpart: health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/model/SleepSessionMergingTest.kt, features/sleep/SleepPresentationMapperTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | excludes awake time within the session from the sleep duration | PORTED | SleepSessionMergingTest.kt: `sleepDurationMsFromStages excludes awake stages when sleep stages are present` (also SleepPresentationMapperTest.kt: `duration points are asleep hours with awake stages excluded`) | |
@@ -892,7 +892,7 @@ Kotlin counterpart: app/src/androidTest/kotlin/tech/mmarca/openvitals/features/s
 | Sleep screen shows the access gate when permission missing | PORTED | HealthConnectAccessGateTest: `insufficientAccess_replacesTheContentAndOffersToGrant` | Kotlin routes every screen gate through HealthConnectScreenShell, so it is pinned once rather than per screen |
 
 ## test/features/sleep/sleep_stage_share_card_test.dart
-Kotlin counterpart: none (rendering); merged-id logic in domain/model/SleepSessionMergingTest.kt
+Kotlin counterpart: none (rendering); merged-id logic in health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/model/SleepSessionMergingTest.kt
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
 | the stage fills are actually painted — non-zero HEIGHT | N/A-WIDGET | | Flutter Stack/loose-constraints layout regression |
@@ -970,7 +970,7 @@ Kotlin counterpart: none (DailyReadinessCard.kt untested)
 | a day the provider has not reached yet shows a placeholder | N/A-WIDGET | — | day-guard placeholder logic in the Kotlin card is untested |
 
 ## test/features/readiness/readiness_display_test.dart
-Kotlin counterpart: none for the display compositions (panel lines live as private functions in DailyReadinessPanel.kt, detail spec in ReadinessScoreDetailsScreen.kt); partial neighbors: features/readiness/StressL10nTest.kt (stress strings), domain/insights/DailyReadinessTest.kt (insight computation)
+Kotlin counterpart: none for the display compositions (panel lines live as private functions in DailyReadinessPanel.kt, detail spec in ReadinessScoreDetailsScreen.kt); partial neighbors: features/readiness/StressL10nTest.kt (stress strings), health-calculations/src/test/kotlin/tech/mmarca/healthcalculations/insights/DailyReadinessTest.kt (insight computation)
 
 | Flutter case | Status | Kotlin test | Note |
 |---|---|---|---|
