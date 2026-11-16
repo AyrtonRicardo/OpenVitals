@@ -1725,4 +1725,5 @@
     <string name="medical_field_type">Τύπος</string>
     <string name="medical_field_contact">Επαφή</string>
     <string name="medical_status_active">Ενεργό</string>
+    <string name="medical_status_inactive">Ανενεργό</string>
 </resources>
