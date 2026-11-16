@@ -1741,7 +1741,7 @@
     <string name="health_connect_promote_medical_records_body">Дозвольте медичні записи, щоб переглядати, імпортувати та експортувати вакцини, алергії, результати аналізів тощо.</string>
     <string name="medical_records_title">Медичні записи</string>
     <string name="medical_beta_tag">Бета</string>
-    <string name="medical_beta_notice_body">Медичні записи в беті та ще в розробці, тому можуть виникати помилки. Будь ласка, користуйтеся ними обережно й перевіряйте імпортовані дані.</string>
+    <string name="medical_beta_notice_body">Медичні записи в беті та ще у розробці, тому можуть виникати помилки. Будь ласка, користуйтеся ними обережно й перевіряйте імпортовані дані.</string>
     <string name="medical_beta_notice_accept">Я розумію</string>
     <string name="medical_category_vaccines">Вакцини</string>
     <string name="medical_category_allergies">Алергії</string>
