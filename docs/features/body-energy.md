@@ -33,12 +33,21 @@ time. Sleep charges per minute slept, scaled by three things:
 
 - **How well the night went.** See below; this is usually the biggest of the
   three.
-- **Overnight HRV**, against the personal baseline.
+- **Overnight HRV**, against the personal baseline. A night's HRV is the
+  time-weighted mean of rMSSD inside its main sleep, the hours before midnight
+  included (Nuuttila et al. 2022, doi:10.1123/ijspp.2022-0145). The baseline is
+  the mean and standard deviation of ln rMSSD over the 28 nights before, at
+  least ten of them (Kiviniemi et al. 2007). A night more than one standard
+  deviation below charges a tenth less, two below a quarter less. A night above
+  stays neutral. Naps and waking time are not scaled.
 - **Breathing rate**, which penalises a night spent above the usual.
 
 **Drain** comes from basal metabolism (a gentle downward slope whenever nothing
 else is happening, scaled by measured BMR), from active energy expenditure, from
-heart-rate-derived stress, and from recovery debt after a hard session.
+heart-rate intensity, from heart-rate-derived stress, and from recovery debt after a hard session.
+Heart-rate intensity drains by Banister's TRIMP weighting on the heart rate
+reserve, from 30 % of the reserve on (ACSM light intensity). Manual zones carry
+no maximum, so they keep their fixed zone rates.
 Where a stretch has steps but no active-calorie record, the steps stand in: the
 walking cost at that stretch's cadence (Moore et al. 2021,
 doi:10.1249/MSS.0000000000002430) and the body profile's weight. Without a
