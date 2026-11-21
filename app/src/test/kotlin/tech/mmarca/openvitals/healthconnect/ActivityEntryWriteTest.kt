@@ -1,5 +1,8 @@
 package tech.mmarca.openvitals.healthconnect
 
+import androidx.health.connect.client.units.Energy
+import androidx.health.connect.client.records.TotalCaloriesBurnedRecord
+import androidx.health.connect.client.records.ActiveCaloriesBurnedRecord
 import tech.mmarca.openvitals.domain.model.OwnActivityMetrics
 import tech.mmarca.openvitals.domain.model.ActivityFormMetric
 import android.util.Log
@@ -347,6 +350,54 @@ class ActivityEntryWriteTest {
         // The next edit or delete must still find it.
         reader.deleteActivityEntry(client.sessionIdAt(T10_10))
         assertThat(client.all(DistanceRecord::class)).isEmpty()
+    }
+
+    @Test
+    fun `a workout we wrote shows its own calories, not every app's in its window`() = onTheTestClock {
+        val client = client()
+        val reader = reader(client)
+        reader.writeActivityEntry(
+            request(T10_00, T11_00).copy(activeCaloriesKcal = 250.0, totalCaloriesKcal = 290.0),
+        )
+        // A watch's all-day burn over the same hour.
+        insertAsAnotherApp(
+            ActiveCaloriesBurnedRecord(
+                startTime = T10_10,
+                startZoneOffset = null,
+                endTime = T10_40,
+                endZoneOffset = null,
+                energy = Energy.kilocalories(10.0),
+                metadata = Metadata.manualEntry(),
+            ),
+        )
+        insertAsAnotherApp(
+            TotalCaloriesBurnedRecord(
+                startTime = T10_10,
+                startZoneOffset = null,
+                endTime = T10_40,
+                endZoneOffset = null,
+                energy = Energy.kilocalories(40.0),
+                metadata = Metadata.manualEntry(),
+            ),
+        )
+
+        val read = reader.readExerciseSession(
+            id = client.sessionIdAt(T10_00),
+            includeSteps = false,
+            includeDistance = false,
+            includeTotalCalories = true,
+            includeActiveCalories = true,
+            includeWheelchairPushes = false,
+            includeFloors = false,
+            includeElevation = false,
+            includeSpeed = false,
+            includePower = false,
+            includeStepsCadence = false,
+            includeCyclingCadence = false,
+        )
+
+        assertThat(read!!.activeCaloriesKcal).isEqualTo(250.0)
+        assertThat(read.totalCaloriesKcal).isEqualTo(290.0)
     }
 
     @Test

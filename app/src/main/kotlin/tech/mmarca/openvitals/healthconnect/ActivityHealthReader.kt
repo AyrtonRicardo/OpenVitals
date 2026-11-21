@@ -450,6 +450,14 @@ internal class ActivityHealthReader(
             } else {
                 null
             }
+            // A workout OpenVitals wrote shows the calories stored with it. The aggregate is every
+            // app's data in the window, by Health Connect's priority order, so a source that writes
+            // calories all day (a watch's resting burn) replaced a ride's 250 kcal with its own 40.
+            val ownCalories = if (record.metadata.dataOrigin.packageName == appPackageName) {
+                ownSessionCalories(record)
+            } else {
+                null
+            }
 
             record.toExerciseData(
                 steps = if (includeSteps && aggregate != null) aggregate[StepsRecord.COUNT_TOTAL] ?: 0L else null,
@@ -458,9 +466,13 @@ internal class ActivityHealthReader(
                 } else {
                     null
                 },
-                totalCaloriesKcal = totalCalories?.kcal,
-                totalCaloriesSource = totalCalories?.source ?: CaloriesBurnedSource.NO_DATA,
-                activeCaloriesKcal = if (includeActiveCalories && aggregate != null) {
+                totalCaloriesKcal = ownCalories?.totalKcal ?: totalCalories?.kcal,
+                totalCaloriesSource = if (ownCalories?.totalKcal != null) {
+                    CaloriesBurnedSource.RECORDED_TOTAL
+                } else {
+                    totalCalories?.source ?: CaloriesBurnedSource.NO_DATA
+                },
+                activeCaloriesKcal = ownCalories?.activeKcal ?: if (includeActiveCalories && aggregate != null) {
                     activeCaloriesMetricKcal ?: 0.0
                 } else {
                     null
@@ -826,6 +838,19 @@ internal class ActivityHealthReader(
                 .takeIf { it.isNotEmpty() }?.sumOf { it.count },
         )
     }
+
+    private class OwnSessionCalories(val activeKcal: Double?, val totalKcal: Double?)
+
+    /** The calories stored with [session] when it was saved. Each is null when none was. */
+    private suspend fun ownSessionCalories(session: ExerciseSessionRecord): OwnSessionCalories =
+        OwnSessionCalories(
+            activeKcal = ownManualActivityMetricRecords(
+                ActiveCaloriesBurnedRecord::class, "active_calories", session.startTime, session.endTime,
+            ).takeIf { it.isNotEmpty() }?.sumOf { it.energy.inKilocalories },
+            totalKcal = ownManualActivityMetricRecords(
+                TotalCaloriesBurnedRecord::class, "total_calories", session.startTime, session.endTime,
+            ).takeIf { it.isNotEmpty() }?.sumOf { it.energy.inKilocalories },
+        )
 
     suspend fun deleteActivityEntry(id: String) = withContext(Dispatchers.IO) {
         val existing = support.client().readRecord(ExerciseSessionRecord::class, id).record
