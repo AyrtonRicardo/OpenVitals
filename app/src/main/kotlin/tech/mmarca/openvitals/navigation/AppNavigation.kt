@@ -458,7 +458,10 @@ fun AppNavigation(
                 )
             }
 
-            composable(SleepEfficiencyDetailRoute) {
+            composable(
+                route = SleepEfficiencyDetailRoute + SELECTED_DAY_QUERY_PATTERN,
+                arguments = listOf(navArgument(SELECTED_DAY_ARG) { type = NavType.StringType; nullable = true; defaultValue = null }),
+            ) {
                 val recoveryViewModel = hiltViewModel<RecoveryViewModel>()
                 SleepEfficiencyDetailScreen(
                     viewModel = recoveryViewModel,
@@ -467,7 +470,10 @@ fun AppNavigation(
                 )
             }
 
-            composable(SleepScoreDetailRoute) {
+            composable(
+                route = SleepScoreDetailRoute + SELECTED_DAY_QUERY_PATTERN,
+                arguments = listOf(navArgument(SELECTED_DAY_ARG) { type = NavType.StringType; nullable = true; defaultValue = null }),
+            ) {
                 val recoveryViewModel = hiltViewModel<RecoveryViewModel>()
                 SleepScoreDetailScreen(
                     viewModel = recoveryViewModel,
@@ -561,11 +567,11 @@ fun AppNavigation(
                     onOpenSleepSession = { sleepId ->
                         navController.navigate(Screen.SleepDetail.createRoute(sleepId))
                     },
-                    onOpenSleepScore = {
-                        navController.navigate(SleepScoreDetailRoute)
+                    onOpenSleepScore = { day ->
+                        navController.navigate(SleepScoreDetailRoute.withSelectedDay(day))
                     },
-                    onOpenSleepEfficiency = {
-                        navController.navigate(SleepEfficiencyDetailRoute)
+                    onOpenSleepEfficiency = { day ->
+                        navController.navigate(SleepEfficiencyDetailRoute.withSelectedDay(day))
                     },
                     onOpenHeartRateRecovery = {
                         navController.navigate(HeartRecoveryDetailRoute)
@@ -731,10 +737,14 @@ fun AppNavigation(
                         navController.navigate(Screen.SleepDetail.createRoute(sleepId))
                     },
                     onOpenSleepScore = {
-                        navController.navigate(SleepScoreDetailRoute)
+                        navController.navigate(
+                            SleepScoreDetailRoute.withSelectedDay(sleepViewModel.uiState.value.selectedDate),
+                        )
                     },
                     onOpenSleepEfficiency = {
-                        navController.navigate(SleepEfficiencyDetailRoute)
+                        navController.navigate(
+                            SleepEfficiencyDetailRoute.withSelectedDay(sleepViewModel.uiState.value.selectedDate),
+                        )
                     },
                 )
             }

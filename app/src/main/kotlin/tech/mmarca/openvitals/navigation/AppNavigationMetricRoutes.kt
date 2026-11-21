@@ -86,8 +86,8 @@ internal fun MetricRouteContent(
     onStartPlannedWorkout: (String) -> Unit = {},
     onManageWorkoutPlans: () -> Unit = {},
     onOpenSleepSession: (String) -> Unit,
-    onOpenSleepScore: () -> Unit,
-    onOpenSleepEfficiency: () -> Unit,
+    onOpenSleepScore: (java.time.LocalDate) -> Unit,
+    onOpenSleepEfficiency: (java.time.LocalDate) -> Unit,
     onOpenHeartRateRecovery: () -> Unit = {},
     onOpenTrainingReadinessDetails: (java.time.LocalDate) -> Unit = {},
     onOpenStressDetails: (java.time.LocalDate) -> Unit = {},
@@ -177,8 +177,9 @@ internal fun MetricRouteContent(
                 unitFormatter = unitFormatter,
                 dateTimeFormatterProvider = dateTimeFormatterProvider,
                 onOpenSleepSession = onOpenSleepSession,
-                onOpenSleepScore = onOpenSleepScore,
-                onOpenSleepEfficiency = onOpenSleepEfficiency,
+                // The detail opens on the day this screen is on, not on today.
+                onOpenSleepScore = { onOpenSleepScore(sleepViewModel.uiState.value.selectedDate) },
+                onOpenSleepEfficiency = { onOpenSleepEfficiency(sleepViewModel.uiState.value.selectedDate) },
             )
         }
         MetricRouteDestination.BodyEnergy -> {

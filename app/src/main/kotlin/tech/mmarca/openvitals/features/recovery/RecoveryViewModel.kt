@@ -1,6 +1,7 @@
 package tech.mmarca.openvitals.features.recovery
 
 import androidx.compose.runtime.Immutable
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,6 +29,7 @@ import tech.mmarca.healthcalculations.model.sleepDurationMsFromStages
 import tech.mmarca.openvitals.data.repository.contract.BodyProfilePreferences
 import tech.mmarca.openvitals.data.repository.contract.HeartRepository
 import tech.mmarca.openvitals.data.repository.contract.SleepRepository
+import tech.mmarca.openvitals.navigation.selectedDayOrNull
 
 private const val RecoveryLookbackDays = 7L
 
@@ -69,10 +71,14 @@ class RecoveryViewModel @Inject constructor(
     private val sleepRepository: SleepRepository,
     private val heartRepository: HeartRepository,
     private val bodyProfilePreferences: BodyProfilePreferences,
+    savedStateHandle: SavedStateHandle,
     private val dispatchers: DispatcherProvider = DefaultDispatcherProvider,
 ) : ViewModel() {
 
-    private val _uiState = MutableStateFlow(RecoveryUiState())
+    /** The day the sleep screen was on when the detail opened; absent means today. */
+    private val pinnedDay: LocalDate? = savedStateHandle.selectedDayOrNull()
+
+    private val _uiState = MutableStateFlow(RecoveryUiState(selectedDate = pinnedDay ?: LocalDate.now()))
     val uiState: StateFlow<RecoveryUiState> = _uiState.asStateFlow()
     private val loadCoordinator = LoadCoordinator()
 
@@ -80,7 +86,7 @@ class RecoveryViewModel @Inject constructor(
         load()
     }
 
-    fun load(today: LocalDate = LocalDate.now()) {
+    fun load(today: LocalDate = pinnedDay ?: LocalDate.now()) {
         loadCoordinator.launch(viewModelScope) load@{
             val start = today.minusDays(RecoveryLookbackDays - 1)
             _uiState.value = _uiState.value.copy(

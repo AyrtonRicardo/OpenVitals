@@ -2,6 +2,7 @@ package tech.mmarca.openvitals.features.recovery
 
 import tech.mmarca.openvitals.data.repository.contract.FakePreferences
 import tech.mmarca.openvitals.core.presentation.ScreenError
+import androidx.lifecycle.SavedStateHandle
 import io.mockk.coEvery
 import io.mockk.coVerify
 import io.mockk.every
@@ -23,6 +24,7 @@ import tech.mmarca.healthcalculations.model.SleepStage
 import tech.mmarca.healthcalculations.preferences.BodyProfile
 import tech.mmarca.openvitals.data.repository.contract.HeartRepository
 import tech.mmarca.openvitals.data.repository.contract.SleepRepository
+import tech.mmarca.openvitals.navigation.SELECTED_DAY_ARG
 import tech.mmarca.openvitals.util.MainDispatcherRule
 import kotlinx.coroutines.test.runTest
 
@@ -53,10 +55,14 @@ class RecoveryViewModelTest {
         sleepRepository: SleepRepository = sleepRepo(sessions),
         heartRepository: HeartRepository = heartRepo(),
         bodyProfilePreferences: FakePreferences = preferences(),
+        pinnedDay: LocalDate? = null,
     ) = RecoveryViewModel(
         sleepRepository = sleepRepository,
         heartRepository = heartRepository,
         bodyProfilePreferences = bodyProfilePreferences,
+        savedStateHandle = SavedStateHandle(
+            pinnedDay?.let { mapOf(SELECTED_DAY_ARG to it.toString()) }.orEmpty(),
+        ),
         dispatchers = mainDispatcherRule.dispatcherProvider,
     )
 
@@ -83,6 +89,28 @@ class RecoveryViewModelTest {
         assertEquals(93.75, state.today.sleepScore.sleepEfficiencyPercent, 0.001)
         assertEquals(30.0, state.today.sleepScore.wakeAfterSleepOnsetMinutes, 0.001)
         coVerify { repo.loadSleepSessions(today.minusDays(6), today) }
+    }
+
+    @Test
+    fun `a day pinned by the route is the day shown, and a refresh keeps it`() = runTest {
+        val saturday = today.minusDays(2)
+        val repo = sleepRepo(
+            sessions = listOf(
+                sleepSession(saturday, durationHours = 6),
+                sleepSession(today),
+            ),
+        )
+
+        val vm = viewModel(sleepRepository = repo, pinnedDay = saturday)
+        vm.load()
+        advanceUntilIdle()
+
+        val state = vm.uiState.value
+        assertEquals(saturday, state.selectedDate)
+        assertEquals("sleep-$saturday", state.today.mainSleepSession?.id)
+        // The week ends on the pinned day, so its baseline is the nights before it.
+        assertEquals(saturday, state.days.last().date)
+        coVerify(exactly = 2) { repo.loadSleepSessions(saturday.minusDays(6), saturday) }
     }
 
     @Test
