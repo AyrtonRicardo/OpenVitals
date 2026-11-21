@@ -198,6 +198,33 @@ class HealthConnectReaderSupportTest {
         assertTrue(maxActiveReads.get() <= 4)
     }
 
+    @Test fun `long reads take one permit between them, so a short read still gets through`() = runTest {
+        val support = support()
+        val release = kotlinx.coroutines.CompletableDeferred<Unit>()
+        val activeLongReads = AtomicInteger(0)
+        val maxActiveLongReads = AtomicInteger(0)
+        // The heart rate tile and Body Energy, each paging through the day's samples.
+        val longReads = (0 until 2).map { index ->
+            async {
+                support.withLongReadLogging("long-$index", fallback = Unit) {
+                    val active = activeLongReads.incrementAndGet()
+                    maxActiveLongReads.updateAndGet { currentMax -> maxOf(currentMax, active) }
+                    release.await()
+                    activeLongReads.decrementAndGet()
+                }
+            }
+        }
+        testScheduler.runCurrent()
+
+        // With both permits held by the long reads this never returned.
+        val sleep = support.withLogging("sleep", fallback = 0) { 7 }
+
+        assertEquals(7, sleep)
+        release.complete(Unit)
+        longReads.awaitAll()
+        assertEquals(1, maxActiveLongReads.get())
+    }
+
     @Test fun `a strict read rethrows the failure a screen read swallows`() = runTest {
         val support = support()
 

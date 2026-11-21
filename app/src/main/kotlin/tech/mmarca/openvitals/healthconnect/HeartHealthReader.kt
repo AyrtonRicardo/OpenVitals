@@ -33,6 +33,9 @@ internal class HeartHealthReader(
     companion object {
         private val MinAggregateBucket: Duration = Duration.ofSeconds(30)
         private const val MaxAggregateBuckets = 240L
+
+        /** A raw read this long is a day's trace, not a workout's, and takes the long-read lane. */
+        private val LongRawHeartRateReadSpan: Duration = Duration.ofHours(6)
     }
 
     /**
@@ -88,7 +91,11 @@ internal class HeartHealthReader(
             // Too long to hold sample by sample. Five-minute buckets, read in chunks.
             return readHeartRateSamplesForInsights(start, end)
         }
-        return support.withLogging("readRawHeartRateSamples[$start..$end]", emptyList()) {
+        val operation = "readRawHeartRateSamples[$start..$end]"
+        if (Duration.between(start, end) >= LongRawHeartRateReadSpan) {
+            return support.withLongReadLogging(operation, emptyList()) { readRawOrAggregatedFallback(start, end) }
+        }
+        return support.withLogging(operation, emptyList()) {
             readRawOrAggregatedFallback(start, end)
         }
     }

@@ -38,6 +38,8 @@ import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
 import tech.mmarca.openvitals.sensors.ble.BleSensorCoordinator
 import tech.mmarca.openvitals.util.MainDispatcherRule
 import io.mockk.coEvery
+import tech.mmarca.openvitals.core.performance.AppForegroundGate
+import tech.mmarca.openvitals.core.performance.HealthDataWriteEpoch
 import io.mockk.coVerify
 import io.mockk.every
 import io.mockk.mockk
@@ -92,6 +94,7 @@ class DashboardViewModelTest {
             DashboardWidgetId.entries.map { id -> id.name }.toSet()
         every { it.setDashboardKnownWidgetIds(any()) } returns Unit
         every { it.healthConnectSyncEnabled } returns true
+        every { it.changeEpoch } returns 0L
         every { it.bodyEnergyCalibration() } returns BodyEnergyCalibration.Automatic
     }
 
@@ -717,6 +720,61 @@ class DashboardViewModelTest {
         assertEquals(8_000L, vm.uiState.value.data?.steps)
         assertFalse(vm.uiState.value.isLoading)
         assertNull(vm.uiState.value.error)
+    }
+
+    @Test fun `a resume inside the app keeps a fresh day, and reloads once the app has written`() = runTest {
+        val loader = mockDashboardDataLoader()
+        var loads = 0
+        coEvery { loader.loadDashboard(any<DashboardQuery>()) } coAnswers {
+            val query = firstArg<DashboardQuery>()
+            if (query.visibleMetrics == setOf(DashboardMetric.STEPS)) loads += 1
+            DashboardData(date = today, steps = 8_000, loadedMetrics = query.visibleMetrics)
+        }
+        val writeEpoch = HealthDataWriteEpoch()
+
+        val vm = dashboardViewModel(loader, prefs(), foregroundGate = AppForegroundGate(), writeEpoch = writeEpoch)
+        advanceUntilIdle()
+        assertEquals(1, loads)
+
+        // Back from Settings: nothing changed, so nothing is read again.
+        vm.resumeCurrentDay()
+        advanceUntilIdle()
+        assertEquals(1, loads)
+        assertEquals(8_000L, vm.uiState.value.data?.steps)
+
+        // Back from logging an entry: the app wrote to Health Connect.
+        writeEpoch.bump()
+        vm.resumeCurrentDay()
+        advanceUntilIdle()
+        assertEquals(2, loads)
+
+        // A pull to refresh always reads.
+        vm.refresh()
+        advanceUntilIdle()
+        assertEquals(3, loads)
+    }
+
+    @Test fun `a resume reloads a day whose last load failed`() = runTest {
+        val loader = mockDashboardDataLoader()
+        var loads = 0
+        coEvery { loader.loadDashboard(any<DashboardQuery>()) } coAnswers {
+            loads += 1
+            throw IllegalStateException("the provider hung up")
+        }
+
+        val vm = dashboardViewModel(
+            loader,
+            prefs(),
+            foregroundGate = AppForegroundGate(),
+            writeEpoch = HealthDataWriteEpoch(),
+        )
+        advanceUntilIdle()
+        val loadsAfterOpen = loads
+
+        vm.resumeCurrentDay()
+        advanceUntilIdle()
+
+        assertTrue(loads > loadsAfterOpen)
     }
 
     @Test fun `a resume after the open load settles still reloads the day`() = runTest {
@@ -1411,6 +1469,8 @@ class DashboardViewModelTest {
         historySyncScheduler: HistorySyncScheduler? = null,
         homeWidgetRefreshScheduler: HomeWidgetRefreshScheduler? = null,
         chainSyncService: BodyEnergyChainSyncService? = null,
+        foregroundGate: AppForegroundGate? = null,
+        writeEpoch: HealthDataWriteEpoch? = null,
     ): DashboardViewModel =
         DashboardViewModel(
             loadDashboardDayUseCase = LoadDashboardDayUseCase(loader),
@@ -1426,6 +1486,8 @@ class DashboardViewModelTest {
             historySyncScheduler = historySyncScheduler,
             homeWidgetRefreshScheduler = homeWidgetRefreshScheduler,
             chainSyncService = chainSyncService,
+            foregroundGate = foregroundGate,
+            writeEpoch = writeEpoch,
         )
 
     private fun mockDashboardDataLoader(configure: DashboardDataLoader.() -> Unit = {}): DashboardDataLoader =

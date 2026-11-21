@@ -114,6 +114,7 @@ class ImportedClientRecordIdLookupTest {
             syncGate = mockk(relaxed = true),
             mindfulnessGate = mockk(relaxed = true),
             foregroundGate = AppForegroundGate(),
+            writeEpoch = tech.mmarca.openvitals.core.performance.HealthDataWriteEpoch(),
         )
     }
 

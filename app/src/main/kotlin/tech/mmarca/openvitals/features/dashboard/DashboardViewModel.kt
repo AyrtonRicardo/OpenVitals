@@ -158,6 +158,7 @@ class DashboardViewModel @Inject constructor(
     private val medicalRecords: MedicalRecordsRepository? = null,
     private val foregroundGate: AppForegroundGate? = null,
     private val openWatchLink: tech.mmarca.openvitals.openwatch.OpenWatchLink? = null,
+    private val writeEpoch: tech.mmarca.openvitals.core.performance.HealthDataWriteEpoch? = null,
 ) : ViewModel() {
 
     val minimumOnboardingPermissions get() = repository.minimumOnboardingPermissions
@@ -196,6 +197,13 @@ class DashboardViewModel @Inject constructor(
      * same day is absorbed; FORCE and date changes restart.
      */
     private var inFlightLoadDate: LocalDate? = null
+
+    /** Lets a resume keep the day on screen. Absent without the signals it reads, and then every resume reloads. */
+    private val resumeFreshness = foregroundGate?.let { gate ->
+        writeEpoch?.let { writes ->
+            DashboardResumeFreshness({ gate.foregroundEpoch }, { writes.value + prefs.changeEpoch })
+        }
+    }
 
     init {
         observeOpenWatch()
@@ -346,10 +354,13 @@ class DashboardViewModel @Inject constructor(
 
     fun resumeCurrentDay() {
         refreshPreferences()
-        // Reload whenever the user returns to today: ON_RESUME is the only signal
-        // that Health Connect data may have changed.
+        // ON_RESUME is the only signal that Health Connect data may have changed, so
+        // a return to today reloads, unless the app never left the foreground and
+        // changed nothing itself since a recent load: see [DashboardResumeFreshness].
         if (!userPinnedPastDay) {
-            load(LocalDate.now())
+            val today = LocalDate.now()
+            if (_uiState.value.selectedDate == today && resumeFreshness?.isFresh(today) == true) return
+            load(today)
         }
     }
 
@@ -373,14 +384,17 @@ class DashboardViewModel @Inject constructor(
         )
         val generation = ++loadGeneration
         inFlightLoadDate = clampedDate
+        val freshnessStamp = resumeFreshness?.begin(clampedDate)
         loadCoordinator.launch(viewModelScope) load@{
             try {
-                runLoadPass(
+                val clean = runLoadPass(
                     clampedDate = clampedDate,
                     refreshMode = refreshMode,
                     generation = generation,
                     onlyWidgets = onlyWidgets,
                 )
+                // Only a pass that read every tile, with none refused, is worth keeping on a resume.
+                if (clean && onlyWidgets == null && freshnessStamp != null) resumeFreshness.settle(freshnessStamp)
             } finally {
                 // A superseded job must not clear the newer load's marker.
                 if (isCurrent) inFlightLoadDate = null
@@ -393,7 +407,7 @@ class DashboardViewModel @Inject constructor(
         refreshMode: RefreshMode,
         generation: Long,
         onlyWidgets: Set<DashboardWidgetId>? = null,
-    ) {
+    ): Boolean {
         val sleepWindow = prefs.sleepWindow
         val activityWeekMode = prefs.activityWeekMode
         val showOpenVitalsCalculatedCalories = prefs.showOpenVitalsCalculatedCalories
@@ -469,7 +483,7 @@ class DashboardViewModel @Inject constructor(
             metricPasses.awaitAll()
         }
 
-        if (!isCurrent) return
+        if (!isCurrent) return false
         // One metric failing is that tile's problem. Every metric failing is the screen's.
         val firstFailure = failures.filterNotNull().firstOrNull()
         if (onlyWidgets == null && firstFailure != null && failures.size == groups.size && failures.none { it == null }) {
@@ -492,6 +506,7 @@ class DashboardViewModel @Inject constructor(
         }
         // The home screen shows today, so a settled read of today is its cue.
         if (clampedDate == LocalDate.now()) homeWidgetRefreshScheduler?.refreshNow()
+        return failures.all { it == null } && _uiState.value.degradedWidgets.isEmpty()
     }
 
     /**

@@ -94,6 +94,7 @@ internal class HealthConnectReaderSupport(
     },
 ) {
     private val readSemaphore = Semaphore(MaxConcurrentReads)
+    private val longReadSemaphore = Semaphore(MaxConcurrentReads - 1)
     private val pacer = HealthConnectCallPacer(nowMillis, pacingGapMillis)
 
     fun client(): HealthConnectClient = clientProvider()
@@ -105,6 +106,19 @@ internal class HealthConnectReaderSupport(
         fallback: T,
         block: suspend () -> T,
     ): T = withRateLimitGuard(operation, fallback, block)
+
+    /**
+     * [withLogging] for a read that pages through a day or more of dense samples
+     * and so holds its permit for as long as that takes. One such read at a time:
+     * the heart rate tile and Body Energy each read the day's samples, and with a
+     * watch that writes every second the two held both permits for minutes while
+     * every other tile, sleep included, waited behind them.
+     */
+    suspend fun <T> withLongReadLogging(
+        operation: String,
+        fallback: T,
+        block: suspend () -> T,
+    ): T = longReadSemaphore.withPermit { withRateLimitGuard(operation, fallback, block) }
 
     suspend fun <T> withNullableLogging(
         operation: String,

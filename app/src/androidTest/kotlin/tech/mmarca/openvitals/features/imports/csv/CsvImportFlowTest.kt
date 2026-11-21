@@ -271,6 +271,7 @@ class CsvImportFlowTest {
             syncGate = HealthConnectSyncGate(preferences),
             mindfulnessGate = MindfulnessIntegrationGate(preferences),
             foregroundGate = AppForegroundGate(),
+            writeEpoch = tech.mmarca.openvitals.core.performance.HealthDataWriteEpoch(),
         )
         return CsvImportViewModel(
             context = context,

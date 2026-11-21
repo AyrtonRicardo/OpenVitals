@@ -98,6 +98,15 @@ class PreferencesRepository @Inject constructor(
     HealthConnectPreferences {
 
     private val prefs = context.getSharedPreferences(PREFS_FILE, Context.MODE_PRIVATE)
+    private val changeCount = java.util.concurrent.atomic.AtomicLong()
+    // A field, not a lambda at the call: the preferences hold their listeners weakly.
+    private val changeListener =
+        android.content.SharedPreferences.OnSharedPreferenceChangeListener { _, _ -> changeCount.incrementAndGet() }
+    init { prefs.registerOnSharedPreferenceChangeListener(changeListener) }
+
+    /** Moves when any setting in this file is written. A screen compares it to tell whether its inputs changed. */
+    val changeEpoch: Long
+        get() = changeCount.get()
     private val _unitSystemPreference = MutableStateFlow(readUnitSystemPreference())
     private val _unitSystem = MutableStateFlow(_unitSystemPreference.value.resolve(systemUnitSystem::current))
     private val _unitOverrides = MutableStateFlow(readUnitOverrides())

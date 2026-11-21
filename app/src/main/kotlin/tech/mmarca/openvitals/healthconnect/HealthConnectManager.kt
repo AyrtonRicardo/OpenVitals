@@ -85,6 +85,7 @@ class HealthConnectManager @Inject constructor(
     private val syncGate: HealthConnectSyncGate,
     mindfulnessGate: MindfulnessIntegrationGate,
     private val foregroundGate: AppForegroundGate,
+    private val writeEpoch: tech.mmarca.openvitals.core.performance.HealthDataWriteEpoch,
 ) {
     private val diagnostics = HealthConnectDiagnostics(context)
     private val availabilityService = HealthConnectAvailabilityService(
@@ -787,7 +788,7 @@ class HealthConnectManager @Inject constructor(
     private var cachedClient: HealthConnectClient? = null
 
     private fun client(): HealthConnectClient =
-        cachedClient ?: HealthConnectClient.getOrCreate(context).also { cachedClient = it }
+        cachedClient ?: WriteCountingHealthConnectClient(HealthConnectClient.getOrCreate(context), writeEpoch::bump).also { cachedClient = it }
 
     /** After a permission request: the granted set and the provider status are asked again. */
     fun invalidatePermissionCache() {
