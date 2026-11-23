@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The body figure for tape measurements. Edit the outline freely; keep the viewBox and move
+     each anchor_<site> point to where the tape goes. Re-import into res/drawable/body_map_front.xml
+     (Android Studio: Vector Asset, local file) and run BodyMapAnchorTest, which names any anchor
+     that no longer matches BodyMapGeometry.kt. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 308 470" width="308" height="470">
+  <g id="outline" fill="#000000">
+    <path d="M130,56 A24,30 0 1,1 178,56 A24,30 0 1,1 130,56 Z"/>
+    <path d="M145,80 L163,80 L163,102 L145,102 Z"/>
+    <path d="M145,98 L163,98 C178,106 200,104 210,118 L205,200 C200,218 188,224 186,232 C198,252 205,270 203,292 L196,322 L112,322 L105,292 C103,270 110,252 122,232 C120,224 108,218 103,200 L98,118 C108,104 130,106 145,98 Z"/>
+    <path d="M98,118 C88,128 86,145 86,165 C86,185 89,196 90,206 C88,222 86,236 86,248 C86,262 88,272 89,282 C88,294 101,296 100,284 C99,272 101,262 102,248 C102,236 101,220 100,206 C101,194 103,180 103,152 Z"/>
+    <path d="M210,118 C220,128 222,145 222,165 C222,185 219,196 218,206 C220,222 222,236 222,248 C222,262 220,272 219,282 C220,294 207,296 208,284 C209,272 207,262 206,248 C206,236 207,220 208,206 C207,194 205,180 205,152 Z"/>
+    <path d="M112,320 L152,320 L150,344 C149,360 147,372 146,382 C149,396 149,410 146,424 L143,450 C143,466 125,466 125,452 L123,428 C118,414 118,400 121,384 C119,370 117,360 116,356 Z"/>
+    <path d="M196,320 L156,320 L158,344 C159,360 161,372 162,382 C159,396 159,410 162,424 L165,450 C165,466 183,466 183,452 L185,428 C190,414 190,400 187,384 C189,370 191,360 192,356 Z"/>
+  </g>
+  <g id="anchors" fill="#000000" fill-opacity="0">
+    <path id="anchor_neck" d="M154,92"/>
+    <path id="anchor_chest" d="M154,158"/>
+    <path id="anchor_waist" d="M154,226"/>
+    <path id="anchor_hips" d="M154,282"/>
+    <path id="anchor_shoulders" d="M154,116"/>
+    <path id="anchor_right_upper_arm" d="M95,172"/>
+    <path id="anchor_left_upper_arm" d="M213,172"/>
+    <path id="anchor_right_forearm" d="M94,245"/>
+    <path id="anchor_left_forearm" d="M214,245"/>
+    <path id="anchor_right_thigh" d="M133,346"/>
+    <path id="anchor_left_thigh" d="M175,346"/>
+    <path id="anchor_right_calf" d="M134,410"/>
+    <path id="anchor_left_calf" d="M174,410"/>
+  </g>
+</svg>

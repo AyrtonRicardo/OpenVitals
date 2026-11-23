@@ -124,6 +124,10 @@ class MetricDispatchTest {
             metricRouteDestinationFor(DashboardWidgetId.CYCLE),
         )
         assertEquals(
+            MetricRouteDestination.Circumferences,
+            metricRouteDestinationFor(DashboardWidgetId.CIRCUMFERENCES),
+        )
+        assertEquals(
             MetricRouteDestination.CardioLoad,
             metricRouteDestinationFor(DashboardWidgetId.WEEKLY_CARDIO_LOAD),
         )

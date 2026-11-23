@@ -19,13 +19,19 @@ import tech.mmarca.openvitals.data.local.beverage.BeverageDao
 import tech.mmarca.openvitals.data.local.bodyenergy.BodyEnergyTimelineDao
 import tech.mmarca.openvitals.data.local.cycle.CycleJournalDao
 import tech.mmarca.openvitals.data.local.cycle.PillIntakeDao
+import tech.mmarca.openvitals.data.local.circumference.BodyCircumferenceDao
 import tech.mmarca.openvitals.data.local.food.FoodDao
 import tech.mmarca.openvitals.data.local.heartratecache.HeartRateDayCacheDao
 import tech.mmarca.openvitals.data.local.medical.MedicalDocumentDao
+import tech.mmarca.openvitals.data.local.photos.ProgressPhotoDao
 import tech.mmarca.openvitals.data.local.syncorigin.SyncedRecordOriginDao
 import tech.mmarca.openvitals.data.local.vitalscache.VitalsDailyCacheDao
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
 import tech.mmarca.openvitals.domain.preferences.SystemUnitSystemProvider
+import tech.mmarca.openvitals.features.progressphotos.ContentProgressPhotoImporter
+import tech.mmarca.openvitals.features.progressphotos.ProgressPhotoImporter
+import tech.mmarca.openvitals.features.progressphotos.ProgressPhotoSaveScheduler
+import tech.mmarca.openvitals.features.progressphotos.ProgressPhotoSaveScheduling
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -68,6 +74,22 @@ object AppModule {
     @Singleton
     fun providePillIntakeDao(database: OpenVitalsDatabase): PillIntakeDao =
         database.pillIntakeDao()
+
+    @Provides
+    @Singleton
+    fun provideBodyCircumferenceDao(database: OpenVitalsDatabase): BodyCircumferenceDao =
+        database.bodyCircumferenceDao()
+
+    @Provides
+    @Singleton
+    fun provideProgressPhotoDao(database: OpenVitalsDatabase): ProgressPhotoDao =
+        database.progressPhotoDao()
+
+    @Provides
+    fun provideProgressPhotoImporter(importer: ContentProgressPhotoImporter): ProgressPhotoImporter = importer
+
+    @Provides
+    fun provideProgressPhotoSaveScheduling(scheduler: ProgressPhotoSaveScheduler): ProgressPhotoSaveScheduling = scheduler
 
     @Provides
     @Singleton

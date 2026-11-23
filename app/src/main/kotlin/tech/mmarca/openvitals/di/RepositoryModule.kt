@@ -12,6 +12,9 @@ import tech.mmarca.openvitals.data.repository.BodyRepositoryImpl
 import tech.mmarca.openvitals.data.repository.CaffeineRepositoryImpl
 import tech.mmarca.openvitals.data.repository.CycleJournalRepositoryImpl
 import tech.mmarca.openvitals.data.repository.PillIntakeRepositoryImpl
+import tech.mmarca.openvitals.data.repository.BodyCircumferenceRepositoryImpl
+import tech.mmarca.openvitals.data.repository.BodyFolderRepositoryImpl
+import tech.mmarca.openvitals.data.repository.ProgressPhotoRepositoryImpl
 import tech.mmarca.openvitals.data.repository.CycleRepositoryImpl
 import tech.mmarca.openvitals.data.repository.FoodRepositoryImpl
 import tech.mmarca.openvitals.data.repository.HealthRepositoryImpl
@@ -30,6 +33,9 @@ import tech.mmarca.openvitals.data.repository.contract.BodyRepository
 import tech.mmarca.openvitals.data.repository.contract.CaffeineRepository
 import tech.mmarca.openvitals.data.repository.contract.CycleJournalRepository
 import tech.mmarca.openvitals.data.repository.contract.PillIntakeRepository
+import tech.mmarca.openvitals.data.repository.contract.BodyCircumferenceRepository
+import tech.mmarca.openvitals.data.repository.contract.BodyFolderRepository
+import tech.mmarca.openvitals.data.repository.contract.ProgressPhotoRepository
 import tech.mmarca.openvitals.data.repository.contract.CycleRepository
 import tech.mmarca.openvitals.data.repository.contract.FoodRepository
 import tech.mmarca.openvitals.data.repository.contract.HealthRepository
@@ -114,6 +120,18 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindPillIntakeRepository(impl: PillIntakeRepositoryImpl): PillIntakeRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindBodyCircumferenceRepository(impl: BodyCircumferenceRepositoryImpl): BodyCircumferenceRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindProgressPhotoRepository(impl: ProgressPhotoRepositoryImpl): ProgressPhotoRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindBodyFolderRepository(impl: BodyFolderRepositoryImpl): BodyFolderRepository
 
     @Binds
     @Singleton

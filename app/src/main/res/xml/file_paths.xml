@@ -15,6 +15,9 @@
     <cache-path
         name="medical_exports"
         path="medical_exports/" />
+    <cache-path
+        name="progress_photo_capture"
+        path="progress_photo_capture/" />
     <files-path
         name="medical_documents"
         path="medical_documents/" />

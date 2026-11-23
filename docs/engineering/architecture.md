@@ -18,8 +18,8 @@ The repo now has one Android app module for the local app. The goal is to keep b
 - Feature repositories: in place for activity, sleep, heart, body, body energy, caffeine, hydration, nutrition, mindfulness, cycle, and vitals
 - Dashboard: still a dedicated day-based summary screen, not a period-detail screen
 - Manual entry: separate from the dashboard and writes explicit user-entered records directly to Health Connect
-- Room is at schema version 18. It holds derived summary caches plus the tables Health Connect cannot represent (`synced_record_origins`, the food catalog, the cycle journal, cycle exclusions, pill intakes, and the index of kept medical documents); Health Connect remains the source of truth for everything it has a record type for
-- WorkManager is used for user-started Apple Health imports, offline map imports, and the home widget refresh
+- Room is at schema version 21. It holds derived summary caches plus the tables Health Connect cannot represent (`synced_record_origins`, the food catalog, the cycle journal, cycle exclusions, pill intakes, the index of kept medical documents, tape measurements and progress photos); Health Connect remains the source of truth for everything it has a record type for
+- WorkManager is used for user-started Apple Health imports, offline map imports, the home widget refresh, and the progress photo save queue
 - Phone-to-phone Health Connect sync lives under [`features/devicesync`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/devicesync) and runs over Bluetooth Classic RFCOMM
 - A one-time Flutter-to-Kotlin data migrator lives under [`data/migration`](../../app/src/main/kotlin/tech/mmarca/openvitals/data/migration) and runs from `OpenVitalsApp.onCreate()`
 
@@ -207,7 +207,7 @@ Some repositories are now split into a `data/repository/contract/` interface and
 
 ### Local storage
 
-[`OpenVitalsDatabase`](../../app/src/main/kotlin/tech/mmarca/openvitals/data/local/OpenVitalsDatabase.kt) is at `VERSION = 18`, with migrations declared in its companion object and listed once, in `ALL_MIGRATIONS`, which the database builder takes. Room exports the schema of each version to [`app/schemas`](../../app/schemas); the files are committed.
+[`OpenVitalsDatabase`](../../app/src/main/kotlin/tech/mmarca/openvitals/data/local/OpenVitalsDatabase.kt) is at `VERSION = 21`, with migrations declared in its companion object and listed once, in `ALL_MIGRATIONS`, which the database builder takes. Room exports the schema of each version to [`app/schemas`](../../app/schemas); the files are committed.
 
 To change the schema: raise `VERSION`, write the migration, add it to `ALL_MIGRATIONS`, build once, and commit the new schema file. `OpenVitalsDatabaseSchemaTest` fails until all of that is done: it replays every migration's statements and compares the tables they leave with the exported schema. It can do that on the JVM because the migrations only create and drop tables. A migration that alters a table needs a real database, so add `room-testing` and a `MigrationTestHelper` test with it; the exported schemas are what that helper reads.
 
@@ -222,6 +222,8 @@ To change the schema: raise `VERSION`, write the migration, add it to `ALL_MIGRA
 | `cycle_journal_entries`, `cycle_exclusions` | `data/local/cycle` | the cycle day log Health Connect has no record type for (pain, mood, energy, desire, symptoms, notes, pregnancy test, temperature disturbances, cervical sensation, cervix opening, firmness and position) and the cycles kept out of the estimate, added in migration 12 → 13; the cervix and desire columns in 16 → 17 |
 | `pill_intakes` | `data/local/cycle` | the days the contraceptive pill was marked as taken; the scheme itself is a cycle preference, added in migration 13 → 14 |
 | `medical_documents`, `medical_document_records` | `data/local/medical` | the files kept from medical imports, stored under `files/medical_documents`, and the Health Connect records each one gave; a file is data Health Connect cannot hold, and the records stay in Health Connect. Added in migration 14 → 15 |
+| `body_circumferences` | `data/local/circumference` | tape measurements of the neck, shoulders, chest, waist and hips and, on each side, the upper arm, forearm, thigh and calf, keyed by site and instant; Health Connect has no record type for them. Added in migration 18 → 19 |
+| `progress_photos` | `data/local/photos` | progress photos: the instant, the file name in the picked folder and whether the full image is there yet; the thumbnail and, until it is saved, the full image are files under `files/progress_photos`. Health Connect has no type for a photo. Added in migration 19 → 20 |
 
 Three tables the device layer owned (`garmin_wellness_samples`, added in 5 → 6; `garmin_sleep_minutes`, 9 → 10; `scale_weigh_ins`, 15 → 16) left with that layer: `MIGRATION_17_18` drops all three. Their data lives in OpenWatch now.
 
@@ -285,6 +287,9 @@ Current feature packages:
 - [`features/body`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/body)
 - [`features/bodyenergy`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/bodyenergy)
 - [`features/caffeine`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/caffeine)
+- [`features/circumference`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/circumference) — tape measurements from Room, the one period-detail screen with no Health Connect shell, since it reads nothing from Health Connect. Its header is a body figure: an SVG kept in `app/src/main/res-src/body_map_front.svg` and imported as the vector drawable `body_map_front`, with an invisible `anchor_<site>` marker per part; `BodyMapGeometry` repeats those points and `BodyMapAnchorTest` fails when the two disagree. Each part's tile shows its latest value and its change from its first value or a picked date; the period history below follows the part tapped. The entry form uses the same figure: one date, several parts, one save, stored at local noon, replacing that part's other entries of the day after a warning
+- [`features/progressphotos`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/progressphotos) — progress photos from Room, over a period, with no Health Connect shell either; a new photo is linked to the day on screen in Day mode, its full image is saved to the body measurements folder by `ProgressPhotoSaveWorker`, and it waits on the phone while that folder is unreachable
+- [`features/bodyfolder`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/bodyfolder) — the body measurements folder card under Body profile: a Storage Access Framework tree kept by `BodyFolderRepository` (a network share works through a document provider app, so the app still holds no network permission), the `measurements.json` export, and the `photos.json` index the web dashboard in `tools/body-dashboard` reads
 - [`features/cycle`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/cycle)
 - [`features/devicesync`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/devicesync)
 - [`features/homewidgets`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/homewidgets)
@@ -412,10 +417,13 @@ Current files:
 - [`features/manualentry/food`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/manualentry/food)
 - [`features/manualentry/nutrition`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/manualentry/nutrition)
 - [`features/manualentry/body`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/manualentry/body)
+- [`features/manualentry/circumference`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/manualentry/circumference)
 - [`features/manualentry/vitals`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/manualentry/vitals)
 - [`features/manualentry/mindfulness`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/manualentry/mindfulness)
 
 The current manual entry widgets cover hydration, food from a catalog the user builds, carbohydrate totals, activity sessions with manual entry, existing plans, or GPS recording, activity file review launched from Settings Data Importers for GPX/KML/KMZ, TCX, and FIT files, mindfulness, body composition, height, blood pressure, SpO2, respiratory rate, body temperature, HRV, blood glucose, and VO2 max. Body composition is one form for what a body analysis scale shows: weight, body fat, lean mass, body water, bone mass, and BMR. The filled values are written in one `insertRecords` call with one time, so a weigh-in is saved whole or not at all; body water may be typed as a percentage, which becomes a mass of the weight on the same form, never of an older one. Each value stays its own record afterwards, so the Body screens edit and delete it alone, through the same form showing that one field. The daily BMR estimate is written by its own pass and is not offered for editing. Blood glucose is typed in mmol/L or mg/dL, starting from the unit setting, and carries Health Connect's relation to meal, meal, and sample; VO2 max carries how it was measured. Health Connect's constants for those fields are mirrored in `GlucoseRecordValues` and `Vo2MaxRecordValues`, and `EntryWritePathsTest` checks the mirrors against the library. Every vitals type maps to and from its record in `healthconnect/VitalsRecordMapping.kt`. A blood pressure reading can carry the pulse the monitor showed: it is written as a one-sample `HeartRateRecord` at the reading's time whose `clientRecordId` derives from the reading's with its tokens stripped (`bpPulseClientRecordId`), so an edit of the reading rewrites it, clearing the field deletes it, and deleting the reading deletes it too. The value is also encoded on the reading's own `clientRecordId` as a `_bppulse-<bpm>` token beside the `_bpctx-` meal context, which is what lets a list of readings and the edit form show it without a heart rate read. Saving a pulse needs heart rate write access on top of blood pressure; a reading without one never asks for it. Widget order is customizable in the same spirit as the dashboard, but the dashboard remains read-only.
+
+The circumference form is the one entry that writes to Room instead of Health Connect: tape measurements have no record type there, so it asks for no permission and its tile opens the form directly. The progress photos tile is the other Room-backed tile: it opens the progress photos screen, where photos are added in place.
 
 Write permissions can be requested during one-tap onboarding or lazily from Add entry and the specific metric entry route. The dashboard remains read-only. Each write goes directly to Health Connect; OpenVitals keeps only local UI preferences such as widget order and mindfulness timer/background-sound settings.
 
@@ -698,6 +706,7 @@ The dashboard and daily readiness read Health Connect on every load.
 The sync table (`synced_record_origins`) exists only because Health Connect has no record type for a record's source phone; it is not a precedent for mirroring records Health Connect can already hold.
 
 WorkManager is used for the Apple Health import worker and the offline map import worker because those workflows can be long-running and user-visible.
+It also runs the progress photo save queue, `ProgressPhotoSaveWorker`: a plain background job, not a foreground one, with no network constraint (the app has no network permission), which backs off and retries while the picked folder is unreachable. Adding a photo, picking a folder and opening the photos screen start it again.
 It is also used for one scheduled job, the home widget refresh.
 
 A phone-to-phone sync holds its own coroutine scope, is foreground and user-initiated, and has no background variant. Do not read any of this as a general background-sync layer, and do not design new features as if one or a raw-record database already exists.

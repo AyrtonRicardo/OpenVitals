@@ -411,12 +411,13 @@ class DashboardPresentationMapperTest {
 
     @Test
     fun build_deviceSupportsNothing_producesNoTilesAtAll() {
-        // The hero rings are ordinary widgets, so a device that serves nothing renders nothing.
+        // The hero rings are ordinary widgets, so a device that serves nothing renders nothing
+        // from Health Connect. The tape measurements tile reads Room, so it stays, empty.
         val display = build(
             DashboardData(date = LocalDate.now(), supportedMetrics = emptySet()),
         )
 
-        assertEquals(emptyMap<DashboardWidgetId, DashboardWidgetDisplayModel>(), display.widgets)
+        assertEquals(setOf(DashboardWidgetId.CIRCUMFERENCES), display.widgets.keys)
         assertEquals(emptySet<DashboardWidgetId>(), display.unsupportedIds)
     }
 
@@ -465,7 +466,8 @@ class DashboardPresentationMapperTest {
                 DashboardWidgetId.MEDICAL_RECORDS - DashboardWidgetId.OPENWATCH,
             display.widgets.keys.toList(),
         )
-        assertEquals(display.widgets.keys, display.unsupportedIds)
+        // Every Health Connect tile is unsupported; the tape measurements tile reads Room.
+        assertEquals(display.widgets.keys - DashboardWidgetId.CIRCUMFERENCES, display.unsupportedIds)
     }
 
     @Test
@@ -523,5 +525,30 @@ class DashboardPresentationMapperTest {
         assertNull(without.widgets[DashboardWidgetId.OPENWATCH])
         assertEquals(tile, with.widgets[DashboardWidgetId.OPENWATCH]?.openWatch)
         assertFalse(with.widgets.getValue(DashboardWidgetId.OPENWATCH).showsNoDataMessage())
+    }
+
+    @Test
+    fun build_circumferencesTile_showsTheNewestWaistFromRoom() {
+        val data = DashboardData(date = LocalDate.now())
+
+        val without = build(data)
+        val with = DashboardPresentationMapper.build(
+            data = data,
+            dailyGoals = DashboardDailyGoals(),
+            unitFormatter = unitFormatter,
+            dateTimeFormatterProvider = dateTimeFormatterProvider,
+            // Marked loading with the rest: it is not a Health Connect tile, so it never waits.
+            loadingWidgets = setOf(DashboardWidgetId.CIRCUMFERENCES),
+            latestWaistCm = 82.5,
+        )
+
+        // Never measured: the tile is there, empty, and sorts with the other empty tiles.
+        val empty = without.widgets.getValue(DashboardWidgetId.CIRCUMFERENCES)
+        assertTrue(empty.showsNoDataMessage())
+        val tile = with.widgets.getValue(DashboardWidgetId.CIRCUMFERENCES)
+        assertEquals("82.5", tile.value?.value)
+        assertEquals("cm", tile.value?.unit)
+        assertFalse(tile.isLoading)
+        assertFalse(tile.showsNoDataMessage())
     }
 }

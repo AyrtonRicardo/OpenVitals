@@ -11,6 +11,7 @@ import java.time.LocalDate
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.core.presentation.DateTimeFormatterProvider
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
+import tech.mmarca.openvitals.domain.model.CircumferenceSite
 import tech.mmarca.openvitals.domain.model.BodyMeasurementType
 import tech.mmarca.healthcalculations.model.VitalsMeasurementType
 import tech.mmarca.openvitals.features.activity.ActiveCaloriesScreen
@@ -44,6 +45,8 @@ import tech.mmarca.openvitals.features.readiness.DailyReadinessViewModel
 import tech.mmarca.openvitals.features.bodyenergy.BodyEnergyViewModel
 import tech.mmarca.openvitals.features.caffeine.CaffeineScreen
 import tech.mmarca.openvitals.features.caffeine.CaffeineViewModel
+import tech.mmarca.openvitals.features.circumference.CircumferenceScreen
+import tech.mmarca.openvitals.features.circumference.CircumferenceViewModel
 import tech.mmarca.openvitals.features.cycle.CycleScreen
 import tech.mmarca.openvitals.features.cycle.CycleViewModel
 import tech.mmarca.openvitals.features.dashboard.DashboardWidgetId
@@ -101,6 +104,8 @@ internal fun MetricRouteContent(
     onLogCycleEntry: (LocalDate) -> Unit = {},
     onChooseCycleEntry: () -> Unit = {},
     onOpenCycleSettings: () -> Unit = {},
+    onAddCircumference: (CircumferenceSite) -> Unit = {},
+    onOpenProgressPhotos: () -> Unit = {},
 ) {
     when (val destination = metricRouteDestinationFor(metricId)) {
         MetricRouteDestination.Calories -> {
@@ -234,6 +239,16 @@ internal fun MetricRouteContent(
                 onOpenCycleSettings = onOpenCycleSettings,
             )
         }
+        MetricRouteDestination.Circumferences -> {
+            val circumferenceViewModel = hiltViewModel<CircumferenceViewModel>()
+            CircumferenceScreen(
+                viewModel = circumferenceViewModel,
+                unitFormatter = unitFormatter,
+                dateTimeFormatterProvider = dateTimeFormatterProvider,
+                onAddMeasurement = onAddCircumference,
+                onOpenProgressPhotos = onOpenProgressPhotos,
+            )
+        }
         MetricRouteDestination.CardioLoad -> {
             val activityOverviewViewModel = hiltViewModel<ActivityOverviewViewModel>()
             CardioLoadDetailScreen(
@@ -264,6 +279,7 @@ internal sealed interface MetricRouteDestination {
     data object Caffeine : MetricRouteDestination
     data object Mindfulness : MetricRouteDestination
     data object Cycle : MetricRouteDestination
+    data object Circumferences : MetricRouteDestination
     data object CardioLoad : MetricRouteDestination
     data object Unknown : MetricRouteDestination
 }
@@ -285,6 +301,7 @@ internal fun metricRouteDestinationFor(metricId: DashboardWidgetId?): MetricRout
         DashboardWidgetId.CAFFEINE -> MetricRouteDestination.Caffeine
         DashboardWidgetId.MINDFULNESS -> MetricRouteDestination.Mindfulness
         DashboardWidgetId.CYCLE -> MetricRouteDestination.Cycle
+        DashboardWidgetId.CIRCUMFERENCES -> MetricRouteDestination.Circumferences
         DashboardWidgetId.WEEKLY_CARDIO_LOAD,
         DashboardWidgetId.CARDIO_LOAD -> MetricRouteDestination.CardioLoad
         else -> MetricRouteDestination.Unknown

@@ -673,7 +673,7 @@ internal fun DashboardData.toSnapshot(
             }
         }
         // The medical records entry and the OpenWatch tile, not a day's reading.
-        DashboardWidgetId.MEDICAL_RECORDS, DashboardWidgetId.OPENWATCH -> snapshot(null)
+        DashboardWidgetId.MEDICAL_RECORDS, DashboardWidgetId.OPENWATCH, DashboardWidgetId.CIRCUMFERENCES -> snapshot(null)
     }
 }
 
@@ -703,6 +703,7 @@ fun DashboardWidgetId.homeMetricTitleRes(): Int = when (this) {
     DashboardWidgetId.BMR -> R.string.metric_bmr
     DashboardWidgetId.BONE_MASS -> R.string.metric_bone_mass
     DashboardWidgetId.BODY_WATER_MASS -> R.string.metric_body_water_mass
+    DashboardWidgetId.CIRCUMFERENCES -> R.string.metric_circumferences
     DashboardWidgetId.AVG_HEART_RATE -> R.string.metric_avg_heart_rate
     DashboardWidgetId.RESTING_HEART_RATE -> R.string.metric_resting_heart_rate
     DashboardWidgetId.HRV -> R.string.metric_hrv
@@ -721,11 +722,14 @@ fun DashboardWidgetId.homeMetricTitleRes(): Int = when (this) {
     DashboardWidgetId.OPENWATCH -> R.string.metric_watch
 }
 
-/** CYCLE has its own concealed-by-default widget; a placed metric tile for it keeps rendering. */
+/**
+ * CYCLE has its own concealed-by-default widget; a placed metric tile for it keeps rendering.
+ * The tape measurements live in Room, which the home widget refresh does not read.
+ */
 fun homeMetricWidgetCatalog(): List<DashboardWidgetId> =
     DashboardWidgetId.entries.filterNot {
         it == DashboardWidgetId.CARDIO_LOAD || it == DashboardWidgetId.CAFFEINE || it == DashboardWidgetId.CYCLE ||
-            it == DashboardWidgetId.MEDICAL_RECORDS
+            it == DashboardWidgetId.MEDICAL_RECORDS || it == DashboardWidgetId.CIRCUMFERENCES
     }
 
 private fun String?.toDashboardWidgetIdOrNull(): DashboardWidgetId? =

@@ -612,6 +612,10 @@ fun AppNavigation(
                     onOpenCycleSettings = {
                         navController.navigate(Screen.SettingsCycle.route)
                     },
+                    onAddCircumference = { site ->
+                        navController.navigate(Screen.CircumferenceEntry.createRoute(site.name))
+                    },
+                    onOpenProgressPhotos = { navController.navigate(Screen.ProgressPhotos.route) },
                 )
             }
 
@@ -840,6 +844,7 @@ private fun metricTitleRes(metricId: DashboardWidgetId): Int =
         DashboardWidgetId.BMR -> R.string.screen_calories
         DashboardWidgetId.BONE_MASS -> R.string.metric_bone_mass
         DashboardWidgetId.BODY_WATER_MASS -> R.string.metric_body_water_mass
+        DashboardWidgetId.CIRCUMFERENCES -> R.string.metric_circumferences
         DashboardWidgetId.AVG_HEART_RATE -> R.string.screen_heart_rate
         DashboardWidgetId.RESTING_HEART_RATE -> R.string.metric_resting_heart_rate
         DashboardWidgetId.HRV -> R.string.screen_hrv

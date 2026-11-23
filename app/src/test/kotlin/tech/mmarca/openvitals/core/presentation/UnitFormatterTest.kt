@@ -47,6 +47,11 @@ class UnitFormatterTest {
         assertEquals("180 cm", formatter(UnitSystem.METRIC).height(180.0).text)
     }
 
+    @Test fun `a circumference follows the height unit with one decimal and no feet`() {
+        assertEquals("82.5 cm", formatter(UnitSystem.METRIC).circumference(82.5).text)
+        assertEquals("32.5 in", formatter(UnitSystem.IMPERIAL).circumference(82.55).text)
+    }
+
     @Test fun `imperial height uses feet and inches`() {
         assertEquals("5' 11\"", formatter(UnitSystem.IMPERIAL).height(180.0).text)
     }

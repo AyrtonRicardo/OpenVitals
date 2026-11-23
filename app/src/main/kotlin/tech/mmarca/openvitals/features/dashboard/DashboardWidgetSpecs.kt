@@ -56,6 +56,7 @@ import androidx.compose.material.icons.outlined.Restaurant
 import androidx.compose.material.icons.outlined.SelfImprovement
 import androidx.compose.material.icons.outlined.Stairs
 import androidx.compose.material.icons.outlined.Straighten
+import androidx.compose.material.icons.outlined.Straighten
 import androidx.compose.material.icons.outlined.Terrain
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
@@ -402,6 +403,7 @@ private fun dashboardWidgetTitle(widgetId: DashboardWidgetId): String =
             DashboardWidgetId.BMR -> R.string.metric_bmr
             DashboardWidgetId.BONE_MASS -> R.string.metric_bone_mass
             DashboardWidgetId.BODY_WATER_MASS -> R.string.metric_body_water_mass
+            DashboardWidgetId.CIRCUMFERENCES -> R.string.circumference_site_waist
             DashboardWidgetId.AVG_HEART_RATE -> R.string.metric_avg_heart_rate
             DashboardWidgetId.RESTING_HEART_RATE -> R.string.metric_resting_heart_rate
             DashboardWidgetId.HRV -> R.string.metric_hrv
@@ -461,6 +463,7 @@ private fun dashboardWidgetMeta(widgetId: DashboardWidgetId): DashboardWidgetMet
         DashboardWidgetId.BMI -> DashboardWidgetMeta(Icons.Outlined.MonitorWeight, WeightColor)
         DashboardWidgetId.FFMI -> DashboardWidgetMeta(Icons.Outlined.FitnessCenter, BodyFatColor)
         DashboardWidgetId.BODY_FAT -> DashboardWidgetMeta(Icons.Outlined.MonitorWeight, BodyFatColor)
+        DashboardWidgetId.CIRCUMFERENCES -> DashboardWidgetMeta(Icons.Outlined.Straighten, WeightColor)
         DashboardWidgetId.AVG_HEART_RATE,
         DashboardWidgetId.RESTING_HEART_RATE,
         DashboardWidgetId.BLOOD_PRESSURE,

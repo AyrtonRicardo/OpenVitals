@@ -18,6 +18,7 @@ import tech.mmarca.openvitals.core.presentation.toScreenError
 import tech.mmarca.openvitals.core.performance.LoadCoordinator
 import tech.mmarca.openvitals.data.repository.BleDeviceRepository
 import tech.mmarca.openvitals.domain.model.HealthConnectAvailability
+import tech.mmarca.openvitals.domain.model.CircumferenceSite
 import tech.mmarca.openvitals.domain.model.RefreshMode
 import tech.mmarca.openvitals.domain.preferences.ActivityWeekMode
 import tech.mmarca.healthcalculations.preferences.SleepWindow
@@ -29,6 +30,7 @@ import tech.mmarca.openvitals.domain.model.DashboardQuery
 import tech.mmarca.openvitals.domain.model.dashboardMetricLoadGroups
 import tech.mmarca.openvitals.domain.model.mergeLoaded
 import tech.mmarca.openvitals.data.repository.contract.ActivityRepository
+import tech.mmarca.openvitals.data.repository.contract.BodyCircumferenceRepository
 import tech.mmarca.openvitals.data.repository.contract.BodyEnergyRepository
 import tech.mmarca.openvitals.data.repository.contract.BodyEnergyTimelineQuery
 import tech.mmarca.openvitals.data.repository.contract.HealthRepository
@@ -94,6 +96,8 @@ data class DashboardUiState(
     val sensorStatus: DashboardSensorStatus = DashboardSensorStatus(),
     /** The OpenWatch tile, from OpenLink; null hides it. */
     val openWatch: tech.mmarca.openvitals.openwatch.OpenWatchTileDisplay? = null,
+    /** The newest waist measurement, from Room, for the tape measurements tile. */
+    val latestWaistCm: Double? = null,
 )
 
 @Immutable
@@ -159,6 +163,7 @@ class DashboardViewModel @Inject constructor(
     private val foregroundGate: AppForegroundGate? = null,
     private val openWatchLink: tech.mmarca.openvitals.openwatch.OpenWatchLink? = null,
     private val writeEpoch: tech.mmarca.openvitals.core.performance.HealthDataWriteEpoch? = null,
+    private val circumferences: BodyCircumferenceRepository? = null,
 ) : ViewModel() {
 
     val minimumOnboardingPermissions get() = repository.minimumOnboardingPermissions
@@ -207,6 +212,7 @@ class DashboardViewModel @Inject constructor(
 
     init {
         observeOpenWatch()
+        observeLatestWaist()
         observeSensorStatus()
         observeBodyEnergyRebuild()
         observeRateLimit()
@@ -266,6 +272,17 @@ class DashboardViewModel @Inject constructor(
                     _uiState.update { it.copy(openWatch = tile) }
                     rebuildDisplay()
                 }
+            }
+        }
+    }
+
+    /** The tape measurements tile follows Room, outside the day's Health Connect load. */
+    private fun observeLatestWaist() {
+        val repository = circumferences ?: return
+        viewModelScope.launch {
+            repository.latest(CircumferenceSite.WAIST).collect { entry ->
+                _uiState.update { it.copy(latestWaistCm = entry?.centimeters) }
+                rebuildDisplay()
             }
         }
     }
@@ -772,6 +789,7 @@ class DashboardViewModel @Inject constructor(
             includeUnsupported = _uiState.value.isEditingDashboard,
             medicalRecordsAvailable = medicalRecords?.isAvailable() == true,
             openWatch = _uiState.value.openWatch,
+            latestWaistCm = _uiState.value.latestWaistCm,
         )
             // A reload marks every tile loading. Without the last answers, the sort would reshuffle.
             .withLastDemoted(_uiState.value.display.lastDemoted)

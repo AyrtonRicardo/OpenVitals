@@ -13,15 +13,21 @@ import androidx.lifecycle.compose.LifecycleEventEffect
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import tech.mmarca.openvitals.R
 import tech.mmarca.openvitals.data.sync.BmrEstimateService
+import tech.mmarca.openvitals.features.bodyfolder.BodyFolderCard
+import tech.mmarca.openvitals.features.bodyfolder.BodyFolderViewModel
 import tech.mmarca.openvitals.openwatch.relativeTime
 import tech.mmarca.openvitals.ui.components.SectionHeader
 import tech.mmarca.openvitals.ui.components.rememberHealthConnectPermissionLauncher
 import tech.mmarca.openvitals.ui.theme.LayoutMetrics
 
-/** Body profile: the declared body, the BMR estimate and the caffeine clearance factors. Shares [BodySettingsViewModel] with Recovery. */
+/**
+ * Body profile: the declared body, the BMR estimate, the caffeine clearance factors and the body
+ * measurements folder. Shares [BodySettingsViewModel] with Recovery.
+ */
 @Composable
-fun BodyProfileSettingsScreen(viewModel: BodySettingsViewModel) {
+fun BodyProfileSettingsScreen(viewModel: BodySettingsViewModel, folderViewModel: BodyFolderViewModel) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
+    val folderState by folderViewModel.uiState.collectAsStateWithLifecycle()
     val openWatchSync by viewModel.openWatchProfileSync.collectAsStateWithLifecycle()
 
     // The write permission is granted in Health Connect, so it is re-read on the way back.
@@ -72,6 +78,17 @@ fun BodyProfileSettingsScreen(viewModel: BodySettingsViewModel) {
             MetabolismCard(
                 preferences = state.caffeinePreferences,
                 onSave = viewModel::updateCaffeinePreferences,
+                modifier = Modifier.padding(horizontal = LayoutMetrics.screenGutter),
+            )
+        }
+        item { SettingsCardSpacer() }
+        item {
+            BodyFolderCard(
+                state = folderState,
+                onFolderPicked = folderViewModel::onFolderPicked,
+                onForget = folderViewModel::forgetFolder,
+                onExport = folderViewModel::exportNow,
+                onSavePhotos = folderViewModel::savePhotosNow,
                 modifier = Modifier.padding(horizontal = LayoutMetrics.screenGutter),
             )
         }

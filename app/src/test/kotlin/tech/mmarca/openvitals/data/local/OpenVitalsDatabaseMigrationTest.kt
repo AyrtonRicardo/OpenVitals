@@ -231,4 +231,65 @@ class OpenVitalsDatabaseMigrationTest {
         // Nothing else: Health Connect holds what the devices wrote, and the dashboard tables stay.
         verify(exactly = 3) { db.execSQL(any()) }
     }
+
+    @Test
+    fun `version eighteen adds the body circumferences table`() {
+        val db = mockk<SupportSQLiteDatabase>(relaxed = true)
+
+        OpenVitalsDatabase.MIGRATION_18_19.migrate(db)
+
+        assertEquals(18, OpenVitalsDatabase.MIGRATION_18_19.startVersion)
+        assertEquals(19, OpenVitalsDatabase.MIGRATION_18_19.endVersion)
+        verify {
+            db.execSQL(
+                match {
+                    it.contains("CREATE TABLE IF NOT EXISTS `body_circumferences`") &&
+                        it.contains("`site` TEXT NOT NULL") &&
+                        it.contains("`measured_at_millis` INTEGER NOT NULL") &&
+                        it.contains("`centimeters` REAL NOT NULL") &&
+                        it.contains("PRIMARY KEY(`site`, `measured_at_millis`)")
+                },
+            )
+        }
+        // Creation only: nothing is copied or dropped.
+        verify(exactly = 1) { db.execSQL(any()) }
+    }
+
+    @Test
+    fun `version nineteen adds the progress photos table`() {
+        val db = mockk<SupportSQLiteDatabase>(relaxed = true)
+
+        OpenVitalsDatabase.MIGRATION_19_20.migrate(db)
+
+        assertEquals(19, OpenVitalsDatabase.MIGRATION_19_20.startVersion)
+        assertEquals(20, OpenVitalsDatabase.MIGRATION_19_20.endVersion)
+        verify {
+            db.execSQL(
+                match {
+                    it.contains("CREATE TABLE IF NOT EXISTS `progress_photos`") &&
+                        it.contains("`id` TEXT NOT NULL") &&
+                        it.contains("`taken_at_millis` INTEGER NOT NULL") &&
+                        it.contains("`file_name` TEXT NOT NULL") &&
+                        it.contains("`saved` INTEGER NOT NULL") &&
+                        it.contains("PRIMARY KEY(`id`)")
+                },
+            )
+        }
+        // Creation only: nothing is copied or dropped.
+        verify(exactly = 1) { db.execSQL(any()) }
+    }
+
+    @Test
+    fun `version twenty moves the unsided arm and thigh to the right side`() {
+        val db = mockk<SupportSQLiteDatabase>(relaxed = true)
+
+        OpenVitalsDatabase.MIGRATION_20_21.migrate(db)
+
+        assertEquals(20, OpenVitalsDatabase.MIGRATION_20_21.startVersion)
+        assertEquals(21, OpenVitalsDatabase.MIGRATION_20_21.endVersion)
+        verify { db.execSQL("UPDATE `body_circumferences` SET `site` = 'RIGHT_UPPER_ARM' WHERE `site` = 'UPPER_ARM'") }
+        verify { db.execSQL("UPDATE `body_circumferences` SET `site` = 'RIGHT_THIGH' WHERE `site` = 'THIGH'") }
+        // A rename only: nothing is created or dropped.
+        verify(exactly = 2) { db.execSQL(any()) }
+    }
 }
