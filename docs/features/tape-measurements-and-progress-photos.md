@@ -2,7 +2,7 @@
 
 > **Status:** Current implemented behavior.
 > **Audience:** Users and contributors.
-> **Implementation:** `features/circumference`, `features/manualentry/circumference`, `features/progressphotos`, `features/bodyfolder`, `data/local/circumference`, `data/local/photos`.
+> **Implementation:** `features/circumference`, `features/manualentry/circumference`, `features/progressphotos`, `features/bodyfolder`, `data/local/circumference`, `data/local/photos`, `tools/body-dashboard`.
 > **Navigation:** Dashboard, Circumferences; Add entry, Circumference or Progress photos; Settings, Body profile, Body measurements folder.
 > **Related:** [Feature map](feature-map.md), [Body metrics](body-metrics.md), [Manual entry of metrics](manual-entry-metrics.md), [Settings and preferences](settings-and-preferences.md).
 
@@ -31,3 +31,7 @@ Settings, Body profile, Body measurements folder picks the folder with Android's
 | `measurements.json` | the body records and tape measurements, written by **Export measurements** |
 | `photos.json` | the saved photos, each with its day, rewritten after each save or delete |
 | `photos/` | the full images |
+
+## Web Dashboard
+
+`tools/body-dashboard` is a static page that reads that folder: charts of every series and tape site, and the photos with the weight and waist of their day, two side by side. Its README explains serving it from a home server with the folder mounted read-only, reachable on the home network or over a VPN such as Tailscale. It must not be exposed to the internet: it has no login.

@@ -1,0 +1,9 @@
+{
+  "name": "openvitals-body-dashboard",
+  "private": true,
+  "description": "Static dashboard for the body measurements folder OpenVitals writes. No dependencies.",
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/dashboard.test.mjs"
+  }
+}

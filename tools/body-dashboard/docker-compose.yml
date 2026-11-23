@@ -1,0 +1,17 @@
+# Run on the N100: BODY_FOLDER=/path/to/the/shared/folder docker compose up -d
+# BIND_ADDRESS is the address the dashboard listens on: the N100's LAN address,
+# or its Tailscale address (100.x.y.z) to reach it only over the VPN.
+services:
+  body-dashboard:
+    image: nginx:1.27-alpine
+    restart: unless-stopped
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+    ports:
+      - "${BIND_ADDRESS:-127.0.0.1}:${PORT:-8088}:80"
+    volumes:
+      - ./nginx.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./:/srv/dashboard:ro
+      - ${BODY_FOLDER:?Set BODY_FOLDER to the folder OpenVitals writes to}:/srv/data:ro
