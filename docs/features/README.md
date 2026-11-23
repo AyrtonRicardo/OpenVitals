@@ -25,6 +25,7 @@ Use the [feature map](feature-map.md) when you need the route/widget/package map
 - [Heart and vitals](heart-and-vitals.md): heart rate, resting heart rate, HRV, blood pressure, SpO2, VO2 max, respiratory rate, body temperature, blood glucose, skin temperature, and Today Vitals.
 - [Heart rate recovery](heart-rate-recovery.md): the guided test, the marks, quality verdicts, and how effort is judged.
 - [Body metrics](body-metrics.md): weight, height, BMI, body fat, lean mass, BMR, bone mass, body water mass, and FFMI context.
+- [Tape measurements and progress photos](tape-measurements-and-progress-photos.md): progress photos kept by OpenVitals, the body measurements folder, and the measurements export.
 - [Nutrition](nutrition.md): calories in, protein, carbohydrates, fat, and selected nutrient totals.
 - [Hydration](hydration.md): hydration period detail, entry history, goals, and reminder controls.
 - [Mindfulness](mindfulness.md): mindfulness period detail, session history, goals, reminders, and manual-entry relationship.

@@ -1,0 +1,37 @@
+{
+    "format": "openvitals-body-measurements",
+    "version": 1,
+    "exportedAt": "2026-11-21T18:00:00Z",
+    "units": {
+        "mass": "kg",
+        "length": "cm",
+        "bodyFat": "percent"
+    },
+    "weight": [
+        { "time": "2026-11-01T07:00:00Z", "kg": 82.4 },
+        { "time": "2026-11-15T07:00:00Z", "kg": 81.55 },
+        { "time": "2026-11-20T07:00:00Z", "kg": 80.12 }
+    ],
+    "height": [
+        { "time": "2026-01-10T09:00:00Z", "cm": 180.0 }
+    ],
+    "bodyFat": [
+        { "time": "2026-11-01T07:00:00Z", "percent": 22.5 },
+        { "time": "2026-11-20T07:00:00Z", "percent": 21.8 }
+    ],
+    "leanMass": [
+        { "time": "2026-11-20T07:00:00Z", "kg": 62.7 }
+    ],
+    "boneMass": [
+        { "time": "2026-11-20T07:00:00Z", "kg": 3.2 }
+    ],
+    "bodyWater": [
+        { "time": "2026-11-20T07:00:00Z", "kg": 45.1 }
+    ],
+    "circumferences": [
+        { "time": "2026-11-01T08:00:00Z", "site": "waist", "cm": 88.0 },
+        { "time": "2026-11-20T08:00:00Z", "site": "waist", "cm": 86.5 },
+        { "time": "2026-11-20T08:02:00Z", "site": "hips", "cm": 100.0 },
+        { "time": "2026-11-20T08:05:00Z", "site": "left_forearm", "cm": 34.0 }
+    ]
+}

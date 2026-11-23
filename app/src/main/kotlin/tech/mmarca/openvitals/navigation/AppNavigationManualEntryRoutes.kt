@@ -17,6 +17,7 @@ import tech.mmarca.openvitals.features.manualentry.activity.ActivityEntryScreen
 import tech.mmarca.openvitals.features.manualentry.activity.ActivityEntryViewModel
 import tech.mmarca.openvitals.features.manualentry.body.BodyMeasurementEntryScreen
 import tech.mmarca.openvitals.features.manualentry.body.BodyMeasurementEntryViewModel
+import tech.mmarca.openvitals.features.progressphotos.ProgressPhotosScreen
 import tech.mmarca.openvitals.features.manualentry.cycle.CycleEntryChooserScreen
 import tech.mmarca.openvitals.features.manualentry.cycle.CycleEntryScreen
 import tech.mmarca.openvitals.features.manualentry.cycle.CycleEntryViewModel
@@ -82,6 +83,7 @@ internal fun NavGraphBuilder.manualEntryRoutes(
                 onOpenCycleEntry = {
                     navController.navigate(Screen.CycleEntryChooser.route)
                 },
+                onOpenProgressPhotos = { navController.navigate(Screen.ProgressPhotos.route) },
                 onOpenWorkoutPlans = {
                     navController.navigate(Screen.WorkoutPlans.route)
                 },
@@ -294,6 +296,15 @@ internal fun NavGraphBuilder.manualEntryRoutes(
             unitFormatter = unitFormatter,
             onEntrySaved = onEntrySavedAndPopBack,
             onLeave = { navController.popBackStack() },
+        )
+    }
+
+    // A browsing screen, not a form: photos are added and deleted in place.
+    composable(Screen.ProgressPhotos.route) {
+        ProgressPhotosScreen(
+            viewModel = hiltViewModel(),
+            dateTimeFormatterProvider = dateTimeFormatterProvider,
+            onOpenFolderSettings = { navController.navigate(Screen.SettingsBodyProfile.route) { launchSingleTop = true } },
         )
     }
 

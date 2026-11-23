@@ -159,6 +159,8 @@ sealed class Screen(
         fun createRoute(type: String, entryId: String): String =
             "manual_entry/body/${Uri.encode(type)}/edit/${Uri.encode(entryId)}"
     }
+    /** Progress photos over a period; reached from the Add entry tile. */
+    data object ProgressPhotos : Screen("progress_photos", R.string.screen_progress_photos)
     data object VitalsMeasurementEntry : Screen("manual_entry/vitals/{$VITALS_MEASUREMENT_TYPE_ARG}", R.string.screen_vitals_measurement_entry) {
         fun createRoute(type: String): String = "manual_entry/vitals/${Uri.encode(type)}"
     }
@@ -275,6 +277,7 @@ sealed class Screen(
                 BodyCompositionEntry,
                 BodyMeasurementEntry,
                 BodyMeasurementEntryEdit,
+                ProgressPhotos,
                 VitalsMeasurementEntry,
                 VitalsMeasurementEntryEdit,
                 CycleEntryChooser,

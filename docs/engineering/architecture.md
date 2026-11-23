@@ -19,7 +19,7 @@ The repo now has one Android app module for the local app. The goal is to keep b
 - Dashboard: still a dedicated day-based summary screen, not a period-detail screen
 - Manual entry: separate from the dashboard and writes explicit user-entered records directly to Health Connect
 - Room is at schema version 21. It holds derived summary caches plus the tables Health Connect cannot represent (`synced_record_origins`, the food catalog, the cycle journal, cycle exclusions, pill intakes, the index of kept medical documents, tape measurements and progress photos); Health Connect remains the source of truth for everything it has a record type for
-- WorkManager is used for user-started Apple Health imports, offline map imports, and the home widget refresh
+- WorkManager is used for user-started Apple Health imports, offline map imports, the home widget refresh, and the progress photo save queue
 - Phone-to-phone Health Connect sync lives under [`features/devicesync`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/devicesync) and runs over Bluetooth Classic RFCOMM
 - A one-time Flutter-to-Kotlin data migrator lives under [`data/migration`](../../app/src/main/kotlin/tech/mmarca/openvitals/data/migration) and runs from `OpenVitalsApp.onCreate()`
 
@@ -287,6 +287,8 @@ Current feature packages:
 - [`features/body`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/body)
 - [`features/bodyenergy`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/bodyenergy)
 - [`features/caffeine`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/caffeine)
+- [`features/progressphotos`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/progressphotos) — progress photos from Room, over a period, with no Health Connect shell either; a new photo is linked to the day on screen in Day mode, its full image is saved to the body measurements folder by `ProgressPhotoSaveWorker`, and it waits on the phone while that folder is unreachable
+- [`features/bodyfolder`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/bodyfolder) — the body measurements folder card under Body profile: a Storage Access Framework tree kept by `BodyFolderRepository` (a network share works through a document provider app, so the app still holds no network permission), the `measurements.json` export, and the `photos.json` index of the saved photos
 - [`features/cycle`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/cycle)
 - [`features/devicesync`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/devicesync)
 - [`features/homewidgets`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/homewidgets)
@@ -418,6 +420,8 @@ Current files:
 - [`features/manualentry/mindfulness`](../../app/src/main/kotlin/tech/mmarca/openvitals/features/manualentry/mindfulness)
 
 The current manual entry widgets cover hydration, food from a catalog the user builds, carbohydrate totals, activity sessions with manual entry, existing plans, or GPS recording, activity file review launched from Settings Data Importers for GPX/KML/KMZ, TCX, and FIT files, mindfulness, body composition, height, blood pressure, SpO2, respiratory rate, body temperature, HRV, blood glucose, and VO2 max. Body composition is one form for what a body analysis scale shows: weight, body fat, lean mass, body water, bone mass, and BMR. The filled values are written in one `insertRecords` call with one time, so a weigh-in is saved whole or not at all; body water may be typed as a percentage, which becomes a mass of the weight on the same form, never of an older one. Each value stays its own record afterwards, so the Body screens edit and delete it alone, through the same form showing that one field. The daily BMR estimate is written by its own pass and is not offered for editing. Blood glucose is typed in mmol/L or mg/dL, starting from the unit setting, and carries Health Connect's relation to meal, meal, and sample; VO2 max carries how it was measured. Health Connect's constants for those fields are mirrored in `GlucoseRecordValues` and `Vo2MaxRecordValues`, and `EntryWritePathsTest` checks the mirrors against the library. Every vitals type maps to and from its record in `healthconnect/VitalsRecordMapping.kt`. A blood pressure reading can carry the pulse the monitor showed: it is written as a one-sample `HeartRateRecord` at the reading's time whose `clientRecordId` derives from the reading's with its tokens stripped (`bpPulseClientRecordId`), so an edit of the reading rewrites it, clearing the field deletes it, and deleting the reading deletes it too. The value is also encoded on the reading's own `clientRecordId` as a `_bppulse-<bpm>` token beside the `_bpctx-` meal context, which is what lets a list of readings and the edit form show it without a heart rate read. Saving a pulse needs heart rate write access on top of blood pressure; a reading without one never asks for it. Widget order is customizable in the same spirit as the dashboard, but the dashboard remains read-only.
+
+The progress photos tile is the one entry backed by Room instead of Health Connect: a photo has no record type there, so it asks for no permission and opens the progress photos screen, where photos are added in place.
 
 Write permissions can be requested during one-tap onboarding or lazily from Add entry and the specific metric entry route. The dashboard remains read-only. Each write goes directly to Health Connect; OpenVitals keeps only local UI preferences such as widget order and mindfulness timer/background-sound settings.
 
@@ -700,6 +704,7 @@ The dashboard and daily readiness read Health Connect on every load.
 The sync table (`synced_record_origins`) exists only because Health Connect has no record type for a record's source phone; it is not a precedent for mirroring records Health Connect can already hold.
 
 WorkManager is used for the Apple Health import worker and the offline map import worker because those workflows can be long-running and user-visible.
+It also runs the progress photo save queue, `ProgressPhotoSaveWorker`: a plain background job, not a foreground one, with no network constraint (the app has no network permission), which backs off and retries while the picked folder is unreachable. Adding a photo, picking a folder and opening the photos screen start it again.
 It is also used for one scheduled job, the home widget refresh.
 
 A phone-to-phone sync holds its own coroutine scope, is foreground and user-initiated, and has no background variant. Do not read any of this as a general background-sync layer, and do not design new features as if one or a raw-record database already exists.

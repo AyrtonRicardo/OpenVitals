@@ -160,6 +160,7 @@ For the route, widget, package, and documentation mapping, see [`docs/features/f
 - View latest, average, lowest, highest, reading counts, previous-period comparison, and personal baseline where applicable.
 - View BMI interpretation/context.
 - Distinguish editable OpenVitals weight/height/body-fat entries from read-only external entries.
+- View progress photos across day, week, month, and year, grouped by day, with whether each is saved to the body measurements folder yet.
 
 ### Heart And Vitals
 
@@ -347,6 +348,7 @@ For the route, widget, package, and documentation mapping, see [`docs/features/f
 - Request Health Connect body write permissions from the entry flow.
 - BMI is calculated from available weight and height data and is not manually inserted.
 - Lean body mass, BMR, bone mass, and body water mass are view-only in the manual UI.
+- Add progress photos with the camera app or from the gallery, linked to the day on screen in Day view; delete them from the phone and the folder.
 
 ### Vitals
 
@@ -483,6 +485,7 @@ For the route, widget, package, and documentation mapping, see [`docs/features/f
 - See when weight or height comes from a recorded measurement rather than a typed value.
 - Have a changed weight or height saved as a real body measurement, so one number serves BMI, FFMI context, Body Energy, and caffeine estimates.
 - Set the metabolism factors that change how quickly caffeine is cleared. All are optional, and leaving them alone uses population averages.
+- Pick the body measurements folder (a local folder, or a network share offered by a document provider app) for full progress photos and the measurements export; save waiting photos now; export `measurements.json`; forget the folder.
 
 ### Cycle Tracking Settings
 

@@ -1,0 +1,9 @@
+{
+    "format": "openvitals-progress-photos",
+    "version": 1,
+    "exportedAt": "2026-11-21T18:00:00Z",
+    "photos": [
+        { "time": "2026-11-01T06:30:00Z", "date": "2026-11-01", "file": "photos/2026-11-01_073000_aaaa1111.jpg" },
+        { "time": "2026-11-20T23:30:00Z", "date": "2026-11-21", "file": "photos/2026-11-21_003000_bbbb2222.jpg" }
+    ]
+}

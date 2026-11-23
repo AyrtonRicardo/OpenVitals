@@ -70,7 +70,7 @@ internal fun NavGraphBuilder.settingsRoutes(
     }
 
     composable(Screen.SettingsBodyProfile.route) {
-        BodyProfileSettingsScreen(viewModel = hiltViewModel())
+        BodyProfileSettingsScreen(viewModel = hiltViewModel(), folderViewModel = hiltViewModel())
     }
 
     composable(Screen.SettingsVitals.route) {

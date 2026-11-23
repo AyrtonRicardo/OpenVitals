@@ -39,6 +39,7 @@ import androidx.compose.material.icons.outlined.MonitorWeight
 import androidx.compose.material.icons.outlined.Restaurant
 import androidx.compose.material.icons.outlined.CalendarMonth
 import androidx.compose.material.icons.outlined.SelfImprovement
+import androidx.compose.material.icons.outlined.PhotoCamera
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -269,6 +270,7 @@ internal fun manualEntryWidgetSpecs(
     onOpenCycleEntry: () -> Unit,
     onOpenWorkoutPlans: () -> Unit = {},
     onOpenFoodEntry: () -> Unit = {},
+    onOpenProgressPhotos: () -> Unit = {},
 ): List<ManualEntryWidgetSpec> {
     return listOf(
         metricTileWidgetSpec(
@@ -382,6 +384,14 @@ internal fun manualEntryWidgetSpecs(
             accentColor = CycleColor,
             isEditingWidgets = isEditingWidgets,
             onOpen = onOpenCycleEntry,
+        ),
+        metricTileWidgetSpec(
+            id = ManualEntryWidgetId.PROGRESS_PHOTOS,
+            titleRes = R.string.screen_progress_photos,
+            icon = Icons.Outlined.PhotoCamera,
+            accentColor = WeightColor,
+            isEditingWidgets = isEditingWidgets,
+            onOpen = onOpenProgressPhotos,
         ),
     )
 }

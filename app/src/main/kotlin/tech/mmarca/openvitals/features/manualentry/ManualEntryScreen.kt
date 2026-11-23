@@ -34,6 +34,7 @@ fun ManualEntryScreen(
     onOpenCycleEntry: () -> Unit,
     onOpenWorkoutPlans: () -> Unit = {},
     onOpenFoodEntry: () -> Unit = {},
+    onOpenProgressPhotos: () -> Unit = {},
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
     // A tile only opens its entry screen, so the one dialog Health Connect allows is not spent here.
@@ -50,6 +51,8 @@ fun ManualEntryScreen(
         onOpenCycleEntry = viewModel::onCycleWidgetTapped,
         // The plans screen carries its own gate, so the tile navigates directly.
         onOpenWorkoutPlans = onOpenWorkoutPlans,
+        // Photos are kept in Room and the picked folder, so there is no Health Connect gate to pass.
+        onOpenProgressPhotos = onOpenProgressPhotos,
     )
     val specsById = specs.associateBy { it.id }
     val visibleIds = state.widgets.filter { it in specsById }

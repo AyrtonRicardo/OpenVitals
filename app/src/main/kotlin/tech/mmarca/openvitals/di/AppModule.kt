@@ -28,6 +28,10 @@ import tech.mmarca.openvitals.data.local.syncorigin.SyncedRecordOriginDao
 import tech.mmarca.openvitals.data.local.vitalscache.VitalsDailyCacheDao
 import tech.mmarca.openvitals.data.repository.PreferencesRepository
 import tech.mmarca.openvitals.domain.preferences.SystemUnitSystemProvider
+import tech.mmarca.openvitals.features.progressphotos.ContentProgressPhotoImporter
+import tech.mmarca.openvitals.features.progressphotos.ProgressPhotoImporter
+import tech.mmarca.openvitals.features.progressphotos.ProgressPhotoSaveScheduler
+import tech.mmarca.openvitals.features.progressphotos.ProgressPhotoSaveScheduling
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -80,6 +84,12 @@ object AppModule {
     @Singleton
     fun provideProgressPhotoDao(database: OpenVitalsDatabase): ProgressPhotoDao =
         database.progressPhotoDao()
+
+    @Provides
+    fun provideProgressPhotoImporter(importer: ContentProgressPhotoImporter): ProgressPhotoImporter = importer
+
+    @Provides
+    fun provideProgressPhotoSaveScheduling(scheduler: ProgressPhotoSaveScheduler): ProgressPhotoSaveScheduling = scheduler
 
     @Provides
     @Singleton
