@@ -3917,6 +3917,24 @@
     <string name="data_sharing_permission_cycle_description">читати ваші дані про цикл з OpenVitals</string>
     <string name="data_sharing_permission_sexual_activity_label">Дані про статеву активність OpenVitals</string>
     <string name="data_sharing_permission_sexual_activity_description">читати ваші дані про статеву активність з OpenVitals</string>
+    <string name="metric_circumferences">Обхвати</string>
+    <string name="circumference_site_waist">Талія</string>
+    <string name="circumference_site_hips">Стегна</string>
+    <string name="circumference_site_chest">Груди</string>
+    <string name="circumference_site_neck">Шия</string>
+    <string name="circumference_site_shoulders">Плечі</string>
+    <string name="circumference_site_right_upper_arm">Правий біцепс</string>
+    <string name="circumference_site_left_upper_arm">Лівий біцепс</string>
+    <string name="circumference_site_right_forearm">Праве передпліччя</string>
+    <string name="circumference_site_left_forearm">Ліве передпліччя</string>
+    <string name="circumference_site_right_thigh">Праве стегно</string>
+    <string name="circumference_site_left_thigh">Ліве стегно</string>
+    <string name="circumference_site_right_calf">Права гомілка</string>
+    <string name="circumference_site_left_calf">Ліва гомілка</string>
+    <string name="screen_circumference_entry">Введення обхвату</string>
+    <string name="circumference_entry_subtitle">Вимірювання сантиметровою стрічкою зберігаються на цьому телефоні. Health Connect не може їх зберегти.</string>
+    <string name="circumference_empty">Немає вимірювань за цей період. Торкніться частини фігури, щоб додати вимір.</string>
+    <string name="circumference_measurements_title">Вимірювання</string>
     <string name="screen_progress_photos">Фото прогресу</string>
     <string name="progress_photos_add">Додати фото</string>
     <string name="progress_photos_take">Зробити фото</string>
@@ -3941,4 +3959,31 @@
     <string name="body_folder_export">Експортувати виміри</string>
     <string name="body_folder_exporting">Експорт…</string>
     <string name="body_folder_exported">Записів у measurements.json: %1$d</string>
+    <string name="circumference_last_value">останнє %1$s · %2$s</string>
+    <plurals name="circumference_replace_warning">
+        <item quantity="one">Для «%1$s» вже є %2$s за %3$s. Збереження замінить значення.</item>
+        <item quantity="few">Для «%1$s» вже є %2$s за %3$s. Збереження замінить ці значення.</item>
+        <item quantity="many">Для «%1$s» вже є %2$s за %3$s. Збереження замінить ці значення.</item>
+        <item quantity="other">Для «%1$s» вже є %2$s за %3$s. Збереження замінить ці значення.</item>
+    </plurals>
+    <string name="circumference_replace_title">Замінити виміри?</string>
+    <plurals name="circumference_replace_body">
+        <item quantity="one">Для «%1$s» вже є значення за %2$s. Збереження замінить його.</item>
+        <item quantity="few">Для «%1$s» вже є значення за %2$s. Збереження замінить їх.</item>
+        <item quantity="many">Для «%1$s» вже є значення за %2$s. Збереження замінить їх.</item>
+        <item quantity="other">Для «%1$s» вже є значення за %2$s. Збереження замінить їх.</item>
+    </plurals>
+    <string name="circumference_replace_confirm">Замінити</string>
+    <string name="circumference_save">Зберегти виміри</string>
+    <string name="circumference_tile_description">%1$s, %2$s, %3$s</string>
+    <string name="circumference_tile_value_description">%1$s, %2$s</string>
+    <string name="circumference_not_measured">не виміряно</string>
+    <string name="circumference_compare_first">Останній vs перший вимір</string>
+    <string name="circumference_compare_date">Останній vs %1$s</string>
+    <string name="circumference_compare_pick">Порівняти з датою</string>
+    <string name="circumference_compare_clear">Скинути дату порівняння</string>
+    <string name="circumference_change_smaller">менше на %1$s</string>
+    <string name="circumference_change_larger">більше на %1$s</string>
+    <string name="circumference_change_none">без змін</string>
+    <string name="circumference_change_unknown">немає порівняння</string>
 </resources>

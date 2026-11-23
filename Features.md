@@ -160,6 +160,7 @@ For the route, widget, package, and documentation mapping, see [`docs/features/f
 - View latest, average, lowest, highest, reading counts, previous-period comparison, and personal baseline where applicable.
 - View BMI interpretation/context.
 - Distinguish editable OpenVitals weight/height/body-fat entries from read-only external entries.
+- View tape measurements (neck, shoulders, chest, waist, hips, and the right and left upper arm, forearm, thigh and calf) on a body figure facing you, each part's latest value and its change from its first measurement or from a picked date; tap a part to measure it, then see its history across day, week, month, and year, with latest, change, and average. The dashboard tile shows the latest waist.
 - View progress photos across day, week, month, and year, grouped by day, with whether each is saved to the body measurements folder yet.
 
 ### Heart And Vitals
@@ -348,6 +349,7 @@ For the route, widget, package, and documentation mapping, see [`docs/features/f
 - Request Health Connect body write permissions from the entry flow.
 - BMI is calculated from available weight and height data and is not manually inserted.
 - Lean body mass, BMR, bone mass, and body water mass are view-only in the manual UI.
+- Add tape measurements on a body figure, several parts in one save on one date, in centimetres or inches, with a warning before replacing a value the date already has; delete them by swiping. They are kept by OpenVitals, since Health Connect has no record type for them.
 - Add progress photos with the camera app or from the gallery, linked to the day on screen in Day view; delete them from the phone and the folder.
 
 ### Vitals

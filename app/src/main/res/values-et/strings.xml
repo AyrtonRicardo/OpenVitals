@@ -3852,6 +3852,24 @@
     <string name="data_sharing_permission_cycle_description">lugeda sinu tsükliandmeid OpenVitalsist</string>
     <string name="data_sharing_permission_sexual_activity_label">OpenVitalsi seksuaalse aktiivsuse andmed</string>
     <string name="data_sharing_permission_sexual_activity_description">lugeda sinu seksuaalse aktiivsuse andmeid OpenVitalsist</string>
+    <string name="metric_circumferences">Ümbermõõdud</string>
+    <string name="circumference_site_waist">Talje</string>
+    <string name="circumference_site_hips">Puusad</string>
+    <string name="circumference_site_chest">Rind</string>
+    <string name="circumference_site_neck">Kael</string>
+    <string name="circumference_site_shoulders">Õlad</string>
+    <string name="circumference_site_right_upper_arm">Parem õlavars</string>
+    <string name="circumference_site_left_upper_arm">Vasak õlavars</string>
+    <string name="circumference_site_right_forearm">Parem küünarvars</string>
+    <string name="circumference_site_left_forearm">Vasak küünarvars</string>
+    <string name="circumference_site_right_thigh">Parem reis</string>
+    <string name="circumference_site_left_thigh">Vasak reis</string>
+    <string name="circumference_site_right_calf">Parem säär</string>
+    <string name="circumference_site_left_calf">Vasak säär</string>
+    <string name="screen_circumference_entry">Ümbermõõdu sisestus</string>
+    <string name="circumference_entry_subtitle">Mõõdulindiga mõõtmised jäävad sellesse telefoni. Health Connect ei saa neid salvestada.</string>
+    <string name="circumference_empty">Selles perioodis mõõtmisi pole. Lisamiseks puuduta kujul kehaosa.</string>
+    <string name="circumference_measurements_title">Mõõtmised</string>
     <string name="screen_progress_photos">Edenemisfotod</string>
     <string name="progress_photos_add">Lisa foto</string>
     <string name="progress_photos_take">Tee foto</string>
@@ -3876,4 +3894,27 @@
     <string name="body_folder_export">Ekspordi mõõdud</string>
     <string name="body_folder_exporting">Eksportimine…</string>
     <string name="body_folder_exported">Faili measurements.json kirjutatud kirjeid: %1$d</string>
+    <string name="circumference_last_value">viimati %1$s · %2$s</string>
+    <plurals name="circumference_replace_warning">
+        <item quantity="one">%1$s on %3$s juba %2$s. Salvestamine asendab selle.</item>
+        <item quantity="other">%1$s on %3$s juba %2$s. Salvestamine asendab need.</item>
+    </plurals>
+    <string name="circumference_replace_title">Kas asendada mõõdud?</string>
+    <plurals name="circumference_replace_body">
+        <item quantity="one">%1$s on %2$s juba väärtus olemas. Salvestamine asendab selle.</item>
+        <item quantity="other">%1$s on %2$s juba väärtused olemas. Salvestamine asendab need.</item>
+    </plurals>
+    <string name="circumference_replace_confirm">Asenda</string>
+    <string name="circumference_save">Salvesta mõõdud</string>
+    <string name="circumference_tile_description">%1$s, %2$s, %3$s</string>
+    <string name="circumference_tile_value_description">%1$s, %2$s</string>
+    <string name="circumference_not_measured">mõõtmata</string>
+    <string name="circumference_compare_first">Viimane vs. esimene mõõtmine</string>
+    <string name="circumference_compare_date">Viimane vs. %1$s</string>
+    <string name="circumference_compare_pick">Võrdle kuupäevaga</string>
+    <string name="circumference_compare_clear">Eemalda võrdluskuupäev</string>
+    <string name="circumference_change_smaller">väiksem %1$s võrra</string>
+    <string name="circumference_change_larger">suurem %1$s võrra</string>
+    <string name="circumference_change_none">muutumatu</string>
+    <string name="circumference_change_unknown">võrdlus puudub</string>
 </resources>

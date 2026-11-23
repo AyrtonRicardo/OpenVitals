@@ -3853,6 +3853,24 @@
     <string name="data_sharing_permission_cycle_description">读取您在 OpenVitals 中的周期数据</string>
     <string name="data_sharing_permission_sexual_activity_label">OpenVitals 性活动数据</string>
     <string name="data_sharing_permission_sexual_activity_description">读取您在 OpenVitals 中的性活动数据</string>
+    <string name="metric_circumferences">围度</string>
+    <string name="circumference_site_waist">腰围</string>
+    <string name="circumference_site_hips">臀围</string>
+    <string name="circumference_site_chest">胸围</string>
+    <string name="circumference_site_neck">颈围</string>
+    <string name="circumference_site_shoulders">肩围</string>
+    <string name="circumference_site_right_upper_arm">右上臂围</string>
+    <string name="circumference_site_left_upper_arm">左上臂围</string>
+    <string name="circumference_site_right_forearm">右前臂围</string>
+    <string name="circumference_site_left_forearm">左前臂围</string>
+    <string name="circumference_site_right_thigh">右大腿围</string>
+    <string name="circumference_site_left_thigh">左大腿围</string>
+    <string name="circumference_site_right_calf">右小腿围</string>
+    <string name="circumference_site_left_calf">左小腿围</string>
+    <string name="screen_circumference_entry">围度记录</string>
+    <string name="circumference_entry_subtitle">软尺测量值仅保存在此手机上。Health Connect 无法保存它们。</string>
+    <string name="circumference_empty">此期间没有测量记录。点按人形上的部位即可添加。</string>
+    <string name="circumference_measurements_title">测量记录</string>
     <string name="screen_progress_photos">进度照片</string>
     <string name="progress_photos_add">添加照片</string>
     <string name="progress_photos_take">拍照</string>
@@ -3877,4 +3895,25 @@
     <string name="body_folder_export">导出测量数据</string>
     <string name="body_folder_exporting">正在导出…</string>
     <string name="body_folder_exported">已写入 measurements.json 的条目：%1$d</string>
+    <string name="circumference_last_value">上次 %1$s · %2$s</string>
+    <plurals name="circumference_replace_warning">
+        <item quantity="other">%1$s 在 %3$s 已有 %2$s。保存会替换。</item>
+    </plurals>
+    <string name="circumference_replace_title">替换测量值？</string>
+    <plurals name="circumference_replace_body">
+        <item quantity="other">%1$s 在 %2$s 已有数值。保存会替换它们。</item>
+    </plurals>
+    <string name="circumference_replace_confirm">替换</string>
+    <string name="circumference_save">保存测量值</string>
+    <string name="circumference_tile_description">%1$s，%2$s，%3$s</string>
+    <string name="circumference_tile_value_description">%1$s，%2$s</string>
+    <string name="circumference_not_measured">未测量</string>
+    <string name="circumference_compare_first">最新 vs 首次测量</string>
+    <string name="circumference_compare_date">最新 vs %1$s</string>
+    <string name="circumference_compare_pick">与某日期比较</string>
+    <string name="circumference_compare_clear">清除比较日期</string>
+    <string name="circumference_change_smaller">减少 %1$s</string>
+    <string name="circumference_change_larger">增加 %1$s</string>
+    <string name="circumference_change_none">无变化</string>
+    <string name="circumference_change_unknown">无比较</string>
 </resources>

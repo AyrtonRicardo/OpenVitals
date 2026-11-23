@@ -7,6 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import tech.mmarca.openvitals.core.presentation.UnitFormatter
+import tech.mmarca.openvitals.domain.model.CircumferenceSite
 import tech.mmarca.openvitals.domain.preferences.AppThemeMode
 import tech.mmarca.healthcalculations.model.VitalsMeasurementType
 import tech.mmarca.openvitals.features.manualentry.ManualEntryScreen
@@ -17,6 +18,8 @@ import tech.mmarca.openvitals.features.manualentry.activity.ActivityEntryScreen
 import tech.mmarca.openvitals.features.manualentry.activity.ActivityEntryViewModel
 import tech.mmarca.openvitals.features.manualentry.body.BodyMeasurementEntryScreen
 import tech.mmarca.openvitals.features.manualentry.body.BodyMeasurementEntryViewModel
+import tech.mmarca.openvitals.features.manualentry.circumference.CircumferenceEntryScreen
+import tech.mmarca.openvitals.features.manualentry.circumference.CircumferenceEntryViewModel
 import tech.mmarca.openvitals.features.progressphotos.ProgressPhotosScreen
 import tech.mmarca.openvitals.features.manualentry.cycle.CycleEntryChooserScreen
 import tech.mmarca.openvitals.features.manualentry.cycle.CycleEntryScreen
@@ -82,6 +85,9 @@ internal fun NavGraphBuilder.manualEntryRoutes(
                 },
                 onOpenCycleEntry = {
                     navController.navigate(Screen.CycleEntryChooser.route)
+                },
+                onOpenCircumferenceEntry = {
+                    navController.navigate(Screen.CircumferenceEntry.createRoute(CircumferenceSite.WAIST.name))
                 },
                 onOpenProgressPhotos = { navController.navigate(Screen.ProgressPhotos.route) },
                 onOpenWorkoutPlans = {
@@ -305,6 +311,19 @@ internal fun NavGraphBuilder.manualEntryRoutes(
             viewModel = hiltViewModel(),
             dateTimeFormatterProvider = dateTimeFormatterProvider,
             onOpenFolderSettings = { navController.navigate(Screen.SettingsBodyProfile.route) { launchSingleTop = true } },
+        )
+    }
+
+    // One tape measurement per save, so the form closes and the screen behind it rereads.
+    composable(
+        route = Screen.CircumferenceEntry.route,
+        arguments = listOf(navArgument(CIRCUMFERENCE_SITE_ARG) { type = NavType.StringType }),
+    ) {
+        val circumferenceViewModel = hiltViewModel<CircumferenceEntryViewModel>()
+        CircumferenceEntryScreen(
+            viewModel = circumferenceViewModel,
+            unitFormatter = unitFormatter,
+            onEntrySaved = onEntrySavedAndPopBack,
         )
     }
 

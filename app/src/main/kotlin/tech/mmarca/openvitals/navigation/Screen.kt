@@ -48,6 +48,7 @@ const val MEDICAL_IMPORT_URI_ARG = "uri"
 const val METRIC_ID_ARG = "metricId"
 const val BODY_MEASUREMENT_TYPE_ARG = "bodyMeasurementType"
 const val BODY_ENTRY_ID_ARG = "bodyEntryId"
+const val CIRCUMFERENCE_SITE_ARG = "circumferenceSite"
 const val HYDRATION_ENTRY_ID_ARG = "hydrationEntryId"
 const val HYDRATION_DRINK_ID_ARG = "hydrationDrinkId"
 const val NUTRITION_ENTRY_ID_ARG = "nutritionEntryId"
@@ -159,7 +160,11 @@ sealed class Screen(
         fun createRoute(type: String, entryId: String): String =
             "manual_entry/body/${Uri.encode(type)}/edit/${Uri.encode(entryId)}"
     }
-    /** Progress photos over a period; reached from the Add entry tile. */
+    data object CircumferenceEntry :
+        Screen("manual_entry/circumference/{$CIRCUMFERENCE_SITE_ARG}", R.string.screen_circumference_entry) {
+        fun createRoute(site: String): String = "manual_entry/circumference/${Uri.encode(site)}"
+    }
+    /** Progress photos over a period; reached from the Add entry tile and the circumference screen. */
     data object ProgressPhotos : Screen("progress_photos", R.string.screen_progress_photos)
     data object VitalsMeasurementEntry : Screen("manual_entry/vitals/{$VITALS_MEASUREMENT_TYPE_ARG}", R.string.screen_vitals_measurement_entry) {
         fun createRoute(type: String): String = "manual_entry/vitals/${Uri.encode(type)}"
@@ -277,6 +282,7 @@ sealed class Screen(
                 BodyCompositionEntry,
                 BodyMeasurementEntry,
                 BodyMeasurementEntryEdit,
+                CircumferenceEntry,
                 ProgressPhotos,
                 VitalsMeasurementEntry,
                 VitalsMeasurementEntryEdit,

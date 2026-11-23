@@ -3915,6 +3915,24 @@
     <string name="data_sharing_permission_cycle_description">read your cycle data from OpenVitals</string>
     <string name="data_sharing_permission_sexual_activity_label">OpenVitals sexual activity data</string>
     <string name="data_sharing_permission_sexual_activity_description">read your sexual activity data from OpenVitals</string>
+    <string name="metric_circumferences">Circumferences</string>
+    <string name="circumference_site_waist">Waist</string>
+    <string name="circumference_site_hips">Hips</string>
+    <string name="circumference_site_chest">Chest</string>
+    <string name="circumference_site_neck">Neck</string>
+    <string name="circumference_site_shoulders">Shoulders</string>
+    <string name="circumference_site_right_upper_arm">Right upper arm</string>
+    <string name="circumference_site_left_upper_arm">Left upper arm</string>
+    <string name="circumference_site_right_forearm">Right forearm</string>
+    <string name="circumference_site_left_forearm">Left forearm</string>
+    <string name="circumference_site_right_thigh">Right thigh</string>
+    <string name="circumference_site_left_thigh">Left thigh</string>
+    <string name="circumference_site_right_calf">Right calf</string>
+    <string name="circumference_site_left_calf">Left calf</string>
+    <string name="screen_circumference_entry">Circumference entry</string>
+    <string name="circumference_entry_subtitle">Tape measurements are kept on this phone. Health Connect has no place for them.</string>
+    <string name="circumference_empty">No measurements in this period. Tap a part on the figure to add one.</string>
+    <string name="circumference_measurements_title">Measurements</string>
     <string name="screen_progress_photos">Progress photos</string>
     <string name="progress_photos_add">Add photo</string>
     <string name="progress_photos_take">Take photo</string>
@@ -3939,4 +3957,27 @@
     <string name="body_folder_export">Export measurements</string>
     <string name="body_folder_exporting">Exporting…</string>
     <string name="body_folder_exported">Entries written to measurements.json: %1$d</string>
+    <string name="circumference_last_value">last %1$s · %2$s</string>
+    <plurals name="circumference_replace_warning">
+        <item quantity="one">%1$s already has %2$s on %3$s. Saving replaces it.</item>
+        <item quantity="other">%1$s already has %2$s on %3$s. Saving replaces them.</item>
+    </plurals>
+    <string name="circumference_replace_title">Replace measurements?</string>
+    <plurals name="circumference_replace_body">
+        <item quantity="one">On %2$s, %1$s already has a value. Saving replaces it.</item>
+        <item quantity="other">On %2$s, %1$s already have values. Saving replaces them.</item>
+    </plurals>
+    <string name="circumference_replace_confirm">Replace</string>
+    <string name="circumference_save">Save measurements</string>
+    <string name="circumference_tile_description">%1$s, %2$s, %3$s</string>
+    <string name="circumference_tile_value_description">%1$s, %2$s</string>
+    <string name="circumference_not_measured">not measured</string>
+    <string name="circumference_compare_first">Latest vs. first measurement</string>
+    <string name="circumference_compare_date">Latest vs. %1$s</string>
+    <string name="circumference_compare_pick">Compare with a date</string>
+    <string name="circumference_compare_clear">Clear comparison date</string>
+    <string name="circumference_change_smaller">smaller by %1$s</string>
+    <string name="circumference_change_larger">larger by %1$s</string>
+    <string name="circumference_change_none">unchanged</string>
+    <string name="circumference_change_unknown">no comparison</string>
 </resources>

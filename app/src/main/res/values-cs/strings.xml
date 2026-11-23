@@ -3918,6 +3918,24 @@
     <string name="data_sharing_permission_cycle_description">číst vaše data o cyklu z OpenVitals</string>
     <string name="data_sharing_permission_sexual_activity_label">Sexuální aktivita z OpenVitals</string>
     <string name="data_sharing_permission_sexual_activity_description">číst vaše data o sexuální aktivitě z OpenVitals</string>
+    <string name="metric_circumferences">Obvody</string>
+    <string name="circumference_site_waist">Pas</string>
+    <string name="circumference_site_hips">Boky</string>
+    <string name="circumference_site_chest">Hrudník</string>
+    <string name="circumference_site_neck">Krk</string>
+    <string name="circumference_site_shoulders">Ramena</string>
+    <string name="circumference_site_right_upper_arm">Pravá paže</string>
+    <string name="circumference_site_left_upper_arm">Levá paže</string>
+    <string name="circumference_site_right_forearm">Pravé předloktí</string>
+    <string name="circumference_site_left_forearm">Levé předloktí</string>
+    <string name="circumference_site_right_thigh">Pravé stehno</string>
+    <string name="circumference_site_left_thigh">Levé stehno</string>
+    <string name="circumference_site_right_calf">Pravé lýtko</string>
+    <string name="circumference_site_left_calf">Levé lýtko</string>
+    <string name="screen_circumference_entry">Zadání obvodu</string>
+    <string name="circumference_entry_subtitle">Měření krejčovským metrem zůstávají v tomto telefonu. Health Connect je neumí uložit.</string>
+    <string name="circumference_empty">Žádná měření v tomto období. Klepnutím na část postavy ji přidáte.</string>
+    <string name="circumference_measurements_title">Měření</string>
     <string name="screen_progress_photos">Fotky pokroku</string>
     <string name="progress_photos_add">Přidat fotku</string>
     <string name="progress_photos_take">Vyfotit</string>
@@ -3942,4 +3960,31 @@
     <string name="body_folder_export">Exportovat míry</string>
     <string name="body_folder_exporting">Exportuji…</string>
     <string name="body_folder_exported">Záznamy zapsané do measurements.json: %1$d</string>
+    <string name="circumference_last_value">naposledy %1$s · %2$s</string>
+    <plurals name="circumference_replace_warning">
+        <item quantity="one">%1$s už má %2$s dne %3$s. Uložením se hodnota nahradí.</item>
+        <item quantity="few">%1$s už má %2$s dne %3$s. Uložením se hodnoty nahradí.</item>
+        <item quantity="many">%1$s už má %2$s dne %3$s. Uložením se hodnoty nahradí.</item>
+        <item quantity="other">%1$s už má %2$s dne %3$s. Uložením se hodnoty nahradí.</item>
+    </plurals>
+    <string name="circumference_replace_title">Nahradit míry?</string>
+    <plurals name="circumference_replace_body">
+        <item quantity="one">Dne %2$s už %1$s má hodnotu. Uložením se nahradí.</item>
+        <item quantity="few">Dne %2$s už %1$s mají hodnoty. Uložením se nahradí.</item>
+        <item quantity="many">Dne %2$s už %1$s mají hodnoty. Uložením se nahradí.</item>
+        <item quantity="other">Dne %2$s už %1$s mají hodnoty. Uložením se nahradí.</item>
+    </plurals>
+    <string name="circumference_replace_confirm">Nahradit</string>
+    <string name="circumference_save">Uložit míry</string>
+    <string name="circumference_tile_description">%1$s, %2$s, %3$s</string>
+    <string name="circumference_tile_value_description">%1$s, %2$s</string>
+    <string name="circumference_not_measured">neměřeno</string>
+    <string name="circumference_compare_first">Poslední vs. první měření</string>
+    <string name="circumference_compare_date">Poslední vs. %1$s</string>
+    <string name="circumference_compare_pick">Porovnat s datem</string>
+    <string name="circumference_compare_clear">Zrušit datum porovnání</string>
+    <string name="circumference_change_smaller">menší o %1$s</string>
+    <string name="circumference_change_larger">větší o %1$s</string>
+    <string name="circumference_change_none">beze změny</string>
+    <string name="circumference_change_unknown">bez porovnání</string>
 </resources>

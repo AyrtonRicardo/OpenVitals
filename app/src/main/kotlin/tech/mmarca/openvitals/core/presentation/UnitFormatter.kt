@@ -73,6 +73,13 @@ class UnitFormatter(
             }
         }
 
+    /** A tape measurement, in centimetres or inches as the height setting says; never feet. */
+    fun circumference(centimeters: Double): DisplayValue =
+        when (unitSystem(UnitQuantity.HEIGHT)) {
+            UnitSystem.METRIC -> DisplayValue(decimal(centimeters, 1), "cm")
+            UnitSystem.IMPERIAL -> DisplayValue(decimal(centimeters / 2.54, 1), "in")
+        }
+
     fun bodyMass(kg: Double, decimals: Int = 1): DisplayValue =
         when (unitSystem(UnitQuantity.WEIGHT)) {
             UnitSystem.METRIC -> DisplayValue(decimal(kg, decimals), "kg")

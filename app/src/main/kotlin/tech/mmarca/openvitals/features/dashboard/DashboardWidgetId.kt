@@ -28,6 +28,9 @@ enum class DashboardWidgetId {
     BMR,
     BONE_MASS,
     BODY_WATER_MASS,
+
+    /** Tape measurements, from Room; the card shows the newest waist. */
+    CIRCUMFERENCES,
     AVG_HEART_RATE,
     RESTING_HEART_RATE,
     HRV,
@@ -84,6 +87,7 @@ val DefaultDashboardWidgetIds: List<DashboardWidgetId> = listOf(
     DashboardWidgetId.BMR,
     DashboardWidgetId.BONE_MASS,
     DashboardWidgetId.BODY_WATER_MASS,
+    DashboardWidgetId.CIRCUMFERENCES,
     DashboardWidgetId.AVG_HEART_RATE,
     DashboardWidgetId.RESTING_HEART_RATE,
     DashboardWidgetId.HRV,
@@ -266,6 +270,6 @@ fun DashboardWidgetId.toDashboardMetricOrNull(): DashboardMetric? = when (this) 
     DashboardWidgetId.CARDIO_LOAD -> DashboardMetric.WEEKLY_CARDIO_LOAD
     DashboardWidgetId.MINDFULNESS -> DashboardMetric.MINDFULNESS
     DashboardWidgetId.CYCLE -> DashboardMetric.CYCLE
-    // The medical records entry and the OpenWatch tile, never gated by the provider.
-    DashboardWidgetId.MEDICAL_RECORDS, DashboardWidgetId.OPENWATCH -> null
+    // The medical records entry, the OpenWatch tile and the tape measurements, never gated by the provider.
+    DashboardWidgetId.MEDICAL_RECORDS, DashboardWidgetId.OPENWATCH, DashboardWidgetId.CIRCUMFERENCES -> null
 }

@@ -3882,6 +3882,24 @@
     <string name="data_sharing_permission_cycle_description">leggere i tuoi dati del ciclo da OpenVitals</string>
     <string name="data_sharing_permission_sexual_activity_label">Dati sull\'attività sessuale di OpenVitals</string>
     <string name="data_sharing_permission_sexual_activity_description">leggere i tuoi dati sull\'attività sessuale da OpenVitals</string>
+    <string name="metric_circumferences">Circonferenze</string>
+    <string name="circumference_site_waist">Vita</string>
+    <string name="circumference_site_hips">Fianchi</string>
+    <string name="circumference_site_chest">Torace</string>
+    <string name="circumference_site_neck">Collo</string>
+    <string name="circumference_site_shoulders">Spalle</string>
+    <string name="circumference_site_right_upper_arm">Braccio destro</string>
+    <string name="circumference_site_left_upper_arm">Braccio sinistro</string>
+    <string name="circumference_site_right_forearm">Avambraccio destro</string>
+    <string name="circumference_site_left_forearm">Avambraccio sinistro</string>
+    <string name="circumference_site_right_thigh">Coscia destra</string>
+    <string name="circumference_site_left_thigh">Coscia sinistra</string>
+    <string name="circumference_site_right_calf">Polpaccio destro</string>
+    <string name="circumference_site_left_calf">Polpaccio sinistro</string>
+    <string name="screen_circumference_entry">Inserimento circonferenza</string>
+    <string name="circumference_entry_subtitle">Le misure con il metro da sarta restano su questo telefono. Health Connect non può salvarle.</string>
+    <string name="circumference_empty">Nessuna misura in questo periodo. Tocca una parte della figura per aggiungerne una.</string>
+    <string name="circumference_measurements_title">Misure</string>
     <string name="screen_progress_photos">Foto dei progressi</string>
     <string name="progress_photos_add">Aggiungi foto</string>
     <string name="progress_photos_take">Scatta foto</string>
@@ -3906,4 +3924,29 @@
     <string name="body_folder_export">Esporta misure</string>
     <string name="body_folder_exporting">Esportazione…</string>
     <string name="body_folder_exported">Voci scritte in measurements.json: %1$d</string>
+    <string name="circumference_last_value">ultimo %1$s · %2$s</string>
+    <plurals name="circumference_replace_warning">
+        <item quantity="one">%1$s ha già %2$s il %3$s. Il salvataggio lo sostituisce.</item>
+        <item quantity="many">%1$s ha già %2$s il %3$s. Il salvataggio li sostituisce.</item>
+        <item quantity="other">%1$s ha già %2$s il %3$s. Il salvataggio li sostituisce.</item>
+    </plurals>
+    <string name="circumference_replace_title">Sostituire le misure?</string>
+    <plurals name="circumference_replace_body">
+        <item quantity="one">%1$s ha già un valore il %2$s. Il salvataggio lo sostituisce.</item>
+        <item quantity="many">%1$s hanno già dei valori il %2$s. Il salvataggio li sostituisce.</item>
+        <item quantity="other">%1$s hanno già dei valori il %2$s. Il salvataggio li sostituisce.</item>
+    </plurals>
+    <string name="circumference_replace_confirm">Sostituisci</string>
+    <string name="circumference_save">Salva misure</string>
+    <string name="circumference_tile_description">%1$s, %2$s, %3$s</string>
+    <string name="circumference_tile_value_description">%1$s, %2$s</string>
+    <string name="circumference_not_measured">non misurato</string>
+    <string name="circumference_compare_first">Ultima vs prima misura</string>
+    <string name="circumference_compare_date">Ultima vs %1$s</string>
+    <string name="circumference_compare_pick">Confronta con una data</string>
+    <string name="circumference_compare_clear">Cancella la data di confronto</string>
+    <string name="circumference_change_smaller">più piccolo di %1$s</string>
+    <string name="circumference_change_larger">più grande di %1$s</string>
+    <string name="circumference_change_none">invariato</string>
+    <string name="circumference_change_unknown">nessun confronto</string>
 </resources>

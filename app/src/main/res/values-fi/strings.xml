@@ -3852,6 +3852,24 @@
     <string name="data_sharing_permission_cycle_description">lukea kiertotietojasi OpenVitalsista</string>
     <string name="data_sharing_permission_sexual_activity_label">OpenVitalsin seksuaalisen aktiivisuuden tiedot</string>
     <string name="data_sharing_permission_sexual_activity_description">lukea seksuaalisen aktiivisuutesi tietoja OpenVitalsista</string>
+    <string name="metric_circumferences">Ympärysmitat</string>
+    <string name="circumference_site_waist">Vyötärö</string>
+    <string name="circumference_site_hips">Lantio</string>
+    <string name="circumference_site_chest">Rinta</string>
+    <string name="circumference_site_neck">Kaula</string>
+    <string name="circumference_site_shoulders">Hartiat</string>
+    <string name="circumference_site_right_upper_arm">Oikea olkavarsi</string>
+    <string name="circumference_site_left_upper_arm">Vasen olkavarsi</string>
+    <string name="circumference_site_right_forearm">Oikea kyynärvarsi</string>
+    <string name="circumference_site_left_forearm">Vasen kyynärvarsi</string>
+    <string name="circumference_site_right_thigh">Oikea reisi</string>
+    <string name="circumference_site_left_thigh">Vasen reisi</string>
+    <string name="circumference_site_right_calf">Oikea pohje</string>
+    <string name="circumference_site_left_calf">Vasen pohje</string>
+    <string name="screen_circumference_entry">Ympärysmitan kirjaus</string>
+    <string name="circumference_entry_subtitle">Mittanauhalla otetut mitat säilyvät tässä puhelimessa. Health Connect ei voi tallentaa niitä.</string>
+    <string name="circumference_empty">Ei mittauksia tällä jaksolla. Lisää mittaus napauttamalla hahmon kohtaa.</string>
+    <string name="circumference_measurements_title">Mittaukset</string>
     <string name="screen_progress_photos">Edistymiskuvat</string>
     <string name="progress_photos_add">Lisää kuva</string>
     <string name="progress_photos_take">Ota kuva</string>
@@ -3876,4 +3894,27 @@
     <string name="body_folder_export">Vie mitat</string>
     <string name="body_folder_exporting">Viedään…</string>
     <string name="body_folder_exported">Tiedostoon measurements.json kirjoitetut merkinnät: %1$d</string>
+    <string name="circumference_last_value">viimeksi %1$s · %2$s</string>
+    <plurals name="circumference_replace_warning">
+        <item quantity="one">Kohdalla %1$s on jo %2$s päivälle %3$s. Tallennus korvaa sen.</item>
+        <item quantity="other">Kohdalla %1$s on jo %2$s päivälle %3$s. Tallennus korvaa ne.</item>
+    </plurals>
+    <string name="circumference_replace_title">Korvataanko mitat?</string>
+    <plurals name="circumference_replace_body">
+        <item quantity="one">Kohdalla %1$s on jo arvo päivälle %2$s. Tallennus korvaa sen.</item>
+        <item quantity="other">Kohdilla %1$s on jo arvot päivälle %2$s. Tallennus korvaa ne.</item>
+    </plurals>
+    <string name="circumference_replace_confirm">Korvaa</string>
+    <string name="circumference_save">Tallenna mitat</string>
+    <string name="circumference_tile_description">%1$s, %2$s, %3$s</string>
+    <string name="circumference_tile_value_description">%1$s, %2$s</string>
+    <string name="circumference_not_measured">ei mitattu</string>
+    <string name="circumference_compare_first">Uusin vs. ensimmäinen mittaus</string>
+    <string name="circumference_compare_date">Uusin vs. %1$s</string>
+    <string name="circumference_compare_pick">Vertaa päivämäärään</string>
+    <string name="circumference_compare_clear">Poista vertailupäivä</string>
+    <string name="circumference_change_smaller">pienempi %1$s</string>
+    <string name="circumference_change_larger">suurempi %1$s</string>
+    <string name="circumference_change_none">ennallaan</string>
+    <string name="circumference_change_unknown">ei vertailua</string>
 </resources>

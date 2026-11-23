@@ -34,6 +34,8 @@ object DashboardPresentationMapper {
         medicalRecordsAvailable: Boolean = false,
         /** The OpenWatch tile; null hides it. */
         openWatch: tech.mmarca.openvitals.openwatch.OpenWatchTileDisplay? = null,
+        /** The newest waist measurement, from Room, for the tape measurements tile. */
+        latestWaistCm: Double? = null,
         /** Tiles whose last read Health Connect refused. They are not sorted as empty. */
         degradedWidgets: Set<DashboardWidgetId> = emptySet(),
     ): DashboardDisplayState {
@@ -56,6 +58,7 @@ object DashboardPresentationMapper {
                     bodyEnergySetupCompleted = bodyEnergySetupCompleted,
                     medicalRecordsAvailable = medicalRecordsAvailable,
                     openWatch = openWatch,
+                    latestWaistCm = latestWaistCm,
                 ) ?: return@forEach
                 if (!isSupported) unsupportedIds += widgetId
                 put(widgetId, if (widgetId in degradedWidgets) widget.copy(degraded = true) else widget)
@@ -76,6 +79,7 @@ object DashboardPresentationMapper {
         bodyEnergySetupCompleted: Boolean,
         medicalRecordsAvailable: Boolean = false,
         openWatch: tech.mmarca.openvitals.openwatch.OpenWatchTileDisplay? = null,
+        latestWaistCm: Double? = null,
     ): DashboardWidgetDisplayModel? = when (widgetId) {
         DashboardWidgetId.STEPS -> metricWidget(
             id = widgetId,
@@ -342,6 +346,12 @@ object DashboardPresentationMapper {
             id = widgetId,
             value = data.bodyWaterMassKg?.let { unitFormatter.bodyMass(it, decimals = 2) },
             isLoading = isLoading,
+        )
+        // Room, not Health Connect: the day's load does not touch it, so it is never loading.
+        DashboardWidgetId.CIRCUMFERENCES -> optionalMetricWidget(
+            id = widgetId,
+            value = latestWaistCm?.let(unitFormatter::circumference),
+            isLoading = false,
         )
         DashboardWidgetId.AVG_HEART_RATE -> metricWidget(
             id = widgetId,

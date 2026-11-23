@@ -34,6 +34,7 @@ fun ManualEntryScreen(
     onOpenCycleEntry: () -> Unit,
     onOpenWorkoutPlans: () -> Unit = {},
     onOpenFoodEntry: () -> Unit = {},
+    onOpenCircumferenceEntry: () -> Unit = {},
     onOpenProgressPhotos: () -> Unit = {},
 ) {
     val state by viewModel.uiState.collectAsStateWithLifecycle()
@@ -51,7 +52,9 @@ fun ManualEntryScreen(
         onOpenCycleEntry = viewModel::onCycleWidgetTapped,
         // The plans screen carries its own gate, so the tile navigates directly.
         onOpenWorkoutPlans = onOpenWorkoutPlans,
-        // Photos are kept in Room and the picked folder, so there is no Health Connect gate to pass.
+        // Tape measurements are kept in Room, so there is no Health Connect gate to pass.
+        onOpenCircumferenceEntry = onOpenCircumferenceEntry,
+        // Photos are kept in Room and the picked folder, so there is no Health Connect gate either.
         onOpenProgressPhotos = onOpenProgressPhotos,
     )
     val specsById = specs.associateBy { it.id }

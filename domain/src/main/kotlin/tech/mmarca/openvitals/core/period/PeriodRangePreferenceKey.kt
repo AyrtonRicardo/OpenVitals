@@ -11,6 +11,7 @@ enum class PeriodRangePreferenceKey(
     HEART("detail_range_heart", TimeRange.WEEK),
     HEART_RATE_RECOVERY("detail_range_heart_rate_recovery", TimeRange.MONTH),
     BODY("detail_range_body", TimeRange.MONTH),
+    CIRCUMFERENCE("detail_range_circumference", TimeRange.MONTH),
     PROGRESS_PHOTOS("detail_range_progress_photos", TimeRange.MONTH),
     HYDRATION("detail_range_hydration", TimeRange.WEEK),
     NUTRITION("detail_range_nutrition", TimeRange.WEEK),
