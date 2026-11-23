@@ -9,6 +9,8 @@ import tech.mmarca.openvitals.data.local.beverage.BeverageEntity
 import tech.mmarca.openvitals.data.local.bodyenergy.BodyEnergyBucketEntity
 import tech.mmarca.openvitals.data.local.bodyenergy.BodyEnergyDayEntity
 import tech.mmarca.openvitals.data.local.bodyenergy.BodyEnergyTimelineDao
+import tech.mmarca.openvitals.data.local.circumference.BodyCircumferenceDao
+import tech.mmarca.openvitals.data.local.circumference.BodyCircumferenceEntity
 import tech.mmarca.openvitals.data.local.cycle.CycleExclusionEntity
 import tech.mmarca.openvitals.data.local.cycle.CycleJournalDao
 import tech.mmarca.openvitals.data.local.cycle.CycleJournalEntryEntity
@@ -22,6 +24,8 @@ import tech.mmarca.openvitals.data.local.heartratecache.HeartRateDayEntity
 import tech.mmarca.openvitals.data.local.medical.MedicalDocumentDao
 import tech.mmarca.openvitals.data.local.medical.MedicalDocumentEntity
 import tech.mmarca.openvitals.data.local.medical.MedicalDocumentRecordEntity
+import tech.mmarca.openvitals.data.local.photos.ProgressPhotoDao
+import tech.mmarca.openvitals.data.local.photos.ProgressPhotoEntity
 import tech.mmarca.openvitals.data.local.syncorigin.SyncedRecordOriginDao
 import tech.mmarca.openvitals.data.local.syncorigin.SyncedRecordOriginEntity
 import tech.mmarca.openvitals.data.local.vitalscache.VitalsDailyAggregateEntity
@@ -44,6 +48,8 @@ import tech.mmarca.openvitals.data.local.vitalscache.VitalsSyncCursorEntity
         PillIntakeEntity::class,
         MedicalDocumentEntity::class,
         MedicalDocumentRecordEntity::class,
+        BodyCircumferenceEntity::class,
+        ProgressPhotoEntity::class,
     ],
     version = OpenVitalsDatabase.VERSION,
     exportSchema = true,
@@ -69,10 +75,14 @@ abstract class OpenVitalsDatabase : RoomDatabase() {
 
     abstract fun medicalDocumentDao(): MedicalDocumentDao
 
+    abstract fun bodyCircumferenceDao(): BodyCircumferenceDao
+
+    abstract fun progressPhotoDao(): ProgressPhotoDao
+
 
     companion object {
         /** Raise it with a new migration in [ALL_MIGRATIONS], and commit the schema file Room then writes. */
-        const val VERSION = 18
+        const val VERSION = 21
 
         val MIGRATION_1_3 = beverageMigration(1)
         val MIGRATION_2_3 = beverageMigration(2)
@@ -193,6 +203,38 @@ abstract class OpenVitalsDatabase : RoomDatabase() {
         }
 
         /**
+         * Tape measurements of the waist, hips, chest, neck, upper arm and thigh. Health Connect
+         * has no record type for them. Creation only; there is nothing to backfill.
+         */
+        val MIGRATION_18_19 = object : Migration(18, 19) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                createBodyCircumferencesTable(db)
+            }
+        }
+
+        /**
+         * Progress photos. Health Connect has no type for a photo, so the phone keeps a row and a
+         * thumbnail and the full image goes to the folder the user picked. Creation only; there is
+         * nothing to backfill.
+         */
+        val MIGRATION_19_20 = object : Migration(19, 20) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                createProgressPhotosTable(db)
+            }
+        }
+
+        /**
+         * Arms and legs are measured on each side from now on. A saved upper-arm or thigh value
+         * said no side; it becomes the right one, the side usually measured. A rename only.
+         */
+        val MIGRATION_20_21 = object : Migration(20, 21) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("UPDATE `body_circumferences` SET `site` = 'RIGHT_UPPER_ARM' WHERE `site` = 'UPPER_ARM'")
+                db.execSQL("UPDATE `body_circumferences` SET `site` = 'RIGHT_THIGH' WHERE `site` = 'THIGH'")
+            }
+        }
+
+        /**
          * Every migration, in one place. The database builder takes this list, so a migration
          * cannot be written and then left out of it.
          */
@@ -215,6 +257,9 @@ abstract class OpenVitalsDatabase : RoomDatabase() {
                 MIGRATION_15_16,
                 MIGRATION_16_17,
                 MIGRATION_17_18,
+                MIGRATION_18_19,
+                MIGRATION_19_20,
+                MIGRATION_20_21,
             )
 
         /** `ALTER TABLE ADD COLUMN`, skipped when an earlier creation already carries the column. */
@@ -492,6 +537,33 @@ abstract class OpenVitalsDatabase : RoomDatabase() {
                     `start_date` TEXT NOT NULL,
                     `reason` TEXT,
                     PRIMARY KEY(`start_date`)
+                )
+                """.trimIndent()
+            )
+        }
+
+        private fun createProgressPhotosTable(db: SupportSQLiteDatabase) {
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `progress_photos` (
+                    `id` TEXT NOT NULL,
+                    `taken_at_millis` INTEGER NOT NULL,
+                    `file_name` TEXT NOT NULL,
+                    `saved` INTEGER NOT NULL,
+                    PRIMARY KEY(`id`)
+                )
+                """.trimIndent()
+            )
+        }
+
+        private fun createBodyCircumferencesTable(db: SupportSQLiteDatabase) {
+            db.execSQL(
+                """
+                CREATE TABLE IF NOT EXISTS `body_circumferences` (
+                    `site` TEXT NOT NULL,
+                    `measured_at_millis` INTEGER NOT NULL,
+                    `centimeters` REAL NOT NULL,
+                    PRIMARY KEY(`site`, `measured_at_millis`)
                 )
                 """.trimIndent()
             )
